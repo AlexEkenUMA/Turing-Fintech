@@ -33,3 +33,16 @@ mvn archetype:generate \
 	-Dpackage=[paquete de donde colgará todo el código del nuevo proyecto]
 ```
 En el comando de arriba hay que establecer los valores de las propiedades `groupId`, `artifactId`, `version` y `package` para el proyecto nuevo.
+
+Lo siguiente es un ejemplo concreto estableciendo el valor para esos parámetros:
+
+```
+mvn archetype:generate \
+	-DarchetypeGroupId=es.uma.informatica.sii \
+	-DarchetypeArtifactId=jpa-archetype \
+	-DarchetypeVersion=1.0.1 \
+	-DgroupId=es.uma \
+	-DartifactId=proyecto \
+	-Dversion=1.0.0-SNAPSHOT \
+	-Dpackage=es.uma.proyecto
+```
