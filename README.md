@@ -21,7 +21,7 @@ mvn install
 
 ## Ejecución del arquetipo
 
-Una vez instalado, para generar un nuevo proyecto usando el arquetipo debemos ir al directorio donde queremos crear el proyecto y ejecutamos lo siguiente:
+Una vez instalado, para generar un nuevo proyecto usando el arquetipo debemos ir al directorio donde queremos crear el proyecto y ejecutamos lo siguiente (__cuidado__: el comando siguiente funciona en Linux y Mac, en Windows hay que eliminar los tabuladores y sustituir las `\` por `^`):
 ```
 mvn archetype:generate \
 	-DarchetypeGroupId=es.uma.informatica.sii \
