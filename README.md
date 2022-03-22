@@ -21,16 +21,16 @@ mvn install
 
 ## Ejecución del arquetipo
 
-Una vez instalado, para generar un nuevo proyecto usando el arquetipo debemos ir al directorio donde queremos crear el proyecto y ejecutamos lo siguiente (__cuidado__: el comando siguiente funciona en Linux y Mac, en Windows hay que eliminar los tabuladores y sustituir las `\` por `^`):
+Una vez instalado, para generar un nuevo proyecto usando el arquetipo debemos ir al directorio donde queremos crear el proyecto y ejecutamos lo siguiente (__cuidado__: el comando siguiente funciona en Linux y Mac, en Windows hay que sustituir las `\` por `^`):
 ```
 mvn archetype:generate \
-	-DarchetypeGroupId=es.uma.informatica.sii \
-	-DarchetypeArtifactId=jpa-archetype \
-	-DarchetypeVersion=1.0.1 \
-	-DgroupId=[groupId del proyecto nuevo] \
-	-DartifactId=[artifactId del proyecto nuevo] \
-	-Dversion=[versión del proyecto nuevo] \
-	-Dpackage=[paquete de donde colgará todo el código del nuevo proyecto]
+-DarchetypeGroupId=es.uma.informatica.sii \
+-DarchetypeArtifactId=jpa-archetype \
+-DarchetypeVersion=1.0.1 \
+-DgroupId=[groupId del proyecto nuevo] \
+-DartifactId=[artifactId del proyecto nuevo] \
+-Dversion=[versión del proyecto nuevo] \
+-Dpackage=[paquete de donde colgará todo el código del nuevo proyecto]
 ```
 En el comando de arriba hay que establecer los valores de las propiedades `groupId`, `artifactId`, `version` y `package` para el proyecto nuevo.
 
@@ -38,11 +38,11 @@ Lo siguiente es un ejemplo concreto estableciendo el valor para esos parámetros
 
 ```
 mvn archetype:generate \
-	-DarchetypeGroupId=es.uma.informatica.sii \
-	-DarchetypeArtifactId=jpa-archetype \
-	-DarchetypeVersion=1.0.1 \
-	-DgroupId=es.uma \
-	-DartifactId=proyecto \
-	-Dversion=1.0.0-SNAPSHOT \
-	-Dpackage=es.uma.proyecto
+-DarchetypeGroupId=es.uma.informatica.sii \
+-DarchetypeArtifactId=jpa-archetype \
+-DarchetypeVersion=1.0.1 \
+-DgroupId=es.uma \
+-DartifactId=proyecto \
+-Dversion=1.0.0-SNAPSHOT \
+-Dpackage=es.uma.proyecto
 ```
