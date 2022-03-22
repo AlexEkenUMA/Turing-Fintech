@@ -34,7 +34,7 @@ mvn archetype:generate \
 ```
 En el comando de arriba hay que establecer los valores de las propiedades `groupId`, `artifactId`, `version` y `package` para el proyecto nuevo.
 
-Lo siguiente es un ejemplo concreto estableciendo el valor para esos parámetros:
+Lo siguiente es un ejemplo concreto estableciendo el valor para esos parámetros (__cuidado__: el comando siguiente funciona en Linux y Mac, en Windows hay que sustituir las `\` por `^`):
 
 ```
 mvn archetype:generate \
