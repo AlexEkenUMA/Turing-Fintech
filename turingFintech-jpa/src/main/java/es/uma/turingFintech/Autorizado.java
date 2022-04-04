@@ -8,85 +8,118 @@ import java.util.Objects;
 @Entity
 public class Autorizado implements Serializable {
 
-    @Id private Long Identificacion;
+    @Id
+    private Long identificacion;
     @Column(nullable = false)
-    private String Nombre;
+    private String nombre;
     @Column(nullable = false)
-    private String Apellidos;
+    private String apellidos;
     @Column(nullable = false)
-    private String Direccion;
+    private String direccion;
     @Temporal(TemporalType.DATE)
-    private Date Fecha_Nacimiento;
-    private String Estado;
+    private Date fecha_Nacimiento;
+    private String estado;
     @Temporal(TemporalType.DATE)
-    private Date Fecha_Inicio;      // (Como autorizado)
+    private Date fecha_Inicio;      // (Como autorizado)
     @Temporal(TemporalType.DATE)
-    private Date Fecha_Fin;         // (Como autorizado)
+    private Date fecha_Fin;         // (Como autorizado)
 
 
     //Constructores
 
 
     public Autorizado(Long identificacion, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
-        Identificacion = identificacion;
-        Nombre = nombre;
-        Apellidos = apellidos;
-        Direccion = direccion;
-        Fecha_Nacimiento = fecha_Nacimiento;
-        Estado = estado;
-        Fecha_Inicio = fecha_Inicio;
-        Fecha_Fin = fecha_Fin;
+        this.identificacion = identificacion;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.fecha_Nacimiento = fecha_Nacimiento;
+        this.estado = estado;
+        this.fecha_Inicio = fecha_Inicio;
+        this.fecha_Fin = fecha_Fin;
     }
 
-    public Autorizado(){
+    public Autorizado() {
 
     }
 
     //Getters and Setters
 
 
-    public Long getIdentificacion() {return Identificacion;}
+    public Long getIdentificacion() {
+        return identificacion;
+    }
 
-    public void setIdentificacion(Long identificacion) {Identificacion = identificacion;}
+    public void setIdentificacion(Long identificacion) {
+        this.identificacion = identificacion;
+    }
 
-    public String getNombre() {return Nombre;}
+    public String getNombre() {
+        return nombre;
+    }
 
-    public void setNombre(String nombre) {Nombre = nombre;}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getApellidos() {return Apellidos;}
+    public String getApellidos() {
+        return apellidos;
+    }
 
-    public void setApellidos(String apellidos) {Apellidos = apellidos;}
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
-    public String getDireccion() {return Direccion;}
+    public String getDireccion() {
+        return direccion;
+    }
 
-    public void setDireccion(String direccion) {Direccion = direccion;}
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 
-    public Date getFecha_Nacimiento() {return Fecha_Nacimiento;}
+    public Date getFecha_Nacimiento() {
+        return fecha_Nacimiento;
+    }
 
-    public void setFecha_Nacimiento(Date fecha_Nacimiento) {Fecha_Nacimiento = fecha_Nacimiento;}
+    public void setFecha_Nacimiento(Date fecha_Nacimiento) {
+        this.fecha_Nacimiento = fecha_Nacimiento;
+    }
 
-    public String getEstado() {return Estado;}
+    public String getEstado() {
+        return estado;
+    }
 
-    public void setEstado(String estado) {Estado = estado;}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
-    public Date getFecha_Inicio() {return Fecha_Inicio;}
+    public Date getFecha_Inicio() {
+        return fecha_Inicio;
+    }
 
-    public void setFecha_Inicio(Date fecha_Inicio) {Fecha_Inicio = fecha_Inicio;}
+    public void setFecha_Inicio(Date fecha_Inicio) {
+        this.fecha_Inicio = fecha_Inicio;
+    }
 
-    public Date getFecha_Fin() {return Fecha_Fin;}
+    public Date getFecha_Fin() {
+        return fecha_Fin;
+    }
 
-    public void setFecha_Fin(Date fecha_Fin) {Fecha_Fin = fecha_Fin;}
+    public void setFecha_Fin(Date fecha_Fin) {
+        this.fecha_Fin = fecha_Fin;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Autorizado that = (Autorizado) o;
-        return Objects.equals(Identificacion, that.Identificacion) && Objects.equals(Nombre, that.Nombre) && Objects.equals(Apellidos, that.Apellidos) && Objects.equals(Direccion, that.Direccion) && Objects.equals(Fecha_Nacimiento, that.Fecha_Nacimiento) && Objects.equals(Estado, that.Estado) && Objects.equals(Fecha_Inicio, that.Fecha_Inicio) && Objects.equals(Fecha_Fin, that.Fecha_Fin);
+        return Objects.equals(identificacion, that.identificacion) && Objects.equals(nombre, that.nombre) && Objects.equals(apellidos, that.apellidos) && Objects.equals(direccion, that.direccion) && Objects.equals(fecha_Nacimiento, that.fecha_Nacimiento) && Objects.equals(estado, that.estado) && Objects.equals(fecha_Inicio, that.fecha_Inicio) && Objects.equals(fecha_Fin, that.fecha_Fin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Identificacion, Nombre, Apellidos, Direccion, Fecha_Nacimiento, Estado, Fecha_Inicio, Fecha_Fin);
+        return Objects.hash(identificacion, nombre, apellidos, direccion, fecha_Nacimiento, estado, fecha_Inicio, fecha_Fin);
     }
 }

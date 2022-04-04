@@ -7,20 +7,20 @@ import java.util.Objects;
 
 @Entity
 public class Divisas implements Serializable {
-    @Id private String Abreviatura;
-    private String Nombre;
-    private char Simbolo;
-    private double Cambio_Euro;
+    @Id private String abreviatura;
+    private String nombre;
+    private char simbolo;
+    private double cambio_Euro;
     //Relacion con Transaccion
 
     //Constructores
 
 
     public Divisas(String abreviatura, String nombre, char simbolo, double cambio_Euro) {
-        Abreviatura = abreviatura;
-        Nombre = nombre;
-        Simbolo = simbolo;
-        Cambio_Euro = cambio_Euro;
+        this.abreviatura = abreviatura;
+        this.nombre = nombre;
+        this.simbolo = simbolo;
+        this.cambio_Euro = cambio_Euro;
     }
 
     public Divisas(){
@@ -30,32 +30,48 @@ public class Divisas implements Serializable {
     //Getters and Setters
 
 
-    public String getAbreviatura() {return Abreviatura;}
+    public String getAbreviatura() {
+        return abreviatura;
+    }
 
-    public void setAbreviatura(String abreviatura) {Abreviatura = abreviatura;}
+    public void setAbreviatura(String abreviatura) {
+        this.abreviatura = abreviatura;
+    }
 
-    public String getNombre() {return Nombre;}
+    public String getNombre() {
+        return nombre;
+    }
 
-    public void setNombre(String nombre) {Nombre = nombre;}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public char getSimbolo() {return Simbolo;}
+    public char getSimbolo() {
+        return simbolo;
+    }
 
-    public void setSimbolo(char simbolo) {Simbolo = simbolo;}
+    public void setSimbolo(char simbolo) {
+        this.simbolo = simbolo;
+    }
 
-    public double getCambio_Euro() {return Cambio_Euro;}
+    public double getCambio_Euro() {
+        return cambio_Euro;
+    }
 
-    public void setCambio_Euro(double cambio_Euro) {Cambio_Euro = cambio_Euro;}
+    public void setCambio_Euro(double cambio_Euro) {
+        this.cambio_Euro = cambio_Euro;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Divisas divisas = (Divisas) o;
-        return Simbolo == divisas.Simbolo && Double.compare(divisas.Cambio_Euro, Cambio_Euro) == 0 && Objects.equals(Abreviatura, divisas.Abreviatura) && Objects.equals(Nombre, divisas.Nombre);
+        return simbolo == divisas.simbolo && Double.compare(divisas.cambio_Euro, cambio_Euro) == 0 && Objects.equals(abreviatura, divisas.abreviatura) && Objects.equals(nombre, divisas.nombre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Abreviatura, Nombre, Simbolo, Cambio_Euro);
+        return Objects.hash(abreviatura, nombre, simbolo, cambio_Euro);
     }
 }
