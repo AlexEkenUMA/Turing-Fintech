@@ -1,13 +1,16 @@
 package es.uma.turingFintech;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 public class Cuenta implements Serializable {
-    @Id private String IBAN;
+    @Id
+    @GeneratedValue
+    private String IBAN;
     private String SWIFT;
     //SubEntidades de Finctech (Ebury) y de Referencia
 

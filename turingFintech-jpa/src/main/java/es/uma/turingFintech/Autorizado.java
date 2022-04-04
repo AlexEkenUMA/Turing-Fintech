@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Autorizado implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long identificacion;
     @Column(nullable = false)
     private String nombre;

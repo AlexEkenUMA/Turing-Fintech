@@ -10,7 +10,6 @@ import java.util.Objects;
 public class Usuario implements Serializable {
 
     @Id
-    @GeneratedValue
     private String nombre_usuario;
     private String contraseña;
     private boolean administrativo;

@@ -1,6 +1,7 @@
 package es.uma.turingFintech;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,7 +10,9 @@ import java.util.Objects;
 @Entity
 public class Transacciones implements Serializable {
 
-    @Id private Long iD_Unico;
+    @Id
+    @GeneratedValue
+    private Long iD_Unico;
     private Date fecha_Instruccion;
     private Double cantidad;
     private String concepto;

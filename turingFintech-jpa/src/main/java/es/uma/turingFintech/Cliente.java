@@ -7,7 +7,9 @@ import java.util.Objects;
 
 @Entity
 public class Cliente implements Serializable {
-    @Id private Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
     @Column (nullable = false)
     private String tipo_Cliente; // Habría que hacer dos subentidades --> Persona Física y Jurídica
     @Column (nullable = false)
