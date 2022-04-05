@@ -30,7 +30,7 @@ public class Cliente implements Serializable {
 
     //relación uno a muchos cliente-cuenta
     @OneToMany
-    private List<CuentasFintech> cuentasFintech;
+    private List<CuentaFintech> cuentasFintech;
     //Constructores
 
 

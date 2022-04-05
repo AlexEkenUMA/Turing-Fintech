@@ -4,8 +4,8 @@
 		<class>es.uma.turingFintech.Autorizado</class>
 		<class>es.uma.turingFintech.Cliente</class>
 		<class>es.uma.turingFintech.Cuenta</class>
-		<class>es.uma.turingFintech.CuentasFintech</class>
-		<class>es.uma.turingFintech.CuentasReferencia</class>
+		<class>es.uma.turingFintech.CuentaFintech</class>
+		<class>es.uma.turingFintech.CuentaReferencia</class>
 		<class>es.uma.turingFintech.Divisas</class>
 		<class>es.uma.turingFintech.PersonaFisica</class>
 		<class>es.uma.turingFintech.PersonaJuridica</class>

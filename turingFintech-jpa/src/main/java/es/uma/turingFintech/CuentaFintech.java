@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class CuentasFintech extends Cuenta implements Serializable {
+public class CuentaFintech extends Cuenta implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column (nullable = false)
@@ -25,7 +25,7 @@ public class CuentasFintech extends Cuenta implements Serializable {
     //Constructores
 
 
-    public CuentasFintech(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
+    public CuentaFintech(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
         super(IBAN, SWIFT);
         this.fecha_Apertura = fecha_Apertura;
         this.estado = estado;
@@ -33,14 +33,14 @@ public class CuentasFintech extends Cuenta implements Serializable {
         this.saldo = saldo;
     }
 
-    public CuentasFintech(Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
+    public CuentaFintech(Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
         this.fecha_Apertura = fecha_Apertura;
         this.estado = estado;
         this.tipo = tipo;
         this.saldo = saldo;
     }
 
-    public CuentasFintech(){
+    public CuentaFintech(){
 
     }
 
@@ -84,7 +84,7 @@ public class CuentasFintech extends Cuenta implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CuentasFintech that = (CuentasFintech) o;
+        CuentaFintech that = (CuentaFintech) o;
         return estado == that.estado && Objects.equals(fecha_Apertura, that.fecha_Apertura) && Objects.equals(tipo, that.tipo) && Objects.equals(saldo, that.saldo);
     }
 

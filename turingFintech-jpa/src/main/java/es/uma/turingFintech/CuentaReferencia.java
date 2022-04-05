@@ -3,10 +3,11 @@ package es.uma.turingFintech;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class CuentasReferencia extends Cuenta implements Serializable {
+public class CuentaReferencia extends Cuenta implements Serializable {
     @Column(nullable = false)
     private String nombre_Banco;
     private String sucursal;
@@ -25,10 +26,15 @@ public class CuentasReferencia extends Cuenta implements Serializable {
     //relacion uno-muchos cuentareferencia-divisa
     @ManyToOne
     private Divisa divisa;
+
+    //relacion uno-muchos pooledaccount-depositadaen
+    @OneToMany (mappedBy = "cuentaReferencia")
+    private List<DepositadaEn> listaDepositos;
+
     //Constructores
 
 
-    public CuentasReferencia(String IBAN, String SWIFT, String nombre_Banco, String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
+    public CuentaReferencia(String IBAN, String SWIFT, String nombre_Banco, String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
         super(IBAN, SWIFT);
         this.nombre_Banco = nombre_Banco;
         this.sucursal = sucursal;
@@ -38,7 +44,7 @@ public class CuentasReferencia extends Cuenta implements Serializable {
         this.estado = estado;
     }
 
-    public CuentasReferencia(String nombre_Banco, String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
+    public CuentaReferencia(String nombre_Banco, String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
         this.nombre_Banco = nombre_Banco;
         this.sucursal = sucursal;
         this.pais = pais;
@@ -47,7 +53,7 @@ public class CuentasReferencia extends Cuenta implements Serializable {
         this.estado = estado;
     }
 
-    public CuentasReferencia() {
+    public CuentaReferencia() {
 
     }
 
@@ -107,7 +113,7 @@ public class CuentasReferencia extends Cuenta implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CuentasReferencia that = (CuentasReferencia) o;
+        CuentaReferencia that = (CuentaReferencia) o;
         return Objects.equals(nombre_Banco, that.nombre_Banco) && Objects.equals(sucursal, that.sucursal) && Objects.equals(pais, that.pais) && Objects.equals(saldo, that.saldo) && Objects.equals(fecha_Apertura, that.fecha_Apertura) && Objects.equals(estado, that.estado);
     }
 

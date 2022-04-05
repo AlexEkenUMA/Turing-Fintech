@@ -23,7 +23,7 @@ public class Divisa implements Serializable {
 
     //relacion uno-muchos divisa-cuentaReferencia
     @OneToMany
-    private List<CuentasReferencia> cuentasReferencia;
+    private List<CuentaReferencia> cuentasReferencia;
 
     //Constructores
 

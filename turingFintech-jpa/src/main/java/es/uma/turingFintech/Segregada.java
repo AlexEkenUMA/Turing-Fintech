@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Segregada extends CuentasFintech implements Serializable {
+public class Segregada extends CuentaFintech implements Serializable {
 
     private double comision;
 
@@ -15,7 +15,7 @@ public class Segregada extends CuentasFintech implements Serializable {
 
     //Relacion 1:1 con Cuenta Referencia
     @OneToOne
-    private CuentasReferencia cr;
+    private CuentaReferencia cr;
 
     public Segregada(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo, double comision) {
         super(IBAN, SWIFT, fecha_Apertura, estado, tipo, saldo);
