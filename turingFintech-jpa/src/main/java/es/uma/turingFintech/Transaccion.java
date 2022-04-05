@@ -1,15 +1,12 @@
 package es.uma.turingFintech;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Transacciones implements Serializable {
+public class Transaccion implements Serializable {
 
     @Id
     @GeneratedValue
@@ -25,10 +22,25 @@ public class Transacciones implements Serializable {
     private String tipo_Transaccion;
     //Relacion con Divisas
 
+    @ManyToOne
+    private Divisa receptor;
+    private Divisa emisor;
+
+
+
+    //Relacion con Cuenta
+
+    @ManyToOne
+    private Cuenta origen;
+
+    @ManyToOne
+    private Cuenta destino;
+
+
     //Constructores
 
 
-    public Transacciones(Long iD_Unico, Date fecha_Instruccion, Double cantidad, String concepto, String nombre_Emisor, Double comision, String tipo_Transaccion) {
+    public Transaccion(Long iD_Unico, Date fecha_Instruccion, Double cantidad, String concepto, String nombre_Emisor, Double comision, String tipo_Transaccion) {
         this.iD_Unico = iD_Unico;
         this.fecha_Instruccion = fecha_Instruccion;
         this.cantidad = cantidad;
@@ -38,7 +50,7 @@ public class Transacciones implements Serializable {
         this.tipo_Transaccion = tipo_Transaccion;
     }
 
-    public Transacciones(){
+    public Transaccion(){
 
     }
 
@@ -105,7 +117,7 @@ public class Transacciones implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Transacciones that = (Transacciones) o;
+        Transaccion that = (Transaccion) o;
         return Objects.equals(iD_Unico, that.iD_Unico) && Objects.equals(fecha_Instruccion, that.fecha_Instruccion) && Objects.equals(cantidad, that.cantidad) && Objects.equals(concepto, that.concepto) && Objects.equals(nombre_Emisor, that.nombre_Emisor) && Objects.equals(comision, that.comision) && Objects.equals(tipo_Transaccion, that.tipo_Transaccion);
     }
 

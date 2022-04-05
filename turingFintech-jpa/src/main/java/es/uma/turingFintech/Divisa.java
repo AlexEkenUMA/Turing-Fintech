@@ -1,13 +1,12 @@
 package es.uma.turingFintech;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Divisas implements Serializable {
+public class Divisa implements Serializable {
     @Column(nullable = false)
     @Id private String abreviatura;
     @Column(nullable = false)
@@ -16,18 +15,23 @@ public class Divisas implements Serializable {
     @Column(nullable = false)
     private double cambio_Euro;
     //Relacion con Transaccion
+    @OneToMany
+    private List<Transaccion> emisor;
+    @OneToMany
+    private List<Transaccion> receptor;
+
 
     //Constructores
 
 
-    public Divisas(String abreviatura, String nombre, char simbolo, double cambio_Euro) {
+    public Divisa(String abreviatura, String nombre, char simbolo, double cambio_Euro) {
         this.abreviatura = abreviatura;
         this.nombre = nombre;
         this.simbolo = simbolo;
         this.cambio_Euro = cambio_Euro;
     }
 
-    public Divisas(){
+    public Divisa(){
 
     }
 
@@ -70,7 +74,7 @@ public class Divisas implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Divisas divisas = (Divisas) o;
+        Divisa divisas = (Divisa) o;
         return simbolo == divisas.simbolo && Double.compare(divisas.cambio_Euro, cambio_Euro) == 0 && Objects.equals(abreviatura, divisas.abreviatura) && Objects.equals(nombre, divisas.nombre);
     }
 
