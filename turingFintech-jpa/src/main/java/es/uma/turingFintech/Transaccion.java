@@ -20,21 +20,16 @@ public class Transaccion implements Serializable {
     private Double comision;
     @Column(nullable = false)
     private String tipo_Transaccion;
+
     //Relacion con Divisas
-
-
     @ManyToOne
     private Divisa receptor;
     @ManyToOne
     private Divisa emisor;
 
-
-
     //Relacion con Cuenta
-
     @ManyToOne
     private Cuenta origen;
-
     @ManyToOne
     private Cuenta destino;
 

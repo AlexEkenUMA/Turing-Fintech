@@ -1,18 +1,18 @@
 package es.uma.turingFintech;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class DepositadaEn {
     @Column (nullable = false)
     private double saldo;
 
     //relacion muchos-uno depositadaen-cuentareferencia
-    @ManyToOne
+    @Id @ManyToOne
     private CuentaReferencia cuentaReferencia;
     //relacion muchos-uno depositadaen-pooledaccount
-    @ManyToOne
+    @Id @ManyToOne
     private PooledAccount pooledAccount;
 
     public DepositadaEn(double saldo) {

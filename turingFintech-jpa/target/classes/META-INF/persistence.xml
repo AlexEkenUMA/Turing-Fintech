@@ -4,15 +4,16 @@
 		<class>es.uma.turingFintech.Autorizado</class>
 		<class>es.uma.turingFintech.Cliente</class>
 		<class>es.uma.turingFintech.Cuenta</class>
-		<class>es.uma.turingFintech.CuentasFintech</class>
-		<class>es.uma.turingFintech.CuentasReferencia</class>
-		<class>es.uma.turingFintech.Divisas</class>
+		<class>es.uma.turingFintech.CuentaFintech</class>
+		<class>es.uma.turingFintech.CuentaReferencia</class>
+		<class>es.uma.turingFintech.Divisa</class>
 		<class>es.uma.turingFintech.PersonaFisica</class>
 		<class>es.uma.turingFintech.PersonaJuridica</class>
 		<class>es.uma.turingFintech.PooledAccount</class>
 		<class>es.uma.turingFintech.Segregada</class>
-		<class>es.uma.turingFintech.Transacciones</class>
+		<class>es.uma.turingFintech.Transaccion</class>
 		<class>es.uma.turingFintech.Usuario</class>
+		<class>es.uma.turingFintech.DepositadaEn</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
 			<property name="javax.persistence.jdbc.user" value=""/>
