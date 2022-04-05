@@ -21,7 +21,7 @@ public class Transaccion implements Serializable {
     @Column(nullable = false)
     private String tipo_Transaccion;
     //Relacion con Divisas
-    //Hola
+
 
     @ManyToOne
     private Divisa receptor;
