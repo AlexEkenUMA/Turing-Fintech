@@ -14,6 +14,7 @@ public class Divisa implements Serializable {
     private char simbolo;
     @Column(nullable = false)
     private double cambio_Euro;
+
     //Relacion con Transaccion
     @OneToMany
     private List<Transaccion> emisor;
