@@ -24,6 +24,7 @@ public class Transaccion implements Serializable {
 
     @ManyToOne
     private Divisa receptor;
+    @ManyToOne
     private Divisa emisor;
 
 

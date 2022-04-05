@@ -15,8 +15,6 @@ public class PersonaFisica extends Cliente implements Serializable {
     private Date Fecha_Nacimiento;
 
     //Constructores
-
-
     public PersonaFisica(Long id, String tipo_Cliente, String estado, Date fecha_Alta,
                          Date fecha_Baja, String direccion, String ciudad,
                          Integer codigo_Postal, String pais, String nombre, String apellidos, Date fecha_Nacimiento) {

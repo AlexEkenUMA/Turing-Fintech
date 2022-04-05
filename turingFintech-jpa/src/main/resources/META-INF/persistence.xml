@@ -11,7 +11,7 @@
 		<class>es.uma.turingFintech.PersonaJuridica</class>
 		<class>es.uma.turingFintech.PooledAccount</class>
 		<class>es.uma.turingFintech.Segregada</class>
-		<class>es.uma.turingFintech.Transacciones</class>
+		<class>es.uma.turingFintech.Transaccion</class>
 		<class>es.uma.turingFintech.Usuario</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>

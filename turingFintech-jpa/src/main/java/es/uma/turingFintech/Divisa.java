@@ -20,6 +20,9 @@ public class Divisa implements Serializable {
     @OneToMany
     private List<Transaccion> receptor;
 
+    //relacion uno-muchos divisa-cuentaReferencia
+    @OneToMany
+    private List<CuentasReferencia> cuentasReferencia;
 
     //Constructores
 

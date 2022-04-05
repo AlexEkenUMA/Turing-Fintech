@@ -3,6 +3,7 @@ package es.uma.turingFintech;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +28,9 @@ public class Cliente implements Serializable {
     @Column (nullable = false)
     private String pais;
 
+    //relación uno a muchos cliente-cuenta
+    @OneToMany
+    private List<CuentasFintech> cuentasFintech;
     //Constructores
 
 

@@ -22,6 +22,9 @@ public class CuentasReferencia extends Cuenta implements Serializable {
     @OneToOne
     private Segregada segregada;
 
+    //relacion uno-muchos cuentareferencia-divisa
+    @ManyToOne
+    private Divisa divisa;
     //Constructores
 
 

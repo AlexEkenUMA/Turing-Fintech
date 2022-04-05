@@ -18,6 +18,10 @@ public class CuentasFintech extends Cuenta implements Serializable {
     private String tipo;
     private Double saldo;
 
+    //relación uno a muchos cliente-cuenta
+    @ManyToOne
+    private Cliente cliente;
+
     //Constructores
 
 
