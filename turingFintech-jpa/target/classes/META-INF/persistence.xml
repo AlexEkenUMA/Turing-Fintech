@@ -14,6 +14,7 @@
 		<class>es.uma.turingFintech.Transaccion</class>
 		<class>es.uma.turingFintech.Usuario</class>
 		<class>es.uma.turingFintech.DepositadaEn</class>
+		<class>es.uma.turingFintech.Empresa</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
 			<property name="javax.persistence.jdbc.user" value=""/>

@@ -13,9 +13,6 @@ public class Empresa extends Cliente implements Serializable {
     @Column(nullable = false)
     private String razon_Social;
 
-    public Empresa() {
-    }
-
     //Relacion con Autorizado
     @ManyToMany (mappedBy = "empresas")
     private List<Autorizado> autorizados;
@@ -31,6 +28,9 @@ public class Empresa extends Cliente implements Serializable {
 
     public Empresa(String razon_Social) {
         this.razon_Social = razon_Social;
+    }
+
+    public Empresa() {
     }
 
     public String getRazon_Social() {
