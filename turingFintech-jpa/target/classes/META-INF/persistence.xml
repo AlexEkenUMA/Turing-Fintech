@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="turingFintech" transaction-type="RESOURCE_LOCAL">
-		<class>es.uma.turingFintech.Cuenta</class>
-		<class>es.uma.turingFintech.Segregada</class>
-		<class>es.uma.turingFintech.CuentasFintech</class>
+		<class>es.uma.turingFintech.Autorizado</class>
 		<class>es.uma.turingFintech.Cliente</class>
-		<class>es.uma.turingFintech.Usuario</class>
+		<class>es.uma.turingFintech.Cuenta</class>
+		<class>es.uma.turingFintech.CuentasFintech</class>
+		<class>es.uma.turingFintech.CuentasReferencia</class>
 		<class>es.uma.turingFintech.Divisas</class>
 		<class>es.uma.turingFintech.PersonaFisica</class>
 		<class>es.uma.turingFintech.PersonaJuridica</class>
-		<class>es.uma.turingFintech.Transacciones</class>
-		<class>es.uma.turingFintech.Autorizado</class>
-		<class>es.uma.turingFintech.CuentasReferencia</class>
 		<class>es.uma.turingFintech.PooledAccount</class>
 		<class>es.uma.turingFintech.Segregada</class>
+		<class>es.uma.turingFintech.Transacciones</class>
+		<class>es.uma.turingFintech.Usuario</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
 			<property name="javax.persistence.jdbc.user" value=""/>
