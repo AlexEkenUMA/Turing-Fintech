@@ -1,6 +1,7 @@
 package es.uma.turingFintech;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -9,6 +10,12 @@ import java.util.Objects;
 public class Segregada extends CuentasFintech implements Serializable {
 
     private double comision;
+
+    //Relaciones
+
+    //Relacion 1:1 con Cuenta Referencia
+    @OneToOne
+    private CuentasReferencia cr;
 
     public Segregada(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo, double comision) {
         super(IBAN, SWIFT, fecha_Apertura, estado, tipo, saldo);

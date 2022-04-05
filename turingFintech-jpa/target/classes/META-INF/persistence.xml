@@ -13,6 +13,7 @@
 		<class>es.uma.turingFintech.Autorizado</class>
 		<class>es.uma.turingFintech.CuentasReferencia</class>
 		<class>es.uma.turingFintech.PooledAccount</class>
+		<class>es.uma.turingFintech.Segregada</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
 			<property name="javax.persistence.jdbc.user" value=""/>

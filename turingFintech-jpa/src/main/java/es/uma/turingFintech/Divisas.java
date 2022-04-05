@@ -1,5 +1,6 @@
 package es.uma.turingFintech;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -7,9 +8,12 @@ import java.util.Objects;
 
 @Entity
 public class Divisas implements Serializable {
+    @Column(nullable = false)
     @Id private String abreviatura;
+    @Column(nullable = false)
     private String nombre;
     private char simbolo;
+    @Column(nullable = false)
     private double cambio_Euro;
     //Relacion con Transaccion
 

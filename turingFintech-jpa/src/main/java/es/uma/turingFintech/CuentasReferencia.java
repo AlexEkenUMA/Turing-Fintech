@@ -1,44 +1,50 @@
 package es.uma.turingFintech;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class CuentasReferencia extends Cuenta implements Serializable {
-    private String Nombre_Banco;
-    private String Sucursal;
-    private String Pais;
-    private Double Saldo;
-    private Date Fecha_Apertura;
-    private Boolean Estado;
+    @Column(nullable = false)
+    private String nombre_Banco;
+    private String sucursal;
+    private String pais;
+    @Column(nullable = false)
+    private Double saldo;
+    @Temporal(TemporalType.DATE)
+    private Date fecha_Apertura;
+    private Boolean estado;
+    //Relaciones
+
+    //relacion 1:1 con Segregada
+    @OneToOne
+    private Segregada segregada;
 
     //Constructores
 
 
-    public CuentasReferencia(String IBAN, String SWIFT, String nombre_Banco,
-                             String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
+    public CuentasReferencia(String IBAN, String SWIFT, String nombre_Banco, String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
         super(IBAN, SWIFT);
-        Nombre_Banco = nombre_Banco;
-        Sucursal = sucursal;
-        Pais = pais;
-        Saldo = saldo;
-        Fecha_Apertura = fecha_Apertura;
-        Estado = estado;
+        this.nombre_Banco = nombre_Banco;
+        this.sucursal = sucursal;
+        this.pais = pais;
+        this.saldo = saldo;
+        this.fecha_Apertura = fecha_Apertura;
+        this.estado = estado;
     }
 
     public CuentasReferencia(String nombre_Banco, String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
-        Nombre_Banco = nombre_Banco;
-        Sucursal = sucursal;
-        Pais = pais;
-        Saldo = saldo;
-        Fecha_Apertura = fecha_Apertura;
-        Estado = estado;
+        this.nombre_Banco = nombre_Banco;
+        this.sucursal = sucursal;
+        this.pais = pais;
+        this.saldo = saldo;
+        this.fecha_Apertura = fecha_Apertura;
+        this.estado = estado;
     }
 
-    public CuentasReferencia(){
+    public CuentasReferencia() {
 
     }
 
@@ -46,51 +52,51 @@ public class CuentasReferencia extends Cuenta implements Serializable {
 
 
     public String getNombre_Banco() {
-        return Nombre_Banco;
+        return nombre_Banco;
     }
 
     public void setNombre_Banco(String nombre_Banco) {
-        Nombre_Banco = nombre_Banco;
+        this.nombre_Banco = nombre_Banco;
     }
 
     public String getSucursal() {
-        return Sucursal;
+        return sucursal;
     }
 
     public void setSucursal(String sucursal) {
-        Sucursal = sucursal;
+        this.sucursal = sucursal;
     }
 
     public String getPais() {
-        return Pais;
+        return pais;
     }
 
     public void setPais(String pais) {
-        Pais = pais;
+        this.pais = pais;
     }
 
     public Double getSaldo() {
-        return Saldo;
+        return saldo;
     }
 
     public void setSaldo(Double saldo) {
-        Saldo = saldo;
+        this.saldo = saldo;
     }
 
     public Date getFecha_Apertura() {
-        return Fecha_Apertura;
+        return fecha_Apertura;
     }
 
     public void setFecha_Apertura(Date fecha_Apertura) {
-        Fecha_Apertura = fecha_Apertura;
+        this.fecha_Apertura = fecha_Apertura;
     }
 
     public Boolean getEstado() {
-        return Estado;
+        return estado;
     }
 
     public void setEstado(Boolean estado) {
-        Estado = estado;
+        this.estado = estado;
     }
 
     @Override
@@ -99,11 +105,11 @@ public class CuentasReferencia extends Cuenta implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CuentasReferencia that = (CuentasReferencia) o;
-        return Objects.equals(Nombre_Banco, that.Nombre_Banco) && Objects.equals(Sucursal, that.Sucursal) && Objects.equals(Pais, that.Pais) && Objects.equals(Saldo, that.Saldo) && Objects.equals(Fecha_Apertura, that.Fecha_Apertura) && Objects.equals(Estado, that.Estado);
+        return Objects.equals(nombre_Banco, that.nombre_Banco) && Objects.equals(sucursal, that.sucursal) && Objects.equals(pais, that.pais) && Objects.equals(saldo, that.saldo) && Objects.equals(fecha_Apertura, that.fecha_Apertura) && Objects.equals(estado, that.estado);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), Nombre_Banco, Sucursal, Pais, Saldo, Fecha_Apertura, Estado);
+        return Objects.hash(super.hashCode(), nombre_Banco, sucursal, pais, saldo, fecha_Apertura, estado);
     }
 }

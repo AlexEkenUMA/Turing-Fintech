@@ -1,12 +1,11 @@
 package es.uma.turingFintech;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Cuenta implements Serializable {
     @Id
     @GeneratedValue

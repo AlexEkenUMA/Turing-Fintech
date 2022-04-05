@@ -6,33 +6,34 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class CuentasFintech extends Cuenta implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column (nullable = false)
-    private Date Fecha_Apertura;
+    private Date fecha_Apertura;
     @Column (nullable = false)
-    private boolean Estado;
+    private boolean estado;
     @Column (nullable = false)
-    private String Tipo;
-    private Double Saldo;
+    private String tipo;
+    private Double saldo;
 
     //Constructores
 
 
     public CuentasFintech(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
         super(IBAN, SWIFT);
-        Fecha_Apertura = fecha_Apertura;
-        Estado = estado;
-        Tipo = tipo;
-        Saldo = saldo;
+        this.fecha_Apertura = fecha_Apertura;
+        this.estado = estado;
+        this.tipo = tipo;
+        this.saldo = saldo;
     }
 
     public CuentasFintech(Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
-        Fecha_Apertura = fecha_Apertura;
-        Estado = estado;
-        Tipo = tipo;
-        Saldo = saldo;
+        this.fecha_Apertura = fecha_Apertura;
+        this.estado = estado;
+        this.tipo = tipo;
+        this.saldo = saldo;
     }
 
     public CuentasFintech(){
@@ -43,35 +44,35 @@ public class CuentasFintech extends Cuenta implements Serializable {
 
 
     public Date getFecha_Apertura() {
-        return Fecha_Apertura;
+        return fecha_Apertura;
     }
 
     public void setFecha_Apertura(Date fecha_Apertura) {
-        Fecha_Apertura = fecha_Apertura;
+        this.fecha_Apertura = fecha_Apertura;
     }
 
     public boolean isEstado() {
-        return Estado;
+        return estado;
     }
 
     public void setEstado(boolean estado) {
-        Estado = estado;
+        this.estado = estado;
     }
 
     public String getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(String tipo) {
-        Tipo = tipo;
+        this.tipo = tipo;
     }
 
     public Double getSaldo() {
-        return Saldo;
+        return saldo;
     }
 
     public void setSaldo(Double saldo) {
-        Saldo = saldo;
+        this.saldo = saldo;
     }
 
     @Override
@@ -80,11 +81,11 @@ public class CuentasFintech extends Cuenta implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CuentasFintech that = (CuentasFintech) o;
-        return Estado == that.Estado && Objects.equals(Fecha_Apertura, that.Fecha_Apertura) && Objects.equals(Tipo, that.Tipo) && Objects.equals(Saldo, that.Saldo);
+        return estado == that.estado && Objects.equals(fecha_Apertura, that.fecha_Apertura) && Objects.equals(tipo, that.tipo) && Objects.equals(saldo, that.saldo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), Fecha_Apertura, Estado, Tipo, Saldo);
+        return Objects.hash(super.hashCode(), fecha_Apertura, estado, tipo, saldo);
     }
 }
