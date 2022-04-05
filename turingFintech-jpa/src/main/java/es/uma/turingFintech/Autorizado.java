@@ -3,6 +3,7 @@ package es.uma.turingFintech;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +25,11 @@ public class Autorizado implements Serializable {
     private Date fecha_Inicio;      // (Como autorizado)
     @Temporal(TemporalType.DATE)
     private Date fecha_Fin;         // (Como autorizado)
+
+
+    //Relacion con Empresa
+    @ManyToMany
+    private List<Empresa> empresas;
 
 
     //Constructores
