@@ -1,0 +1,18 @@
+Realizadas:
+
+SubEntenidades: Fintech, Pooled, Segregada, CuentaReferencia, PersonaJuridica, PersonaFisica
+
+Divisa    --> Transaccion
+Cuenta    --> Transaccion
+Segregada --> CuentaReferencia
+Cliente   --> CuentaFintech 1:M
+Divisa    --> CuentaReferencia 1:M
+
+
+Faltan:
+
+Empresa       --> PersonaAutorizada M:M
+PooledAccount --> CuentaReferencia
+
+
+
