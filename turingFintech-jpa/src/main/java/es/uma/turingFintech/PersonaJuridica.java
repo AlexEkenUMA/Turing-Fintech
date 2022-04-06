@@ -3,8 +3,10 @@ package es.uma.turingFintech;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +14,10 @@ public class PersonaJuridica extends Cliente implements Serializable {
 
     @Column(nullable = false)
     private String Razon_Social;
+
+    //Relacion muchos-muchos con Autorizado
+    @ManyToMany(mappedBy = "empresa")
+    private List<Autorizado> autorizados;
 
     //Constructores
 
@@ -31,7 +37,6 @@ public class PersonaJuridica extends Cliente implements Serializable {
     }
 
     //Getters and Setters
-
 
     public String getRazon_Social() {
         return Razon_Social;

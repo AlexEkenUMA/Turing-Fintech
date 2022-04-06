@@ -27,11 +27,11 @@ public class Autorizado implements Serializable {
     private Date fecha_Fin;         // (Como autorizado)
 
 
-    //Relacion con Empresa
+    //Relacion muchos-muchos con PersonaJuridica
     @ManyToMany
     @JoinTable(name = "jnd_aut_emp", joinColumns = @JoinColumn(name = "autorizado_fk"),
     inverseJoinColumns = @JoinColumn(name = "empresa_fk"))
-    private List<Empresa> empresas;
+    private List<PersonaJuridica> empresa;
 
 
     //Constructores
