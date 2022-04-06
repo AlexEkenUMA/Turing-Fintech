@@ -16,7 +16,7 @@ public class PersonaJuridica extends Cliente implements Serializable {
     private String Razon_Social;
 
     //Relacion muchos-muchos con Autorizado
-    @ManyToMany(mappedBy = "empresa")
+    @ManyToMany(mappedBy = "empresas")
     private List<Autorizado> autorizados;
 
     //Constructores

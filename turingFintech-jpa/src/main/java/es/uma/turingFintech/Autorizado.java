@@ -31,7 +31,7 @@ public class Autorizado implements Serializable {
     @ManyToMany
     @JoinTable(name = "jnd_aut_emp", joinColumns = @JoinColumn(name = "autorizado_fk"),
     inverseJoinColumns = @JoinColumn(name = "empresa_fk"))
-    private List<PersonaJuridica> empresa;
+    private List<PersonaJuridica> empresas;
 
 
     //Constructores
