@@ -15,9 +15,9 @@ public class Cuenta implements Serializable {
 
 
     //Relacion con Transacción
-    @OneToMany
+    @OneToMany(mappedBy = "origen")
     private List<Transaccion> origen;
-    @OneToMany
+    @OneToMany(mappedBy = "destino")
     private List<Transaccion> destino;
 
     //Constructores

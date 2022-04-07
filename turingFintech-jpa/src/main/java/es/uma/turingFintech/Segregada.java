@@ -14,7 +14,7 @@ public class Segregada extends CuentaFintech implements Serializable {
     //Relaciones
 
     //Relacion 1:1 con Cuenta Referencia
-    @OneToOne
+    @OneToOne(mappedBy = "segregada")
     private CuentaReferencia cr;
 
     public Segregada(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo, double comision) {

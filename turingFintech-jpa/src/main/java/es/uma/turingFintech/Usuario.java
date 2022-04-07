@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
 
     //Relaciones 1:1 Persona Autorizada y Cliente
 
-    @OneToOne
+    @OneToOne(mappedBy = "usuario")
     private Autorizado autorizado;
 
     @OneToOne

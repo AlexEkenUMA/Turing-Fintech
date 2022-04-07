@@ -31,11 +31,11 @@ public class Cliente implements Serializable {
     private String pais;
 
     //relación uno a muchos cliente-cuenta
-    @OneToMany
+    @OneToMany(mappedBy = "cliente")
     private List<CuentaFintech> cuentasFintech;
 
     //Relacion 1:1 usuario
-    @OneToOne
+    @OneToOne(mappedBy = "cliente")
     private Usuario usuario;
 
     //Constructores
