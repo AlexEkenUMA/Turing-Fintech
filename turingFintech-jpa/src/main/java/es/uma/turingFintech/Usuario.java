@@ -3,6 +3,7 @@ package es.uma.turingFintech;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,6 +16,16 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private String contraseña;
     private boolean administrativo;
+
+    //Relaciones 1:1 Persona Autorizada y Cliente
+
+    @OneToOne
+    private Autorizado autorizado;
+
+    @OneToOne
+    private Cliente cliente;
+
+
 
     //Constructores
 
@@ -44,17 +55,32 @@ public class Usuario implements Serializable {
 
     public void setAdministrativo(boolean administrativo) {this.administrativo = administrativo;}
 
+    public Autorizado getAutorizado() {
+        return autorizado;
+    }
+
+    public void setAutorizado(Autorizado autorizado) {
+        this.autorizado = autorizado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(nombre_usuario, usuario.nombre_usuario);
+        return nombre_usuario.equals(usuario.nombre_usuario);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(nombre_usuario);
     }
-
 }

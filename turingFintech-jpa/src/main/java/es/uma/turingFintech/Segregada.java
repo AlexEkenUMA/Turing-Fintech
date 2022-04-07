@@ -22,15 +22,6 @@ public class Segregada extends CuentaFintech implements Serializable {
         this.comision = comision;
     }
 
-    public Segregada(Date fecha_Apertura, boolean estado, String tipo, Double saldo, double comision) {
-        super(fecha_Apertura, estado, tipo, saldo);
-        this.comision = comision;
-    }
-
-    public Segregada(double comision) {
-        this.comision = comision;
-    }
-
     public Segregada(){
 
     }
@@ -46,11 +37,21 @@ public class Segregada extends CuentaFintech implements Serializable {
         this.comision = comision;
     }
 
+    public CuentaReferencia getCr() {
+        return cr;
+    }
+
+    public void setCr(CuentaReferencia cr) {
+        this.cr = cr;
+    }
+    //toString
+
+
     @Override
     public String toString() {
         return "Segregada{" +
                 "comision=" + comision +
-                ", cr=" + cr +
                 "} " + super.toString();
     }
+
 }

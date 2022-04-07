@@ -16,17 +16,25 @@ public class PooledAccount extends CuentaFintech implements Serializable {
         super(IBAN, SWIFT, fecha_Apertura, estado, tipo, saldo);
     }
 
-    public PooledAccount(Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
-        super(fecha_Apertura, estado, tipo, saldo);
-    }
-
     public PooledAccount() {
     }
+
+    //Getters and Setters
+
+    public List<DepositadaEn> getListaDepositos() {
+        return listaDepositos;
+    }
+
+    public void setListaDepositos(List<DepositadaEn> listaDepositos) {
+        this.listaDepositos = listaDepositos;
+    }
+
+
+    //toString
 
     @Override
     public String toString() {
         return "PooledAccount{" +
-                "listaDepositos=" + listaDepositos +
                 "} " + super.toString();
     }
 }

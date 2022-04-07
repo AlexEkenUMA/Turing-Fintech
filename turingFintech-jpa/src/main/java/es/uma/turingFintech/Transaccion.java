@@ -110,6 +110,54 @@ public class Transaccion implements Serializable {
         this.tipo_Transaccion = tipo_Transaccion;
     }
 
+    public Divisa getReceptor() {
+        return receptor;
+    }
+
+    public void setReceptor(Divisa receptor) {
+        this.receptor = receptor;
+    }
+
+    public Divisa getEmisor() {
+        return emisor;
+    }
+
+    public void setEmisor(Divisa emisor) {
+        this.emisor = emisor;
+    }
+
+    public Cuenta getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Cuenta origen) {
+        this.origen = origen;
+    }
+
+    public Cuenta getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Cuenta destino) {
+        this.destino = destino;
+    }
+
+    //Equals, hashCode, toString
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaccion that = (Transaccion) o;
+        return iD_Unico.equals(that.iD_Unico);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(iD_Unico);
+    }
+
     @Override
     public String toString() {
         return "Transaccion{" +
@@ -120,23 +168,8 @@ public class Transaccion implements Serializable {
                 ", nombre_Emisor='" + nombre_Emisor + '\'' +
                 ", comision=" + comision +
                 ", tipo_Transaccion='" + tipo_Transaccion + '\'' +
-                ", receptor=" + receptor +
-                ", emisor=" + emisor +
-                ", origen=" + origen +
-                ", destino=" + destino +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Transaccion that = (Transaccion) o;
-        return Objects.equals(iD_Unico, that.iD_Unico);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(iD_Unico);
-    }
 }

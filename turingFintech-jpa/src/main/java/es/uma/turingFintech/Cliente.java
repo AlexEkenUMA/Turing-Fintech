@@ -33,9 +33,16 @@ public class Cliente implements Serializable {
     //relación uno a muchos cliente-cuenta
     @OneToMany
     private List<CuentaFintech> cuentasFintech;
+
+    //Relacion 1:1 usuario
+    @OneToOne
+    private Usuario usuario;
+
     //Constructores
 
-    public Cliente(Long id, String identificacion, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja, String direccion, String ciudad, Integer codigo_Postal, String pais) {
+
+    public Cliente(Long id, String identificacion, String tipo_Cliente, String estado,
+                   Date fecha_Alta, Date fecha_Baja, String direccion, String ciudad, Integer codigo_Postal, String pais) {
         this.id = id;
         this.identificacion = identificacion;
         this.tipo_Cliente = tipo_Cliente;
@@ -61,6 +68,14 @@ public class Cliente implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
     }
 
     public String getTipo_Cliente() {
@@ -127,20 +142,30 @@ public class Cliente implements Serializable {
         this.pais = pais;
     }
 
-    public String getIdentificacion() {
-        return identificacion;
+    public List<CuentaFintech> getCuentasFintech() {
+        return cuentasFintech;
     }
 
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
+    public void setCuentasFintech(List<CuentaFintech> cuentasFintech) {
+        this.cuentasFintech = cuentasFintech;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    //Equals, hashcode, toString
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id);
+        return id.equals(cliente.id);
     }
 
     @Override
@@ -152,7 +177,7 @@ public class Cliente implements Serializable {
     public String toString() {
         return "Cliente{" +
                 "id=" + id +
-                ", identificacion='" + identificacion + '\'' +
+                ", identificacion=" + identificacion +
                 ", tipo_Cliente='" + tipo_Cliente + '\'' +
                 ", estado='" + estado + '\'' +
                 ", fecha_Alta=" + fecha_Alta +
@@ -161,7 +186,7 @@ public class Cliente implements Serializable {
                 ", ciudad='" + ciudad + '\'' +
                 ", codigo_Postal=" + codigo_Postal +
                 ", pais='" + pais + '\'' +
-                ", cuentasFintech=" + cuentasFintech +
                 '}';
     }
+
 }

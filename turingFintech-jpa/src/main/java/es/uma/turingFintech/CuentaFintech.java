@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class CuentaFintech extends Cuenta implements Serializable {
 
     @Temporal(TemporalType.DATE)
@@ -27,13 +26,6 @@ public class CuentaFintech extends Cuenta implements Serializable {
 
     public CuentaFintech(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
         super(IBAN, SWIFT);
-        this.fecha_Apertura = fecha_Apertura;
-        this.estado = estado;
-        this.tipo = tipo;
-        this.saldo = saldo;
-    }
-
-    public CuentaFintech(Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
         this.fecha_Apertura = fecha_Apertura;
         this.estado = estado;
         this.tipo = tipo;
@@ -79,6 +71,9 @@ public class CuentaFintech extends Cuenta implements Serializable {
         this.saldo = saldo;
     }
 
+    //toString
+
+
     @Override
     public String toString() {
         return "CuentaFintech{" +
@@ -89,4 +84,5 @@ public class CuentaFintech extends Cuenta implements Serializable {
                 ", cliente=" + cliente +
                 "} " + super.toString();
     }
+
 }

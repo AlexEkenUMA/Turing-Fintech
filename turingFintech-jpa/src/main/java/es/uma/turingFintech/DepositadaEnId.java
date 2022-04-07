@@ -3,10 +3,11 @@ package es.uma.turingFintech;
 import javax.persistence.Embeddable;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class DepositadaEnId {
+public class DepositadaEnId implements Serializable {
     private String cuentaReferencia;
     private String pooledAccount;
 
@@ -15,21 +16,12 @@ public class DepositadaEnId {
         this.pooledAccount = pooledAccount;
     }
 
-    public String getIBANcuentaReferencia() {
-        return cuentaReferencia;
+    public DepositadaEnId(){
+
     }
 
-    public void setcuentaReferencia(String cuentaReferencia) {
-        this.cuentaReferencia = cuentaReferencia;
-    }
+    //Getters and Setters
 
-    public String getpooledAccount() {
-        return pooledAccount;
-    }
-
-    public void setpooledAccount(String pooledAccount) {
-        this.pooledAccount = pooledAccount;
-    }
 
     public String getCuentaReferencia() {
         return cuentaReferencia;
@@ -37,6 +29,27 @@ public class DepositadaEnId {
 
     public void setCuentaReferencia(String cuentaReferencia) {
         this.cuentaReferencia = cuentaReferencia;
+    }
+
+    public String getPooledAccount() {
+        return pooledAccount;
+    }
+
+    public void setPooledAccount(String pooledAccount) {
+        this.pooledAccount = pooledAccount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DepositadaEnId that = (DepositadaEnId) o;
+        return Objects.equals(cuentaReferencia, that.cuentaReferencia) && Objects.equals(pooledAccount, that.pooledAccount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cuentaReferencia, pooledAccount);
     }
 
     @Override

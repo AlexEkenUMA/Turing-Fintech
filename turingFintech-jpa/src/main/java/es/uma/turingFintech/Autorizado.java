@@ -3,6 +3,7 @@ package es.uma.turingFintech;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +29,15 @@ public class Autorizado implements Serializable {
     private Date fecha_Fin;         // (Como autorizado)
 
 
+    //Relacion muchos-muchos con PersonaJuridica
+    @ManyToMany
+    private List<PersonaJuridica> empresas;
+
+    //Relacion 1:1 usuario
+    @OneToOne
+    private Usuario usuario;
+
+
     //Constructores
 
 
@@ -49,6 +59,14 @@ public class Autorizado implements Serializable {
 
     //Getters and Setters
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getIdentificacion() {
         return identificacion;
@@ -114,13 +132,22 @@ public class Autorizado implements Serializable {
         this.fecha_Fin = fecha_Fin;
     }
 
-    public Long getId() {
-        return id;
+    public List<PersonaJuridica> getEmpresas() {
+        return empresas;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEmpresas(List<PersonaJuridica> empresas) {
+        this.empresas = empresas;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    //Equals, Hash and ToString
 
     @Override
     public boolean equals(Object o) {

@@ -44,15 +44,6 @@ public class CuentaReferencia extends Cuenta implements Serializable {
         this.estado = estado;
     }
 
-    public CuentaReferencia(String nombre_Banco, String sucursal, String pais, Double saldo, Date fecha_Apertura, Boolean estado) {
-        this.nombre_Banco = nombre_Banco;
-        this.sucursal = sucursal;
-        this.pais = pais;
-        this.saldo = saldo;
-        this.fecha_Apertura = fecha_Apertura;
-        this.estado = estado;
-    }
-
     public CuentaReferencia() {
 
     }
@@ -119,7 +110,7 @@ public class CuentaReferencia extends Cuenta implements Serializable {
                 ", estado=" + estado +
                 ", segregada=" + segregada +
                 ", divisa=" + divisa +
-                ", listaDepositos=" + listaDepositos +
                 "} " + super.toString();
     }
+
 }
