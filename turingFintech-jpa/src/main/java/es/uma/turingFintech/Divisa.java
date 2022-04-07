@@ -16,15 +16,21 @@ public class Divisa implements Serializable {
     private double cambio_Euro;
 
     //Relacion con Transaccion
-    @OneToMany
-    private List<Transaccion> emisor;
-    @OneToMany
-    private List<Transaccion> receptor;
+
+    //@OneToMany
+    //private List<Transaccion> emisor;
+    //@OneToMany
+    //private List<Transaccion> receptor;
+
+    //Eliminado por unidireccionalidad, descomentar para hacerlo bidirecional
 
 
     //relacion uno-muchos divisa-cuentaReferencia
-    @OneToMany
-    private List<CuentaReferencia> cuentasReferencia;
+
+    //@OneToMany
+    //private List<CuentaReferencia> cuentasReferencia;
+
+    //Eliminado por unidireccionalidad, descomentar para hacerlo bidirecional
 
     //Constructores
 
@@ -75,16 +81,31 @@ public class Divisa implements Serializable {
         this.cambio_Euro = cambio_Euro;
     }
 
+
+
+    //Equals, hashCode, toString
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Divisa divisas = (Divisa) o;
-        return simbolo == divisas.simbolo && Double.compare(divisas.cambio_Euro, cambio_Euro) == 0 && Objects.equals(abreviatura, divisas.abreviatura) && Objects.equals(nombre, divisas.nombre);
+        Divisa divisa = (Divisa) o;
+        return abreviatura.equals(divisa.abreviatura);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(abreviatura, nombre, simbolo, cambio_Euro);
+        return Objects.hash(abreviatura);
+    }
+
+    @Override
+    public String toString() {
+        return "Divisa{" +
+                "abreviatura='" + abreviatura + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", simbolo=" + simbolo +
+                ", cambio_Euro=" + cambio_Euro +
+                '}';
     }
 }

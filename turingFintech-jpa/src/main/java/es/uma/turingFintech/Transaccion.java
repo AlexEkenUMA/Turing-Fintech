@@ -110,16 +110,66 @@ public class Transaccion implements Serializable {
         this.tipo_Transaccion = tipo_Transaccion;
     }
 
+    public Divisa getReceptor() {
+        return receptor;
+    }
+
+    public void setReceptor(Divisa receptor) {
+        this.receptor = receptor;
+    }
+
+    public Divisa getEmisor() {
+        return emisor;
+    }
+
+    public void setEmisor(Divisa emisor) {
+        this.emisor = emisor;
+    }
+
+    public Cuenta getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Cuenta origen) {
+        this.origen = origen;
+    }
+
+    public Cuenta getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Cuenta destino) {
+        this.destino = destino;
+    }
+
+    //Equals, hashCode, toString
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaccion that = (Transaccion) o;
-        return Objects.equals(iD_Unico, that.iD_Unico) && Objects.equals(fecha_Instruccion, that.fecha_Instruccion) && Objects.equals(cantidad, that.cantidad) && Objects.equals(concepto, that.concepto) && Objects.equals(nombre_Emisor, that.nombre_Emisor) && Objects.equals(comision, that.comision) && Objects.equals(tipo_Transaccion, that.tipo_Transaccion);
+        return iD_Unico.equals(that.iD_Unico);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(iD_Unico, fecha_Instruccion, cantidad, concepto, nombre_Emisor, comision, tipo_Transaccion);
+        return Objects.hash(iD_Unico);
     }
+
+    @Override
+    public String toString() {
+        return "Transaccion{" +
+                "iD_Unico=" + iD_Unico +
+                ", fecha_Instruccion=" + fecha_Instruccion +
+                ", cantidad=" + cantidad +
+                ", concepto='" + concepto + '\'' +
+                ", nombre_Emisor='" + nombre_Emisor + '\'' +
+                ", comision=" + comision +
+                ", tipo_Transaccion='" + tipo_Transaccion + '\'' +
+                '}';
+    }
+
+
 }

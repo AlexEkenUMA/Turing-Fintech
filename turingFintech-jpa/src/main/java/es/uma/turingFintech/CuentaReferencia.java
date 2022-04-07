@@ -109,16 +109,17 @@ public class CuentaReferencia extends Cuenta implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        CuentaReferencia that = (CuentaReferencia) o;
-        return Objects.equals(nombre_Banco, that.nombre_Banco) && Objects.equals(sucursal, that.sucursal) && Objects.equals(pais, that.pais) && Objects.equals(saldo, that.saldo) && Objects.equals(fecha_Apertura, that.fecha_Apertura) && Objects.equals(estado, that.estado);
+    public String toString() {
+        return "CuentaReferencia{" +
+                "nombre_Banco='" + nombre_Banco + '\'' +
+                ", sucursal='" + sucursal + '\'' +
+                ", pais='" + pais + '\'' +
+                ", saldo=" + saldo +
+                ", fecha_Apertura=" + fecha_Apertura +
+                ", estado=" + estado +
+                ", segregada=" + segregada +
+                ", divisa=" + divisa +
+                '}';
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), nombre_Banco, sucursal, pais, saldo, fecha_Apertura, estado);
-    }
 }

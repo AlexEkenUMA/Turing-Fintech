@@ -11,7 +11,9 @@ public class Autorizado implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long identificacion;
+    private Long id;
+    @Column(unique = true)
+    private Long identificador;
     @Column(nullable = false)
     private String nombre;
     @Column(nullable = false)
@@ -29,16 +31,19 @@ public class Autorizado implements Serializable {
 
     //Relacion muchos-muchos con PersonaJuridica
     @ManyToMany
-    @JoinTable(name = "jnd_aut_emp", joinColumns = @JoinColumn(name = "autorizado_fk"),
-    inverseJoinColumns = @JoinColumn(name = "empresa_fk"))
     private List<PersonaJuridica> empresas;
+
+    //Relacion 1:1 usuario
+    @OneToOne
+    private Usuario usuario;
 
 
     //Constructores
 
 
-    public Autorizado(Long identificacion, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
-        this.identificacion = identificacion;
+    public Autorizado(Long id, Long identificador, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
+        this.id = id;
+        this.identificador = identificador;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
@@ -55,12 +60,20 @@ public class Autorizado implements Serializable {
     //Getters and Setters
 
 
-    public Long getIdentificacion() {
-        return identificacion;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdentificacion(Long identificacion) {
-        this.identificacion = identificacion;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(Long identificador) {
+        this.identificador = identificador;
     }
 
     public String getNombre() {
@@ -119,16 +132,50 @@ public class Autorizado implements Serializable {
         this.fecha_Fin = fecha_Fin;
     }
 
+    public List<PersonaJuridica> getEmpresas() {
+        return empresas;
+    }
+
+    public void setEmpresas(List<PersonaJuridica> empresas) {
+        this.empresas = empresas;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    //Equals, Hash and ToString
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Autorizado that = (Autorizado) o;
-        return Objects.equals(identificacion, that.identificacion) && Objects.equals(nombre, that.nombre) && Objects.equals(apellidos, that.apellidos) && Objects.equals(direccion, that.direccion) && Objects.equals(fecha_Nacimiento, that.fecha_Nacimiento) && Objects.equals(estado, that.estado) && Objects.equals(fecha_Inicio, that.fecha_Inicio) && Objects.equals(fecha_Fin, that.fecha_Fin);
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(identificacion, nombre, apellidos, direccion, fecha_Nacimiento, estado, fecha_Inicio, fecha_Fin);
+        return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Autorizado{" +
+                "id=" + id +
+                ", identificador=" + identificador +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", fecha_Nacimiento=" + fecha_Nacimiento +
+                ", estado='" + estado + '\'' +
+                ", fecha_Inicio=" + fecha_Inicio +
+                ", fecha_Fin=" + fecha_Fin +
+                '}';
+    }
+
 }

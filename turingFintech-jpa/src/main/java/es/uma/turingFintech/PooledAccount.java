@@ -23,5 +23,17 @@ public class PooledAccount extends CuentaFintech implements Serializable {
     public PooledAccount() {
     }
 
+    //Getters and Setters
+
+    public List<DepositadaEn> getListaDepositos() {
+        return listaDepositos;
+    }
+
+    public void setListaDepositos(List<DepositadaEn> listaDepositos) {
+        this.listaDepositos = listaDepositos;
+    }
+
+
+    //toString
 
 }

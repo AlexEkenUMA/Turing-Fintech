@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class CuentaFintech extends Cuenta implements Serializable {
 
     @Temporal(TemporalType.DATE)
@@ -79,17 +78,18 @@ public class CuentaFintech extends Cuenta implements Serializable {
         this.saldo = saldo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        CuentaFintech that = (CuentaFintech) o;
-        return estado == that.estado && Objects.equals(fecha_Apertura, that.fecha_Apertura) && Objects.equals(tipo, that.tipo) && Objects.equals(saldo, that.saldo);
-    }
+    //toString
+
 
     @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), fecha_Apertura, estado, tipo, saldo);
+    public String toString() {
+        return "CuentaFintech{" +
+                "fecha_Apertura=" + fecha_Apertura +
+                ", estado=" + estado +
+                ", tipo='" + tipo + '\'' +
+                ", saldo=" + saldo +
+                ", cliente=" + cliente +
+                '}';
     }
+
 }

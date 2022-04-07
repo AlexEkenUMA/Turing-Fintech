@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@IdClass(DepositadaEnId.class)
 public class DepositadaEn {
     @Column (nullable = false)
     private double saldo;
@@ -43,4 +44,5 @@ public class DepositadaEn {
     public int hashCode() {
         return Objects.hash(saldo);
     }
+
 }
