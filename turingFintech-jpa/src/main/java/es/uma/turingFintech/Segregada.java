@@ -47,16 +47,10 @@ public class Segregada extends CuentaFintech implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Segregada segregada = (Segregada) o;
-        return Double.compare(segregada.comision, comision) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), comision);
+    public String toString() {
+        return "Segregada{" +
+                "comision=" + comision +
+                ", cr=" + cr +
+                "} " + super.toString();
     }
 }

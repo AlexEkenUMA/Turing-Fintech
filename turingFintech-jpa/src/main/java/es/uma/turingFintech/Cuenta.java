@@ -43,17 +43,26 @@ public class Cuenta implements Serializable {
 
     public void setSWIFT(String SWIFT) {this.SWIFT = SWIFT;}
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cuenta cuenta = (Cuenta) o;
-        return Objects.equals(IBAN, cuenta.IBAN) && Objects.equals(SWIFT, cuenta.SWIFT);
+        return IBAN.equals(cuenta.IBAN);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(IBAN, SWIFT);
+        return Objects.hash(IBAN);
+    }
+
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "IBAN='" + IBAN + '\'' +
+                ", SWIFT='" + SWIFT + '\'' +
+                ", origen=" + origen +
+                ", destino=" + destino +
+                '}';
     }
 }

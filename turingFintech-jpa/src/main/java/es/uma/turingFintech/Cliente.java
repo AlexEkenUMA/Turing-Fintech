@@ -12,6 +12,8 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+    @Column (unique = true, nullable = false)
+    private String identificacion;
     @Column (nullable = false)
     private String tipo_Cliente; // Habría que hacer dos subentidades --> Persona Física y Jurídica
     @Column (nullable = false)
@@ -33,9 +35,9 @@ public class Cliente implements Serializable {
     private List<CuentaFintech> cuentasFintech;
     //Constructores
 
-
-    public Cliente(Long id, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja, String direccion, String ciudad, Integer codigo_Postal, String pais) {
+    public Cliente(Long id, String identificacion, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja, String direccion, String ciudad, Integer codigo_Postal, String pais) {
         this.id = id;
+        this.identificacion = identificacion;
         this.tipo_Cliente = tipo_Cliente;
         this.estado = estado;
         this.fecha_Alta = fecha_Alta;
@@ -125,17 +127,41 @@ public class Cliente implements Serializable {
         this.pais = pais;
     }
 
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) && Objects.equals(tipo_Cliente, cliente.tipo_Cliente) && Objects.equals(estado, cliente.estado) && Objects.equals(fecha_Alta, cliente.fecha_Alta) && Objects.equals(fecha_Baja, cliente.fecha_Baja) && Objects.equals(direccion, cliente.direccion) && Objects.equals(ciudad, cliente.ciudad) && Objects.equals(codigo_Postal, cliente.codigo_Postal) && Objects.equals(pais, cliente.pais);
+        return Objects.equals(id, cliente.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tipo_Cliente, estado, fecha_Alta, fecha_Baja, direccion, ciudad, codigo_Postal, pais);
+        return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", identificacion='" + identificacion + '\'' +
+                ", tipo_Cliente='" + tipo_Cliente + '\'' +
+                ", estado='" + estado + '\'' +
+                ", fecha_Alta=" + fecha_Alta +
+                ", fecha_Baja=" + fecha_Baja +
+                ", direccion='" + direccion + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                ", codigo_Postal=" + codigo_Postal +
+                ", pais='" + pais + '\'' +
+                ", cuentasFintech=" + cuentasFintech +
+                '}';
+    }
 }

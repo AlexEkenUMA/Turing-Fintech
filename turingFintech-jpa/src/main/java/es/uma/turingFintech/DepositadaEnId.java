@@ -7,40 +7,43 @@ import java.util.Objects;
 
 @Embeddable
 public class DepositadaEnId {
-    private CuentaReferencia IBANcuentaReferencia;
-    private PooledAccount IBANpooledAccount;
+    private String cuentaReferencia;
+    private String pooledAccount;
 
-    public DepositadaEnId(CuentaReferencia IBANcuentaReferencia, PooledAccount IBANpooledAccount) {
-        this.IBANcuentaReferencia = IBANcuentaReferencia;
-        this.IBANpooledAccount = IBANpooledAccount;
+    public DepositadaEnId(String cuentaReferencia, String pooledAccount) {
+        this.cuentaReferencia = cuentaReferencia;
+        this.pooledAccount = pooledAccount;
     }
 
-    public CuentaReferencia getIBANcuentaReferencia() {
-        return IBANcuentaReferencia;
+    public String getIBANcuentaReferencia() {
+        return cuentaReferencia;
     }
 
-    public void setIBANcuentaReferencia(CuentaReferencia IBANcuentaReferencia) {
-        this.IBANcuentaReferencia = IBANcuentaReferencia;
+    public void setcuentaReferencia(String cuentaReferencia) {
+        this.cuentaReferencia = cuentaReferencia;
     }
 
-    public PooledAccount getIBANpooledAccount() {
-        return IBANpooledAccount;
+    public String getpooledAccount() {
+        return pooledAccount;
     }
 
-    public void setIBANpooledAccount(PooledAccount IBANpooledAccount) {
-        this.IBANpooledAccount = IBANpooledAccount;
+    public void setpooledAccount(String pooledAccount) {
+        this.pooledAccount = pooledAccount;
+    }
+
+    public String getCuentaReferencia() {
+        return cuentaReferencia;
+    }
+
+    public void setCuentaReferencia(String cuentaReferencia) {
+        this.cuentaReferencia = cuentaReferencia;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DepositadaEnId that = (DepositadaEnId) o;
-        return IBANcuentaReferencia.equals(that.IBANcuentaReferencia) && IBANpooledAccount.equals(that.IBANpooledAccount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(IBANcuentaReferencia, IBANpooledAccount);
+    public String toString() {
+        return "DepositadaEnId{" +
+                "cuentaReferencia='" + cuentaReferencia + '\'' +
+                ", pooledAccount='" + pooledAccount + '\'' +
+                '}';
     }
 }

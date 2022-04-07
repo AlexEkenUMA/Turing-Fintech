@@ -15,10 +15,10 @@ public class PersonaFisica extends Cliente implements Serializable {
     private Date Fecha_Nacimiento;
 
     //Constructores
-    public PersonaFisica(Long id, String tipo_Cliente, String estado, Date fecha_Alta,
+    public PersonaFisica(Long id, String identificacion, String tipo_Cliente, String estado, Date fecha_Alta,
                          Date fecha_Baja, String direccion, String ciudad,
                          Integer codigo_Postal, String pais, String nombre, String apellidos, Date fecha_Nacimiento) {
-        super(id, tipo_Cliente, estado, fecha_Alta, fecha_Baja, direccion, ciudad, codigo_Postal, pais);
+        super(id, identificacion, tipo_Cliente, estado, fecha_Alta, fecha_Baja, direccion, ciudad, codigo_Postal, pais);
         Nombre = nombre;
         Apellidos = apellidos;
         Fecha_Nacimiento = fecha_Nacimiento;
@@ -61,16 +61,11 @@ public class PersonaFisica extends Cliente implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        PersonaFisica that = (PersonaFisica) o;
-        return Objects.equals(Nombre, that.Nombre) && Objects.equals(Apellidos, that.Apellidos) && Objects.equals(Fecha_Nacimiento, that.Fecha_Nacimiento);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), Nombre, Apellidos, Fecha_Nacimiento);
+    public String toString() {
+        return "PersonaFisica{" +
+                "Nombre='" + Nombre + '\'' +
+                ", Apellidos='" + Apellidos + '\'' +
+                ", Fecha_Nacimiento=" + Fecha_Nacimiento +
+                "} " + super.toString();
     }
 }

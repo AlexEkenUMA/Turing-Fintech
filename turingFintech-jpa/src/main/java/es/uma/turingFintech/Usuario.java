@@ -49,12 +49,12 @@ public class Usuario implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return administrativo == usuario.administrativo && Objects.equals(nombre_usuario, usuario.nombre_usuario) && Objects.equals(contraseña, usuario.contraseña);
+        return Objects.equals(nombre_usuario, usuario.nombre_usuario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre_usuario, contraseña, administrativo);
+        return Objects.hash(nombre_usuario);
     }
 
 }

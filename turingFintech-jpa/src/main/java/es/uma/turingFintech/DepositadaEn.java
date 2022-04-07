@@ -36,11 +36,20 @@ public class DepositadaEn {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DepositadaEn that = (DepositadaEn) o;
-        return Double.compare(that.saldo, saldo) == 0;
+        return cuentaReferencia.getIBAN().equals(pooledAccount.getIBAN());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(saldo);
+    }
+
+    @Override
+    public String toString() {
+        return "DepositadaEn{" +
+                "saldo=" + saldo +
+                ", cuentaReferencia=" + cuentaReferencia.toString() +
+                ", pooledAccount=" + pooledAccount.toString() +
+                '}';
     }
 }

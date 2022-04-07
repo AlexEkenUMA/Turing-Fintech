@@ -10,7 +10,9 @@ public class Autorizado implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long identificacion;
+    private Long id;
+    @Column (unique = true, nullable = false)
+    private String identificacion;
     @Column(nullable = false)
     private String nombre;
     @Column(nullable = false)
@@ -29,7 +31,8 @@ public class Autorizado implements Serializable {
     //Constructores
 
 
-    public Autorizado(Long identificacion, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
+    public Autorizado(Long id, String identificacion, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
+        this.id = id;
         this.identificacion = identificacion;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -47,11 +50,11 @@ public class Autorizado implements Serializable {
     //Getters and Setters
 
 
-    public Long getIdentificacion() {
+    public String getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(Long identificacion) {
+    public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
     }
 
@@ -111,16 +114,39 @@ public class Autorizado implements Serializable {
         this.fecha_Fin = fecha_Fin;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Autorizado that = (Autorizado) o;
-        return Objects.equals(identificacion, that.identificacion) && Objects.equals(nombre, that.nombre) && Objects.equals(apellidos, that.apellidos) && Objects.equals(direccion, that.direccion) && Objects.equals(fecha_Nacimiento, that.fecha_Nacimiento) && Objects.equals(estado, that.estado) && Objects.equals(fecha_Inicio, that.fecha_Inicio) && Objects.equals(fecha_Fin, that.fecha_Fin);
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(identificacion, nombre, apellidos, direccion, fecha_Nacimiento, estado, fecha_Inicio, fecha_Fin);
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Autorizado{" +
+                "id=" + id +
+                ", identificacion='" + identificacion + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", fecha_Nacimiento=" + fecha_Nacimiento +
+                ", estado='" + estado + '\'' +
+                ", fecha_Inicio=" + fecha_Inicio +
+                ", fecha_Fin=" + fecha_Fin +
+                '}';
     }
 }

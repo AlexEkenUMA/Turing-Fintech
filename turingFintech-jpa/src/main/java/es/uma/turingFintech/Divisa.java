@@ -80,11 +80,11 @@ public class Divisa implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Divisa divisas = (Divisa) o;
-        return simbolo == divisas.simbolo && Double.compare(divisas.cambio_Euro, cambio_Euro) == 0 && Objects.equals(abreviatura, divisas.abreviatura) && Objects.equals(nombre, divisas.nombre);
+        return Objects.equals(abreviatura, divisas.abreviatura);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(abreviatura, nombre, simbolo, cambio_Euro);
+        return Objects.hash(abreviatura);
     }
 }
