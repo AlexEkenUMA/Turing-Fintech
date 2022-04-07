@@ -41,7 +41,7 @@ public class DepositadaEn {
 
     @Override
     public int hashCode() {
-        return Objects.hash(saldo);
+        return Objects.hash(cuentaReferencia.getIBAN(),pooledAccount.getIBAN());
     }
 
     @Override
