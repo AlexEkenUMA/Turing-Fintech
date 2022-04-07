@@ -142,6 +142,8 @@ public class Transaccion implements Serializable {
         this.destino = destino;
     }
 
+
+
     //Equals, hashCode, toString
 
 

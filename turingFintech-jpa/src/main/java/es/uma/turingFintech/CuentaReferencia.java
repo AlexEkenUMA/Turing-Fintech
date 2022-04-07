@@ -99,6 +99,30 @@ public class CuentaReferencia extends Cuenta implements Serializable {
         this.estado = estado;
     }
 
+    public Segregada getSegregada() {
+        return segregada;
+    }
+
+    public void setSegregada(Segregada segregada) {
+        this.segregada = segregada;
+    }
+
+    public Divisa getDivisa() {
+        return divisa;
+    }
+
+    public void setDivisa(Divisa divisa) {
+        this.divisa = divisa;
+    }
+
+    public List<DepositadaEn> getListaDepositos() {
+        return listaDepositos;
+    }
+
+    public void setListaDepositos(List<DepositadaEn> listaDepositos) {
+        this.listaDepositos = listaDepositos;
+    }
+
     @Override
     public String toString() {
         return "CuentaReferencia{" +
@@ -108,8 +132,6 @@ public class CuentaReferencia extends Cuenta implements Serializable {
                 ", saldo=" + saldo +
                 ", fecha_Apertura=" + fecha_Apertura +
                 ", estado=" + estado +
-                ", segregada=" + segregada +
-                ", divisa=" + divisa +
                 "} " + super.toString();
     }
 

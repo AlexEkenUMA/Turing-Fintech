@@ -71,6 +71,13 @@ public class CuentaFintech extends Cuenta implements Serializable {
         this.saldo = saldo;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     //toString
 
 
@@ -81,7 +88,6 @@ public class CuentaFintech extends Cuenta implements Serializable {
                 ", estado=" + estado +
                 ", tipo='" + tipo + '\'' +
                 ", saldo=" + saldo +
-                ", cliente=" + cliente +
                 "} " + super.toString();
     }
 

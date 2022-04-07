@@ -22,7 +22,7 @@ public class PersonaJuridica extends Cliente implements Serializable {
     //Constructores
 
 
-    public PersonaJuridica(Long id, String identificacion, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja,
+    public PersonaJuridica(Long id, Long identificacion, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja,
                            String direccion, String ciudad, Integer codigo_Postal, String pais,
                            String razon_Social, List<Autorizado> autorizados) {
         super(id, identificacion, tipo_Cliente, estado, fecha_Alta, fecha_Baja, direccion, ciudad, codigo_Postal, pais);
@@ -51,6 +51,9 @@ public class PersonaJuridica extends Cliente implements Serializable {
     public void setAutorizados(List<Autorizado> autorizados) {
         this.autorizados = autorizados;
     }
+
+
+
     //toString
 
 

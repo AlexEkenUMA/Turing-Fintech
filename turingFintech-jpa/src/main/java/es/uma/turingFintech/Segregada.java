@@ -44,6 +44,8 @@ public class Segregada extends CuentaFintech implements Serializable {
     public void setCr(CuentaReferencia cr) {
         this.cr = cr;
     }
+
+
     //toString
 
 

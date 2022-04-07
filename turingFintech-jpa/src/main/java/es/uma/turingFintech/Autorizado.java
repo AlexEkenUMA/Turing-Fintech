@@ -13,7 +13,7 @@ public class Autorizado implements Serializable {
     @GeneratedValue
     private Long id;
     @Column (unique = true, nullable = false)
-    private String identificacion;
+    private Long identificacion;
     @Column(nullable = false)
     private String nombre;
     @Column(nullable = false)
@@ -41,7 +41,7 @@ public class Autorizado implements Serializable {
     //Constructores
 
 
-    public Autorizado(Long id, String identificacion, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
+    public Autorizado(Long id, Long identificacion, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
         this.id = id;
         this.identificacion = identificacion;
         this.nombre = nombre;
@@ -68,11 +68,11 @@ public class Autorizado implements Serializable {
         this.id = id;
     }
 
-    public String getIdentificacion() {
+    public Long getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(String identificacion) {
+    public void setIdentificacion(Long identificacion) {
         this.identificacion = identificacion;
     }
 
@@ -147,6 +147,9 @@ public class Autorizado implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
+
     //Equals, Hash and ToString
 
     @Override

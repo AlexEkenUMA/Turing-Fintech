@@ -13,7 +13,7 @@ public class Cliente implements Serializable {
     @GeneratedValue
     private Long id;
     @Column (unique = true, nullable = false)
-    private String identificacion;
+    private Long identificacion;
     @Column (nullable = false)
     private String tipo_Cliente; // Habría que hacer dos subentidades --> Persona Física y Jurídica
     @Column (nullable = false)
@@ -41,7 +41,7 @@ public class Cliente implements Serializable {
     //Constructores
 
 
-    public Cliente(Long id, String identificacion, String tipo_Cliente, String estado,
+    public Cliente(Long id, Long identificacion, String tipo_Cliente, String estado,
                    Date fecha_Alta, Date fecha_Baja, String direccion, String ciudad, Integer codigo_Postal, String pais) {
         this.id = id;
         this.identificacion = identificacion;
@@ -70,11 +70,11 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
-    public String getIdentificacion() {
+    public Long getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentificacion(String identificacion) {
+    public void setIdentificacion(Long identificacion) {
         this.identificacion = identificacion;
     }
 
@@ -157,6 +157,8 @@ public class Cliente implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+
     //Equals, hashcode, toString
 
 

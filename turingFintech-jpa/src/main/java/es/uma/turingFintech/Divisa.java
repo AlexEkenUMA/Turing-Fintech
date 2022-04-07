@@ -82,6 +82,8 @@ public class Divisa implements Serializable {
     }
 
 
+
+
     //Equals, hashCode, toString
 
 
