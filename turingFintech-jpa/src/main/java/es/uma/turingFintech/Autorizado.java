@@ -3,6 +3,7 @@ package es.uma.turingFintech;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,8 +12,13 @@ public class Autorizado implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+<<<<<<< HEAD
     @Column (unique = true, nullable = false)
     private String identificacion;
+=======
+    @Column(unique = true)
+    private Long identificador;
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Column(nullable = false)
     private String nombre;
     @Column(nullable = false)
@@ -28,12 +34,27 @@ public class Autorizado implements Serializable {
     private Date fecha_Fin;         // (Como autorizado)
 
 
+    //Relacion muchos-muchos con PersonaJuridica
+    @ManyToMany
+    private List<PersonaJuridica> empresas;
+
+    //Relacion 1:1 usuario
+    @OneToOne
+    private Usuario usuario;
+
+
     //Constructores
 
 
+<<<<<<< HEAD
     public Autorizado(Long id, String identificacion, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
         this.id = id;
         this.identificacion = identificacion;
+=======
+    public Autorizado(Long id, Long identificador, String nombre, String apellidos, String direccion, Date fecha_Nacimiento, String estado, Date fecha_Inicio, Date fecha_Fin) {
+        this.id = id;
+        this.identificador = identificador;
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
@@ -50,12 +71,29 @@ public class Autorizado implements Serializable {
     //Getters and Setters
 
 
+<<<<<<< HEAD
     public String getIdentificacion() {
         return identificacion;
     }
 
     public void setIdentificacion(String identificacion) {
         this.identificacion = identificacion;
+=======
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(Long identificador) {
+        this.identificador = identificador;
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
 
     public String getNombre() {
@@ -114,6 +152,7 @@ public class Autorizado implements Serializable {
         this.fecha_Fin = fecha_Fin;
     }
 
+<<<<<<< HEAD
     public Long getId() {
         return id;
     }
@@ -122,6 +161,26 @@ public class Autorizado implements Serializable {
         this.id = id;
     }
 
+=======
+    public List<PersonaJuridica> getEmpresas() {
+        return empresas;
+    }
+
+    public void setEmpresas(List<PersonaJuridica> empresas) {
+        this.empresas = empresas;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    //Equals, Hash and ToString
+
+
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -133,6 +192,7 @@ public class Autorizado implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+<<<<<<< HEAD
     }
 
     @Override
@@ -148,5 +208,23 @@ public class Autorizado implements Serializable {
                 ", fecha_Inicio=" + fecha_Inicio +
                 ", fecha_Fin=" + fecha_Fin +
                 '}';
+=======
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
+
+    @Override
+    public String toString() {
+        return "Autorizado{" +
+                "id=" + id +
+                ", identificador=" + identificador +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", fecha_Nacimiento=" + fecha_Nacimiento +
+                ", estado='" + estado + '\'' +
+                ", fecha_Inicio=" + fecha_Inicio +
+                ", fecha_Fin=" + fecha_Fin +
+                '}';
+    }
+
 }

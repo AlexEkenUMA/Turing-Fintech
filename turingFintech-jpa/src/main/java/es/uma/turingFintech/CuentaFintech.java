@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class CuentaFintech extends Cuenta implements Serializable {
 
     @Temporal(TemporalType.DATE)
@@ -79,6 +78,12 @@ public class CuentaFintech extends Cuenta implements Serializable {
         this.saldo = saldo;
     }
 
+<<<<<<< HEAD
+=======
+    //toString
+
+
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Override
     public String toString() {
         return "CuentaFintech{" +
@@ -87,6 +92,11 @@ public class CuentaFintech extends Cuenta implements Serializable {
                 ", tipo='" + tipo + '\'' +
                 ", saldo=" + saldo +
                 ", cliente=" + cliente +
+<<<<<<< HEAD
                 "} " + super.toString();
+=======
+                '}';
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
+
 }

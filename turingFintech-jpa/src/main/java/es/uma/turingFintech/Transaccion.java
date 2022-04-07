@@ -110,6 +110,41 @@ public class Transaccion implements Serializable {
         this.tipo_Transaccion = tipo_Transaccion;
     }
 
+    public Divisa getReceptor() {
+        return receptor;
+    }
+
+    public void setReceptor(Divisa receptor) {
+        this.receptor = receptor;
+    }
+
+    public Divisa getEmisor() {
+        return emisor;
+    }
+
+    public void setEmisor(Divisa emisor) {
+        this.emisor = emisor;
+    }
+
+    public Cuenta getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Cuenta origen) {
+        this.origen = origen;
+    }
+
+    public Cuenta getDestino() {
+        return destino;
+    }
+
+    public void setDestino(Cuenta destino) {
+        this.destino = destino;
+    }
+
+    //Equals, hashCode, toString
+
+
     @Override
     public String toString() {
         return "Transaccion{" +
@@ -132,11 +167,30 @@ public class Transaccion implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaccion that = (Transaccion) o;
+<<<<<<< HEAD
         return Objects.equals(iD_Unico, that.iD_Unico);
+=======
+        return iD_Unico.equals(that.iD_Unico);
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(iD_Unico);
     }
+
+    @Override
+    public String toString() {
+        return "Transaccion{" +
+                "iD_Unico=" + iD_Unico +
+                ", fecha_Instruccion=" + fecha_Instruccion +
+                ", cantidad=" + cantidad +
+                ", concepto='" + concepto + '\'' +
+                ", nombre_Emisor='" + nombre_Emisor + '\'' +
+                ", comision=" + comision +
+                ", tipo_Transaccion='" + tipo_Transaccion + '\'' +
+                '}';
+    }
+
+
 }

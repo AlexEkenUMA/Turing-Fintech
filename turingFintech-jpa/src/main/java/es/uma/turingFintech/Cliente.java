@@ -12,8 +12,13 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+<<<<<<< HEAD
     @Column (unique = true, nullable = false)
     private String identificacion;
+=======
+    @Column(unique = true)
+    private Long identificacion;
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Column (nullable = false)
     private String tipo_Cliente; // Habría que hacer dos subentidades --> Persona Física y Jurídica
     @Column (nullable = false)
@@ -33,9 +38,20 @@ public class Cliente implements Serializable {
     //relación uno a muchos cliente-cuenta
     @OneToMany
     private List<CuentaFintech> cuentasFintech;
+
+    //Relacion 1:1 usuario
+    @OneToOne
+    private Usuario usuario;
+
     //Constructores
 
+<<<<<<< HEAD
     public Cliente(Long id, String identificacion, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja, String direccion, String ciudad, Integer codigo_Postal, String pais) {
+=======
+
+    public Cliente(Long id, Long identificacion, String tipo_Cliente, String estado,
+                   Date fecha_Alta, Date fecha_Baja, String direccion, String ciudad, Integer codigo_Postal, String pais) {
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
         this.id = id;
         this.identificacion = identificacion;
         this.tipo_Cliente = tipo_Cliente;
@@ -61,6 +77,14 @@ public class Cliente implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(Long identificacion) {
+        this.identificacion = identificacion;
     }
 
     public String getTipo_Cliente() {
@@ -127,6 +151,7 @@ public class Cliente implements Serializable {
         this.pais = pais;
     }
 
+<<<<<<< HEAD
     public String getIdentificacion() {
         return identificacion;
     }
@@ -135,17 +160,60 @@ public class Cliente implements Serializable {
         this.identificacion = identificacion;
     }
 
+=======
+    public List<CuentaFintech> getCuentasFintech() {
+        return cuentasFintech;
+    }
+
+    public void setCuentasFintech(List<CuentaFintech> cuentasFintech) {
+        this.cuentasFintech = cuentasFintech;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    //Equals, hashcode, toString
+
+
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
+<<<<<<< HEAD
         return Objects.equals(id, cliente.id);
+=======
+        return id.equals(cliente.id);
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
+<<<<<<< HEAD
+=======
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", identificacion=" + identificacion +
+                ", tipo_Cliente='" + tipo_Cliente + '\'' +
+                ", estado='" + estado + '\'' +
+                ", fecha_Alta=" + fecha_Alta +
+                ", fecha_Baja=" + fecha_Baja +
+                ", direccion='" + direccion + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                ", codigo_Postal=" + codigo_Postal +
+                ", pais='" + pais + '\'' +
+                '}';
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
 
     @Override

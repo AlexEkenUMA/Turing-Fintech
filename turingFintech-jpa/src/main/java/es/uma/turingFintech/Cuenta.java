@@ -9,7 +9,6 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Cuenta implements Serializable {
     @Id
-    @GeneratedValue
     private String IBAN;
     private String SWIFT;
     //SubEntidades de Finctech (Ebury) y de Referencia
@@ -43,6 +42,28 @@ public class Cuenta implements Serializable {
 
     public void setSWIFT(String SWIFT) {this.SWIFT = SWIFT;}
 
+<<<<<<< HEAD
+=======
+    public List<Transaccion> getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(List<Transaccion> origen) {
+        this.origen = origen;
+    }
+
+    public List<Transaccion> getDestino() {
+        return destino;
+    }
+
+    public void setDestino(List<Transaccion> destino) {
+        this.destino = destino;
+    }
+
+    //Equals, hashCode, toString
+
+
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,8 +82,12 @@ public class Cuenta implements Serializable {
         return "Cuenta{" +
                 "IBAN='" + IBAN + '\'' +
                 ", SWIFT='" + SWIFT + '\'' +
+<<<<<<< HEAD
                 ", origen=" + origen +
                 ", destino=" + destino +
+=======
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
                 '}';
     }
+
 }

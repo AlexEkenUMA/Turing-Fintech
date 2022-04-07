@@ -46,11 +46,29 @@ public class Segregada extends CuentaFintech implements Serializable {
         this.comision = comision;
     }
 
+<<<<<<< HEAD
+=======
+    public CuentaReferencia getCr() {
+        return cr;
+    }
+
+    public void setCr(CuentaReferencia cr) {
+        this.cr = cr;
+    }
+    //toString
+
+
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Override
     public String toString() {
         return "Segregada{" +
                 "comision=" + comision +
+<<<<<<< HEAD
                 ", cr=" + cr +
                 "} " + super.toString();
+=======
+                '}';
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
+
 }

@@ -15,9 +15,17 @@ public class PersonaFisica extends Cliente implements Serializable {
     private Date Fecha_Nacimiento;
 
     //Constructores
+<<<<<<< HEAD
     public PersonaFisica(Long id, String identificacion, String tipo_Cliente, String estado, Date fecha_Alta,
                          Date fecha_Baja, String direccion, String ciudad,
                          Integer codigo_Postal, String pais, String nombre, String apellidos, Date fecha_Nacimiento) {
+=======
+
+
+    public PersonaFisica(Long id, Long identificacion, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja,
+                         String direccion, String ciudad, Integer codigo_Postal, String pais, String nombre,
+                         String apellidos, Date fecha_Nacimiento) {
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
         super(id, identificacion, tipo_Cliente, estado, fecha_Alta, fecha_Baja, direccion, ciudad, codigo_Postal, pais);
         Nombre = nombre;
         Apellidos = apellidos;
@@ -60,12 +68,24 @@ public class PersonaFisica extends Cliente implements Serializable {
         Fecha_Nacimiento = fecha_Nacimiento;
     }
 
+<<<<<<< HEAD
+=======
+
+   //toString
+
+
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     @Override
     public String toString() {
         return "PersonaFisica{" +
                 "Nombre='" + Nombre + '\'' +
                 ", Apellidos='" + Apellidos + '\'' +
                 ", Fecha_Nacimiento=" + Fecha_Nacimiento +
+<<<<<<< HEAD
                 "} " + super.toString();
+=======
+                '}';
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
     }
+
 }

@@ -119,7 +119,13 @@ public class CuentaReferencia extends Cuenta implements Serializable {
                 ", estado=" + estado +
                 ", segregada=" + segregada +
                 ", divisa=" + divisa +
+<<<<<<< HEAD
                 ", listaDepositos=" + listaDepositos +
                 "} " + super.toString();
     }
+=======
+                '}';
+    }
+
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
 }

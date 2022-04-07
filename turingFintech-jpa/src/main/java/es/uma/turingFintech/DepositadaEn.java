@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@IdClass(DepositadaEnId.class)
 public class DepositadaEn {
     @Column (nullable = false)
     private double saldo;
@@ -44,6 +45,7 @@ public class DepositadaEn {
         return Objects.hash(saldo);
     }
 
+<<<<<<< HEAD
     @Override
     public String toString() {
         return "DepositadaEn{" +
@@ -52,4 +54,6 @@ public class DepositadaEn {
                 ", pooledAccount=" + pooledAccount.toString() +
                 '}';
     }
+=======
+>>>>>>> 48d576a34ccf23590b4dba81f5324b7e04edadbb
 }
