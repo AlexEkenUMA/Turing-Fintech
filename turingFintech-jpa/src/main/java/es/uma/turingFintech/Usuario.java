@@ -19,6 +19,7 @@ public class Usuario implements Serializable {
 
     //Relaciones 1:1 Persona Autorizada y Cliente
 
+
     @OneToOne(mappedBy = "usuario")
     private Autorizado autorizado;
 
@@ -85,4 +86,16 @@ public class Usuario implements Serializable {
     public int hashCode() {
         return Objects.hash(nombre_usuario);
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombre_usuario='" + nombre_usuario + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                ", administrativo=" + administrativo +
+                ", autorizado=" + autorizado +
+                ", cliente=" + cliente +
+                '}';
+    }
 }
+

@@ -20,6 +20,7 @@ public class DepositadaEn {
         this.saldo = saldo;
     }
 
+
     public DepositadaEn() {
         this.saldo = 0;
     }
@@ -30,6 +31,14 @@ public class DepositadaEn {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public CuentaReferencia getCuentaReferencia() {
+        return cuentaReferencia;
+    }
+
+    public void setCuentaReferencia(CuentaReferencia cuentaReferencia) {
+        this.cuentaReferencia = cuentaReferencia;
     }
 
     @Override
