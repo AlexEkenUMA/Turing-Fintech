@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="turingFintech.SuiteTest" time="0.083" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="turingFintech.turingTest" time="1.255" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="17.0.2+0"/>
@@ -58,5 +58,5 @@
     <property name="java.vendor.version" value="Homebrew"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase classname="turingFintech.turingTest" name="testtest" time="0.083"/>
+  <testcase classname="turingFintech.turingTest" name="testtest" time="1.255"/>
 </testsuite>
