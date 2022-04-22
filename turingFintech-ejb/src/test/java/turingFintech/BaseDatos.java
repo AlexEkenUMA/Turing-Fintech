@@ -20,6 +20,8 @@ public class BaseDatos {
 		em.getTransaction().begin();
 		
 		//TODO
+
+
 		
 		em.getTransaction().commit();
 		
