@@ -17,7 +17,7 @@ public interface GestionClientes {
     /**
 
      Este método permite a un administrativo modificar los datos de un cliente
-
+     RF3
      */
     public void modificarCliente(Cliente c);
 
@@ -25,7 +25,7 @@ public interface GestionClientes {
     /**
 
      Este método permite a un administrativo dar de baja a un cliente
-
+     RF4
      */
     public void eliminarCliente (Cliente c);
 
