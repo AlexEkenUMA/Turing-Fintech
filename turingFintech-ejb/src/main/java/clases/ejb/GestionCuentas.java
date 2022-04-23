@@ -1,5 +1,6 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.TipoNoValidoException;
 import es.uma.turingFintech.Cuenta;
 
 import javax.ejb.Local;
@@ -15,7 +16,7 @@ public interface GestionCuentas {
      * @param tipo
      * RF5
      */
-    public void aperturaCuenta(String IBAN, String tipo);
+    public void aperturaCuenta(String IBAN,String SWIFT, String tipo) throws TipoNoValidoException;
 
     /**
      * Este método elimina una cuenta de la base de datos

@@ -1,10 +1,14 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.TipoNoValidoException;
 import es.uma.turingFintech.Cuenta;
+import es.uma.turingFintech.PooledAccount;
+import es.uma.turingFintech.Segregada;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 
 @Stateless
 public class CuentasEJB implements GestionCuentas {
@@ -14,15 +18,21 @@ public class CuentasEJB implements GestionCuentas {
 
 
     @Override
-    public void aperturaCuenta(String IBAN, String tipo){
-        if (!tipo.equals("Pooled")){
-
+    public void aperturaCuenta(String IBAN,String SWIFT, String tipo) throws TipoNoValidoException{
+        if (!tipo.equals("Pooled") && !tipo.equals("Segregada")){
+            throw new TipoNoValidoException();
         }
-        if (!tipo.equals("Segregada")){
-
+        Date fecha = new Date();
+        if (tipo.equals("Pooled")) {
+            PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, fecha, true, tipo, 0.00);
+            em.persist(pooledAccount);
+        }
+        if (tipo.equals("Segregada")){
+            Segregada segregada = new Segregada(IBAN, SWIFT, fecha, true, tipo, 0.00, 0.00);
+            em.persist(segregada);
         }
         //TODO
-
+        // comprobar administrativo (Al principio), y comision
     }
 
 

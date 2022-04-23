@@ -22,6 +22,8 @@ public class Segregada extends CuentaFintech implements Serializable {
         this.comision = comision;
     }
 
+    
+
     public Segregada(){
 
     }
