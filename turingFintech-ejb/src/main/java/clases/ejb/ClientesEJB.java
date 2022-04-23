@@ -18,11 +18,9 @@ public class ClientesEJB implements GestionClientes {
 
 
     @Override
-
     public void darAltaCliente (Cliente c){
 
         //TODO
-
 
 
     }

@@ -15,7 +15,12 @@ public class CuentasEJB implements GestionCuentas {
 
     @Override
     public void aperturaCuenta(String IBAN, String tipo){
+        if (!tipo.equals("Pooled")){
 
+        }
+        if (!tipo.equals("Segregada")){
+
+        }
         //TODO
 
     }
