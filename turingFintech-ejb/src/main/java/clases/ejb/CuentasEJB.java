@@ -49,7 +49,9 @@ public class CuentasEJB implements GestionCuentas {
         if (cuentaEntity.getSaldo()!=0.0){
             throw new SaldoIncorrectoException();
         }
+        Date fecha = new Date();
         cuentaEntity.setEstado(false);
+        cuentaEntity.setFecha_cierre(fecha);
         em.merge(cuentaEntity);
     }
 }

@@ -11,6 +11,8 @@ public class CuentaFintech extends Cuenta implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column (nullable = false)
     private Date fecha_Apertura;
+    @Temporal(TemporalType.DATE)
+    private Date fecha_cierre;
     @Column (nullable = false)
     private boolean estado;
     @Column (nullable = false)
@@ -78,6 +80,11 @@ public class CuentaFintech extends Cuenta implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Date getFecha_cierre() {return fecha_cierre;}
+
+    public void setFecha_cierre(Date fecha_cierre) {this.fecha_cierre = fecha_cierre;
+    }
     //toString
 
 
@@ -85,10 +92,10 @@ public class CuentaFintech extends Cuenta implements Serializable {
     public String toString() {
         return "CuentaFintech{" +
                 "fecha_Apertura=" + fecha_Apertura +
+                ", fecha_cierre=" + fecha_cierre +
                 ", estado=" + estado +
                 ", tipo='" + tipo + '\'' +
                 ", saldo=" + saldo +
                 "} " + super.toString();
     }
-
 }
