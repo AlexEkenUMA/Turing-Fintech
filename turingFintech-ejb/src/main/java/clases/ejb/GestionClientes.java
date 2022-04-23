@@ -1,3 +1,5 @@
+package clases.ejb;
+
 import es.uma.turingFintech.Cliente;
 
 import javax.ejb.Local;

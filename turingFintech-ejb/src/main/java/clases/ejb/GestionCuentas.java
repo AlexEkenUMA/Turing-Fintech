@@ -1,3 +1,5 @@
+package clases.ejb;
+
 import es.uma.turingFintech.Cuenta;
 
 import javax.ejb.Local;

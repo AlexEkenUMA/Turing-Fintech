@@ -1,3 +1,5 @@
+package clases.ejb;
+
 import es.uma.turingFintech.Cliente;
 
 import javax.ejb.Stateless;
@@ -6,11 +8,11 @@ import javax.persistence.PersistenceContext;
 import java.util.logging.Logger;
 
 @Stateless
-public class ClientesEJB implements GestionClientes{
+public class ClientesEJB implements GestionClientes {
 
     private static final Logger LOG = Logger.getLogger(ClientesEJB.class.getCanonicalName());
 
-    @PersistenceContext(name = "turingFintech")
+    @PersistenceContext(name = "turingFintech-ejb")
     private EntityManager em;
 
 

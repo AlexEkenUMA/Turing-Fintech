@@ -1,3 +1,5 @@
+package clases.ejb;
+
 import es.uma.turingFintech.Cuenta;
 
 import javax.ejb.Stateless;
@@ -7,7 +9,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class CuentasEJB implements GestionCuentas {
 
-    @PersistenceContext(name = "turingFintech")
+    @PersistenceContext(name = "turingFintech-ejb")
     private EntityManager em;
 
 
