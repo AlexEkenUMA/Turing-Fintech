@@ -13,7 +13,7 @@ public interface GestionClientes {
      Se le permite a un administrativo
      RF2
     */
-    public void darAltaCliente (Cliente c);
+    public void darAltaCliente (Cliente c,String tipoCliente, String razonSocial);
 
 
     /**

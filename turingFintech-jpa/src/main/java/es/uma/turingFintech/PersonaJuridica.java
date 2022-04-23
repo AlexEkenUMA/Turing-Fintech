@@ -24,10 +24,9 @@ public class PersonaJuridica extends Cliente implements Serializable {
 
     public PersonaJuridica(Long id, Long identificacion, String tipo_Cliente, String estado, Date fecha_Alta, Date fecha_Baja,
                            String direccion, String ciudad, Integer codigo_Postal, String pais,
-                           String razon_Social, List<Autorizado> autorizados) {
+                           String razon_Social) {
         super(id, identificacion, tipo_Cliente, estado, fecha_Alta, fecha_Baja, direccion, ciudad, codigo_Postal, pais);
         Razon_Social = razon_Social;
-        this.autorizados = autorizados;
     }
 
     public PersonaJuridica(){
