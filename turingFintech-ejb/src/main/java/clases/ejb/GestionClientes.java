@@ -1,8 +1,10 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.ClienteNoValidoException;
 import es.uma.turingFintech.Cliente;
 
 import javax.ejb.Local;
+import java.util.Date;
 
 @Local
 public interface GestionClientes {
@@ -13,7 +15,7 @@ public interface GestionClientes {
      Se le permite a un administrativo
      RF2
     */
-    public void darAltaCliente (Cliente c,String tipoCliente, String razonSocial);
+    public void darAltaCliente (Cliente c,String tipoCliente, String razonSocial, String nombre, String apellidos, Date fecha_nacimiento) throws ClienteNoValidoException;
 
 
     /**
