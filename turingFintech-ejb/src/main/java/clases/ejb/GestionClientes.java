@@ -1,5 +1,6 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.ClienteNoEncontradoException;
 import clases.ejb.exceptions.ClienteNoValidoException;
 import es.uma.turingFintech.Cliente;
 
@@ -23,7 +24,7 @@ public interface GestionClientes {
      Este método permite a un administrativo modificar los datos de un cliente
      RF3
      */
-    public void modificarCliente(Cliente c);
+    public void modificarCliente(Cliente c, String ID) throws ClienteNoEncontradoException;
 
 
     /**

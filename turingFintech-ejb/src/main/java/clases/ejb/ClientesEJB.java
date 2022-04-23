@@ -1,5 +1,6 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.ClienteNoEncontradoException;
 import clases.ejb.exceptions.ClienteNoValidoException;
 import es.uma.turingFintech.Cliente;
 import es.uma.turingFintech.PersonaFisica;
@@ -41,10 +42,12 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public void modificarCliente(Cliente c){
-
-        //TODO
-
+    public void modificarCliente(Cliente c, String ID) throws ClienteNoEncontradoException {
+        Cliente clienteExiste = em.find(Cliente.class, ID);
+        if(clienteExiste == null){
+            throw new ClienteNoEncontradoException();
+        }
+        em.merge(c);
     }
 
 
