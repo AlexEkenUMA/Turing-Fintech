@@ -1,7 +1,10 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.CuentaNoEncontradaException;
+import clases.ejb.exceptions.SaldoIncorrectoException;
 import clases.ejb.exceptions.TipoNoValidoException;
 import es.uma.turingFintech.Cuenta;
+import es.uma.turingFintech.CuentaFintech;
 import es.uma.turingFintech.PooledAccount;
 import es.uma.turingFintech.Segregada;
 
@@ -37,9 +40,16 @@ public class CuentasEJB implements GestionCuentas {
 
 
     @Override
-    public void cierreCuenta (Cuenta cuenta){
+    public void cierreCuenta (String IBAN) throws CuentaNoEncontradaException, SaldoIncorrectoException {
 
-        //TODO
-
+        CuentaFintech cuentaEntity = em.find(CuentaFintech.class, IBAN);
+        if (cuentaEntity == null){
+            throw new CuentaNoEncontradaException();
+        }
+        if (cuentaEntity.getSaldo()!=0.0){
+            throw new SaldoIncorrectoException();
+        }
+        cuentaEntity.setEstado(false);
+        em.merge(cuentaEntity);
     }
 }

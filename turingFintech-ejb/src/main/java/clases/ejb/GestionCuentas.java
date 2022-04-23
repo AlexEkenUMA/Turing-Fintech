@@ -1,5 +1,7 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.CuentaNoEncontradaException;
+import clases.ejb.exceptions.SaldoIncorrectoException;
 import clases.ejb.exceptions.TipoNoValidoException;
 import es.uma.turingFintech.Cuenta;
 
@@ -20,9 +22,9 @@ public interface GestionCuentas {
 
     /**
      * Este método elimina una cuenta de la base de datos
-     * @param cuenta
+     * @param IBAN
      * RF9
      */
 
-    public void cierreCuenta (Cuenta cuenta);
+    public void cierreCuenta (String IBAN) throws CuentaNoEncontradaException, SaldoIncorrectoException;
 }
