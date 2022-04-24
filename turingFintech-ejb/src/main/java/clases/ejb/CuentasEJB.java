@@ -34,19 +34,22 @@ public class CuentasEJB implements GestionCuentas {
             Segregada segregada = new Segregada(IBAN, SWIFT, fecha, true, tipo, 0.00, 0.00);
             em.persist(segregada);
         }
-        //TODO
+
+
+        // TODO: En ambos casos las cuentas externas asociadas se añaden como información. Si hay varias divisas es necesario varias cuentas externas
         // comprobar administrativo (Al principio), y comision
     }
 
 
     @Override
     public void cierreCuenta (String IBAN) throws CuentaNoEncontradaException, SaldoIncorrectoException {
-
+        // TODO: Comprobar si es administrativo
         CuentaFintech cuentaEntity = em.find(CuentaFintech.class, IBAN);
         if (cuentaEntity == null){
             throw new CuentaNoEncontradaException();
         }
         if (cuentaEntity.getSaldo()!=0.0){
+            // TODO: Comprobar saldo en todas las divisas
             throw new SaldoIncorrectoException();
         }
         Date fecha = new Date();
