@@ -1,4 +1,4 @@
-package clases.ejb;
+package es.uma.turingFintech;
 
 import es.uma.turingFintech.Cliente;
 import es.uma.turingFintech.CuentaFintech;
@@ -39,13 +39,11 @@ public class AccesoDatos implements Closeable {
         Query query = em.createQuery("SELECT cf FROM CuentaFintech cf where tipo='segregada' or tipo='dedicada'");
         List<CuentaFintech> lista = query.getResultList();
         Calendar calendario = Calendar.getInstance();
-        calendario.set(Calendar.YEAR, Calendar.YEAR - 3);
+        //Ponemos la fecha hace 3 años
+        calendario.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR) -3);
         Date limite = calendario.getTime();
         for(CuentaFintech cf : lista){
-            if(cf.getFecha_cierre() != null){
-                lista.remove(cf);
-            }
-            if(limite.after(cf.getFecha_Apertura())){
+            if(!cf.isEstado() || cf.getFecha_cierre() != null || limite.after(cf.getFecha_Apertura())){
                 lista.remove(cf);
             }
         }
@@ -57,10 +55,5 @@ public class AccesoDatos implements Closeable {
         List<Cliente> lista = query.getResultList();
         return lista;
     }
-
-
-
-
-
 
 }
