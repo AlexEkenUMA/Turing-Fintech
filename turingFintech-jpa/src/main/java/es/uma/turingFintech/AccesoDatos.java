@@ -22,7 +22,7 @@ public class AccesoDatos implements Closeable {
      * Constructor por defecto. Crea un contexto de persistencia.
      */
     public AccesoDatos() {
-        emf = Persistence.createEntityManagerFactory("turingFintech-ejb");
+        emf = Persistence.createEntityManagerFactory("turingFintech");
         em = emf.createEntityManager();
     }
 
