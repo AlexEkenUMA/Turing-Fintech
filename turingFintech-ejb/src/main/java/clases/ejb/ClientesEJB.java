@@ -2,6 +2,8 @@ package clases.ejb;
 
 import clases.ejb.exceptions.ClienteNoEncontradoException;
 import clases.ejb.exceptions.ClienteNoValidoException;
+import clases.ejb.exceptions.TipoNoValidoException;
+import es.uma.turingFintech.Autorizado;
 import es.uma.turingFintech.Cliente;
 import es.uma.turingFintech.PersonaFisica;
 import es.uma.turingFintech.PersonaJuridica;
@@ -12,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.constraints.Null;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Stateless
@@ -22,6 +25,29 @@ public class ClientesEJB implements GestionClientes {
     @PersistenceContext(name = "turingFintech-ejb")
     private EntityManager em;
 
+
+    @Override
+    public void darAlta2 (Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+                          Date fechaNac, String direccion, int codigoPostal, String pais, List<Autorizado> au, String ciudad)
+            throws ClienteNoValidoException{
+
+        if (!tipoCliente.equals("Juridico") && !tipoCliente.equals("Fisica")){
+            throw new ClienteNoValidoException();
+        }
+        Date date = new Date();
+        if (tipoCliente.equals("Juridico")){
+
+            PersonaJuridica personaJuridica = new PersonaJuridica (null, id, tipoCliente, "Activo", date, null,
+                    direccion,ciudad, codigoPostal, pais, RazonSocial);
+            personaJuridica.setAutorizados(au);
+            em.persist(personaJuridica);
+        }
+        if (tipoCliente.equals("Fisica")){
+            PersonaFisica personaFisica = new PersonaFisica(null, id, tipoCliente, "Activo", date, null, direccion,ciudad,
+                    codigoPostal, pais, nombre, apellidos, fechaNac);
+            em.persist(personaFisica);
+        }
+    }
 
 
     @Override
@@ -61,5 +87,9 @@ public class ClientesEJB implements GestionClientes {
         em.flush();
     }
 
+
+    public Cliente getCliente (Long id){
+       return em.find(Cliente.class, id);
+    }
 
 }

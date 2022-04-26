@@ -3,20 +3,19 @@ package turingFintech;
 import clases.ejb.GestionCuentas;
 import clases.ejb.GestionClientes;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.naming.NamingException;
+import javax.persistence.Query;
 
 import clases.ejb.GestionUsuarios;
 import clases.ejb.UsuariosEJB;
-import clases.ejb.exceptions.NoEsAdministrativo;
-import clases.ejb.exceptions.TipoNoValidoException;
-import clases.ejb.exceptions.TuringTestException;
-import clases.ejb.exceptions.UsuarioNoEncontrado;
+import clases.ejb.exceptions.*;
 import es.uma.informatica.sii.anotaciones.Requisitos;
-import es.uma.turingFintech.PooledAccount;
-import es.uma.turingFintech.Usuario;
+import es.uma.turingFintech.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -93,27 +92,65 @@ public class TuringFintech {
 	}
 
 
-
 	@Test
 	@Requisitos("RF5")
 	public void testDardeAltaCuentaTipoNoValidoException(){
-		//try{
-			final String tipo = "poooled";
 
-		//	Class<TipoNoValidoException> expectedException = TipoNoValidoException.class;
-		//assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta("", "",, "",tipo));
-			/*
-			gestionCuentas.aperturaCuenta("","", tipo);
-			fail ("Debe lanzar una excepcion");
+		final String tipo = "poooled";
+		Date date = new Date();
+		Long l = Long.getLong("37028939023");
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		Cliente cliente1 = new Cliente(null, l, "PersonaFisica", "Activo", date, null, "Direccion","Ciudad", 29649,
+				"Pais");
+		List<DepositadaEn> dpList = new ArrayList<>();
+		assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta(usuario1, cliente1,
+				"123456", "789", tipo, dpList));
+	}
 
-		}catch (TipoNoValidoException e){
-			// OK
-		}catch (TuringTestException e){
-			fail ("Debería haber lanzado una excepcion");
+	@Test
+	@Requisitos("RF5")
+	public void testDarDeAltaCuentaPooled(){
+
+		final String tipo = "Pooled";
+		Date date = new Date();
+		Long l = Long.getLong("37028939023");
+		List<Autorizado> au = new ArrayList<>();
+
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		//Cliente cliente1 = new Cliente(l, l, "PersonaFisica", "Activo", date, null, "Direccion","Ciudad", 29649,
+		//		"Pais");
+		try{
+			gestionClientes.darAlta2(37028939023L, "Fisica", "rehrte", "Jose", "Pan",
+					date, "Direccion",2898, "29649", au, "");
+		}catch (ClienteNoValidoException e){
+
 		}
 
-			 */
+
+		DepositadaEn dp = new DepositadaEn(0.00);
+		CuentaReferencia cr = new CuentaReferencia("Santander", null, null, null,
+				null, 0.0, null, true);
+		dp.setCuentaReferencia(cr);
+		List<DepositadaEn> dpList = new ArrayList<>();
+		dpList.add(dp);
+
+		try{
+			gestionCuentas.aperturaCuenta(usuario1, gestionClientes.getCliente(37028939023L), "1234", "567", tipo, dpList);
+			List<PooledAccount> pooledAccountList = gestionCuentas.obtenerCuentasPooled();
+			boolean ok = false;
+			for (PooledAccount pa : pooledAccountList){
+				if (pa.getIBAN().equals("1234")){
+					ok = true;
+				}
+			}
+			assertEquals(true, ok);
+
+		}catch (TuringTestException e){
+			fail("No deberia lanzar excepcion");
+		}
 	}
+
+
 
 	/*
 	@Test

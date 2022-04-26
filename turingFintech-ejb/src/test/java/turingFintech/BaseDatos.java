@@ -51,10 +51,6 @@ public class BaseDatos {
 
 		//em.persist(segregada2);
 
-		Cliente cliente1 = new Cliente();
-		Cliente cliente2 = new Cliente();
-		Cliente cliente3 = new Cliente();
-
 		//em.persist(cliente1);
 		//em.persist(cliente2);
 		//em.persist(cliente3);
@@ -63,6 +59,11 @@ public class BaseDatos {
 		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
 		em.persist(usuario1);
 		em.persist(usuario2);
+
+
+		//Cliente cliente1 = new Cliente(null, 37028939023L, "Fisica", "Activo", date,
+		//		null, "Direccion","Ciudad", 29649, "Pais");
+		//em.persist(cliente1);
 
 		em.getTransaction().commit();
 		

@@ -21,7 +21,7 @@ public class CuentasEJB implements GestionCuentas {
     @EJB GestionUsuarios gestionUsuarios;
 
     @Override
-    public void aperturaCuenta(Usuario u,Cliente cliente,String IBAN,String SWIFT, String tipo, List<DepositadaEn> dp)
+    public void aperturaCuenta(Usuario u,Cliente cliente,String IBAN,String SWIFT, String tipo, List<DepositadaEn> dpList)
             throws TipoNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo {
 
         gestionUsuarios.usuarioAdministrativo(u);
@@ -32,14 +32,20 @@ public class CuentasEJB implements GestionCuentas {
         Date fecha = new Date();
         if (tipo.equals("Pooled")) {
             PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, fecha, true, tipo);
+            em.persist(cliente);
+            for (DepositadaEn dp : dpList){
+                dp.setPooledAccount(pooledAccount);
+                em.persist(dp);
+                em.persist(dp.getCuentaReferencia());
+            }
             pooledAccount.setCliente(cliente);
-            pooledAccount.setListaDepositos(dp);
+            pooledAccount.setListaDepositos(dpList);
             em.persist(pooledAccount);
         }
         if (tipo.equals("Segregada")){
             Segregada segregada = new Segregada(IBAN, SWIFT, fecha, true, tipo,0.00);
             segregada.setCliente(cliente);
-            segregada.setCr(dp.get(0).getCuentaReferencia());
+            segregada.setCr(dpList.get(0).getCuentaReferencia());
             em.persist(segregada);
         }
     }
@@ -100,9 +106,9 @@ public class CuentasEJB implements GestionCuentas {
 
     @Override
     public List<Segregada> obtenerCuentasSegregada(){
-        List<Segregada> segregadas = new ArrayList<>();
-
-
+        List<Segregada> segregadas;
+        Query query = em.createQuery("select cuenta from Segregada cuenta");
+        segregadas = (List<Segregada>) query.getResultList();
         return segregadas;
     }
 

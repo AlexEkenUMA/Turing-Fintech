@@ -41,6 +41,10 @@ public class DepositadaEn {
         this.cuentaReferencia = cuentaReferencia;
     }
 
+    public PooledAccount getPooledAccount() {return pooledAccount;}
+
+    public void setPooledAccount(PooledAccount pooledAccount) {this.pooledAccount = pooledAccount;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

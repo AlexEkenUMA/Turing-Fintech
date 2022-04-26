@@ -2,10 +2,12 @@ package clases.ejb;
 
 import clases.ejb.exceptions.ClienteNoEncontradoException;
 import clases.ejb.exceptions.ClienteNoValidoException;
+import es.uma.turingFintech.Autorizado;
 import es.uma.turingFintech.Cliente;
 
 import javax.ejb.Local;
 import java.util.Date;
+import java.util.List;
 
 @Local
 public interface GestionClientes {
@@ -35,5 +37,11 @@ public interface GestionClientes {
     public void eliminarCliente (Cliente c, String ID) throws ClienteNoEncontradoException;
 
 
+    public void darAlta2 (Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+                          Date fechaNac, String direccion, int codigoPostal,
+                          String pais, List<Autorizado> au, String ciudad) throws ClienteNoValidoException;
 
-}
+
+    public Cliente getCliente (Long id);
+
+    }
