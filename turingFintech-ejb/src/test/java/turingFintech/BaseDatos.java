@@ -59,6 +59,10 @@ public class BaseDatos {
 		//em.persist(cliente2);
 		//em.persist(cliente3);
 
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
+		em.persist(usuario1);
+		em.persist(usuario2);
 
 		em.getTransaction().commit();
 		
