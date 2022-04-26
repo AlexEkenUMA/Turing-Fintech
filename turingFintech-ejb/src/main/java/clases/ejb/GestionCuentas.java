@@ -4,8 +4,10 @@ import clases.ejb.exceptions.CuentaNoEncontradaException;
 import clases.ejb.exceptions.SaldoIncorrectoException;
 import clases.ejb.exceptions.TipoNoValidoException;
 import es.uma.turingFintech.Cuenta;
+import es.uma.turingFintech.CuentaFintech;
 
 import javax.ejb.Local;
+import java.util.List;
 
 @Local
 public interface GestionCuentas {
@@ -27,4 +29,7 @@ public interface GestionCuentas {
      */
 
     public void cierreCuenta (String IBAN) throws CuentaNoEncontradaException, SaldoIncorrectoException;
+
+    public List<CuentaFintech> obtenerCuentas ();
+
 }
