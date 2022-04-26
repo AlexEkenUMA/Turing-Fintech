@@ -52,11 +52,13 @@ public class ClientesEJB implements GestionClientes {
 
 
     @Override
-    public void eliminarCliente (Cliente c){
-
-        //TODO
-
-
+    public void eliminarCliente (Cliente c, String ID) throws ClienteNoEncontradoException{
+        Cliente cliente = em.find(Cliente.class, ID);
+        if(cliente == null){
+            throw new ClienteNoEncontradoException();
+        }
+        em.remove(cliente);
+        em.flush();
     }
 
 
