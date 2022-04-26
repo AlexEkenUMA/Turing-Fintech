@@ -32,7 +32,7 @@ public interface GestionClientes {
      Este método permite a un administrativo dar de baja a un cliente
      RF4
      */
-    public void eliminarCliente (Cliente c);
+    public void eliminarCliente (Cliente c, String ID) throws ClienteNoEncontradoException;
 
 
 
