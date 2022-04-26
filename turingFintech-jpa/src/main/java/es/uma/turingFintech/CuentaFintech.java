@@ -17,7 +17,6 @@ public class CuentaFintech extends Cuenta implements Serializable {
     private boolean estado;
     @Column (nullable = false)
     private String tipo;
-    private Double saldo;
 
     //relación uno a muchos cliente-cuenta
     @ManyToOne
@@ -26,12 +25,11 @@ public class CuentaFintech extends Cuenta implements Serializable {
     //Constructores
 
 
-    public CuentaFintech(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, Double saldo) {
+    public CuentaFintech(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo) {
         super(IBAN, SWIFT);
         this.fecha_Apertura = fecha_Apertura;
         this.estado = estado;
         this.tipo = tipo;
-        this.saldo = saldo;
     }
 
     public CuentaFintech(){
@@ -65,14 +63,6 @@ public class CuentaFintech extends Cuenta implements Serializable {
         this.tipo = tipo;
     }
 
-    public Double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -95,7 +85,6 @@ public class CuentaFintech extends Cuenta implements Serializable {
                 ", fecha_cierre=" + fecha_cierre +
                 ", estado=" + estado +
                 ", tipo='" + tipo + '\'' +
-                ", saldo=" + saldo +
                 "} " + super.toString();
     }
 }

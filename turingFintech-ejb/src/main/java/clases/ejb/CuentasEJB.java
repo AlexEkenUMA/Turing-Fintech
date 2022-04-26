@@ -1,10 +1,9 @@
 package clases.ejb;
 
-import clases.ejb.exceptions.CuentaNoEncontradaException;
-import clases.ejb.exceptions.SaldoIncorrectoException;
-import clases.ejb.exceptions.TipoNoValidoException;
+import clases.ejb.exceptions.*;
 import es.uma.turingFintech.*;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,44 +18,75 @@ public class CuentasEJB implements GestionCuentas {
     @PersistenceContext(name = "turingFintech-ejb")
     private EntityManager em;
 
-
+    @EJB GestionUsuarios gestionUsuarios;
 
     @Override
-    public void aperturaCuenta(String IBAN,String SWIFT, String tipo) throws TipoNoValidoException{
+    public void aperturaCuenta(Usuario u,Cliente cliente,String IBAN,String SWIFT, String tipo, List<DepositadaEn> dp)
+            throws TipoNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo {
+
+        gestionUsuarios.usuarioAdministrativo(u);
+
         if (!tipo.equals("Pooled") && !tipo.equals("Segregada")){
             throw new TipoNoValidoException();
         }
         Date fecha = new Date();
         if (tipo.equals("Pooled")) {
-            PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, fecha, true, tipo, 0.00);
+            PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, fecha, true, tipo);
+            pooledAccount.setCliente(cliente);
+            pooledAccount.setListaDepositos(dp);
             em.persist(pooledAccount);
         }
         if (tipo.equals("Segregada")){
-            Segregada segregada = new Segregada(IBAN, SWIFT, fecha, true, tipo, 0.00, 0.00);
+            Segregada segregada = new Segregada(IBAN, SWIFT, fecha, true, tipo,0.00);
+            segregada.setCliente(cliente);
+            segregada.setCr(dp.get(0).getCuentaReferencia());
             em.persist(segregada);
         }
-
-
-        // TODO: En ambos casos las cuentas externas asociadas se añaden como información. Si hay varias divisas es necesario varias cuentas externas
-        // comprobar administrativo (Al principio), y comision
     }
 
 
     @Override
-    public void cierreCuenta (String IBAN) throws CuentaNoEncontradaException, SaldoIncorrectoException {
-        // TODO: Comprobar si es administrativo
+    public void cierreCuenta (Usuario u, String IBAN)
+            throws CuentaNoEncontradaException, SaldoIncorrectoException, UsuarioNoEncontrado, NoEsAdministrativo
+    {
+        gestionUsuarios.usuarioAdministrativo(u);
+
+        Date fecha = new Date();
         CuentaFintech cuentaEntity = em.find(CuentaFintech.class, IBAN);
         if (cuentaEntity == null){
             throw new CuentaNoEncontradaException();
         }
-        if (cuentaEntity.getSaldo()!=0.0){
-            // TODO: Comprobar saldo en todas las divisas
+        if (cuentaEntity.getTipo().equals("Pooled")){
+            PooledAccount pooledEntity = em.find(PooledAccount.class, IBAN);
+            if (pooledEntity == null){
+                throw new CuentaNoEncontradaException();
+            }
+            List<DepositadaEn> dpList = pooledEntity.getListaDepositos();
+            boolean ok = true;
+            for (DepositadaEn dp : dpList){
+                if (dp.getSaldo() != 0){
+                    ok = false;
+                }
+            }
+        if (!ok){
             throw new SaldoIncorrectoException();
         }
-        Date fecha = new Date();
-        cuentaEntity.setEstado(false);
-        cuentaEntity.setFecha_cierre(fecha);
-        em.merge(cuentaEntity);
+        pooledEntity.setEstado(false);
+        pooledEntity.setFecha_cierre(fecha);
+        em.merge(pooledEntity);
+        }
+        if (cuentaEntity.getTipo().equals("Segregada")){
+            Segregada segregadaEntity = em.find(Segregada.class, IBAN);
+            if (segregadaEntity == null){
+                throw new CuentaNoEncontradaException();
+            }
+            if (segregadaEntity.getCr().getSaldo() != 0){
+                throw new SaldoIncorrectoException();
+            }
+            segregadaEntity.setFecha_cierre(fecha);
+            segregadaEntity.setEstado(false);
+            em.merge(segregadaEntity);
+        }
     }
 
     @Override

@@ -34,8 +34,8 @@ public class BaseDatos {
 		//CuentaFintech fintech2 = new CuentaFintech("ES2057883234722030876293", "", date
 			//	, false, "Segregada", 0.0 );
 
-		CuentaFintech fintech3 = new CuentaFintech("ES4696789300722030876293", "", date
-				, false, "", 0.0 );
+		//CuentaFintech fintech3 = new CuentaFintech("ES4696789300722030876293", "", date
+		//		, false, "", 0.0 );
 
 		//em.persist(fintech1);
 		//em.persist(fintech2);

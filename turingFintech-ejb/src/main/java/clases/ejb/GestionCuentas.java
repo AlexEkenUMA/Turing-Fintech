@@ -1,12 +1,7 @@
 package clases.ejb;
 
-import clases.ejb.exceptions.CuentaNoEncontradaException;
-import clases.ejb.exceptions.SaldoIncorrectoException;
-import clases.ejb.exceptions.TipoNoValidoException;
-import es.uma.turingFintech.Cuenta;
-import es.uma.turingFintech.CuentaFintech;
-import es.uma.turingFintech.PooledAccount;
-import es.uma.turingFintech.Segregada;
+import clases.ejb.exceptions.*;
+import es.uma.turingFintech.*;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -22,7 +17,8 @@ public interface GestionCuentas {
      * @param tipo
      * RF5
      */
-    public void aperturaCuenta(String IBAN,String SWIFT, String tipo) throws TipoNoValidoException;
+    public void aperturaCuenta(Usuario u, Cliente cliente, String IBAN, String SWIFT, String tipo, List<DepositadaEn> dp)
+            throws TipoNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
     /**
      * Este método elimina una cuenta de la base de datos
@@ -30,7 +26,8 @@ public interface GestionCuentas {
      * RF9
      */
 
-    public void cierreCuenta (String IBAN) throws CuentaNoEncontradaException, SaldoIncorrectoException;
+    public void cierreCuenta (Usuario u,String IBAN)
+            throws CuentaNoEncontradaException, SaldoIncorrectoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
     public List<PooledAccount> obtenerCuentasPooled ();
 
