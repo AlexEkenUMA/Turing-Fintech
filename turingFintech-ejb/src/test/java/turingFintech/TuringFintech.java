@@ -1,10 +1,9 @@
 package turingFintech;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import clases.ejb.GestionCuentas;
 import clases.ejb.GestionClientes;
+
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.naming.NamingException;
@@ -12,8 +11,11 @@ import javax.naming.NamingException;
 import clases.ejb.exceptions.TipoNoValidoException;
 import clases.ejb.exceptions.TuringTestException;
 import es.uma.informatica.sii.anotaciones.Requisitos;
+import es.uma.turingFintech.PooledAccount;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class TuringFintech {
 	
@@ -40,11 +42,14 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF2")
+	@Requisitos("RF5")
 	public void testDardeAltaCuentaTipoNoValidoException(){
-
-		try{
+		//try{
 			final String tipo = "poooled";
+
+			Class<TipoNoValidoException> expectedException = TipoNoValidoException.class;
+			assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta("", "",tipo));
+			/*
 			gestionCuentas.aperturaCuenta("","", tipo);
 			fail ("Debe lanzar una excepcion");
 
@@ -53,16 +58,21 @@ public class TuringFintech {
 		}catch (TuringTestException e){
 			fail ("Debería haber lanzado una excepcion");
 		}
+
+			 */
 	}
 
 	@Test
-	@Requisitos("RF2")
+	@Requisitos("RF5")
 	public void testDardeAltaCuenta(){
-		final String tipo = "Segregada";
+		final String tipo = "Pooled";
 		try{
 
-			gestionCuentas.aperturaCuenta("","", tipo);
-
+			gestionCuentas.aperturaCuenta("1234","5678", tipo);
+			List<PooledAccount> pooled = gestionCuentas.obtenerCuentasPooled();
+			assertEquals(1, pooled.size());
+			assertEquals("1234", pooled.get(0).getIBAN());
+			assertEquals("5678", pooled.get(0).getSWIFT());
 
 		}catch (TipoNoValidoException e){
 			fail("Lanzo una excepcion al insertar");

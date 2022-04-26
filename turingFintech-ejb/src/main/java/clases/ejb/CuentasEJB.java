@@ -11,6 +11,7 @@ import es.uma.turingFintech.Segregada;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,10 +64,9 @@ public class CuentasEJB implements GestionCuentas {
     @Override
     public List<PooledAccount> obtenerCuentasPooled (){
 
-        List<PooledAccount> pooled = new ArrayList();
-
-
-
+        List<PooledAccount> pooled;
+        Query query = em.createQuery("select cuenta from PooledAccount cuenta");
+        pooled = (List<PooledAccount>) query.getResultList();
         return pooled;
     }
 
