@@ -20,37 +20,6 @@ public class CuentasEJB implements GestionCuentas {
     private EntityManager em;
 
 
-    public boolean usuarioAdministrativo (Usuario u){
-
-        boolean ok = false;
-
-        Query query = em.createQuery("select usuario from Usuario usuario where usuario.nombre_usuario = :nombre " +
-                "and usuario.contraseña = :password");
-        query.setParameter("nombre", u.getNombre_usuario());
-        query.setParameter("password", u.getContraseña());
-        List<Usuario> usuarios = query.getResultList();
-        if (!usuarios.isEmpty()){
-            if (usuarios.get(0).isAdministrativo()){
-                ok = true;
-            }
-        }
-        return ok;
-    }
-
-    public boolean usuarioCorrecto (Usuario u){
-
-        boolean ok = false;
-
-        Query query = em.createQuery("select usuario from Usuario usuario where usuario.nombre_usuario = :nombre " +
-                "and usuario.contraseña = :password");
-        query.setParameter("nombre", u.getNombre_usuario());
-        query.setParameter("password", u.getContraseña());
-        List<Usuario> usuarios = query.getResultList();
-        if (!usuarios.isEmpty()){
-           ok = true;
-        }
-        return ok;
-    }
 
     @Override
     public void aperturaCuenta(String IBAN,String SWIFT, String tipo) throws TipoNoValidoException{
