@@ -11,7 +11,9 @@ import es.uma.turingFintech.Segregada;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Stateless
 public class CuentasEJB implements GestionCuentas {
@@ -57,4 +59,26 @@ public class CuentasEJB implements GestionCuentas {
         cuentaEntity.setFecha_cierre(fecha);
         em.merge(cuentaEntity);
     }
+
+    @Override
+    public List<PooledAccount> obtenerCuentasPooled (){
+
+        List<PooledAccount> pooled = new ArrayList();
+
+
+
+        return pooled;
+    }
+
+    @Override
+    public List<Segregada> obtenerCuentasSegregada(){
+        List<Segregada> segregadas = new ArrayList<>();
+
+
+        return segregadas;
+    }
+
 }
+
+
+

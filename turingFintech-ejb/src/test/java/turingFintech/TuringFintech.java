@@ -68,10 +68,4 @@ public class TuringFintech {
 			fail("Lanzo una excepcion al insertar");
 		}
 	}
-		try{
-			gestionCuentas.
-
-		}
-
-
 }
