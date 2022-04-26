@@ -3,10 +3,7 @@ package clases.ejb;
 import clases.ejb.exceptions.CuentaNoEncontradaException;
 import clases.ejb.exceptions.SaldoIncorrectoException;
 import clases.ejb.exceptions.TipoNoValidoException;
-import es.uma.turingFintech.Cuenta;
-import es.uma.turingFintech.CuentaFintech;
-import es.uma.turingFintech.PooledAccount;
-import es.uma.turingFintech.Segregada;
+import es.uma.turingFintech.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,6 +19,38 @@ public class CuentasEJB implements GestionCuentas {
     @PersistenceContext(name = "turingFintech-ejb")
     private EntityManager em;
 
+
+    public boolean usuarioAdministrativo (Usuario u){
+
+        boolean ok = false;
+
+        Query query = em.createQuery("select usuario from Usuario usuario where usuario.nombre_usuario = :nombre " +
+                "and usuario.contraseña = :password");
+        query.setParameter("nombre", u.getNombre_usuario());
+        query.setParameter("password", u.getContraseña());
+        List<Usuario> usuarios = query.getResultList();
+        if (!usuarios.isEmpty()){
+            if (usuarios.get(0).isAdministrativo()){
+                ok = true;
+            }
+        }
+        return ok;
+    }
+
+    public boolean usuarioCorrecto (Usuario u){
+
+        boolean ok = false;
+
+        Query query = em.createQuery("select usuario from Usuario usuario where usuario.nombre_usuario = :nombre " +
+                "and usuario.contraseña = :password");
+        query.setParameter("nombre", u.getNombre_usuario());
+        query.setParameter("password", u.getContraseña());
+        List<Usuario> usuarios = query.getResultList();
+        if (!usuarios.isEmpty()){
+           ok = true;
+        }
+        return ok;
+    }
 
     @Override
     public void aperturaCuenta(String IBAN,String SWIFT, String tipo) throws TipoNoValidoException{
