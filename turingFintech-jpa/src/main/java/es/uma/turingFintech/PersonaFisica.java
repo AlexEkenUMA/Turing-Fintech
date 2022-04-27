@@ -7,9 +7,9 @@ import java.util.Objects;
 
 @Entity
 public class PersonaFisica extends Cliente implements Serializable {
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String Nombre;
-    @Column(nullable = false)
+   // @Column(nullable = false)
     private String Apellidos;
     @Temporal(TemporalType.DATE)
     private Date Fecha_Nacimiento;

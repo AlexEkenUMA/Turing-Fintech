@@ -150,7 +150,13 @@ public class TuringFintech {
 			fail("ClienteNoValido (NO DEBERIA");
 		}
 		List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
-		assertEquals(1, personaJuridicas.size());
+		boolean ok = false;
+		for (PersonaJuridica pj : personaJuridicas){
+			if (pj.getIdentificacion() == 31L){
+				ok = true;
+			}
+		}
+		assertEquals(true, ok);
 	}
 
 
@@ -163,12 +169,17 @@ public class TuringFintech {
 
 		final String tipo = "poooled";
 		Date date = new Date();
+		List<Autorizado> au = new ArrayList<>();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		Cliente cliente1 = new Cliente(null, 32L, "PersonaFisica", "Activo", date, null,
-				"Direccion","Ciudad", 29649,
-				"Pais");
+		try{
+			gestionClientes.darAlta2(40L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais",au, "Ciudad" );
+		}catch (ClienteNoValidoException e){
+
+		}
+		List<PersonaFisica> pf = gestionClientes.getPersonasFisicas();
 		List<DepositadaEn> dpList = new ArrayList<>();
-		assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta(usuario1, gestionClientes.getCliente(37028939023L),
+		assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta(usuario1, pf.get(0),
 				"123456", "789", tipo, dpList));
 	}
 
@@ -251,5 +262,18 @@ public class TuringFintech {
 			fail("No deberia lanzar excepcion");
 		}
 	}
+
+	@Test
+	@Requisitos("RF90")
+	public void testCierreCuentaNoEncontrada(){
+		final String IBAN = "1234";
+
+
+
+
+
+	}
+
+
 
 }
