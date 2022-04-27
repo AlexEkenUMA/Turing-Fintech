@@ -28,7 +28,8 @@ public class UsuariosEJB implements GestionUsuarios {
         if (usuarios.isEmpty()){
             throw new UsuarioNoEncontrado();
         }else{
-            if(usuarios.get(0).getCliente() == null || usuarios.get(0).getCliente().getTipo_Cliente() == "Fisica"){
+            //o esta autorizado, o es personafisica
+            if(usuarios.get(0).getCliente() == null || usuarios.get(0).getCliente().getTipo_Cliente() == "Fisica" || usuarios.get(0).getAutorizado() != null){
                 ok = true;
             }
             else{

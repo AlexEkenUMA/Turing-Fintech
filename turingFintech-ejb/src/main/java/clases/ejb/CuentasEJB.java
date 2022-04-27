@@ -120,7 +120,23 @@ public class CuentasEJB implements GestionCuentas {
     @Override
     public List<Segregada> getCuentasHolanda(){
         Query query = em.createQuery("SELECT s FROM Segregada s");
+        //La información puede ser consultada en cualquier momento de L-V de 7:30 am a 5:30 PM
         List<Segregada> lista = query.getResultList();
+        return lista;
+    }
+
+    @Override
+    public List<Segregada> getCuentasAlemania(){
+        Query query = em.createQuery("SELECT s FROM Segregada s");
+        //Todas las cuentas proporcionadas en los ultimos 5 años (da igual el estado actual de la cuenta)
+        //Informe diario y semanal
+        List<Segregada> lista = query.getResultList();
+        for(Segregada s : lista){
+            if(s.getCliente() == null){
+                lista.remove(s);
+            }
+        }
+
         return lista;
     }
 }

@@ -35,4 +35,6 @@ public interface GestionCuentas {
 
     public List<Segregada> getCuentasHolanda();
 
+    public List<Segregada> getCuentasAlemania();
+
 }

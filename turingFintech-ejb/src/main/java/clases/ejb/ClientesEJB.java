@@ -141,6 +141,8 @@ public class ClientesEJB implements GestionClientes {
     @Override
     public List<Cliente> getClientesHolanda(){
         Query query = em.createQuery("SELECT c FROM Cliente c");
+        //Obtener todos los clientes que han tenido una cuenta segregada durante los 3 ultimos años
+        //La información puede ser consultada en cualquier momento de L-V de 7:30 am a 5:30 PM
         List<Cliente> lista = query.getResultList();
         return lista;
     }
