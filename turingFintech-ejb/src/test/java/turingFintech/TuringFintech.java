@@ -121,17 +121,17 @@ public class TuringFintech {
 		}
 		List<PersonaFisica> personaFisicas = gestionClientes.getPersonasFisicas();
 
-		assertEquals(1, personaFisicas.size());
+		//assertEquals(1, personaFisicas.size());
 
-		/*
+
 		boolean ok = false;
 		for (PersonaFisica pf : personaFisicas){
-			if (pf.getId() == 32L){
+			if (pf.getIdentificacion() == 32L){
 				ok = true;
 			}
 		}
 		assertEquals(true, ok);
-		*/
+
 
 	}
 
