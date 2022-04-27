@@ -180,8 +180,7 @@ public class TuringFintech {
 		Date date = new Date();
 		List<Autorizado> au = new ArrayList<>();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		//Cliente cliente1 = new Cliente(l, l, "PersonaFisica", "Activo", date, null, "Direccion","Ciudad", 29649,
-		//		"Pais");
+
 
 		try{
 			gestionClientes.darAlta2(33L, "Fisica", "Razon", "Nombre", "Apellidos", date,
@@ -217,30 +216,40 @@ public class TuringFintech {
 	@Requisitos("RF5")
 	public void testDarDeAltaCuentaSegregada(){
 
+		final String tipo = "Segregada";
+		Date date = new Date();
+		List<Autorizado> au = new ArrayList<>();
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
-
-
-
-	}
-
-
-	/*
-	@Test
-	@Requisitos("RF5")
-	public void testDardeAltaCuenta(){
-		final String tipo = "Pooled";
 		try{
+			gestionClientes.darAlta2(34L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais",au, "Ciudad" );
+		}catch (ClienteNoValidoException e){
 
-			gestionCuentas.aperturaCuenta("1234","5678", tipo);
-			List<PooledAccount> pooled = gestionCuentas.obtenerCuentasPooled();
-			assertEquals(1, pooled.size());
-			assertEquals("1234", pooled.get(0).getIBAN());
-			assertEquals("5678", pooled.get(0).getSWIFT());
+		}
+		List<PersonaFisica> personaFisica = gestionClientes.getPersonasFisicas();
+		DepositadaEn dp = new DepositadaEn(0.00);
+		CuentaReferencia cr = new CuentaReferencia("12345", "4567", "Santander", "sucursal",
+				"pais", 0.0, date, true);
+		dp.setCuentaReferencia(cr);
+		List<DepositadaEn> dpList = new ArrayList<>();
+		dpList.add(dp);
 
-		}catch (TipoNoValidoException e){
-			fail("Lanzo una excepcion al insertar");
+		try{
+			gestionCuentas.aperturaCuenta(usuario1, personaFisica.get(0), "1234", "567", tipo, dpList);
+			List<Segregada> segregadas = gestionCuentas.obtenerCuentasSegregada();
+			boolean ok = false;
+			for (Segregada s : segregadas){
+				if (s.getIBAN().equals("1234")){
+					ok = true;
+				}
+			}
+			assertEquals(true, ok);
+
+
+		}catch (TuringTestException e){
+			fail("No deberia lanzar excepcion");
 		}
 	}
 
-	 */
 }

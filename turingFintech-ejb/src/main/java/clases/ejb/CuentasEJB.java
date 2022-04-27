@@ -49,6 +49,7 @@ public class CuentasEJB implements GestionCuentas {
         if (tipo.equals("Segregada")){
             Segregada segregada = new Segregada(IBAN, SWIFT, fecha, true, tipo,0.00);
             segregada.setCliente(cliente);
+            em.persist(dpList.get(0).getCuentaReferencia());
             segregada.setCr(dpList.get(0).getCuentaReferencia());
             em.persist(segregada);
         }
