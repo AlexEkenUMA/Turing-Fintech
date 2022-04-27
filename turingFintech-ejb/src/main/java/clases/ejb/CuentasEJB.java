@@ -32,12 +32,15 @@ public class CuentasEJB implements GestionCuentas {
         Date fecha = new Date();
         if (tipo.equals("Pooled")) {
             PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, fecha, true, tipo);
-            em.persist(cliente);
+           // em.persist(cliente);
 
             for (DepositadaEn dp : dpList){
-                dp.setPooledAccount(pooledAccount);
-                em.persist(dp);
-                em.persist(dp.getCuentaReferencia());
+                if (dp != null) {
+                    dp.setPooledAccount(pooledAccount);
+                    em.persist(dp);
+                    em.persist(dp.getCuentaReferencia());
+                }
+
             }
             pooledAccount.setCliente(cliente);
             pooledAccount.setListaDepositos(dpList);

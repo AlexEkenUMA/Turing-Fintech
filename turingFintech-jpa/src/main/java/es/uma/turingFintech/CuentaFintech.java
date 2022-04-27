@@ -15,7 +15,7 @@ public class CuentaFintech extends Cuenta implements Serializable {
     private Date fecha_cierre;
     @Column (nullable = false)
     private boolean estado;
-    @Column (nullable = false)
+    //@Column (nullable = false)
     private String tipo;
 
     //relación uno a muchos cliente-cuenta

@@ -114,7 +114,7 @@ public class TuringFintech {
 		List<Autorizado> au = new ArrayList<>();
 
 		try{
-			gestionClientes.darAlta2(32L, tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(30L, tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
@@ -126,7 +126,7 @@ public class TuringFintech {
 
 		boolean ok = false;
 		for (PersonaFisica pf : personaFisicas){
-			if (pf.getIdentificacion() == 32L){
+			if (pf.getIdentificacion() == 30L){
 				ok = true;
 			}
 		}
@@ -144,7 +144,7 @@ public class TuringFintech {
 		Date date = new Date();
 		List<Autorizado> au = new ArrayList<>();
 		try{
-			gestionClientes.darAlta2(32L, tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(31L, tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
@@ -163,9 +163,9 @@ public class TuringFintech {
 
 		final String tipo = "poooled";
 		Date date = new Date();
-		Long l = Long.getLong("37028939023");
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		Cliente cliente1 = new Cliente(null, l, "PersonaFisica", "Activo", date, null, "Direccion","Ciudad", 29649,
+		Cliente cliente1 = new Cliente(null, 32L, "PersonaFisica", "Activo", date, null,
+				"Direccion","Ciudad", 29649,
 				"Pais");
 		List<DepositadaEn> dpList = new ArrayList<>();
 		assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta(usuario1, gestionClientes.getCliente(37028939023L),
@@ -178,29 +178,27 @@ public class TuringFintech {
 
 		final String tipo = "Pooled";
 		Date date = new Date();
-		Long l = Long.getLong("37028939023");
 		List<Autorizado> au = new ArrayList<>();
-
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		//Cliente cliente1 = new Cliente(l, l, "PersonaFisica", "Activo", date, null, "Direccion","Ciudad", 29649,
 		//		"Pais");
+
 		try{
-			gestionClientes.darAlta2(37028939023L, "Fisica", "rehrte", "Jose", "Pan",
-					date, "Direccion",2898, "29649", au, "");
+			gestionClientes.darAlta2(33L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 
 		}
-
-
+		List<PersonaFisica> personaFisica = gestionClientes.getPersonasFisicas();
 		DepositadaEn dp = new DepositadaEn(0.00);
-		CuentaReferencia cr = new CuentaReferencia("Santander", null, null, null,
-				null, 0.0, null, true);
+		CuentaReferencia cr = new CuentaReferencia("12345", "4567", "Santander", "sucursal",
+				"pais", 0.0, date, true);
 		dp.setCuentaReferencia(cr);
 		List<DepositadaEn> dpList = new ArrayList<>();
 		dpList.add(dp);
 
 		try{
-			gestionCuentas.aperturaCuenta(usuario1, gestionClientes.getCliente(37028939023L), "1234", "567", tipo, dpList);
+			gestionCuentas.aperturaCuenta(usuario1, personaFisica.get(0), "1234", "567", tipo, dpList);
 			List<PooledAccount> pooledAccountList = gestionCuentas.obtenerCuentasPooled();
 			boolean ok = false;
 			for (PooledAccount pa : pooledAccountList){
@@ -215,6 +213,15 @@ public class TuringFintech {
 		}
 	}
 
+	@Test
+	@Requisitos("RF5")
+	public void testDarDeAltaCuentaSegregada(){
+
+
+
+
+
+	}
 
 
 	/*

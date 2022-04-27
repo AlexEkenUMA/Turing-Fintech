@@ -8,11 +8,11 @@ import java.util.Objects;
 
 @Entity
 public class CuentaReferencia extends Cuenta implements Serializable {
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String nombre_Banco;
     private String sucursal;
     private String pais;
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private Double saldo;
     @Temporal(TemporalType.DATE)
     private Date fecha_Apertura;
