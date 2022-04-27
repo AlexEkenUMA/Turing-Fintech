@@ -264,16 +264,53 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF90")
+	@Requisitos("RF9")
 	public void testCierreCuentaNoEncontrada(){
 		final String IBAN = "1234";
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
-
-
-
+		assertThrows(CuentaNoEncontradaException.class, () -> gestionCuentas.cierreCuenta(usuario1, IBAN));
 
 	}
 
 
+	@Test
+	@Requisitos("RF9")
+	public void testCierreCuenta() {
 
+		final String tipo = "Pooled";
+		final String IBAN = "12345";
+
+		Date date = new Date();
+		List<Autorizado> au = new ArrayList<>();
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+
+		try {
+			gestionClientes.darAlta2(39L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais", au, "Ciudad");
+		} catch (ClienteNoValidoException e) {
+
+		}
+		List<PersonaFisica> personaFisica = gestionClientes.getPersonasFisicas();
+		DepositadaEn dp = new DepositadaEn(0.00);
+		CuentaReferencia cr = new CuentaReferencia("123456", "4567", "Santander", "sucursal",
+				"pais", 0.0, date, true);
+		dp.setCuentaReferencia(cr);
+		List<DepositadaEn> dpList = new ArrayList<>();
+		dpList.add(dp);
+
+		try {
+			gestionCuentas.aperturaCuenta(usuario1, personaFisica.get(0), IBAN, "567", tipo, dpList);
+			gestionCuentas.cierreCuenta(usuario1, IBAN);
+			List<PooledAccount> pooledAccountList = gestionCuentas.obtenerCuentasPooled();
+			boolean ok = false;
+			for (PooledAccount pl : pooledAccountList){
+				if (pl.getIBAN().equals(IBAN)){
+					assertEquals(false, pl.isEstado());
+				}
+			}
+		} catch (TuringTestException e) {
+			fail("No deberia lanzar excepcion");
+		}
+	}
 }

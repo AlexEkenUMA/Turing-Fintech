@@ -75,6 +75,7 @@ public class CuentaFintech extends Cuenta implements Serializable {
 
     public void setFecha_cierre(Date fecha_cierre) {this.fecha_cierre = fecha_cierre;
     }
+
     //toString
 
 
