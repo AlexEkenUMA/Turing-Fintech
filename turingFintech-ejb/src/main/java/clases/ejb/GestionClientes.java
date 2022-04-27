@@ -4,6 +4,8 @@ import clases.ejb.exceptions.ClienteNoEncontradoException;
 import clases.ejb.exceptions.ClienteNoValidoException;
 import es.uma.turingFintech.Autorizado;
 import es.uma.turingFintech.Cliente;
+import es.uma.turingFintech.PersonaFisica;
+import es.uma.turingFintech.PersonaJuridica;
 
 import javax.ejb.Local;
 import java.util.Date;
@@ -43,5 +45,12 @@ public interface GestionClientes {
 
 
     public Cliente getCliente (Long id);
+
+
+    public List<PersonaFisica> getPersonasFisicas ();
+
+    public List<PersonaJuridica> getPersonasJuridicas();
+
+
 
     }

@@ -91,6 +91,71 @@ public class TuringFintech {
 		assertThrows(NoEsAdministrativo.class, () -> gestionUsuarios.usuarioAdministrativo(usuario2));
 	}
 
+	@Test
+	@Requisitos("RF2")
+	public void darDeAltaClienteNoValido(){
+
+		// (Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+		//                          Date fechaNac, String direccion, int codigoPostal, String pais, List<Autorizado> au, String ciudad)
+		final String tipo = "Fisiiico";
+		Date date = new Date();
+		List<Autorizado> au = new ArrayList<>();
+		assertThrows(ClienteNoValidoException.class, () -> gestionClientes.darAlta2(32L, tipo, "Razon", "Nombre", "Apellidos", date,
+				"Direccion", 2967, "Pais",au, "Ciudad" ));
+
+	}
+
+	@Test
+	@Requisitos("RF2")
+	public void darDeAltaClienteFisico(){
+
+		final String tipo = "Fisica";
+		Date date = new Date();
+		List<Autorizado> au = new ArrayList<>();
+
+		try{
+			gestionClientes.darAlta2(32L, tipo, "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais",au, "Ciudad" );
+		}catch (ClienteNoValidoException e){
+			fail("ClienteNoValido (NO DEBERIA");
+		}
+		List<PersonaFisica> personaFisicas = gestionClientes.getPersonasFisicas();
+
+		assertEquals(1, personaFisicas.size());
+
+		/*
+		boolean ok = false;
+		for (PersonaFisica pf : personaFisicas){
+			if (pf.getId() == 32L){
+				ok = true;
+			}
+		}
+		assertEquals(true, ok);
+		*/
+
+	}
+
+
+	@Test
+	@Requisitos("RF2")
+	public void darDeAltaClienteJuridico(){
+
+		final String tipo = "Juridico";
+		Date date = new Date();
+		List<Autorizado> au = new ArrayList<>();
+		try{
+			gestionClientes.darAlta2(32L, tipo, "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais",au, "Ciudad" );
+		}catch (ClienteNoValidoException e){
+			fail("ClienteNoValido (NO DEBERIA");
+		}
+		List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
+		assertEquals(1, personaJuridicas.size());
+	}
+
+
+
+
 
 	@Test
 	@Requisitos("RF5")
@@ -103,7 +168,7 @@ public class TuringFintech {
 		Cliente cliente1 = new Cliente(null, l, "PersonaFisica", "Activo", date, null, "Direccion","Ciudad", 29649,
 				"Pais");
 		List<DepositadaEn> dpList = new ArrayList<>();
-		assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta(usuario1, cliente1,
+		assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta(usuario1, gestionClientes.getCliente(37028939023L),
 				"123456", "789", tipo, dpList));
 	}
 

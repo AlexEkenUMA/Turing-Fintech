@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 public class PersonaJuridica extends Cliente implements Serializable {
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String Razon_Social;
 
     //Relacion muchos-muchos con Autorizado

@@ -12,6 +12,7 @@ import org.eclipse.persistence.internal.sessions.DirectCollectionChangeRecord;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.constraints.Null;
 import java.util.Date;
 import java.util.List;
@@ -40,11 +41,14 @@ public class ClientesEJB implements GestionClientes {
             PersonaJuridica personaJuridica = new PersonaJuridica (null, id, tipoCliente, "Activo", date, null,
                     direccion,ciudad, codigoPostal, pais, RazonSocial);
             personaJuridica.setAutorizados(au);
+
             em.persist(personaJuridica);
         }
         if (tipoCliente.equals("Fisica")){
             PersonaFisica personaFisica = new PersonaFisica(null, id, tipoCliente, "Activo", date, null, direccion,ciudad,
                     codigoPostal, pais, nombre, apellidos, fechaNac);
+
+
             em.persist(personaFisica);
         }
     }
@@ -92,4 +96,15 @@ public class ClientesEJB implements GestionClientes {
        return em.find(Cliente.class, id);
     }
 
+    public List<PersonaFisica> getPersonasFisicas (){
+        Query query = em.createQuery("select cliente from PersonaFisica cliente");
+        List<PersonaFisica> personaFisicas = (List<PersonaFisica>) query.getResultList();
+        return personaFisicas;
+    }
+
+    public List<PersonaJuridica> getPersonasJuridicas(){
+        Query query = em.createQuery("select cliente from PersonaJuridica cliente");
+        List<PersonaJuridica> personaJuridicas = (List<PersonaJuridica>) query.getResultList();
+        return personaJuridicas;
+    }
 }
