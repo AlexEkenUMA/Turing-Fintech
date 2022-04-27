@@ -11,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import es.uma.turingFintech.*;
+import org.eclipse.persistence.internal.descriptors.PersistenceObject;
 
 public class BaseDatos {
 	public static void inicializaBaseDatos(String nombreUnidadPersistencia) {
@@ -57,9 +58,12 @@ public class BaseDatos {
 
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
+		PersonaJuridica personaJuridica1 = new PersonaJuridica(null, 55L, "Juridico", "Activo", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		usuario1.setCliente(personaJuridica1);
+		em.persist(personaJuridica1);
 		em.persist(usuario1);
 		em.persist(usuario2);
-
 
 		//Cliente cliente1 = new Cliente(null, 37028939023L, "Fisica", "Activo", date,
 		//		null, "Direccion","Ciudad", 29649, "Pais");

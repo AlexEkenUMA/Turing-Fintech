@@ -51,13 +51,14 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF1")
 	public void testUsuarioCorrecto(){
-		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
 		try{
-			gestionUsuarios.usuarioCorrecto(usuario1);
 			gestionUsuarios.usuarioCorrecto(usuario2);
 
 		}catch (UsuarioNoEncontrado e){
+			fail("No deberia lanzar la excepcion");
+		}
+		catch (EmpresaNoTieneAcceso e){
 			fail("No deberia lanzar la excepcion");
 		}
 	}
@@ -339,5 +340,13 @@ public class TuringFintech {
 		} catch (TuringTestException e) {
 			fail("No deberia lanzar excepcion");
 		}
+	}
+
+	@Test
+	@Requisitos("RF10")
+	public void testAccesoPersonaJuridica(){
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+
+		assertThrows(EmpresaNoTieneAcceso.class, () -> gestionUsuarios.usuarioCorrecto(usuario1));
 	}
 }

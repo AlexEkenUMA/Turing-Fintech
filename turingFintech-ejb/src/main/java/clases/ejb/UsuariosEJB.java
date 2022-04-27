@@ -1,5 +1,6 @@
 package clases.ejb;
 
+import clases.ejb.exceptions.EmpresaNoTieneAcceso;
 import clases.ejb.exceptions.NoEsAdministrativo;
 import clases.ejb.exceptions.UsuarioNoEncontrado;
 import es.uma.turingFintech.Usuario;
@@ -17,7 +18,7 @@ public class UsuariosEJB implements GestionUsuarios {
     private EntityManager em;
 
     @Override
-    public boolean usuarioCorrecto (Usuario u) throws UsuarioNoEncontrado{
+    public boolean usuarioCorrecto (Usuario u) throws UsuarioNoEncontrado, EmpresaNoTieneAcceso {
         boolean ok = false;
         Query query = em.createQuery("select usuario from Usuario usuario where usuario.nombre_usuario = :nombre " +
                 "and usuario.contraseña = :password");
@@ -27,7 +28,13 @@ public class UsuariosEJB implements GestionUsuarios {
         if (usuarios.isEmpty()){
             throw new UsuarioNoEncontrado();
         }else{
-            ok = true;
+            if(usuarios.get(0).getCliente() == null || usuarios.get(0).getCliente().getTipo_Cliente() == "Fisica"){
+                ok = true;
+            }
+            else{
+                throw new EmpresaNoTieneAcceso();
+            }
+
         }
         return ok;
     }
