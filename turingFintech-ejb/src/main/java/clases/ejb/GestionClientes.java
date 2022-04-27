@@ -24,7 +24,7 @@ public interface GestionClientes {
      Este método permite a un administrativo modificar los datos de un cliente
      RF3
      */
-    public void modificarCliente(Usuario u, Cliente c, String ID) throws ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
+    public void modificarCliente(Usuario u, Cliente c, Long ID) throws ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
     /**
@@ -32,7 +32,7 @@ public interface GestionClientes {
      Este método permite a un administrativo dar de baja a un cliente
      RF4
      */
-    public void eliminarCliente (Usuario u, Cliente c, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
+    public void eliminarCliente (Usuario u, Cliente c, Long ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
     public void darAlta2 (Usuario u, Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,

@@ -56,6 +56,10 @@ public class BaseDatos {
 		//em.persist(cliente2);
 		//em.persist(cliente3);
 
+		PersonaJuridica pj = new PersonaJuridica(null, 21L, "Juridico", "Activo", date, null, "Direccion",
+				"sevilla", 29002, "pais", "ninguna");
+		em.persist(pj);
+
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
 		PersonaJuridica personaJuridica1 = new PersonaJuridica(null, 55L, "Juridico", "Activo", date, null, "Direccion",

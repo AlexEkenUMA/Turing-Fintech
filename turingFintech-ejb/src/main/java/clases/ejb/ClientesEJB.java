@@ -72,20 +72,29 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public void modificarCliente(Usuario u, Cliente c, String ID) throws ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
+    public void modificarCliente(Usuario u, Cliente c, Long ID) throws ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
 
         gestionUsuarios.usuarioAdministrativo(u);
-
-        Cliente clienteExiste = em.find(Cliente.class, ID);
+        PersonaJuridica clienteExiste = null;
+        List<PersonaJuridica> clientes = getPersonasJuridicas();
+        for(PersonaJuridica pj: clientes){
+            if(ID == pj.getIdentificacion()){
+                clienteExiste = pj;
+            }
+        }
         if(clienteExiste == null){
             throw new ClienteNoEncontradoException();
         }
-        em.merge(c);
+        if(c.getId() == clienteExiste.getId() && c.getIdentificacion() == clienteExiste.getIdentificacion()){
+            em.merge(c);
+        }else{
+            throw new ModificarClienteDistintaID();
+        }
     }
 
 
     @Override
-    public void eliminarCliente (Usuario u, Cliente c, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
+    public void eliminarCliente (Usuario u, Cliente c, Long ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
 
         gestionUsuarios.usuarioAdministrativo(u);
         Date fecha = new Date();

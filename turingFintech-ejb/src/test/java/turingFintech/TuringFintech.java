@@ -171,8 +171,51 @@ public class TuringFintech {
 		assertEquals(true, ok);
 	}
 
+	@Test
+	@Requisitos("RF3")
+	public void modificarClienteNoEncontrado(){
+		Date date1 = new Date();
+		Date date2 = new Date();
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		Cliente cliente = new Cliente(12L, 1L, "juridico", "activo", date1, date2, "calle", "ciudad", 2900, "pais");
+		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.modificarCliente(usuario1, cliente,12L));
+	}
 
 
+	@Test
+	@Requisitos("RF3")
+	public void modificarCliente(){
+		Long identificacion = 21L;
+		PersonaJuridica pj2 = null;
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		List<PersonaJuridica> clientes = gestionClientes.getPersonasJuridicas();
+		System.out.println(clientes);
+		for(PersonaJuridica pj: clientes){
+			if(identificacion == pj.getIdentificacion()){
+				pj2 = pj;
+				System.out.println("encontrado identificacion");
+			}
+		}
+		PersonaJuridica copiapj2 = pj2;
+		copiapj2.setCiudad("mlg");
+		try{
+			gestionClientes.modificarCliente(usuario1,copiapj2,21L);
+		}catch (ClienteNoEncontradoException e){
+			fail("No se ha encontrado cliente (NO DEBERIA)");
+		} catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado usuario (NO DEBERIA)");
+		} catch (NoEsAdministrativo e) {
+			fail("Usuario no es administrativo (NO DEBERIA)");
+		} catch (ModificarClienteDistintaID e){
+			fail("Cliente con distinta ID (NO DEBERIA)");
+		}
+		List<PersonaJuridica> ClienteComprobar = gestionClientes.getPersonasJuridicas();
+		for(PersonaJuridica pj: ClienteComprobar){
+			if(identificacion == pj.getIdentificacion()){
+				assertEquals(pj.getCiudad(), "mlg");
+			}
+		}
+	}
 
 
 	@Test
