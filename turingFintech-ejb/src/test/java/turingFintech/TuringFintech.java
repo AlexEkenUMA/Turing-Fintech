@@ -100,7 +100,8 @@ public class TuringFintech {
 		final String tipo = "Fisiiico";
 		Date date = new Date();
 		List<Autorizado> au = new ArrayList<>();
-		assertThrows(ClienteNoValidoException.class, () -> gestionClientes.darAlta2(32L, tipo, "Razon", "Nombre", "Apellidos", date,
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		assertThrows(ClienteNoValidoException.class, () -> gestionClientes.darAlta2(usuario1,32L, tipo, "Razon", "Nombre", "Apellidos", date,
 				"Direccion", 2967, "Pais",au, "Ciudad" ));
 
 	}
@@ -112,12 +113,17 @@ public class TuringFintech {
 		final String tipo = "Fisica";
 		Date date = new Date();
 		List<Autorizado> au = new ArrayList<>();
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try{
-			gestionClientes.darAlta2(30L, tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,30L, tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
+		} catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado (NO DEBERIA)");
+		} catch (NoEsAdministrativo e) {
+			fail("No es administrativo (NO DEBERIA)");
 		}
 		List<PersonaFisica> personaFisicas = gestionClientes.getPersonasFisicas();
 
@@ -143,11 +149,16 @@ public class TuringFintech {
 		final String tipo = "Juridico";
 		Date date = new Date();
 		List<Autorizado> au = new ArrayList<>();
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
-			gestionClientes.darAlta2(31L, tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,31L, tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
+		}  catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado (NO DEBERIA)");
+		} catch (NoEsAdministrativo e) {
+			fail("No es administrativo (NO DEBERIA)");
 		}
 		List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
 		boolean ok = false;
@@ -172,10 +183,14 @@ public class TuringFintech {
 		List<Autorizado> au = new ArrayList<>();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
-			gestionClientes.darAlta2(40L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,40L, "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
-
+			fail("Cliente no valido (NO DEBERIA)");
+		}  catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado (NO DEBERIA)");
+		} catch (NoEsAdministrativo e) {
+			fail("No es administrativo (NO DEBERIA)");
 		}
 		List<PersonaFisica> pf = gestionClientes.getPersonasFisicas();
 		List<DepositadaEn> dpList = new ArrayList<>();
@@ -194,10 +209,14 @@ public class TuringFintech {
 
 
 		try{
-			gestionClientes.darAlta2(33L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,33L, "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
-
+			fail("Cliente no valido (NO DEBERIA)");
+		}  catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado (NO DEBERIA)");
+		} catch (NoEsAdministrativo e) {
+			fail("No es administrativo (NO DEBERIA)");
 		}
 		List<PersonaFisica> personaFisica = gestionClientes.getPersonasFisicas();
 		DepositadaEn dp = new DepositadaEn(0.00);
@@ -233,10 +252,14 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try{
-			gestionClientes.darAlta2(34L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,34L, "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
-
+			fail("Cliente no valido (NO DEBERIA)");
+		} catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado (NO DEBERIA)");
+		} catch (NoEsAdministrativo e) {
+			fail("No es administrativo (NO DEBERIA)");
 		}
 		List<PersonaFisica> personaFisica = gestionClientes.getPersonasFisicas();
 		DepositadaEn dp = new DepositadaEn(0.00);
@@ -286,10 +309,14 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try {
-			gestionClientes.darAlta2(39L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1, 39L, "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais", au, "Ciudad");
 		} catch (ClienteNoValidoException e) {
-
+			fail("Cliente no valido (NO DEBERIA)");
+		} catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado (NO DEBERIA)");
+		} catch (NoEsAdministrativo e) {
+			fail("No es administrativo (NO DEBERIA)");
 		}
 		List<PersonaFisica> personaFisica = gestionClientes.getPersonasFisicas();
 		DepositadaEn dp = new DepositadaEn(0.00);

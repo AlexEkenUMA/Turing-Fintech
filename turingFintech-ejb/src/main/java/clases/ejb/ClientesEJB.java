@@ -1,14 +1,10 @@
 package clases.ejb;
 
-import clases.ejb.exceptions.ClienteNoEncontradoException;
-import clases.ejb.exceptions.ClienteNoValidoException;
-import clases.ejb.exceptions.TipoNoValidoException;
-import es.uma.turingFintech.Autorizado;
-import es.uma.turingFintech.Cliente;
-import es.uma.turingFintech.PersonaFisica;
-import es.uma.turingFintech.PersonaJuridica;
+import clases.ejb.exceptions.*;
+import es.uma.turingFintech.*;
 import org.eclipse.persistence.internal.sessions.DirectCollectionChangeRecord;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,11 +22,16 @@ public class ClientesEJB implements GestionClientes {
     @PersistenceContext(name = "turingFintech-ejb")
     private EntityManager em;
 
+    @EJB
+    GestionUsuarios gestionUsuarios;
+
 
     @Override
-    public void darAlta2 (Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+    public void darAlta2 (Usuario u, Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
                           Date fechaNac, String direccion, int codigoPostal, String pais, List<Autorizado> au, String ciudad)
-            throws ClienteNoValidoException{
+            throws ClienteNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo {
+
+        gestionUsuarios.usuarioAdministrativo(u);
 
         if (!tipoCliente.equals("Juridico") && !tipoCliente.equals("Fisica")){
             throw new ClienteNoValidoException();
@@ -68,11 +69,13 @@ public class ClientesEJB implements GestionClientes {
             throw new ClienteNoValidoException();
         }
 
-
     }
 
     @Override
-    public void modificarCliente(Cliente c, String ID) throws ClienteNoEncontradoException {
+    public void modificarCliente(Usuario u, Cliente c, String ID) throws ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
+
+        gestionUsuarios.usuarioAdministrativo(u);
+
         Cliente clienteExiste = em.find(Cliente.class, ID);
         if(clienteExiste == null){
             throw new ClienteNoEncontradoException();
@@ -82,13 +85,31 @@ public class ClientesEJB implements GestionClientes {
 
 
     @Override
-    public void eliminarCliente (Cliente c, String ID) throws ClienteNoEncontradoException{
+    public void eliminarCliente (Usuario u, Cliente c, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
+
+        gestionUsuarios.usuarioAdministrativo(u);
+        Date fecha = new Date();
+
         Cliente cliente = em.find(Cliente.class, ID);
         if(cliente == null){
             throw new ClienteNoEncontradoException();
         }
-        em.remove(cliente);
-        em.flush();
+
+        List<CuentaFintech> cuentas = cliente.getCuentasFintech();
+        boolean ok = true;
+        for(CuentaFintech cf : cuentas){
+            if(cf.isEstado()) {
+                ok = false;
+            }
+        }
+        if(ok){
+          cliente.setEstado("Baja");
+          cliente.setFecha_Baja(fecha);
+          em.merge(cliente);
+        }else{
+            throw new CuentaActiva();
+        }
+
     }
 
 

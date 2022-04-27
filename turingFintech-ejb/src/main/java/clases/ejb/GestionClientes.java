@@ -1,11 +1,7 @@
 package clases.ejb;
 
-import clases.ejb.exceptions.ClienteNoEncontradoException;
-import clases.ejb.exceptions.ClienteNoValidoException;
-import es.uma.turingFintech.Autorizado;
-import es.uma.turingFintech.Cliente;
-import es.uma.turingFintech.PersonaFisica;
-import es.uma.turingFintech.PersonaJuridica;
+import clases.ejb.exceptions.*;
+import es.uma.turingFintech.*;
 
 import javax.ejb.Local;
 import java.util.Date;
@@ -28,7 +24,7 @@ public interface GestionClientes {
      Este método permite a un administrativo modificar los datos de un cliente
      RF3
      */
-    public void modificarCliente(Cliente c, String ID) throws ClienteNoEncontradoException;
+    public void modificarCliente(Usuario u, Cliente c, String ID) throws ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
     /**
@@ -36,12 +32,12 @@ public interface GestionClientes {
      Este método permite a un administrativo dar de baja a un cliente
      RF4
      */
-    public void eliminarCliente (Cliente c, String ID) throws ClienteNoEncontradoException;
+    public void eliminarCliente (Usuario u, Cliente c, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
-    public void darAlta2 (Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+    public void darAlta2 (Usuario u, Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
                           Date fechaNac, String direccion, int codigoPostal,
-                          String pais, List<Autorizado> au, String ciudad) throws ClienteNoValidoException;
+                          String pais, List<Autorizado> au, String ciudad) throws ClienteNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
     public Cliente getCliente (Long id);
