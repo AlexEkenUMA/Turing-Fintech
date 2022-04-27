@@ -117,6 +117,12 @@ public class CuentasEJB implements GestionCuentas {
         return segregadas;
     }
 
+    @Override
+    public List<Segregada> getCuentasHolanda(){
+        Query query = em.createQuery("SELECT s FROM Segregada s");
+        List<Segregada> lista = query.getResultList();
+        return lista;
+    }
 }
 
 

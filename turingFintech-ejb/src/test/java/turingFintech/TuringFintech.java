@@ -392,4 +392,20 @@ public class TuringFintech {
 
 		assertThrows(EmpresaNoTieneAcceso.class, () -> gestionUsuarios.usuarioCorrecto(usuario1));
 	}
+
+	@Test
+	@Requisitos("RF11")
+	public void testObtenerClientesHolanda(){
+		final Long identificacion = 21L;
+		List<Cliente> informeHolanda = gestionClientes.getClientesHolanda();
+		assertEquals(informeHolanda.get(0).getIdentificacion(), identificacion);
+	}
+
+	@Test
+	@Requisitos("RF11")
+	public void testObtenerCuentasHolanda(){
+		final String IBAN = "ES2057883234722030876293";
+		List<Segregada> informeHolanda = gestionCuentas.getCuentasHolanda();
+		assertEquals(informeHolanda.get(0).getIBAN(), IBAN);
+	}
 }

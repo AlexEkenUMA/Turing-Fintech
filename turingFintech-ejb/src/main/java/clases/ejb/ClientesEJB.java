@@ -137,4 +137,11 @@ public class ClientesEJB implements GestionClientes {
         List<PersonaJuridica> personaJuridicas = (List<PersonaJuridica>) query.getResultList();
         return personaJuridicas;
     }
+
+    @Override
+    public List<Cliente> getClientesHolanda(){
+        Query query = em.createQuery("SELECT c FROM Cliente c");
+        List<Cliente> lista = query.getResultList();
+        return lista;
+    }
 }

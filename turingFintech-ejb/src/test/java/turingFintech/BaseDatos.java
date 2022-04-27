@@ -47,8 +47,7 @@ public class BaseDatos {
 
 		//em.persist(pooledAccount1);
 
-		//Segregada segregada2 = new Segregada("ES2057883234722030876293", "", date
-		//		, false, "Segregada", 0.0, 0.0);
+
 
 		//em.persist(segregada2);
 
@@ -69,6 +68,8 @@ public class BaseDatos {
 		em.persist(usuario1);
 		em.persist(usuario2);
 
+		Segregada segregada2 = new Segregada("ES2057883234722030876293", "", date, false, "Segregada", 0.0);
+		em.persist(segregada2);
 		//Cliente cliente1 = new Cliente(null, 37028939023L, "Fisica", "Activo", date,
 		//		null, "Direccion","Ciudad", 29649, "Pais");
 		//em.persist(cliente1);

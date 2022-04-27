@@ -47,6 +47,8 @@ public interface GestionClientes {
 
     public List<PersonaJuridica> getPersonasJuridicas();
 
+    public List<Cliente> getClientesHolanda();
+
 
 
     }
