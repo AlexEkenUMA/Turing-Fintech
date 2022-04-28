@@ -36,10 +36,10 @@ public class AutorizadosEJB implements GestionAutorizados{
         }
         List<Autorizado> autorizadoList = pj.getAutorizados();
         autorizadoList.add(autorizado);
-        //pj.setAutorizados(autorizadoList);
+        pj.setAutorizados(autorizadoList);
         List<PersonaJuridica> personaJuridicas = autorizado.getEmpresas();
         personaJuridicas.add(pj);
-        //autorizado.setEmpresas(personaJuridicas);
+        autorizado.setEmpresas(personaJuridicas);
         em.merge(autorizado);
         em.merge(pj);
     }

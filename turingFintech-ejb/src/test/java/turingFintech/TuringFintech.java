@@ -361,15 +361,56 @@ public class TuringFintech {
 	@Requisitos("RF6")
 	public void testAnadirAutorizado(){
 		Date date = new Date();
-		Autorizado autorizado = new Autorizado(1L, 100L, "Nombre", "Apellidos",
+		Autorizado autorizado = new Autorizado(150L, 100L, "Nombre", "Apellidos",
 				"Direccion", date, "Estado", date, date);
-		PersonaJuridica personaJuridica1 = new PersonaJuridica(10L, 50L, "Juridico", "Activo", date, null, "Direccion",
-				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		List<PersonaJuridica> pjP = new ArrayList<>();
+		autorizado.setEmpresas(pjP);
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
+			List<Autorizado> autor = new ArrayList<>();
+			gestionClientes.darAlta2(usuario1,50L, "Juridico", "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais",autor, "Ciudad" );
 
+			List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
+			Long id = null;
+			PersonaJuridica personaJuridica1 = null;
+			for (PersonaJuridica pj : personaJuridicas){
+				if (pj.getIdentificacion()==50L){
+					id = pj.getId();
+					personaJuridica1 = pj;
+				}
+			}
 			gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1, autorizado);
+			for (PersonaJuridica pj : personaJuridicas){
+				if (pj.getIdentificacion()==50L){
+					id = pj.getId();
+					personaJuridica1 = pj;
+				}
+			}
+			List<Autorizado> autorizadoList 	   = gestionAutorizados.getAutorizados();
+			Autorizado autorizado1 			       = null;
+			for (Autorizado au : autorizadoList){
+				if (au.getIdentificacion() == 100L){
+					autorizado1 = au;
+				}
+			}
+			List<Autorizado> auJuridcas = personaJuridica1.getAutorizados();
+			List<PersonaJuridica> pjAuto = autorizado1.getEmpresas();
+			boolean bautorizado = false;
+			boolean bjuridica   = false;
+			for (Autorizado au : auJuridcas){
+				if (au.getIdentificacion() == 100L){
+					bautorizado = true;
+				}
+			}
+			for (PersonaJuridica pj : pjAuto){
+				if (pj.getIdentificacion() == 50L){
+					bjuridica = true;
+				}
+			}
 
+			assertEquals(true, bautorizado);
+			assertEquals(true, bjuridica);
 
 
 		}catch (NoEsAdministrativo e){
@@ -378,6 +419,8 @@ public class TuringFintech {
 			fail("UsuarioNoEncontrado (NO DEBERIA)");
 		}catch (PersonaJuridicaNoEncontrada e){
 			fail("PersonaJuridicaNoEncontrada (NO DEBERIA)");
+		}catch (ClienteNoValidoException e){
+			fail("ClienteNoValido (NO DEBERIA)");
 		}
 
 	}
