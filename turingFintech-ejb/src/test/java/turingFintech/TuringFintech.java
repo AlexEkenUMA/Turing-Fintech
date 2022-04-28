@@ -476,6 +476,24 @@ public class TuringFintech {
 		}
 	}
 
+
+	@Test
+	@Requisitos("RF8")
+	public void testAutorizadoNoEncontrado(){
+
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		final Long id = 100000L;
+		assertThrows(AutorizadoNoEncontradoException.class, ()-> gestionAutorizados.eliminarAutorizados(usuario1, id));
+	}
+
+	@Test
+	@Requisitos("RF8")
+	public void testEliminarAutorizado(){
+
+
+
+	}
+
 	@Test
 	@Requisitos("RF9")
 	public void testCierreCuentaNoEncontrada(){
