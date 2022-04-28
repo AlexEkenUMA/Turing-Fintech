@@ -263,30 +263,6 @@ public class TuringFintech {
 
 	@Test
 	@Requisitos("RF5")
-	public void testDardeAltaCuentaTipoNoValidoException(){
-
-		final String tipo = "poooled";
-		Date date = new Date();
-		List<Autorizado> au = new ArrayList<>();
-		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		try{
-			gestionClientes.darAlta2(usuario1,40L, "Fisica", "Razon", "Nombre", "Apellidos", date,
-					"Direccion", 2967, "Pais",au, "Ciudad" );
-		}catch (ClienteNoValidoException e){
-			fail("Cliente no valido (NO DEBERIA)");
-		}  catch (UsuarioNoEncontrado e) {
-			fail("No se ha encontrado (NO DEBERIA)");
-		} catch (NoEsAdministrativo e) {
-			fail("No es administrativo (NO DEBERIA)");
-		}
-		List<PersonaFisica> pf = gestionClientes.getPersonasFisicas();
-		List<DepositadaEn> dpList = new ArrayList<>();
-		assertThrows(TipoNoValidoException.class, () -> gestionCuentas.aperturaCuenta(usuario1, pf.get(0),
-				"123456", "789", tipo, dpList));
-	}
-
-	@Test
-	@Requisitos("RF5")
 	public void testDarDeAltaCuentaPooled(){
 
 		final String tipo = "Pooled";
@@ -314,7 +290,7 @@ public class TuringFintech {
 		dpList.add(dp);
 
 		try{
-			gestionCuentas.aperturaCuenta(usuario1, personaFisica.get(0), "1234", "567", tipo, dpList);
+			gestionCuentas.aperturaCuentaPooled(usuario1, personaFisica.get(0), "1234", "567", dpList);
 			List<PooledAccount> pooledAccountList = gestionCuentas.obtenerCuentasPooled();
 			boolean ok = false;
 			for (PooledAccount pa : pooledAccountList){
@@ -349,15 +325,10 @@ public class TuringFintech {
 			fail("No es administrativo (NO DEBERIA)");
 		}
 		List<PersonaFisica> personaFisica = gestionClientes.getPersonasFisicas();
-		DepositadaEn dp = new DepositadaEn(0.00);
 		CuentaReferencia cr = new CuentaReferencia("12345", "4567", "Santander", "sucursal",
 				"pais", 0.0, date, true);
-		dp.setCuentaReferencia(cr);
-		List<DepositadaEn> dpList = new ArrayList<>();
-		dpList.add(dp);
-
 		try{
-			gestionCuentas.aperturaCuenta(usuario1, personaFisica.get(0), "1234", "567", tipo, dpList);
+			gestionCuentas.aperturaCuentaSegregada(usuario1, personaFisica.get(0), "1234", "567", cr);
 			List<Segregada> segregadas = gestionCuentas.obtenerCuentasSegregada();
 			boolean ok = false;
 			for (Segregada s : segregadas){
