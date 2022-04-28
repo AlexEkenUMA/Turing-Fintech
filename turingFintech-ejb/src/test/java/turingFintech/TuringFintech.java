@@ -509,25 +509,24 @@ public class TuringFintech {
 				}
 			}
 			gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1, autorizado);
-			List<PersonaJuridica> personaJuridicaList = autorizado.getEmpresas();
-			gestionAutorizados.eliminarAutorizados(usuario1, autorizado.getId());
 
+			gestionAutorizados.eliminarAutorizados(usuario1, autorizado.getId());
 			List<Autorizado> autorizadoList = gestionAutorizados.getAutorizados();
+
 			Autorizado autorizado1 = null;
 			for (Autorizado au: autorizadoList){
 				if (au.getIdentificacion() == 100L){
 					autorizado1 = au;
 				}
 			}
+			List<PersonaJuridica> personaJuridicaList = autorizado1.getEmpresas();
 			boolean ok = true;
 			for (PersonaJuridica pj : personaJuridicaList){
 				if (pj.getAutorizados().contains(autorizado1)){
 					ok = false;
 				}
-
-
 			}
-			assertEquals("Baja", autorizado1.getEstado());
+			assertEquals("Baja",autorizado1.getEstado());
 			assertEquals(0, autorizado1.getEmpresas().size());
 			assertEquals(true, ok);
 
