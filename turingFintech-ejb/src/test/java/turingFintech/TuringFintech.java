@@ -453,4 +453,17 @@ public class TuringFintech {
 		List<Segregada> informeHolanda = gestionCuentas.getCuentasHolanda();
 		assertEquals(informeHolanda.get(0).getIBAN(), IBAN);
 	}
+
+
+
+	@Test
+	@Requisitos("RF13")
+	public void testRegistrarTransaccionCuentaNoEncontrada(){
+
+
+
+
+
+
+	}
 }
