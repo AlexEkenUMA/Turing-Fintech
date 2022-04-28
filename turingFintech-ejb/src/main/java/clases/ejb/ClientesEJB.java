@@ -104,7 +104,7 @@ public class ClientesEJB implements GestionClientes {
             throw new ClienteNoEncontradoException();
         }
 
-        List<CuentaFintech> cuentas = cliente.getCuentasFintech();
+        List<CuentaFintech> cuentas = cliente.getCuentasFintech(); //
         boolean ok = true;
         for(CuentaFintech cf : cuentas){
             if(cf.isEstado()) {

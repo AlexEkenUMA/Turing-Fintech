@@ -38,9 +38,12 @@ public class CuentasEJB implements GestionCuentas {
                 if (dp != null) {
                     dp.setPooledAccount(pooledAccount);
                     em.persist(dp);
-                    em.persist(dp.getCuentaReferencia());
+                    //em.persist(dp.getCuentaReferencia());
+                  CuentaReferencia cuentaReferencia =   em.find(CuentaReferencia.class, dp.getCuentaReferencia().getIBAN());
+                    if (cuentaReferencia == null){
+                        em.persist(dp.getCuentaReferencia());
+                    }
                 }
-
             }
             pooledAccount.setCliente(cliente);
             pooledAccount.setListaDepositos(dpList);
