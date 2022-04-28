@@ -253,6 +253,13 @@ public class TuringFintech {
 			}
 		}
 	}
+	@Test
+	@Requisitos("RF4")
+	public void testEliminarClienteConCuentaActiva(){
+		final Long identificacion = 108L;
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		assertThrows(CuentaActiva.class, () -> gestionClientes.eliminarCliente(usuario1, identificacion));
+	}
 
 	@Test
 	@Requisitos("RF5")

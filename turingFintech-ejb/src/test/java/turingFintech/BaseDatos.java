@@ -1,8 +1,10 @@
 package turingFintech;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -73,6 +75,19 @@ public class BaseDatos {
 		PersonaFisica personaFisica1 = new PersonaFisica(null, 300L, "Fisica", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", date);
 		em.persist(personaFisica1);
+
+		PersonaJuridica personaJuridica2 = new PersonaJuridica(null, 108L, "Juridico", "Activo", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		Segregada segregada3 = new Segregada("ES20578832365722030876293", "", date, true, "Segregada", 0.0);
+		segregada3.setCliente(personaJuridica2);
+		List<CuentaFintech> listaCuentas = new ArrayList<>();
+		listaCuentas.add(segregada3);
+		listaCuentas.add(segregada2);
+		em.persist(segregada3);
+		personaJuridica2.setCuentasFintech(listaCuentas);
+		em.persist(personaJuridica2);
+
+
 
 		em.getTransaction().commit();
 		
