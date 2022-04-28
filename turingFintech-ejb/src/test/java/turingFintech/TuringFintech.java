@@ -509,6 +509,7 @@ public class TuringFintech {
 				}
 			}
 			gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1, autorizado);
+			List<PersonaJuridica> personaJuridicaList = autorizado.getEmpresas();
 			gestionAutorizados.eliminarAutorizados(usuario1, autorizado.getId());
 
 			List<Autorizado> autorizadoList = gestionAutorizados.getAutorizados();
@@ -518,9 +519,18 @@ public class TuringFintech {
 					autorizado1 = au;
 				}
 			}
+			boolean ok = true;
+			for (PersonaJuridica pj : personaJuridicaList){
+				if (pj.getAutorizados().contains(autorizado1)){
+					ok = false;
+				}
+
+
+			}
 			assertEquals("Baja", autorizado1.getEstado());
-			assertNotNull(autorizado1.getEmpresas());
-			//assertEquals(0, autorizado1.getEmpresas().size());
+			assertEquals(0, autorizado1.getEmpresas().size());
+			assertEquals(true, ok);
+
 
 
 
