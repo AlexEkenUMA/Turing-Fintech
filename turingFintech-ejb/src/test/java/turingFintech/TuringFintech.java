@@ -221,6 +221,38 @@ public class TuringFintech {
 		}
 	}
 
+	@Test
+	@Requisitos("RF4")
+	public void testEliminarClienteNoExistente(){
+		Date date1 = new Date();
+		Date date2 = new Date();
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.eliminarCliente(usuario1, 12L));
+	}
+
+	@Test
+	@Requisitos("RF4")
+	public void testEliminarCliente(){
+		final Long identificacion = 300L;
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		try{
+			gestionClientes.eliminarCliente(usuario1, identificacion);
+		} catch (CuentaActiva cuentaActiva) {
+			fail("Este cliente tiene alguna cuenta activa todavía");
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("El usuario no fue encontrado en la BBDD");
+		} catch (ClienteNoEncontradoException e) {
+			fail("El cliente no fue encontrado en la BBDD");
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario que da de baja el cliente no es administrativo");
+		}
+		List<PersonaJuridica> ClienteComprobar = gestionClientes.getPersonasJuridicas();
+		for(PersonaJuridica pj: ClienteComprobar){
+			if(identificacion == pj.getIdentificacion()){
+				assertNotNull(pj.getFecha_Baja());
+			}
+		}
+	}
 
 	@Test
 	@Requisitos("RF5")

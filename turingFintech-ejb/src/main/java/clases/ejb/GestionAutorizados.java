@@ -10,7 +10,7 @@ import es.uma.turingFintech.Usuario;
 import javax.ejb.Local;
 
 @Local
-public interface GestionAutorizados {
+public interface    GestionAutorizados {
 
     public void anadirAutorizados (Usuario u, PersonaJuridica pj, Autorizado autorizado) throws NoEsAdministrativo,
             PersonaJuridicaNoEncontrada, UsuarioNoEncontrado;

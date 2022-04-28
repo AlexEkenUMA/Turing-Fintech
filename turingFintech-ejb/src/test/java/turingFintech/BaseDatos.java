@@ -70,9 +70,9 @@ public class BaseDatos {
 
 		Segregada segregada2 = new Segregada("ES2057883234722030876293", "", date, false, "Segregada", 0.0);
 		em.persist(segregada2);
-		//Cliente cliente1 = new Cliente(null, 37028939023L, "Fisica", "Activo", date,
-		//		null, "Direccion","Ciudad", 29649, "Pais");
-		//em.persist(cliente1);
+		PersonaFisica personaFisica1 = new PersonaFisica(null, 300L, "Fisica", "Activo", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alex", "Requena", date);
+		em.persist(personaFisica1);
 
 		em.getTransaction().commit();
 		

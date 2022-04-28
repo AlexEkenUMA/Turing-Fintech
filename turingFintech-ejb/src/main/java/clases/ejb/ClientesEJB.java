@@ -116,31 +116,69 @@ public class ClientesEJB implements GestionClientes {
 
 
     @Override
-    public void eliminarCliente (Usuario u, Cliente c, Long ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
-
+    public void eliminarCliente (Usuario u, Long ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
         gestionUsuarios.usuarioAdministrativo(u);
-        Date fecha = new Date();
-
-        Cliente cliente = em.find(Cliente.class, ID);
-        if(cliente == null){
-            throw new ClienteNoEncontradoException();
-        }
-
-        List<CuentaFintech> cuentas = cliente.getCuentasFintech(); //
-        boolean ok = true;
-        for(CuentaFintech cf : cuentas){
-            if(cf.isEstado()) {
-                ok = false;
+        String tipo = "";
+        PersonaJuridica personaJuridicaExiste = null;
+        PersonaFisica personaFisicaExiste = null;
+        List<PersonaJuridica> empresas = getPersonasJuridicas();
+        for(PersonaJuridica pj: empresas){
+            if(pj.getIdentificacion().equals(ID)){
+                personaJuridicaExiste = pj;
+                tipo = "Juridico";
             }
         }
-        if(ok){
-          cliente.setEstado("Baja");
-          cliente.setFecha_Baja(fecha);
-          em.merge(cliente);
-        }else{
-            throw new CuentaActiva();
+        List<PersonaFisica> personasFisicas = getPersonasFisicas();
+        for(PersonaFisica pf: personasFisicas){
+            if(pf.getIdentificacion().equals(ID)){
+                personaFisicaExiste = pf;
+                tipo = "Fisica";
+            }
         }
+        if(!tipo.equals("Fisica") && !tipo.equals("Juridico")){
+            throw new ClienteNoEncontradoException();
+        }
+        else{
+            if(tipo.equals("Juridico")){
+                List<CuentaFintech> cuentas = personaJuridicaExiste.getCuentasFintech(); //
+                boolean ok = true;
+                if(!cuentas.isEmpty()){
+                    for(CuentaFintech cf : cuentas){
+                        if(cf.isEstado()) {
+                            ok = false;
+                        }
+                    }
+                }
+                if(ok){
+                    personaJuridicaExiste.setEstado("Baja");
+                    personaJuridicaExiste.setFecha_Baja(new Date());
+                    em.merge(personaJuridicaExiste);
+                }else{
+                    //el cliente tiene alguna cuenta activa por lo tanto no se le puede dar de baja
+                    throw new CuentaActiva();
+                }
+            }
+            if(tipo.equals("Fisica")){
+                List<CuentaFintech> cuentas = personaFisicaExiste.getCuentasFintech(); //
+                boolean ok = true;
+                if(!cuentas.isEmpty()){
+                    for(CuentaFintech cf : cuentas){
+                        if(cf.isEstado()) {
+                            ok = false;
+                        }
+                    }
+                }
+                if(ok){
+                    personaFisicaExiste.setEstado("Baja");
+                    personaFisicaExiste.setFecha_Baja(new Date());
+                    em.merge(personaFisicaExiste);
+                }else{
+                    //el cliente tiene alguna cuenta activa por lo tanto no se le puede dar de baja
+                    throw new CuentaActiva();
+                }
+            }
 
+        }
     }
 
     public List<PersonaFisica> getPersonasFisicas (){
