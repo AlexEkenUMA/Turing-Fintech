@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -75,6 +76,13 @@ public class AutorizadosEJB implements GestionAutorizados{
             autorizadoExiste.setEmpresas(vacia);
             em.merge(autorizadoExiste);
 
+    }
+
+    @Override
+    public List<Autorizado> getAutorizados(){
+        Query query = em.createQuery("select autorizado from Autorizado autorizado");
+        List<Autorizado> autorizadoList = (List<Autorizado>) query.getResultList();
+        return autorizadoList;
     }
 
 }

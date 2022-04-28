@@ -357,6 +357,33 @@ public class TuringFintech {
 		autorizado));
 	}
 
+	@Test
+	@Requisitos("RF6")
+	public void testAnadirAutorizado(){
+		Date date = new Date();
+		Autorizado autorizado = new Autorizado(1L, 100L, "Nombre", "Apellidos",
+				"Direccion", date, "Estado", date, date);
+		PersonaJuridica personaJuridica1 = new PersonaJuridica(10L, 50L, "Juridico", "Activo", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		try{
+
+			gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1, autorizado);
+
+
+
+		}catch (NoEsAdministrativo e){
+			fail("NoEsAdministrativo (NO DEBERIA)");
+		}catch (UsuarioNoEncontrado e){
+			fail("UsuarioNoEncontrado (NO DEBERIA)");
+		}catch (PersonaJuridicaNoEncontrada e){
+			fail("PersonaJuridicaNoEncontrada (NO DEBERIA)");
+		}
+
+	}
+
+
+
 
 
 

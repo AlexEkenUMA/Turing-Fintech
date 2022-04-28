@@ -6,6 +6,7 @@ import es.uma.turingFintech.PersonaJuridica;
 import es.uma.turingFintech.Usuario;
 
 import javax.ejb.Local;
+import java.util.List;
 
 @Local
 public interface    GestionAutorizados {
@@ -18,5 +19,7 @@ public interface    GestionAutorizados {
 
     public void eliminarAutorizados(Usuario u, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException;
 
+
+    public List<Autorizado> getAutorizados();
 
 }
