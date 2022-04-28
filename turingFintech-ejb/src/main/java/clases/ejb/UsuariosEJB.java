@@ -3,6 +3,8 @@ package clases.ejb;
 import clases.ejb.exceptions.EmpresaNoTieneAcceso;
 import clases.ejb.exceptions.NoEsAdministrativo;
 import clases.ejb.exceptions.UsuarioNoEncontrado;
+import es.uma.turingFintech.Autorizado;
+import es.uma.turingFintech.PersonaJuridica;
 import es.uma.turingFintech.Usuario;
 
 import javax.ejb.Stateless;
@@ -31,7 +33,25 @@ public class UsuariosEJB implements GestionUsuarios {
             //o esta autorizado, o es personafisica
             if(usuarios.get(0).getCliente() == null || usuarios.get(0).getCliente().getTipo_Cliente().equals("Fisica")
                     || usuarios.get(0).getAutorizado() != null){
-                ok = true;
+                //si es un autorizado, comprobamos el n de cuentas a la que tiene acceso. Si solo tiene acceso a operar
+                //con una cuenta y esta bloqueado, le denegamos el acceso a la aplicacion
+                if(usuarios.get(0).getAutorizado() != null){
+                    Autorizado au = usuarios.get(0).getAutorizado();
+                    boolean solotieneaccesoacuentasdeclientebloqueado = true;
+                    List<PersonaJuridica> listapj = au.getEmpresas();
+                    for(PersonaJuridica pj : listapj){
+                        if(!pj.getEstado().equals("Bloqueado") && !pj.getCuentasFintech().isEmpty()){
+                            solotieneaccesoacuentasdeclientebloqueado = false;
+                        }
+                    }
+                    if(!solotieneaccesoacuentasdeclientebloqueado){
+                        ok = true;
+                    }
+                }
+                else{
+                    ok = true;
+                }
+
             }
             else{
                 throw new EmpresaNoTieneAcceso();

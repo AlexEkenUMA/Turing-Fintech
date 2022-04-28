@@ -181,6 +181,40 @@ public class ClientesEJB implements GestionClientes {
         }
     }
 
+    public void bloquearCliente (Usuario u, Cliente c) throws UsuarioNoEncontrado, NoEsAdministrativo{
+        gestionUsuarios.usuarioAdministrativo(u);
+        if(c.getTipo_Cliente().equals("Juridico")){
+            c.setEstado("Bloqueado");
+            PersonaJuridica pj = em.find(PersonaJuridica.class, c.getId());
+            List<CuentaFintech> cuentaspj = pj.getCuentasFintech();
+            List<Autorizado> listaAutorizados = pj.getAutorizados();
+            //no sabemos si hace falta bloquear a los autorizados asociados a la empresa
+            //for(Autorizado au : listaAutorizados){
+            //    au.setEstado("Bloqueado");
+            //}
+        }
+        else{
+            PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
+            pf.setEstado("Bloqueado");
+        }
+    }
+
+    public void desbloquearCliente (Usuario u, Cliente c) throws UsuarioNoEncontrado, NoEsAdministrativo{
+        gestionUsuarios.usuarioAdministrativo(u);
+        if(c.getTipo_Cliente().equals("Juridico")){
+            PersonaJuridica pj = em.find(PersonaJuridica.class, c.getId());
+            List<CuentaFintech> cuentaspj = pj.getCuentasFintech();
+            List<Autorizado> listaAutorizados = pj.getAutorizados();
+            for(Autorizado au : listaAutorizados){
+                au.setEstado("Activo");
+            }
+        }
+        else{
+            PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
+            pf.setEstado("Activo");
+        }
+    }
+
     public List<PersonaFisica> getPersonasFisicas (){
         Query query = em.createQuery("select cliente from PersonaFisica cliente");
         List<PersonaFisica> personaFisicas = (List<PersonaFisica>) query.getResultList();
