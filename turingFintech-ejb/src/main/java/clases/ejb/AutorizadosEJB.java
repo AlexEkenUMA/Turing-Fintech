@@ -60,7 +60,20 @@ public class AutorizadosEJB implements GestionAutorizados{
     }
 
 
-    public void eliminarAutorizados(Usuario u, Autorizado au, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo {
+    public void eliminarAutorizados(Usuario u, Long ID)
+            throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException{
+
+        gestionUsuarios.usuarioAdministrativo(u);
+
+        Autorizado autorizadoExiste = em.find(Autorizado.class, ID);
+        if(autorizadoExiste == null){
+            throw new AutorizadoNoEncontradoException();
+        }
+
+            autorizadoExiste.setEstado("Baja");
+            List<PersonaJuridica> vacia = null;
+            autorizadoExiste.setEmpresas(vacia);
+            em.merge(autorizadoExiste);
 
     }
 

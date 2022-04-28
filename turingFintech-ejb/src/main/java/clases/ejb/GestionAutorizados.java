@@ -16,7 +16,7 @@ public interface    GestionAutorizados {
     public void modificarAutorizados(Usuario u, Autorizado au, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException, ModificarAutorizadosDistintaID;
 
 
-
+    public void eliminarAutorizados(Usuario u, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException;
 
 
 }
