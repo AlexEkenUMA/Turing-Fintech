@@ -88,6 +88,16 @@ public class BaseDatos {
 		em.persist(personaJuridica2);
 
 
+		Usuario usuario3= new Usuario("Cristiano", "Ronaldo", false);
+		personaJuridica2.setUsuario(usuario3);
+		Autorizado autorizado1 = new Autorizado(null, 36L, "Cristiano", "Ronaldo", "Cielo", new Date(), "Activo", new Date(), null);
+		usuario3.setAutorizado(autorizado1);
+		List<Autorizado> listaAutorizados = new ArrayList<>();
+		listaAutorizados.add(autorizado1);
+		personaJuridica2.setAutorizados(listaAutorizados);
+		em.persist(autorizado1);
+		em.persist(usuario3);
+
 
 		em.getTransaction().commit();
 		

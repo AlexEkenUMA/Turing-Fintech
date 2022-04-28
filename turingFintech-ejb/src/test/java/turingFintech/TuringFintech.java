@@ -453,6 +453,21 @@ public class TuringFintech {
 	}
 
 	@Test
+	@Requisitos("RF10")
+	public void testAccesoPersonaAutorizada(){
+		Usuario usuario3= new Usuario("Cristiano", "Ronaldo", false);
+		try{
+			assertEquals(true, gestionUsuarios.usuarioCorrecto(usuario3));
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("Usuario no encontrado");
+		} catch (EmpresaNoTieneAcceso empresaNoTieneAcceso) {
+			fail("Una empresa no puede tener acceso");
+		}
+
+
+	}
+
+	@Test
 	@Requisitos("RF11")
 	public void testObtenerClientesHolanda(){
 		final Long identificacion = 21L;
@@ -463,7 +478,7 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF11")
 	public void testObtenerCuentasHolanda(){
-		final String IBAN = "ES2057883234722030876293";
+		final String IBAN = "ES20578832365722030876293";
 		List<Segregada> informeHolanda = gestionCuentas.getCuentasHolanda();
 		assertEquals(informeHolanda.get(0).getIBAN(), IBAN);
 	}
