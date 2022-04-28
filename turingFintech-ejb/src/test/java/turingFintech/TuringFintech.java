@@ -489,8 +489,52 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF8")
 	public void testEliminarAutorizado(){
+		Date date = new Date();
+		Autorizado autorizado = new Autorizado(150L, 100L, "Nombre", "Apellidos",
+				"Direccion", date, "Estado", date, date);
+		List<PersonaJuridica> pjP = new ArrayList<>();
+		autorizado.setEmpresas(pjP);
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		try {
+			List<Autorizado> autor = new ArrayList<>();
+			gestionClientes.darAlta2(usuario1, 50L, "Juridico", "Razon", "Nombre", "Apellidos", date,
+					"Direccion", 2967, "Pais", autor, "Ciudad");
+			List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
+			Long id = null;
+			PersonaJuridica personaJuridica1 = null;
+			for (PersonaJuridica pj : personaJuridicas){
+				if (pj.getIdentificacion()==50L){
+					id = pj.getId();
+					personaJuridica1 = pj;
+				}
+			}
+			gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1, autorizado);
+			gestionAutorizados.eliminarAutorizados(usuario1, autorizado.getId());
+
+			List<Autorizado> autorizadoList = gestionAutorizados.getAutorizados();
+			Autorizado autorizado1 = null;
+			for (Autorizado au: autorizadoList){
+				if (au.getIdentificacion() == 100L){
+					autorizado1 = au;
+				}
+			}
+			assertEquals("Baja", autorizado1.getEstado());
+			assertNotNull(autorizado1.getEmpresas());
+			//assertEquals(0, autorizado1.getEmpresas().size());
 
 
+
+		}catch (NoEsAdministrativo e){
+			fail("NoEsAdministrativo (NO DEBERIA)");
+		}catch (UsuarioNoEncontrado e){
+			fail("UsuarioNoEncontrado (NO DEBERIA)");
+		}catch (PersonaJuridicaNoEncontrada e){
+			fail("PersonaJuridicaNoEncontrada (NO DEBERIA)");
+		}catch (ClienteNoValidoException e){
+			fail("ClienteNoValido (NO DEBERIA)");
+		}catch (AutorizadoNoEncontradoException e){
+			fail("AutorizadoNoEncontrado (NO DEBERIA)");
+		}
 
 	}
 
