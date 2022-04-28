@@ -1,9 +1,8 @@
 package clases.ejb;
 
-import clases.ejb.exceptions.NoEsAdministrativo;
-import clases.ejb.exceptions.PersonaJuridicaNoEncontrada;
-import clases.ejb.exceptions.UsuarioNoEncontrado;
+import clases.ejb.exceptions.*;
 import es.uma.turingFintech.Autorizado;
+import es.uma.turingFintech.CuentaFintech;
 import es.uma.turingFintech.PersonaJuridica;
 import es.uma.turingFintech.Usuario;
 
@@ -42,6 +41,27 @@ public class AutorizadosEJB implements GestionAutorizados{
         //autorizado.setEmpresas(personaJuridicas);
         em.merge(autorizado);
         em.merge(pj);
+    }
+
+    public void modificarAutorizados(Usuario u, Autorizado au, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException, ModificarAutorizadosDistintaID {
+
+        gestionUsuarios.usuarioAdministrativo(u);
+
+        Autorizado autorizadoExiste = em.find(Autorizado.class, au.getId());
+        if(autorizadoExiste == null){
+            throw new AutorizadoNoEncontradoException();
+        }
+
+        if(ID != au.getId()){
+            throw new ModificarAutorizadosDistintaID();
+        }else{
+            em.merge(au);
+        }
+    }
+
+
+    public void eliminarAutorizados(Usuario u, Autorizado au, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo {
+
     }
 
 }

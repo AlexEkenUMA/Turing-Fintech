@@ -1,8 +1,6 @@
 package clases.ejb;
 
-import clases.ejb.exceptions.NoEsAdministrativo;
-import clases.ejb.exceptions.PersonaJuridicaNoEncontrada;
-import clases.ejb.exceptions.UsuarioNoEncontrado;
+import clases.ejb.exceptions.*;
 import es.uma.turingFintech.Autorizado;
 import es.uma.turingFintech.PersonaJuridica;
 import es.uma.turingFintech.Usuario;
@@ -14,6 +12,8 @@ public interface    GestionAutorizados {
 
     public void anadirAutorizados (Usuario u, PersonaJuridica pj, Autorizado autorizado) throws NoEsAdministrativo,
             PersonaJuridicaNoEncontrada, UsuarioNoEncontrado;
+
+    public void modificarAutorizados(Usuario u, Autorizado au, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException, ModificarAutorizadosDistintaID;
 
 
 
