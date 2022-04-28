@@ -24,7 +24,7 @@ public interface GestionClientes {
      Este método permite a un administrativo modificar los datos de un cliente
      RF3
      */
-    public void modificarCliente(Usuario u, Cliente c, Long ID) throws ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
+    public void modificarCliente(Usuario u, Cliente c, Long ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
     /**
@@ -38,10 +38,6 @@ public interface GestionClientes {
     public void darAlta2 (Usuario u, Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
                           Date fechaNac, String direccion, int codigoPostal,
                           String pais, List<Autorizado> au, String ciudad) throws ClienteNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo;
-
-
-    public Cliente getCliente (Long id);
-
 
     public List<PersonaFisica> getPersonasFisicas ();
 

@@ -72,23 +72,45 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public void modificarCliente(Usuario u, Cliente c, Long ID) throws ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
+    public void modificarCliente(Usuario u, Cliente c, Long ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
 
         gestionUsuarios.usuarioAdministrativo(u);
-        PersonaJuridica clienteExiste = null;
-        List<PersonaJuridica> clientes = getPersonasJuridicas();
-        for(PersonaJuridica pj: clientes){
-            if(ID == pj.getIdentificacion()){
-                clienteExiste = pj;
+        if(c.getTipo_Cliente().equals("Juridico")){
+            PersonaJuridica personaJuridicaExiste = null;
+            List<PersonaJuridica> empresas = getPersonasJuridicas();
+            for(PersonaJuridica pj: empresas){
+                if(ID == pj.getIdentificacion()){
+                    personaJuridicaExiste = pj;
+                }
+            }
+            if(personaJuridicaExiste == null){
+                throw new ClienteNoEncontradoException();
+            }
+            if(c.getId() == personaJuridicaExiste.getId() && c.getIdentificacion() == personaJuridicaExiste.getIdentificacion()){
+                em.merge(c);
+            }else{
+                throw new ModificarClienteDistintaID();
             }
         }
-        if(clienteExiste == null){
-            throw new ClienteNoEncontradoException();
+        else if (c.getTipo_Cliente().equals("Fisico")){
+            PersonaFisica personaFisicaExiste = null;
+            List<PersonaFisica> personasFisicas = getPersonasFisicas();
+            for(PersonaFisica pf: personasFisicas){
+                if(ID == pf.getIdentificacion()){
+                    personaFisicaExiste = pf;
+                }
+            }
+            if(personaFisicaExiste == null){
+                throw new ClienteNoEncontradoException();
+            }
+            if(c.getId() == personaFisicaExiste.getId() && c.getIdentificacion() == personaFisicaExiste.getIdentificacion()){
+                em.merge(c);
+            }else{
+                throw new ModificarClienteDistintaID();
+            }
         }
-        if(c.getId() == clienteExiste.getId() && c.getIdentificacion() == clienteExiste.getIdentificacion()){
-            em.merge(c);
-        }else{
-            throw new ModificarClienteDistintaID();
+        else{
+            throw new TipoNoValidoException();
         }
     }
 
@@ -119,11 +141,6 @@ public class ClientesEJB implements GestionClientes {
             throw new CuentaActiva();
         }
 
-    }
-
-
-    public Cliente getCliente (Long id){
-       return em.find(Cliente.class, id);
     }
 
     public List<PersonaFisica> getPersonasFisicas (){

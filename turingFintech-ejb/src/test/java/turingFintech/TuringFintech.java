@@ -177,7 +177,7 @@ public class TuringFintech {
 		Date date1 = new Date();
 		Date date2 = new Date();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		Cliente cliente = new Cliente(12L, 1L, "juridico", "activo", date1, date2, "calle", "ciudad", 2900, "pais");
+		Cliente cliente = new Cliente(12L, 1L, "Juridico", "activo", date1, date2, "calle", "ciudad", 2900, "pais");
 		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.modificarCliente(usuario1, cliente,12L));
 	}
 
@@ -209,6 +209,10 @@ public class TuringFintech {
 		} catch (ModificarClienteDistintaID e){
 			fail("Cliente con distinta ID (NO DEBERIA)");
 		}
+		catch (TipoNoValidoException e){
+			fail("Tipo no valido exception lanzado (NO DEBERIA)");
+		}
+
 		List<PersonaJuridica> ClienteComprobar = gestionClientes.getPersonasJuridicas();
 		for(PersonaJuridica pj: ClienteComprobar){
 			if(identificacion == pj.getIdentificacion()){
