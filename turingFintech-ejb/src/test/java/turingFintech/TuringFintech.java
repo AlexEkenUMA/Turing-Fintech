@@ -594,10 +594,5 @@ public class TuringFintech {
 	@Requisitos("RF13")
 	public void testRegistrarTransaccionCuentaNoEncontrada(){
 
-
-
-
-
-
 	}
 }

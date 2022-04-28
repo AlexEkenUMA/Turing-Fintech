@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -70,12 +71,19 @@ public class AutorizadosEJB implements GestionAutorizados{
         if(autorizadoExiste == null){
             throw new AutorizadoNoEncontradoException();
         }
-
             autorizadoExiste.setEstado("Baja");
-            List<PersonaJuridica> vacia = null;
+            List<Autorizado> sinautorizados = new ArrayList<>();
+            List<PersonaJuridica> listaempresas = autorizadoExiste.getEmpresas();
+            //no sabemos si es necesario
+            for (PersonaJuridica pj : listaempresas){
+                List<Autorizado> listaAutorizados = pj.getAutorizados();
+                listaAutorizados.remove(autorizadoExiste);
+                pj.setAutorizados(listaAutorizados);
+                em.merge(pj);
+            }
+            List<PersonaJuridica> vacia = new ArrayList<>();
             autorizadoExiste.setEmpresas(vacia);
             em.merge(autorizadoExiste);
-
     }
 
     @Override
