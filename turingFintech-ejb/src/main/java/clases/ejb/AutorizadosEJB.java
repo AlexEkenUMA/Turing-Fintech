@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 public class AutorizadosEJB implements GestionAutorizados{
@@ -20,7 +21,7 @@ public class AutorizadosEJB implements GestionAutorizados{
     @EJB GestionUsuarios gestionUsuarios;
 
     @Override
-    public void anadirAutorizados (Usuario u, PersonaJuridica pj) throws NoEsAdministrativo,
+    public void anadirAutorizados (Usuario u, PersonaJuridica pj, Autorizado autorizado) throws NoEsAdministrativo,
             UsuarioNoEncontrado, PersonaJuridicaNoEncontrada{
 
         gestionUsuarios.usuarioAdministrativo(u);
@@ -29,11 +30,18 @@ public class AutorizadosEJB implements GestionAutorizados{
         if (personaJuridica == null){
             throw new PersonaJuridicaNoEncontrada();
         }
-        Autorizado autorizado = new Autorizado();
-
-
-
-
+        Autorizado autporizadoEntity = em.find(Autorizado.class, autorizado.getId());
+        if (autporizadoEntity == null){
+            em.persist(autorizado);
+        }
+        List<Autorizado> autorizadoList = pj.getAutorizados();
+        autorizadoList.add(autorizado);
+        pj.setAutorizados(autorizadoList);
+        List<PersonaJuridica> personaJuridicas = autorizado.getEmpresas();
+        personaJuridicas.add(pj);
+        autorizado.setEmpresas(personaJuridicas);
+        em.merge(autorizado);
+        em.merge(pj);
     }
 
 }

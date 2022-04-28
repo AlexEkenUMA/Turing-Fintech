@@ -1,7 +1,6 @@
 package turingFintech;
 
-import clases.ejb.GestionCuentas;
-import clases.ejb.GestionClientes;
+import clases.ejb.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,8 +10,6 @@ import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.persistence.Query;
 
-import clases.ejb.GestionUsuarios;
-import clases.ejb.UsuariosEJB;
 import clases.ejb.exceptions.*;
 import es.uma.informatica.sii.anotaciones.Requisitos;
 import es.uma.turingFintech.*;
@@ -28,18 +25,21 @@ public class TuringFintech {
 	private static final String CLIENTES_EJB = "java:global/classes/ClientesEJB";
 	private static final String CUENTAS_EJB  = "java:global/classes/CuentasEJB";
 	private static final String USUARIOS_EJB = "java:global/classes/UsuariosEJB";
+	private static final String AUTORIZADOS_EJB = "java:global/classes/AutorizadosEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "turingFintechTest";
 	
 	private GestionClientes gestionClientes;
 	private GestionCuentas gestionCuentas;
 	private GestionUsuarios gestionUsuarios;
+	private GestionAutorizados gestionAutorizados;
 
 
 	@Before
 	public void setup() throws NamingException  {
-		gestionClientes = (GestionClientes) SuiteTest.ctx.lookup(CLIENTES_EJB);
-		gestionCuentas  = (GestionCuentas) SuiteTest.ctx.lookup(CUENTAS_EJB);
-		gestionUsuarios =  (GestionUsuarios) SuiteTest.ctx.lookup(USUARIOS_EJB);
+		gestionClientes    = (GestionClientes) SuiteTest.ctx.lookup(CLIENTES_EJB);
+		gestionCuentas     = (GestionCuentas) SuiteTest.ctx.lookup(CUENTAS_EJB);
+		gestionUsuarios    =  (GestionUsuarios) SuiteTest.ctx.lookup(USUARIOS_EJB);
+		gestionAutorizados = (GestionAutorizados) SuiteTest.ctx.lookup(AUTORIZADOS_EJB);
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
@@ -333,6 +333,22 @@ public class TuringFintech {
 			fail("No deberia lanzar excepcion");
 		}
 	}
+
+	@Test
+	@Requisitos("RF6")
+	public void testAnadirAutorizadoPersonaJuridicaNoEncontrada(){
+		Date date = new Date();
+		Autorizado autorizado = new Autorizado(null, 10L, "Nombre", "Apellidos",
+				"Direccion", date, "Estado", date, date);
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		PersonaJuridica personaJuridica1 = new PersonaJuridica(10L, 50L, "Juridico", "Activo", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		assertThrows(PersonaJuridicaNoEncontrada.class, () -> gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1,
+		autorizado));
+	}
+
+
+
 
 	@Test
 	@Requisitos("RF9")
