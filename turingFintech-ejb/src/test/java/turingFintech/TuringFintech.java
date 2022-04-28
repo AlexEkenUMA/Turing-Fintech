@@ -382,10 +382,56 @@ public class TuringFintech {
 
 	}
 
+	@Test
+	@Requisitos("RF7")
+	public void testModificarAutorizadoNoEncontradoAutorizado(){
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		Date date1 = new Date();
+		Date date2 = new Date();
+		Autorizado autorizado = new Autorizado(1L, 232L, "Nombre", "Apellidos",
+				"Direccion", date1, "Estado", date2, null);
+		assertThrows(AutorizadoNoEncontradoException.class, () -> gestionAutorizados.modificarAutorizados(usuario1, autorizado, 36L));
 
+	}
 
+	@Test
+	@Requisitos("RF7")
+	public void testModificarAutorizadosConDistintaID(){
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		Date date1 = new Date();
+		Date date2 = new Date();
+		Autorizado autorizado = new Autorizado(5L, 36L, "Nombre", "Apellidos",
+				"Direccion", date1, "Estado", date2, null);
+		assertThrows(ModificarAutorizadosDistintaID.class, () -> gestionAutorizados.modificarAutorizados(usuario1, autorizado, 1L));
 
+	}
 
+	@Test
+	@Requisitos("RF7")
+	public void testmodificarAutorizados(){
+		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
+		Date date1 = new Date();
+		Date date2 = new Date();
+		Autorizado autorizado = new Autorizado(5L, 36L, "Nombre", "Apellidos",
+				"Direccion", date1, "Estado", date2, null);
+		try{
+			gestionAutorizados.modificarAutorizados(usuario1,autorizado,5L);
+		} catch (AutorizadoNoEncontradoException e) {
+			fail("No se ha encontrado persona autorizada");
+		} catch (UsuarioNoEncontrado e) {
+			fail("No se ha encontrado usuario");
+		} catch (NoEsAdministrativo e) {
+			fail("Usuario no es administrativo");
+		} catch (ModificarAutorizadosDistintaID e) {
+			fail("Autorizado con distinta ID");
+		}
+		List<Autorizado> autorizadoList = gestionAutorizados.getAutorizados();
+		for (Autorizado au : autorizadoList){
+			if(au.getId() == 5L){
+				assertEquals(au.getApellidos(), "Apellidos");
+			}
+		}
+	}
 
 	@Test
 	@Requisitos("RF9")

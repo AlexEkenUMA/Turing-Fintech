@@ -96,6 +96,7 @@ public class BaseDatos {
 		listaAutorizados.add(autorizado1);
 		personaJuridica2.setAutorizados(listaAutorizados);
 		em.persist(autorizado1);
+		System.out.println(autorizado1.getId());
 		em.persist(usuario3);
 
 
