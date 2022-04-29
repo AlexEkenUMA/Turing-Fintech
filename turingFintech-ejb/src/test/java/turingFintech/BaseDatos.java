@@ -141,6 +141,10 @@ public class BaseDatos {
 		em.persist(personaFisica7);
 		em.persist(turing);
 
+		//RF13
+		Transaccion tx1 = new Transaccion(1L, new Date(), 0.0, "Quiero hackear el sistema", "Ismael", 0.0, "Transferencia regular");
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
+
 
 		em.getTransaction().commit();
 		

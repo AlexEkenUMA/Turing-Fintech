@@ -649,12 +649,6 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF13")
-	public void sdkjfnsdon(){
-
-	}
-
-	@Test
 	@Requisitos("RF16")
 	public void testBloquearClienteNoExistente(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);

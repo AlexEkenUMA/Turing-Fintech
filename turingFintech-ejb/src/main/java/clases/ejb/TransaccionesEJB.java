@@ -18,10 +18,13 @@ public class TransaccionesEJB implements GestionTransacciones {
 
     @Override
     public void registrarTransaccionFintech(Usuario usuario, CuentaFintech origen, Cuenta destino, Transaccion transaccion)
-            throws TransaccionConCantidadIncorrecta, SaldoInsuficiente, DivisaNoCoincide, UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
+            throws CuentaDeBajaNoPuedeRegistrarTransaccion, TransaccionConCantidadIncorrecta, SaldoInsuficiente, DivisaNoCoincide, UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
         gestionUsuarios.usuarioAdministrativo(usuario);
         if(transaccion.getCantidad() <= 0){
             throw new TransaccionConCantidadIncorrecta();
+        }
+        if(!origen.isEstado()){
+            throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
         }
         boolean okOrigen = false;
         boolean okDestino = false;
@@ -83,6 +86,9 @@ public class TransaccionesEJB implements GestionTransacciones {
         }
         if(destinoEntity instanceof PooledAccount){
             PooledAccount pooledDestino = (PooledAccount) destinoEntity;
+            if(!pooledDestino.isEstado()){
+                throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
+            }
             transaccion.setDestino(pooledDestino);
             for(DepositadaEn dp : pooledDestino.getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
@@ -100,6 +106,9 @@ public class TransaccionesEJB implements GestionTransacciones {
         }
         if(destinoEntity instanceof  Segregada){
             Segregada segregadaDestino = (Segregada) destinoEntity;
+            if(!segregadaDestino.isEstado()){
+                throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
+            }
             transaccion.setDestino(segregadaDestino);
             for(DepositadaEn dp : segregadaDestino.getCr().getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
@@ -117,6 +126,9 @@ public class TransaccionesEJB implements GestionTransacciones {
         }
         if(destinoEntity instanceof CuentaReferencia){
             CuentaReferencia crDestino = (CuentaReferencia) destinoEntity;
+            if(!crDestino.getEstado()){
+                throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
+            }
             transaccion.setDestino(crDestino);
             for(DepositadaEn dp : crDestino.getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
