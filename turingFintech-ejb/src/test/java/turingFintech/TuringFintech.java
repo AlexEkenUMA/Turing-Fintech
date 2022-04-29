@@ -60,6 +60,10 @@ public class TuringFintech {
 		}
 		catch (EmpresaNoTieneAcceso e){
 			fail("No deberia lanzar la excepcion");
+		} catch (AutorizadoSoloTieneAccesoACuentasClienteBloqueado e) {
+			fail("Autorizado que solo tiene acceso a las cuentas de clientes que estan bloqueados");
+		} catch (PersonaFisicaBloqueada e) {
+			fail("Persona fisica bloqueada esta intentando acceder a la aplicacion");
 		}
 	}
 
@@ -620,6 +624,10 @@ public class TuringFintech {
 			fail("Usuario no encontrado");
 		} catch (EmpresaNoTieneAcceso empresaNoTieneAcceso) {
 			fail("Una empresa no puede tener acceso");
+		} catch (AutorizadoSoloTieneAccesoACuentasClienteBloqueado e) {
+			fail("Autorizado que solo tiene acceso a las cuentas de clientes que estan bloqueados");
+		} catch (PersonaFisicaBloqueada e) {
+			fail("Persona fisica bloqueada esta intentando acceder a la aplicacion");
 		}
 
 
@@ -646,6 +654,12 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF13")
 	public void testRegistrarTransaccionCuentaNoEncontrada(){
+
+	}
+
+	@Test
+	@Requisitos("RF16")
+	public void testBloquearClienteNoExistente(){
 
 	}
 
