@@ -12,7 +12,7 @@ public class PooledAccount extends CuentaFintech implements Serializable {
     @OneToMany (mappedBy = "pooledAccount")
     private List<DepositadaEn> listaDepositos;
 
-    public PooledAccount(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo) {
+    public PooledAccount(String IBAN, String SWIFT, Date fecha_Apertura, String estado, String tipo) {
         super(IBAN, SWIFT, fecha_Apertura, estado, tipo);
     }
 

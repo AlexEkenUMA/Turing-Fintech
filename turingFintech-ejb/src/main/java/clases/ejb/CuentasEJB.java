@@ -32,7 +32,7 @@ public class CuentasEJB implements GestionCuentas {
         }
         Date fecha = new Date();
         if (tipo.equals("Pooled")) {
-            PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, fecha, true, tipo);
+            PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, fecha, "Activa", tipo);
            // em.persist(cliente);
 
             for (DepositadaEn dp : dpList){
@@ -51,7 +51,7 @@ public class CuentasEJB implements GestionCuentas {
             em.persist(pooledAccount);
         }
         if (tipo.equals("Segregada")){
-            Segregada segregada = new Segregada(IBAN, SWIFT, fecha, true, tipo,0.00);
+            Segregada segregada = new Segregada(IBAN, SWIFT, fecha, "Activa", tipo,0.00);
             segregada.setCliente(cliente);
             em.persist(dpList.get(0).getCuentaReferencia());
             segregada.setCr(dpList.get(0).getCuentaReferencia());
@@ -62,7 +62,7 @@ public class CuentasEJB implements GestionCuentas {
     public void aperturaCuentaPooled(Usuario u,Cliente cliente,String IBAN,String SWIFT, List<DepositadaEn> dpList) throws UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
 
-        PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, new Date(), true, "Pooled");
+        PooledAccount pooledAccount = new PooledAccount(IBAN, SWIFT, new Date(), "Activa", "Pooled");
         //habria que comprobar si el cliente existe
         pooledAccount.setCliente(cliente);
 
@@ -89,7 +89,7 @@ public class CuentasEJB implements GestionCuentas {
     public void aperturaCuentaSegregada(Usuario u,Cliente cliente,String IBAN,String SWIFT, CuentaReferencia cr) throws UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         //hay que preguntar la comision por defecto de una cuenta segregada
-        Segregada segregada = new Segregada(IBAN, SWIFT, new Date(), true, "Segregada",0.00);
+        Segregada segregada = new Segregada(IBAN, SWIFT, new Date(), "Activa", "Segregada",0.00);
         CuentaReferencia crExiste = em.find(CuentaReferencia.class, cr.getIBAN());
         if(crExiste == null){
             em.persist(cr);
@@ -130,7 +130,7 @@ public class CuentasEJB implements GestionCuentas {
         if (!ok){
             throw new SaldoIncorrectoException();
         }
-        pooledEntity.setEstado(false);
+        pooledEntity.setEstado("Baja");
         pooledEntity.setFecha_cierre(fecha);
         em.merge(pooledEntity);
         }
@@ -143,7 +143,7 @@ public class CuentasEJB implements GestionCuentas {
                 throw new SaldoIncorrectoException();
             }
             segregadaEntity.setFecha_cierre(fecha);
-            segregadaEntity.setEstado(false);
+            segregadaEntity.setEstado("Baja");
             em.merge(segregadaEntity);
         }
     }
@@ -166,10 +166,17 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
-    public List<Segregada> getCuentasHolanda(){
-        Query query = em.createQuery("SELECT s FROM Segregada s");
-        List<Segregada> lista = query.getResultList();
-        return lista;
+    public List<Segregada> getCuentasHolanda(Usuario u, String estado, String IBAN) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunaCuentaCoincideConLosParametrosDeBusqueda{
+        gestionUsuarios.usuarioAdministrativo(u);
+        Query query = em.createQuery("SELECT s FROM Segregada s where s.estado = :estado AND s.IBAN = :IBAN");
+
+        query.setParameter("estado" , estado);
+        query.setParameter("IBAN" , IBAN);
+        List<Segregada> listaResultado = query.getResultList();
+        if(listaResultado.isEmpty()){
+            throw new NingunaCuentaCoincideConLosParametrosDeBusqueda();
+        }
+        return listaResultado;
     }
 
     @Override

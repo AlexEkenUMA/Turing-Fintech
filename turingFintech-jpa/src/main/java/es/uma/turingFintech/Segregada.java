@@ -17,7 +17,7 @@ public class Segregada extends CuentaFintech implements Serializable {
     @OneToOne(mappedBy = "segregada")
     private CuentaReferencia cr;
 
-    public Segregada(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo, double comision) {
+    public Segregada(String IBAN, String SWIFT, Date fecha_Apertura, String estado, String tipo, double comision) {
         super(IBAN, SWIFT, fecha_Apertura, estado, tipo);
         this.comision = comision;
     }

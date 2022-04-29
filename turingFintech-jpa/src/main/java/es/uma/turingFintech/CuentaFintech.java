@@ -14,7 +14,7 @@ public class CuentaFintech extends Cuenta implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fecha_cierre;
     @Column (nullable = false)
-    private boolean estado;
+    private String estado;
     //@Column (nullable = false)
     private String tipo;
 
@@ -25,7 +25,7 @@ public class CuentaFintech extends Cuenta implements Serializable {
     //Constructores
 
 
-    public CuentaFintech(String IBAN, String SWIFT, Date fecha_Apertura, boolean estado, String tipo) {
+    public CuentaFintech(String IBAN, String SWIFT, Date fecha_Apertura, String estado, String tipo) {
         super(IBAN, SWIFT);
         this.fecha_Apertura = fecha_Apertura;
         this.estado = estado;
@@ -47,11 +47,11 @@ public class CuentaFintech extends Cuenta implements Serializable {
         this.fecha_Apertura = fecha_Apertura;
     }
 
-    public boolean isEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

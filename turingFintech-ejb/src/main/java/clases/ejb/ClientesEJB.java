@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.validation.constraints.Null;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -144,7 +145,7 @@ public class ClientesEJB implements GestionClientes {
                 boolean ok = true;
                 if(!cuentas.isEmpty()){
                     for(CuentaFintech cf : cuentas){
-                        if(cf.isEstado()) {
+                        if(cf.getEstado().equals("Activa")) {
                             ok = false;
                         }
                     }
@@ -163,7 +164,7 @@ public class ClientesEJB implements GestionClientes {
                 boolean ok = true;
                 if(!cuentas.isEmpty()){
                     for(CuentaFintech cf : cuentas){
-                        if(cf.isEstado()) {
+                        if(cf.getEstado().equals("Activa")) {
                             ok = false;
                         }
                     }
@@ -272,11 +273,17 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public List<Cliente> getClientesHolanda(){
+    public List<Cliente> getClientesHolanda(Usuario u, Long dni, Date fechaAlta, Date fechaBaja, String nombre, String direccion, String codigoPostal, String pais) throws NingunClienteCoincideConLosParametrosDeBusqueda{
         Query query = em.createQuery("SELECT c FROM Cliente c");
-        //Obtener todos los clientes que han tenido una cuenta segregada durante los 3 ultimos años
-        //La información puede ser consultada en cualquier momento de L-V de 7:30 am a 5:30 PM
+
         List<Cliente> lista = query.getResultList();
+        List<Cliente> listaResultado = new ArrayList<>();
+
+        for(Cliente c : lista){
+            if(c.getIdentificacion().equals(dni) && c.getDireccion().equals(direccion)){
+
+            }
+        }
         return lista;
     }
 }

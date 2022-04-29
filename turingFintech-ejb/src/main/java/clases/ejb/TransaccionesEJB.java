@@ -23,7 +23,7 @@ public class TransaccionesEJB implements GestionTransacciones {
         if(transaccion.getCantidad() <= 0){
             throw new TransaccionConCantidadIncorrecta();
         }
-        if(!origen.isEstado()){
+        if(origen.getEstado().equals("Baja")){
             throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
         }
         boolean okOrigen = false;
@@ -89,7 +89,7 @@ public class TransaccionesEJB implements GestionTransacciones {
         }
         if(destinoEntity instanceof PooledAccount){
             PooledAccount pooledDestino = (PooledAccount) destinoEntity;
-            if(!pooledDestino.isEstado()){
+            if(pooledDestino.getEstado().equals("Baja")){
                 throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
             }
             transaccion.setDestino(pooledDestino);
@@ -109,7 +109,7 @@ public class TransaccionesEJB implements GestionTransacciones {
         }
         if(destinoEntity instanceof  Segregada){
             Segregada segregadaDestino = (Segregada) destinoEntity;
-            if(!segregadaDestino.isEstado()){
+            if(segregadaDestino.getEstado().equals("Baja")){
                 throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
             }
             transaccion.setDestino(segregadaDestino);

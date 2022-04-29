@@ -36,7 +36,7 @@ public interface GestionCuentas {
 
     public List<Segregada> obtenerCuentasSegregada();
 
-    public List<Segregada> getCuentasHolanda();
+    public List<Segregada> getCuentasHolanda(Usuario u, String estado, String IBAN) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunaCuentaCoincideConLosParametrosDeBusqueda;
 
     public List<Segregada> getCuentasAlemania();
 

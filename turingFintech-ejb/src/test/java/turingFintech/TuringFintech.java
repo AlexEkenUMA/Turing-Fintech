@@ -602,7 +602,7 @@ public class TuringFintech {
 			boolean ok = false;
 			for (PooledAccount pl : pooledAccountList){
 				if (pl.getIBAN().equals(IBAN)){
-					assertEquals(false, pl.isEstado());
+					assertEquals("Baja", pl.getEstado());
 				}
 			}
 		} catch (TuringTestException e) {
@@ -641,14 +641,29 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF11")
 	public void testObtenerClientesHolanda(){
-		final Long identificacion = 21L;
-		List<Cliente> informeHolanda = gestionClientes.getClientesHolanda();
-		assertEquals(informeHolanda.get(0).getIdentificacion(), identificacion);
+
+	}
+
+	@Test
+	@Requisitos("RF11")
+	public void testObtenerCuentasHolandaNingunaCoincide(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		assertThrows(NingunaCuentaCoincideConLosParametrosDeBusqueda.class, () -> gestionCuentas.getCuentasHolanda(ibai,"Activa" , "ES205676349780220030876293"));
 	}
 
 	@Test
 	@Requisitos("RF11")
 	public void testObtenerCuentasHolanda(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		try{
+			gestionCuentas.getCuentasHolanda(ibai, "Baja", "ES2057883234722030876293");
+		} catch (NingunaCuentaCoincideConLosParametrosDeBusqueda e) {
+			fail("Los parametros de busqueda no han obtenido ningun resultado");
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("Usuario no encontrado en la BBDD");
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("Usuario no es administrativo");
+		}
 
 	}
 
@@ -657,8 +672,8 @@ public class TuringFintech {
 	public void testRegistrarTransaccionConCantidadErronea(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 0.0, "Quiero hackear el sistema", "Ismael", 0.0, "Transferencia regular");
-		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
-		Segregada cuentaSegregada2 = new Segregada("ES394583094851", "", new Date(), true, "Segregada", 0.1);
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
+		Segregada cuentaSegregada2 = new Segregada("ES394583094851", "", new Date(), "Activa", "Segregada", 0.1);
 
 		assertThrows(TransaccionConCantidadIncorrecta.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada2, tx1));
 	}
@@ -668,8 +683,8 @@ public class TuringFintech {
 	public void testCuentaNoExistenteRealizaTransaccion(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
-		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
-		Segregada cuentaSegregada2 = new Segregada("990", "", new Date(), true, "Segregada", 0.1);
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
+		Segregada cuentaSegregada2 = new Segregada("990", "", new Date(), "Activa", "Segregada", 0.1);
 
 		assertThrows(CuentaNoEncontradaException.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada2, tx1));
 	}
@@ -679,8 +694,8 @@ public class TuringFintech {
 	public void testCuentaDeBajaRealizaTransaccion(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
-		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), false, "Segregada", 0.1);
-		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), false, "Segregada", 0.1);
+		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), "Baja", "Segregada", 0.1);
+		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), "Baja", "Segregada", 0.1);
 		assertThrows(CuentaDeBajaNoPuedeRegistrarTransaccion.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaDeBaja, cuentaDeBaja2, tx1));
 	}
 
@@ -689,7 +704,7 @@ public class TuringFintech {
 	public void testCuentaRealizaTransaccionASiMisma(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
-		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
 		assertThrows(MismaCuentaOrigenYDestino.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada1, tx1));
 	}
 
@@ -828,6 +843,5 @@ public class TuringFintech {
 		Usuario turing = new Usuario("alan", "turing", false);
 		assertThrows(PersonaFisicaBloqueada.class, () -> gestionUsuarios.usuarioCorrecto(turing));
 	}
-
 
 }

@@ -70,7 +70,7 @@ public class BaseDatos {
 		em.persist(usuario1);
 		em.persist(usuario2);
 
-		Segregada segregada2 = new Segregada("ES2057883234722030876293", "", date, false, "Segregada", 0.0);
+		Segregada segregada2 = new Segregada("ES2057883234722030876293", "", date, "Baja", "Segregada", 0.0);
 		em.persist(segregada2);
 		PersonaFisica personaFisica1 = new PersonaFisica(null, 300L, "Fisica", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", date);
@@ -78,7 +78,7 @@ public class BaseDatos {
 
 		PersonaJuridica personaJuridica2 = new PersonaJuridica(null, 108L, "Juridico", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
-		Segregada segregada3 = new Segregada("ES20578832365722030876293", "", date, true, "Segregada", 0.0);
+		Segregada segregada3 = new Segregada("ES20578832365722030876293", "", date, "Activa", "Segregada", 0.0);
 		segregada3.setCliente(personaJuridica2);
 		List<CuentaFintech> listaCuentas = new ArrayList<>();
 		listaCuentas.add(segregada3);
@@ -107,7 +107,7 @@ public class BaseDatos {
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		PersonaJuridica personaJuridicaBloqueada = new PersonaJuridica(null, 9999L, "Juridico", "Bloqueado", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
-		Segregada segregada6 = new Segregada("ES2057883255722030876293", "", date, true, "Segregada", 0.0);
+		Segregada segregada6 = new Segregada("ES2057883255722030876293", "", date, "Activa", "Segregada", 0.0);
 		//asociamos alguna cuenta al cliente bloqueado
 		List<CuentaFintech> listaCuentasFintech = new ArrayList<>();
 		listaCuentasFintech.add(segregada6);
@@ -143,10 +143,10 @@ public class BaseDatos {
 
 		//RF13
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
-		Segregada cuentaSegregada2 = new Segregada("ES394583094851", "", new Date(), true, "Segregada", 0.1);
-		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), false, "Segregada", 0.1);
-		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), false, "Segregada", 0.1);
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
+		Segregada cuentaSegregada2 = new Segregada("ES394583094851", "", new Date(), "Activa", "Segregada", 0.1);
+		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), "Baja", "Segregada", 0.1);
+		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), "Baja", "Segregada", 0.1);
 
 
 		em.persist(ibai);
