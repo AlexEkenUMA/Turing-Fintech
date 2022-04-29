@@ -28,7 +28,7 @@ public class ClientesEJB implements GestionClientes {
 
 
     @Override
-    public void darAlta2 (Usuario u, Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+    public void darAlta2 (Usuario u, String id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
                           Date fechaNac, String direccion, int codigoPostal, String pais, List<Autorizado> au, String ciudad)
             throws ClienteNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo {
 
@@ -73,14 +73,14 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public void modificarCliente(Usuario u, Cliente c, Long ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
+    public void modificarCliente(Usuario u, Cliente c, String ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
 
         gestionUsuarios.usuarioAdministrativo(u);
         if(c.getTipo_Cliente().equals("Juridico")){
             PersonaJuridica personaJuridicaExiste = null;
             List<PersonaJuridica> empresas = getPersonasJuridicas();
             for(PersonaJuridica pj: empresas){
-                if(ID == pj.getIdentificacion()){
+                if(ID.equals(pj.getIdentificacion())){
                     personaJuridicaExiste = pj;
                 }
             }
@@ -97,7 +97,7 @@ public class ClientesEJB implements GestionClientes {
             PersonaFisica personaFisicaExiste = null;
             List<PersonaFisica> personasFisicas = getPersonasFisicas();
             for(PersonaFisica pf: personasFisicas){
-                if(ID == pf.getIdentificacion()){
+                if(ID.equals(pf.getIdentificacion())){
                     personaFisicaExiste = pf;
                 }
             }
@@ -117,7 +117,7 @@ public class ClientesEJB implements GestionClientes {
 
 
     @Override
-    public void eliminarCliente (Usuario u, Long ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
+    public void eliminarCliente (Usuario u, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
         gestionUsuarios.usuarioAdministrativo(u);
         String tipo = "";
         PersonaJuridica personaJuridicaExiste = null;
@@ -273,17 +273,22 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public List<Cliente> getClientesHolanda(Usuario u, Long dni, Date fechaAlta, Date fechaBaja, String nombre, String direccion, String codigoPostal, String pais) throws NingunClienteCoincideConLosParametrosDeBusqueda{
-        Query query = em.createQuery("SELECT c FROM Cliente c");
+    public List<Cliente> getClientesHolanda(Usuario u, String dni, Date fechaAlta, Date fechaBaja, String direccion, int codigoPostal, String pais) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda{
+        gestionUsuarios.usuarioAdministrativo(u);
+        Query query = em.createQuery("SELECT c FROM Cliente c where c.identificacion = :dni and " +
+                "c.fecha_Alta = :fechaAlta and c.fecha_Baja = :fechaBaja " +
+                "and c.direccion = :direccion and c.codigo_Postal = :codigoPostal and c.pais = :pais");
 
-        List<Cliente> lista = query.getResultList();
-        List<Cliente> listaResultado = new ArrayList<>();
-
-        for(Cliente c : lista){
-            if(c.getIdentificacion().equals(dni) && c.getDireccion().equals(direccion)){
-
-            }
+        query.setParameter("dni" , dni);
+        query.setParameter("fechaAlta" , fechaAlta);
+        query.setParameter("fechaBaja" , fechaBaja);
+        query.setParameter("direccion" , direccion);
+        query.setParameter("codigoPostal" , codigoPostal);
+        query.setParameter("pais" , pais);
+        List<Cliente> listaResultado = query.getResultList();
+        if(listaResultado.isEmpty()){
+            throw new NingunClienteCoincideConLosParametrosDeBusqueda();
         }
-        return lista;
+        return listaResultado;
     }
 }

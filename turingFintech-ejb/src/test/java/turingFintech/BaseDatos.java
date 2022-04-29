@@ -57,13 +57,13 @@ public class BaseDatos {
 		//em.persist(cliente2);
 		//em.persist(cliente3);
 
-		PersonaJuridica pj = new PersonaJuridica(null, 21L, "Juridico", "Activo", date, null, "Direccion",
+		PersonaJuridica pj = new PersonaJuridica(null, "21L", "Juridico", "Activo", date, null, "Direccion",
 				"sevilla", 29002, "pais", "ninguna");
 		em.persist(pj);
 
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
-		PersonaJuridica personaJuridica1 = new PersonaJuridica(null, 55L, "Juridico", "Activo", date, null, "Direccion",
+		PersonaJuridica personaJuridica1 = new PersonaJuridica(null, "55L", "Juridico", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		usuario1.setCliente(personaJuridica1);
 		em.persist(personaJuridica1);
@@ -72,11 +72,11 @@ public class BaseDatos {
 
 		Segregada segregada2 = new Segregada("ES2057883234722030876293", "", date, "Baja", "Segregada", 0.0);
 		em.persist(segregada2);
-		PersonaFisica personaFisica1 = new PersonaFisica(null, 300L, "Fisica", "Activo", date, null, "Direccion",
+		PersonaFisica personaFisica1 = new PersonaFisica(null, "300L", "Fisica", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", date);
 		em.persist(personaFisica1);
 
-		PersonaJuridica personaJuridica2 = new PersonaJuridica(null, 108L, "Juridico", "Activo", date, null, "Direccion",
+		PersonaJuridica personaJuridica2 = new PersonaJuridica(null, "108L", "Juridico", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		Segregada segregada3 = new Segregada("ES20578832365722030876293", "", date, "Activa", "Segregada", 0.0);
 		segregada3.setCliente(personaJuridica2);
@@ -90,7 +90,7 @@ public class BaseDatos {
 
 		Usuario usuario3= new Usuario("Cristiano", "Ronaldo", false);
 		personaJuridica2.setUsuario(usuario3);
-		Autorizado autorizado1 = new Autorizado(null, 36L, "Cristiano", "Ronaldo", "Cielo", new Date(), "Activo", new Date(), null);
+		Autorizado autorizado1 = new Autorizado(null, "36L", "Cristiano", "Ronaldo", "Cielo", new Date(), "Activo", new Date(), null);
 		usuario3.setAutorizado(autorizado1);
 		List<Autorizado> listaAutorizados = new ArrayList<>();
 		listaAutorizados.add(autorizado1);
@@ -101,11 +101,11 @@ public class BaseDatos {
 
 		//RF16
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(null, 800L, "Fisica", "Activo", date, null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(null, "800L", "Fisica", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", date);
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(null, 2001L, "Juridico", "Activo", date, null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(null, "2001L", "Juridico", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
-		PersonaJuridica personaJuridicaBloqueada = new PersonaJuridica(null, 9999L, "Juridico", "Bloqueado", date, null, "Direccion",
+		PersonaJuridica personaJuridicaBloqueada = new PersonaJuridica(null, "9999L", "Juridico", "Bloqueado", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		Segregada segregada6 = new Segregada("ES2057883255722030876293", "", date, "Activa", "Segregada", 0.0);
 		//asociamos alguna cuenta al cliente bloqueado
@@ -115,7 +115,7 @@ public class BaseDatos {
 		//añadimos las empresas al autorizado
 		List<PersonaJuridica> listaEmpresas = new ArrayList<>();
 		listaEmpresas.add(personaJuridicaBloqueada);
-		Autorizado autorizado4 = new Autorizado(null, 2022L, "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
+		Autorizado autorizado4 = new Autorizado(null, "2022L", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
 		List<Autorizado> listaAutorizados2 = new ArrayList<>();
 		listaAutorizados.add(autorizado4);
 		autorizado4.setEmpresas(listaEmpresas);
@@ -134,7 +134,7 @@ public class BaseDatos {
 		em.persist(karim);
 
 		Usuario turing = new Usuario("alan", "turing", false);
-		PersonaFisica personaFisica7 = new PersonaFisica(null, 666L, "Fisica", "Bloqueado", date, null, "Direccion",
+		PersonaFisica personaFisica7 = new PersonaFisica(null, "666L", "Fisica", "Bloqueado", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alejandro", "Requena", date);
 		turing.setCliente(personaFisica7);
 		personaFisica7.setUsuario(turing);

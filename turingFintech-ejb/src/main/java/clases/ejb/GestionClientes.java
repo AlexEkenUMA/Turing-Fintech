@@ -24,7 +24,7 @@ public interface GestionClientes {
      Este método permite a un administrativo modificar los datos de un cliente
      RF3
      */
-    public void modificarCliente(Usuario u, Cliente c, Long ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
+    public void modificarCliente(Usuario u, Cliente c, String ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
     /**
@@ -32,10 +32,10 @@ public interface GestionClientes {
      Este método permite a un administrativo dar de baja a un cliente
      RF4
      */
-    public void eliminarCliente (Usuario u, Long ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
+    public void eliminarCliente (Usuario u, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
 
-    public void darAlta2 (Usuario u, Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+    public void darAlta2 (Usuario u, String id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
                           Date fechaNac, String direccion, int codigoPostal,
                           String pais, List<Autorizado> au, String ciudad) throws ClienteNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
@@ -47,6 +47,6 @@ public interface GestionClientes {
 
     public List<PersonaJuridica> getPersonasJuridicas();
 
-    public List<Cliente> getClientesHolanda(Usuario u, Long dni, Date fechaAlta, Date fechaBaja, String nombre, String direccion, String codigoPostal, String pais) throws  NingunClienteCoincideConLosParametrosDeBusqueda;
+    public List<Cliente> getClientesHolanda(Usuario u, String dni, Date fechaAlta, Date fechaBaja, String direccion, int codigoPostal, String pais) throws  NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda;
 
     }

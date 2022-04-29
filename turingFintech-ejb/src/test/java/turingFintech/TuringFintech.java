@@ -110,7 +110,7 @@ public class TuringFintech {
 		Date date = new Date();
 		List<Autorizado> au = new ArrayList<>();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		assertThrows(ClienteNoValidoException.class, () -> gestionClientes.darAlta2(usuario1,32L, tipo, "Razon", "Nombre", "Apellidos", date,
+		assertThrows(ClienteNoValidoException.class, () -> gestionClientes.darAlta2(usuario1,"32L", tipo, "Razon", "Nombre", "Apellidos", date,
 				"Direccion", 2967, "Pais",au, "Ciudad" ));
 
 	}
@@ -125,7 +125,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try{
-			gestionClientes.darAlta2(usuario1,30L, tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,"30L", tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
@@ -141,7 +141,7 @@ public class TuringFintech {
 
 		boolean ok = false;
 		for (PersonaFisica pf : personaFisicas){
-			if (pf.getIdentificacion() == 30L){
+			if (pf.getIdentificacion().equals("30L")){
 				ok = true;
 			}
 		}
@@ -160,7 +160,7 @@ public class TuringFintech {
 		List<Autorizado> au = new ArrayList<>();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
-			gestionClientes.darAlta2(usuario1,31L, tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,"31L", tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
@@ -172,7 +172,7 @@ public class TuringFintech {
 		List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
 		boolean ok = false;
 		for (PersonaJuridica pj : personaJuridicas){
-			if (pj.getIdentificacion() == 31L){
+			if (pj.getIdentificacion().equals("31L")){
 				ok = true;
 			}
 		}
@@ -185,21 +185,21 @@ public class TuringFintech {
 		Date date1 = new Date();
 		Date date2 = new Date();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		Cliente cliente = new Cliente(12L, 1L, "Juridico", "activo", date1, date2, "calle", "ciudad", 2900, "pais");
-		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.modificarCliente(usuario1, cliente,12L));
+		Cliente cliente = new Cliente(12L, "1L", "Juridico", "activo", date1, date2, "calle", "ciudad", 2900, "pais");
+		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.modificarCliente(usuario1, cliente,"12L"));
 	}
 
 
 	@Test
 	@Requisitos("RF3")
 	public void modificarCliente(){
-		Long identificacion = 21L;
+		String identificacion = "21L";
 		PersonaJuridica pj2 = null;
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		List<PersonaJuridica> clientes = gestionClientes.getPersonasJuridicas();
 		System.out.println(clientes);
 		for(PersonaJuridica pj: clientes){
-			if(identificacion == pj.getIdentificacion()){
+			if(identificacion.equals(pj.getIdentificacion())){
 				pj2 = pj;
 				System.out.println("encontrado identificacion");
 			}
@@ -207,7 +207,7 @@ public class TuringFintech {
 		PersonaJuridica copiapj2 = pj2;
 		copiapj2.setCiudad("mlg");
 		try{
-			gestionClientes.modificarCliente(usuario1,copiapj2,21L);
+			gestionClientes.modificarCliente(usuario1,copiapj2,"21L");
 		}catch (ClienteNoEncontradoException e){
 			fail("No se ha encontrado cliente (NO DEBERIA)");
 		} catch (UsuarioNoEncontrado e) {
@@ -223,7 +223,7 @@ public class TuringFintech {
 
 		List<PersonaJuridica> ClienteComprobar = gestionClientes.getPersonasJuridicas();
 		for(PersonaJuridica pj: ClienteComprobar){
-			if(identificacion == pj.getIdentificacion()){
+			if(identificacion.equals(pj.getIdentificacion())){
 				assertEquals(pj.getCiudad(), "mlg");
 			}
 		}
@@ -235,13 +235,13 @@ public class TuringFintech {
 		Date date1 = new Date();
 		Date date2 = new Date();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.eliminarCliente(usuario1, 12L));
+		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.eliminarCliente(usuario1, "12L"));
 	}
 
 	@Test
 	@Requisitos("RF4")
 	public void testEliminarCliente(){
-		final Long identificacion = 300L;
+		final String identificacion = "300L";
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
 			gestionClientes.eliminarCliente(usuario1, identificacion);
@@ -256,7 +256,7 @@ public class TuringFintech {
 		}
 		List<PersonaJuridica> ClienteComprobar = gestionClientes.getPersonasJuridicas();
 		for(PersonaJuridica pj: ClienteComprobar){
-			if(identificacion == pj.getIdentificacion()){
+			if(identificacion.equals(pj.getIdentificacion())){
 				assertNotNull(pj.getFecha_Baja());
 			}
 		}
@@ -264,7 +264,7 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF4")
 	public void testEliminarClienteConCuentaActiva(){
-		final Long identificacion = 108L;
+		final String identificacion = "108L";
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		assertThrows(CuentaActiva.class, () -> gestionClientes.eliminarCliente(usuario1, identificacion));
 	}
@@ -280,7 +280,7 @@ public class TuringFintech {
 
 
 		try{
-			gestionClientes.darAlta2(usuario1,33L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,"33L", "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("Cliente no valido (NO DEBERIA)");
@@ -323,7 +323,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try{
-			gestionClientes.darAlta2(usuario1,34L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,"34L", "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("Cliente no valido (NO DEBERIA)");
@@ -356,10 +356,10 @@ public class TuringFintech {
 	@Requisitos("RF6")
 	public void testAnadirAutorizadoPersonaJuridicaNoEncontrada(){
 		Date date = new Date();
-		Autorizado autorizado = new Autorizado(null, 10L, "Nombre", "Apellidos",
+		Autorizado autorizado = new Autorizado(null, "10L", "Nombre", "Apellidos",
 				"Direccion", date, "Estado", date, date);
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		PersonaJuridica personaJuridica1 = new PersonaJuridica(10L, 50L, "Juridico", "Activo", date, null, "Direccion",
+		PersonaJuridica personaJuridica1 = new PersonaJuridica(10L, "50L", "Juridico", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		assertThrows(PersonaJuridicaNoEncontrada.class, () -> gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1,
 		autorizado));
@@ -369,28 +369,28 @@ public class TuringFintech {
 	@Requisitos("RF6")
 	public void testAnadirAutorizado(){
 		Date date = new Date();
-		Autorizado autorizado = new Autorizado(150L, 100L, "Nombre", "Apellidos",
+		Autorizado autorizado = new Autorizado(150L, "100L", "Nombre", "Apellidos",
 				"Direccion", date, "Estado", date, date);
 		List<PersonaJuridica> pjP = new ArrayList<>();
 		autorizado.setEmpresas(pjP);
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
 			List<Autorizado> autor = new ArrayList<>();
-			gestionClientes.darAlta2(usuario1,50L, "Juridico", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1,"50L", "Juridico", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",autor, "Ciudad" );
 
 			List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
 			Long id = null;
 			PersonaJuridica personaJuridica1 = null;
 			for (PersonaJuridica pj : personaJuridicas){
-				if (pj.getIdentificacion()==50L){
+				if (pj.getIdentificacion().equals("50L")){
 					id = pj.getId();
 					personaJuridica1 = pj;
 				}
 			}
 			gestionAutorizados.anadirAutorizados(usuario1, personaJuridica1, autorizado);
 			for (PersonaJuridica pj : personaJuridicas){
-				if (pj.getIdentificacion()==50L){
+				if (pj.getIdentificacion().equals("50L")){
 					id = pj.getId();
 					personaJuridica1 = pj;
 				}
@@ -398,7 +398,7 @@ public class TuringFintech {
 			List<Autorizado> autorizadoList 	   = gestionAutorizados.getAutorizados();
 			Autorizado autorizado1 			       = null;
 			for (Autorizado au : autorizadoList){
-				if (au.getIdentificacion() == 100L){
+				if (au.getIdentificacion() == "100L"){
 					autorizado1 = au;
 				}
 			}
@@ -407,12 +407,12 @@ public class TuringFintech {
 			boolean bautorizado = false;
 			boolean bjuridica   = false;
 			for (Autorizado au : auJuridcas){
-				if (au.getIdentificacion() == 100L){
+				if (au.getIdentificacion() == "100L"){
 					bautorizado = true;
 				}
 			}
 			for (PersonaJuridica pj : pjAuto){
-				if (pj.getIdentificacion() == 50L){
+				if (pj.getIdentificacion().equals("50L")){
 					bjuridica = true;
 				}
 			}
@@ -439,7 +439,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Date date1 = new Date();
 		Date date2 = new Date();
-		Autorizado autorizado = new Autorizado(1L, 232L, "Nombre", "Apellidos",
+		Autorizado autorizado = new Autorizado(1L, "232L", "Nombre", "Apellidos",
 				"Direccion", date1, "Estado", date2, null);
 		assertThrows(AutorizadoNoEncontradoException.class, () -> gestionAutorizados.modificarAutorizados(usuario1, autorizado, 36L));
 
@@ -451,7 +451,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Date date1 = new Date();
 		Date date2 = new Date();
-		Autorizado autorizado = new Autorizado(5L, 36L, "Nombre", "Apellidos",
+		Autorizado autorizado = new Autorizado(5L, "36L", "Nombre", "Apellidos",
 				"Direccion", date1, "Estado", date2, null);
 		assertThrows(ModificarAutorizadosDistintaID.class, () -> gestionAutorizados.modificarAutorizados(usuario1, autorizado, 1L));
 
@@ -463,7 +463,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Date date1 = new Date();
 		Date date2 = new Date();
-		Autorizado autorizado = new Autorizado(5L, 36L, "Nombre", "Apellidos",
+		Autorizado autorizado = new Autorizado(5L, "36L", "Nombre", "Apellidos",
 				"Direccion", date1, "Estado", date2, null);
 		try{
 			gestionAutorizados.modificarAutorizados(usuario1,autorizado,5L);
@@ -498,20 +498,20 @@ public class TuringFintech {
 	@Requisitos("RF8")
 	public void testEliminarAutorizado(){
 		Date date = new Date();
-		Autorizado autorizado = new Autorizado(150L, 100L, "Nombre", "Apellidos",
+		Autorizado autorizado = new Autorizado(150L, "100L", "Nombre", "Apellidos",
 				"Direccion", date, "Estado", date, date);
 		List<PersonaJuridica> pjP = new ArrayList<>();
 		autorizado.setEmpresas(pjP);
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try {
 			List<Autorizado> autor = new ArrayList<>();
-			gestionClientes.darAlta2(usuario1, 50L, "Juridico", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1, "50L", "Juridico", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais", autor, "Ciudad");
 			List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
 			Long id = null;
 			PersonaJuridica personaJuridica1 = null;
 			for (PersonaJuridica pj : personaJuridicas){
-				if (pj.getIdentificacion()==50L){
+				if (pj.getIdentificacion().equals("50L")){
 					id = pj.getId();
 					personaJuridica1 = pj;
 				}
@@ -523,7 +523,7 @@ public class TuringFintech {
 
 			Autorizado autorizado1 = null;
 			for (Autorizado au: autorizadoList){
-				if (au.getIdentificacion() == 100L){
+				if (au.getIdentificacion() == "100L"){
 					autorizado1 = au;
 				}
 			}
@@ -578,7 +578,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try {
-			gestionClientes.darAlta2(usuario1, 39L, "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darAlta2(usuario1, "39L", "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais", au, "Ciudad");
 		} catch (ClienteNoValidoException e) {
 			fail("Cliente no valido (NO DEBERIA)");
@@ -640,12 +640,6 @@ public class TuringFintech {
 
 	@Test
 	@Requisitos("RF11")
-	public void testObtenerClientesHolanda(){
-
-	}
-
-	@Test
-	@Requisitos("RF11")
 	public void testObtenerCuentasHolandaNingunaCoincide(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		assertThrows(NingunaCuentaCoincideConLosParametrosDeBusqueda.class, () -> gestionCuentas.getCuentasHolanda(ibai,"Activa" , "ES205676349780220030876293"));
@@ -664,6 +658,18 @@ public class TuringFintech {
 		} catch (NoEsAdministrativo noEsAdministrativo) {
 			fail("Usuario no es administrativo");
 		}
+	}
+
+	@Test
+	@Requisitos("RF11")
+	public void testObtenerClientesHolandaNingunaCoincide(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		assertThrows(NingunClienteCoincideConLosParametrosDeBusqueda.class, () -> gestionClientes.getClientesHolanda(ibai, "3982749823759F", new Date(), new Date(), "su casa", 29834, "Mozambique"));
+	}
+
+	@Test
+	@Requisitos("RF11")
+	public void testObtenerClientesHolanda(){
 
 	}
 
@@ -712,7 +718,7 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testBloquearClienteNoExistente(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(69L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(69L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
 		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.bloquearCliente(karim, personaFisica4));
 	}
@@ -721,9 +727,9 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testBloquearPersonaFisicaYJuridica(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, "2001L", "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		try{
 			gestionClientes.bloquearCliente(karim, personaFisica4);
@@ -755,9 +761,9 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testDesbloquearPersonaFisicaYJuridica(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, "2001L", "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		try{
 			//bloqueamos
@@ -795,9 +801,9 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testBloquearClienteYaBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, "2001L", "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		try{
 			//bloqueamos
@@ -821,9 +827,9 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testDesbloquearClienteNoBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, "2001L", "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 
 		assertThrows(DesbloquearClienteQueNoEstaBloqueado.class, () -> gestionClientes.desbloquearCliente(karim, personaFisica4));
