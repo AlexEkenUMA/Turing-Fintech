@@ -181,15 +181,20 @@ public class ClientesEJB implements GestionClientes {
         }
     }
 
-    public void bloquearCliente (Usuario u, Cliente c) throws TipoNoValidoException, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
+    public void bloquearCliente (Usuario u, Cliente c) throws BloquearClienteYaBloqueado, TipoNoValidoException, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         if(c.getTipo_Cliente().equals("Juridico")){
             PersonaJuridica pj = em.find(PersonaJuridica.class, c.getId());
             if(pj == null){
                 throw new ClienteNoEncontradoException();
             }
-            pj.setEstado("Bloqueado");
-            em.merge(pj);
+            if(pj.getEstado().equals("Bloqueado")){
+                throw new BloquearClienteYaBloqueado();
+            }
+            else{
+                pj.setEstado("Bloqueado");
+                em.merge(pj);
+            }
             List<CuentaFintech> cuentaspj = pj.getCuentasFintech();
             List<Autorizado> listaAutorizados = pj.getAutorizados();
             //no sabemos si hace falta bloquear a los autorizados asociados a la empresa
@@ -202,23 +207,33 @@ public class ClientesEJB implements GestionClientes {
             if(pf == null){
                 throw new ClienteNoEncontradoException();
             }
-            pf.setEstado("Bloqueado");
-            em.merge(pf);
+            if(pf.getEstado().equals("Bloqueado")){
+                throw new BloquearClienteYaBloqueado();
+            }
+            else{
+                pf.setEstado("Bloqueado");
+                em.merge(pf);
+            }
         }
         else{
             throw new TipoNoValidoException();
         }
     }
 
-    public void desbloquearCliente (Usuario u, Cliente c) throws ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
+    public void desbloquearCliente (Usuario u, Cliente c) throws DesbloquearClienteQueNoEstaBloqueado, TipoNoValidoException, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         if(c.getTipo_Cliente().equals("Juridico")){
             PersonaJuridica pj = em.find(PersonaJuridica.class, c.getId());
             if(pj == null){
                 throw new ClienteNoEncontradoException();
             }
-            pj.setEstado("Activo");
-            em.merge(pj);
+            if(!pj.getEstado().equals("Bloqueado")){
+                throw new DesbloquearClienteQueNoEstaBloqueado();
+            }
+            else{
+                pj.setEstado("Activo");
+                em.merge(pj);
+            }
             List<CuentaFintech> cuentaspj = pj.getCuentasFintech();
             List<Autorizado> listaAutorizados = pj.getAutorizados();
             //no sabemos si es necesario
@@ -226,13 +241,21 @@ public class ClientesEJB implements GestionClientes {
             //    au.setEstado("Activo");
             //}
         }
-        else{
+        else if (c.getTipo_Cliente().equals("Fisica")){
             PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
             if(pf == null){
                 throw new ClienteNoEncontradoException();
             }
-            pf.setEstado("Activo");
-            em.merge(pf);
+            if(!pf.getEstado().equals("Bloqueado")){
+                throw new DesbloquearClienteQueNoEstaBloqueado();
+            }
+            else{
+                pf.setEstado("Activo");
+                em.merge(pf);
+            }
+        }
+        else{
+            throw new TipoNoValidoException();
         }
     }
 

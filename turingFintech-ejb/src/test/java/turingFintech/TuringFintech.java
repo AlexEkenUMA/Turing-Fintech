@@ -685,6 +685,8 @@ public class TuringFintech {
 			fail("El cliente no fue encontrado en la BBDD");
 		} catch (NoEsAdministrativo noEsAdministrativo) {
 			fail("El usuario que intenta bloquear al cliente no es administrativo");
+		} catch (BloquearClienteYaBloqueado bloquearClienteYaBloqueado) {
+			fail("El usuario ha intentado bloquear a un cliente que ya estaba bloqueado");
 		}
 		for(PersonaFisica pf : gestionClientes.getPersonasFisicas()){
 			if(pf.getId().equals(6L)){
@@ -698,6 +700,84 @@ public class TuringFintech {
 		}
 	}
 
+	@Test
+	@Requisitos("RF16")
+	public void testDesbloquearPersonaFisicaYJuridica(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		try{
+			//bloqueamos
+			gestionClientes.bloquearCliente(karim, personaFisica4);
+			gestionClientes.bloquearCliente(karim, personaJuridica4);
+			//desbloqueamos
+			gestionClientes.desbloquearCliente(karim, personaFisica4);
+			gestionClientes.desbloquearCliente(karim, personaJuridica4);
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("Usuario no encontrado en la BBDD");
+		} catch (TipoNoValidoException e) {
+			fail("El tipo del cliente no es valido");
+		} catch (ClienteNoEncontradoException e) {
+			fail("El cliente no fue encontrado en la BBDD");
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario que intenta bloquear al cliente no es administrativo");
+		} catch (DesbloquearClienteQueNoEstaBloqueado desbloquearClienteQueNoEstaBloqueado) {
+			fail("El usuario ha intentado desbloquear a un cliente que no estaba bloqueado");
+		} catch (BloquearClienteYaBloqueado bloquearClienteYaBloqueado) {
+			fail("El usuario ha intentado bloquear a un cliente que ya estaba bloqueado");
+		}
+		for(PersonaFisica pf : gestionClientes.getPersonasFisicas()){
+			if(pf.getId().equals(6L)){
+				assertEquals("Activo", pf.getEstado());
+			}
+		}
+		for(PersonaJuridica pj : gestionClientes.getPersonasJuridicas()){
+			if(pj.getId().equals(7L)){
+				assertEquals("Activo", pj.getEstado());
+			}
+		}
+	}
+
+	@Test
+	@Requisitos("RF16")
+	public void testBloquearClienteYaBloqueado(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		try{
+			//bloqueamos
+			gestionClientes.bloquearCliente(karim, personaFisica4);
+			gestionClientes.bloquearCliente(karim, personaJuridica4);
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("Usuario no encontrado en la BBDD");
+		} catch (TipoNoValidoException e) {
+			fail("El tipo del cliente no es valido");
+		} catch (ClienteNoEncontradoException e) {
+			fail("El cliente no fue encontrado en la BBDD");
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario que intenta bloquear al cliente no es administrativo");
+		} catch (BloquearClienteYaBloqueado bloquearClienteYaBloqueado) {
+			fail("El usuario ha intentado bloquear a un cliente que ya estaba bloqueado");
+		}
+		assertThrows(BloquearClienteYaBloqueado.class, () -> gestionClientes.bloquearCliente(karim, personaFisica4));
+		assertThrows(BloquearClienteYaBloqueado.class, () -> gestionClientes.bloquearCliente(karim, personaJuridica4));
+	}
+	@Test
+	@Requisitos("RF16")
+	public void testDesbloquearClienteNoBloqueado(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+
+		assertThrows(DesbloquearClienteQueNoEstaBloqueado.class, () -> gestionClientes.desbloquearCliente(karim, personaFisica4));
+		assertThrows(DesbloquearClienteQueNoEstaBloqueado.class, () -> gestionClientes.desbloquearCliente(karim, personaJuridica4));
+	}
 
 
 }
