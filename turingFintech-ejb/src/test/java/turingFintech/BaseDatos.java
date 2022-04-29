@@ -133,6 +133,14 @@ public class BaseDatos {
 		//System.out.println(personaJuridica4.getId());
 		em.persist(karim);
 
+		Usuario turing = new Usuario("alan", "turing", false);
+		PersonaFisica personaFisica7 = new PersonaFisica(null, 666L, "Fisica", "Bloqueado", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alejandro", "Requena", date);
+		turing.setCliente(personaFisica7);
+		personaFisica7.setUsuario(turing);
+		em.persist(personaFisica7);
+		em.persist(turing);
+
 
 		em.getTransaction().commit();
 		

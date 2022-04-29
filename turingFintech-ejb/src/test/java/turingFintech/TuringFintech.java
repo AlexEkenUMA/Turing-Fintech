@@ -785,5 +785,12 @@ public class TuringFintech {
 		assertThrows(AutorizadoSoloTieneAccesoACuentasClienteBloqueado.class, () -> gestionUsuarios.usuarioCorrecto(karim));
 	}
 
+	@Test
+	@Requisitos("RF16")
+	public void testAccesoPersonaFisicaBloqueada(){
+		Usuario turing = new Usuario("alan", "turing", false);
+		assertThrows(PersonaFisicaBloqueada.class, () -> gestionUsuarios.usuarioCorrecto(turing));
+	}
+
 
 }
