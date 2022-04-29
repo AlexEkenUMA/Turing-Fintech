@@ -273,7 +273,7 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public List<Cliente> getClientesHolanda(Usuario u, String dni, Date fechaAlta, Date fechaBaja, String direccion, int codigoPostal, String pais) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda{
+    public List<Cliente> getClientesHolanda(Usuario u, String dni, Date fechaAlta, Date fechaBaja, String direccion, Integer codigoPostal, String pais) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda{
         gestionUsuarios.usuarioAdministrativo(u);
         Query query = em.createQuery("SELECT c FROM Cliente c where c.identificacion = :dni and " +
                 "c.fecha_Alta = :fechaAlta and c.fecha_Baja = :fechaBaja " +

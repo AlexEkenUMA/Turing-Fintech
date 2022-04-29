@@ -47,6 +47,6 @@ public interface GestionClientes {
 
     public List<PersonaJuridica> getPersonasJuridicas();
 
-    public List<Cliente> getClientesHolanda(Usuario u, String dni, Date fechaAlta, Date fechaBaja, String direccion, int codigoPostal, String pais) throws  NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda;
+    public List<Cliente> getClientesHolanda(Usuario u, String dni, Date fechaAlta, Date fechaBaja, String direccion, Integer codigoPostal, String pais) throws  NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda;
 
     }
