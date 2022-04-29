@@ -18,8 +18,11 @@ public class TransaccionesEJB implements GestionTransacciones {
 
     @Override
     public void registrarTransaccionFintech(Usuario usuario, CuentaFintech origen, Cuenta destino, Transaccion transaccion)
-            throws SaldoInsuficiente, DivisaNoCoincide, UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
+            throws TransaccionConCantidadIncorrecta, SaldoInsuficiente, DivisaNoCoincide, UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
         gestionUsuarios.usuarioAdministrativo(usuario);
+        if(transaccion.getCantidad() <= 0){
+            throw new TransaccionConCantidadIncorrecta();
+        }
         boolean okOrigen = false;
         boolean okDestino = false;
         CuentaFintech origenEntity  = em.find(CuentaFintech.class, origen.getIBAN());
