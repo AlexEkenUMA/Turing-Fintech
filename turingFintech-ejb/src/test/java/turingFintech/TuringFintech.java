@@ -26,12 +26,14 @@ public class TuringFintech {
 	private static final String CUENTAS_EJB  = "java:global/classes/CuentasEJB";
 	private static final String USUARIOS_EJB = "java:global/classes/UsuariosEJB";
 	private static final String AUTORIZADOS_EJB = "java:global/classes/AutorizadosEJB";
+	private static final String TRANSACCIONES_EJB = "java:global/classes/TransaccionesEJB";
 	private static final String UNIDAD_PERSITENCIA_PRUEBAS = "turingFintechTest";
 	
 	private GestionClientes gestionClientes;
 	private GestionCuentas gestionCuentas;
 	private GestionUsuarios gestionUsuarios;
 	private GestionAutorizados gestionAutorizados;
+	private GestionTransacciones gestionTransacciones;
 
 
 	@Before
@@ -40,6 +42,8 @@ public class TuringFintech {
 		gestionCuentas     = (GestionCuentas) SuiteTest.ctx.lookup(CUENTAS_EJB);
 		gestionUsuarios    =  (GestionUsuarios) SuiteTest.ctx.lookup(USUARIOS_EJB);
 		gestionAutorizados = (GestionAutorizados) SuiteTest.ctx.lookup(AUTORIZADOS_EJB);
+		gestionTransacciones = (GestionTransacciones) SuiteTest.ctx.lookup(TRANSACCIONES_EJB);
+
 		BaseDatos.inicializaBaseDatos(UNIDAD_PERSITENCIA_PRUEBAS);
 	}
 
@@ -646,6 +650,47 @@ public class TuringFintech {
 	@Requisitos("RF11")
 	public void testObtenerCuentasHolanda(){
 
+	}
+
+	@Test
+	@Requisitos("RF13")
+	public void testRegistrarTransaccionConCantidadErronea(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		Transaccion tx1 = new Transaccion(1L, new Date(), 0.0, "Quiero hackear el sistema", "Ismael", 0.0, "Transferencia regular");
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
+		Segregada cuentaSegregada2 = new Segregada("ES394583094851", "", new Date(), true, "Segregada", 0.1);
+
+		assertThrows(TransaccionConCantidadIncorrecta.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada2, tx1));
+	}
+
+	@Test
+	@Requisitos("RF13")
+	public void testCuentaNoExistenteRealizaTransaccion(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
+		Segregada cuentaSegregada2 = new Segregada("990", "", new Date(), true, "Segregada", 0.1);
+
+		assertThrows(CuentaNoEncontradaException.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada2, tx1));
+	}
+
+	@Test
+	@Requisitos("RF13")
+	public void testCuentaDeBajaRealizaTransaccion(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
+		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), false, "Segregada", 0.1);
+		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), false, "Segregada", 0.1);
+		assertThrows(CuentaDeBajaNoPuedeRegistrarTransaccion.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaDeBaja, cuentaDeBaja2, tx1));
+	}
+
+	@Test
+	@Requisitos("RF13")
+	public void testCuentaRealizaTransaccionASiMisma(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
+		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
+		assertThrows(MismaCuentaOrigenYDestino.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada1, tx1));
 	}
 
 	@Test

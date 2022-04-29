@@ -142,9 +142,18 @@ public class BaseDatos {
 		em.persist(turing);
 
 		//RF13
-		Transaccion tx1 = new Transaccion(1L, new Date(), 0.0, "Quiero hackear el sistema", "Ismael", 0.0, "Transferencia regular");
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), true, "Segregada", 0.1);
+		Segregada cuentaSegregada2 = new Segregada("ES394583094851", "", new Date(), true, "Segregada", 0.1);
+		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), false, "Segregada", 0.1);
+		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), false, "Segregada", 0.1);
 
+
+		em.persist(ibai);
+		em.persist(cuentaSegregada1);
+		em.persist(cuentaSegregada2);
+		em.persist(cuentaDeBaja);
+		em.persist(cuentaDeBaja2);
 
 		em.getTransaction().commit();
 		

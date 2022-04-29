@@ -18,7 +18,7 @@ public class TransaccionesEJB implements GestionTransacciones {
 
     @Override
     public void registrarTransaccionFintech(Usuario usuario, CuentaFintech origen, Cuenta destino, Transaccion transaccion)
-            throws CuentaDeBajaNoPuedeRegistrarTransaccion, TransaccionConCantidadIncorrecta, SaldoInsuficiente, DivisaNoCoincide, UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
+            throws MismaCuentaOrigenYDestino, CuentaDeBajaNoPuedeRegistrarTransaccion, TransaccionConCantidadIncorrecta, SaldoInsuficiente, DivisaNoCoincide, UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
         gestionUsuarios.usuarioAdministrativo(usuario);
         if(transaccion.getCantidad() <= 0){
             throw new TransaccionConCantidadIncorrecta();
@@ -32,6 +32,9 @@ public class TransaccionesEJB implements GestionTransacciones {
         Cuenta destinoEntity = em.find(Cuenta.class, destino.getIBAN());
         if (origenEntity == null || destinoEntity == null){
             throw new CuentaNoEncontradaException();
+        }
+        if(origenEntity.getIBAN().equals(destinoEntity.getIBAN())){
+            throw new MismaCuentaOrigenYDestino();
         }
         if(origenEntity instanceof PooledAccount){
             PooledAccount pooledOrigen = (PooledAccount) origenEntity;
