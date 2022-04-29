@@ -1,8 +1,6 @@
 package clases.ejb;
 
-import clases.ejb.exceptions.CuentaNoEncontradaException;
-import clases.ejb.exceptions.NoEsAdministrativo;
-import clases.ejb.exceptions.UsuarioNoEncontrado;
+import clases.ejb.exceptions.*;
 import es.uma.turingFintech.*;
 
 import javax.ejb.EJB;
@@ -19,58 +17,119 @@ public class TransaccionesEJB implements GestionTransacciones {
     @EJB GestionUsuarios gestionUsuarios;
 
     @Override
-    public void registrarTransaccionFintech(Usuario usuario, CuentaFintech origen, CuentaFintech destino, Transaccion transaccion)
-            throws UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
-
+    public void registrarTransaccionFintech(Usuario usuario, CuentaFintech origen, Cuenta destino, Transaccion transaccion)
+            throws SaldoInsuficiente, DivisaNoCoincide, UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
         gestionUsuarios.usuarioAdministrativo(usuario);
-
+        boolean okOrigen = false;
+        boolean okDestino = false;
         CuentaFintech origenEntity  = em.find(CuentaFintech.class, origen.getIBAN());
-        CuentaFintech destinoEntity = em.find(CuentaFintech.class, destino.getIBAN());
+        Cuenta destinoEntity = em.find(Cuenta.class, destino.getIBAN());
         if (origenEntity == null || destinoEntity == null){
             throw new CuentaNoEncontradaException();
         }
-        transaccion.setOrigen(origen);
-        transaccion.setDestino(destino);
+        if(origenEntity instanceof PooledAccount){
+            PooledAccount pooledOrigen = (PooledAccount) origenEntity;
+            transaccion.setOrigen(pooledOrigen);
+            for(DepositadaEn dp : pooledOrigen.getListaDepositos()){
+                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
+                    okOrigen = true;
+                    //el saldo de la cuentareferencia y depositadaen que esten relacionados deberia ser el mismo?
+                    double nuevoSaldo = dp.getSaldo()-transaccion.getCantidad()-transaccion.getComision();
+                    double nuevoSaldoCr = dp.getCuentaReferencia().getSaldo()- transaccion.getCantidad()- transaccion.getComision();
+                    if(nuevoSaldo < 0 || nuevoSaldoCr < 0){
+                        throw new SaldoInsuficiente();
+                    }
+                    else{
+                        dp.setSaldo(nuevoSaldo);
+                        //no se si es necesario
+                        dp.getCuentaReferencia().setSaldo(nuevoSaldoCr);
+                        em.merge(dp);
+                        em.merge(dp.getCuentaReferencia());
+                    }
 
-        /**
-         String tipo = destino.getTipo();
-         if (tipo.equals("Pooled")){
-         PooledAccount pooledAccount = em.find(PooledAccount.class, destino.getIBAN());
-         if (pooledAccount == null){
-         throw new CuentaNoEncontradaException();
-         }
-         List<DepositadaEn> depositadaEnList =  pooledAccount.getListaDepositos();
-         Divisa divisa = transaccion.getEmisor();
-         for (DepositadaEn dp : depositadaEnList){
-         if (divisa == dp.getCuentaReferencia().getDivisa()){
-         dp.setSaldo(dp.getSaldo()+transaccion.getCantidad());
-         dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()+transaccion.getCantidad());
-         em.merge(dp);
-         em.merge(dp.getCuentaReferencia());
-         }
-         }
 
-         }
-         */
-        em.persist(transaccion);
-
-    }
-
-    @Override
-    public void registratTransaccionCuenta(Usuario usuario, CuentaFintech origen, Cuenta destino, Transaccion transaccion)
-            throws UsuarioNoEncontrado, NoEsAdministrativo, CuentaNoEncontradaException{
-
-        gestionUsuarios.usuarioAdministrativo(usuario);
-
-        CuentaFintech origenEntity  = em.find(CuentaFintech.class, origen.getIBAN());
-        Cuenta        destinoEntity = em.find(Cuenta.class, destino.getIBAN());
-        if (origenEntity == null || destinoEntity == null){
-            throw new CuentaNoEncontradaException();
+                }
+            }
+            if(!okOrigen){
+                throw new DivisaNoCoincide();
+            }
         }
-        transaccion.setOrigen(origen);
-        transaccion.setDestino(destino);
+        if(origenEntity instanceof Segregada){
+            Segregada segregadaOrigen = (Segregada) origenEntity;
+            transaccion.setOrigen(segregadaOrigen);
+            for(DepositadaEn dp : segregadaOrigen.getCr().getListaDepositos()){
+                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
+                    okOrigen = true;
+                    double nuevoSaldo = dp.getSaldo()-transaccion.getCantidad()-transaccion.getComision();
+                    double nuevoSaldoCr = dp.getCuentaReferencia().getSaldo()- transaccion.getCantidad()- transaccion.getComision();
+                    if(nuevoSaldo < 0 || nuevoSaldoCr < 0){
+                        throw new SaldoInsuficiente();
+                    }
+                    else{
+                        dp.setSaldo(dp.getSaldo()-transaccion.getCantidad()-transaccion.getComision());
+                        //no se si es necesario
+                        dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()- transaccion.getCantidad()- transaccion.getComision());
+                        em.merge(dp);
+                        em.merge(dp.getCuentaReferencia());
+                    }
+                }
+            }
+            if(!okOrigen){
+                throw new DivisaNoCoincide();
+            }
+        }
+        if(destinoEntity instanceof PooledAccount){
+            PooledAccount pooledDestino = (PooledAccount) destinoEntity;
+            transaccion.setDestino(pooledDestino);
+            for(DepositadaEn dp : pooledDestino.getListaDepositos()){
+                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
+                    okDestino = true;
+                    dp.setSaldo(dp.getSaldo()+transaccion.getCantidad());
+                    //no se si es necesario
+                    dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()+transaccion.getCantidad());
+                    em.merge(dp);
+                    em.merge(dp.getCuentaReferencia());
+                }
+            }
+            if(!okDestino){
+                throw new DivisaNoCoincide();
+            }
+        }
+        if(destinoEntity instanceof  Segregada){
+            Segregada segregadaDestino = (Segregada) destinoEntity;
+            transaccion.setDestino(segregadaDestino);
+            for(DepositadaEn dp : segregadaDestino.getCr().getListaDepositos()){
+                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
+                    okDestino = true;
+                    dp.setSaldo(dp.getSaldo()+transaccion.getCantidad());
+                    //no se si es necesario
+                    dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()+transaccion.getCantidad());
+                    em.merge(dp);
+                    em.merge(dp.getCuentaReferencia());
+                }
+            }
+            if(!okDestino){
+                throw new DivisaNoCoincide();
+            }
+        }
+        if(destinoEntity instanceof CuentaReferencia){
+            CuentaReferencia crDestino = (CuentaReferencia) destinoEntity;
+            transaccion.setDestino(crDestino);
+            for(DepositadaEn dp : crDestino.getListaDepositos()){
+                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
+                    okDestino = true;
+                    dp.setSaldo(dp.getSaldo()+transaccion.getCantidad());
+                    //no se si es necesario
+                    dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()+transaccion.getCantidad());
+                    em.merge(dp);
+                    em.merge(dp.getCuentaReferencia());
+                }
+            }
+            if(!okDestino){
+                throw new DivisaNoCoincide();
+            }
+        }
         em.persist(transaccion);
-
-
     }
+
 }

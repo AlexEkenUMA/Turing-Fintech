@@ -648,11 +648,9 @@ public class TuringFintech {
 
 	}
 
-
-
 	@Test
 	@Requisitos("RF13")
-	public void testRegistrarTransaccionCuentaNoEncontrada(){
+	public void sdkjfnsdon(){
 
 	}
 
