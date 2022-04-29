@@ -25,6 +25,7 @@ public class UsuariosEJB implements GestionUsuarios {
         query.setParameter("nombre", u.getNombre_usuario());
         query.setParameter("password", u.getContraseña());
         List<Usuario> usuarios = query.getResultList();
+
         if (usuarios.isEmpty()){
             throw new UsuarioNoEncontrado();
         }else{

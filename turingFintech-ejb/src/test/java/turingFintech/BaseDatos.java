@@ -105,11 +105,35 @@ public class BaseDatos {
 				"Ciudad", 2967, "Pais", "Alex", "Requena", date);
 		PersonaJuridica personaJuridica4 = new PersonaJuridica(null, 2001L, "Juridico", "Activo", date, null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		PersonaJuridica personaJuridicaBloqueada = new PersonaJuridica(null, 9999L, "Juridico", "Bloqueado", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		Segregada segregada6 = new Segregada("ES2057883255722030876293", "", date, true, "Segregada", 0.0);
+		//asociamos alguna cuenta al cliente bloqueado
+		List<CuentaFintech> listaCuentasFintech = new ArrayList<>();
+		listaCuentasFintech.add(segregada6);
+		personaJuridicaBloqueada.setCuentasFintech(listaCuentasFintech);
+		//añadimos las empresas al autorizado
+		List<PersonaJuridica> listaEmpresas = new ArrayList<>();
+		listaEmpresas.add(personaJuridicaBloqueada);
+		Autorizado autorizado4 = new Autorizado(null, 2022L, "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
+		List<Autorizado> listaAutorizados2 = new ArrayList<>();
+		listaAutorizados.add(autorizado4);
+		autorizado4.setEmpresas(listaEmpresas);
+		personaJuridicaBloqueada.setAutorizados(listaAutorizados);
+		//vinculamos al usuario karim con el autorizado que esta vinculado al cliente bloqueado
+		autorizado4.setUsuario(karim);
+		karim.setAutorizado(autorizado4);
+		karim.setCliente(personaFisica4);
+		em.persist(segregada6);
+		em.persist(personaJuridicaBloqueada);
+		em.persist(autorizado4);
 		em.persist(personaFisica4);
+		//System.out.println(personaFisica4.getId());
 		em.persist(personaJuridica4);
-		System.out.println(personaFisica4.getId());
-		System.out.println(personaJuridica4.getId());
+		//System.out.println(personaJuridica4.getId());
 		em.persist(karim);
+
+
 		em.getTransaction().commit();
 		
 		em.close();

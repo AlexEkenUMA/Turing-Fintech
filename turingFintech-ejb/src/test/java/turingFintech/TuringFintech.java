@@ -617,6 +617,7 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF10")
 	public void testAccesoPersonaAutorizada(){
+		//este usuario tiene asociado un autorizado en la BBDD
 		Usuario usuario3= new Usuario("Cristiano", "Ronaldo", false);
 		try{
 			assertEquals(true, gestionUsuarios.usuarioCorrecto(usuario3));
@@ -644,9 +645,7 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF11")
 	public void testObtenerCuentasHolanda(){
-		final String IBAN = "ES2057883234722030876293";
-		List<Segregada> informeHolanda = gestionCuentas.getCuentasHolanda();
-		assertEquals(IBAN, informeHolanda.get(0).getIBAN());
+
 	}
 
 
@@ -670,9 +669,9 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testBloquearPersonaFisicaYJuridica(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		try{
 			gestionClientes.bloquearCliente(karim, personaFisica4);
@@ -704,9 +703,9 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testDesbloquearPersonaFisicaYJuridica(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		try{
 			//bloqueamos
@@ -744,9 +743,9 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testBloquearClienteYaBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 		try{
 			//bloqueamos
@@ -770,13 +769,20 @@ public class TuringFintech {
 	@Requisitos("RF16")
 	public void testDesbloquearClienteNoBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
-		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+		PersonaFisica personaFisica4 = new PersonaFisica(8L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
-		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(9L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
 				"Ciudad", 2967, "Pais", "Sociedad Anonima");
 
 		assertThrows(DesbloquearClienteQueNoEstaBloqueado.class, () -> gestionClientes.desbloquearCliente(karim, personaFisica4));
 		assertThrows(DesbloquearClienteQueNoEstaBloqueado.class, () -> gestionClientes.desbloquearCliente(karim, personaJuridica4));
+	}
+
+	@Test
+	@Requisitos("RF16")
+	public void testAccesoAutorizadoQueSoloTieneAccesoACuentasDeClientesBloqueados(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		assertThrows(AutorizadoSoloTieneAccesoACuentasClienteBloqueado.class, () -> gestionUsuarios.usuarioCorrecto(karim));
 	}
 
 
