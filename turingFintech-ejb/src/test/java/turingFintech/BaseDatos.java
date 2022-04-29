@@ -99,6 +99,17 @@ public class BaseDatos {
 		em.persist(usuario3);
 
 
+		//RF16
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		PersonaFisica personaFisica4 = new PersonaFisica(null, 800L, "Fisica", "Activo", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alex", "Requena", date);
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(null, 2001L, "Juridico", "Activo", date, null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		em.persist(personaFisica4);
+		em.persist(personaJuridica4);
+		System.out.println(personaFisica4.getId());
+		System.out.println(personaJuridica4.getId());
+		em.persist(karim);
 		em.getTransaction().commit();
 		
 		em.close();

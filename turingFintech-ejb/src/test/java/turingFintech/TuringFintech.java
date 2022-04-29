@@ -646,7 +646,7 @@ public class TuringFintech {
 	public void testObtenerCuentasHolanda(){
 		final String IBAN = "ES2057883234722030876293";
 		List<Segregada> informeHolanda = gestionCuentas.getCuentasHolanda();
-		assertEquals(informeHolanda.get(0).getIBAN(), IBAN);
+		assertEquals(IBAN, informeHolanda.get(0).getIBAN());
 	}
 
 
@@ -660,7 +660,44 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF16")
 	public void testBloquearClienteNoExistente(){
-
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		PersonaFisica personaFisica4 = new PersonaFisica(69L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
+		assertThrows(ClienteNoEncontradoException.class, () -> gestionClientes.bloquearCliente(karim, personaFisica4));
 	}
+
+	@Test
+	@Requisitos("RF16")
+	public void testBloquearPersonaFisicaYJuridica(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		PersonaFisica personaFisica4 = new PersonaFisica(6L, 800L, "Fisica", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Alex", "Requena", new Date());
+		PersonaJuridica personaJuridica4 = new PersonaJuridica(7L, 2001L, "Juridico", "Activo", new Date(), null, "Direccion",
+				"Ciudad", 2967, "Pais", "Sociedad Anonima");
+		try{
+			gestionClientes.bloquearCliente(karim, personaFisica4);
+			gestionClientes.bloquearCliente(karim, personaJuridica4);
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("Usuario no encontrado en la BBDD");
+		} catch (TipoNoValidoException e) {
+			fail("El tipo del cliente no es valido");
+		} catch (ClienteNoEncontradoException e) {
+			fail("El cliente no fue encontrado en la BBDD");
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario que intenta bloquear al cliente no es administrativo");
+		}
+		for(PersonaFisica pf : gestionClientes.getPersonasFisicas()){
+			if(pf.getId().equals(6L)){
+				assertEquals("Bloqueado", pf.getEstado());
+			}
+		}
+		for(PersonaJuridica pj : gestionClientes.getPersonasJuridicas()){
+			if(pj.getId().equals(7L)){
+				assertEquals("Bloqueado", pj.getEstado());
+			}
+		}
+	}
+
+
 
 }

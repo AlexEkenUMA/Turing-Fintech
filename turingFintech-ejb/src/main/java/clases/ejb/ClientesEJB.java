@@ -210,19 +210,29 @@ public class ClientesEJB implements GestionClientes {
         }
     }
 
-    public void desbloquearCliente (Usuario u, Cliente c) throws UsuarioNoEncontrado, NoEsAdministrativo{
+    public void desbloquearCliente (Usuario u, Cliente c) throws ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         if(c.getTipo_Cliente().equals("Juridico")){
             PersonaJuridica pj = em.find(PersonaJuridica.class, c.getId());
+            if(pj == null){
+                throw new ClienteNoEncontradoException();
+            }
+            pj.setEstado("Activo");
+            em.merge(pj);
             List<CuentaFintech> cuentaspj = pj.getCuentasFintech();
             List<Autorizado> listaAutorizados = pj.getAutorizados();
-            for(Autorizado au : listaAutorizados){
-                au.setEstado("Activo");
-            }
+            //no sabemos si es necesario
+            //for(Autorizado au : listaAutorizados){
+            //    au.setEstado("Activo");
+            //}
         }
         else{
             PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
+            if(pf == null){
+                throw new ClienteNoEncontradoException();
+            }
             pf.setEstado("Activo");
+            em.merge(pf);
         }
     }
 
