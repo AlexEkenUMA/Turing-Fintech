@@ -642,7 +642,7 @@ public class TuringFintech {
 	@Requisitos("RF11")
 	public void testObtenerCuentasHolandaNingunaCoincide(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		assertThrows(NingunaCuentaCoincideConLosParametrosDeBusqueda.class, () -> gestionCuentas.getCuentasHolanda(ibai,"Activa" , "ES205676349780220030876293"));
+		assertThrows(NingunaCuentaCoincideConLosParametrosDeBusqueda.class, () -> gestionCuentas.getCuentasHolanda(ibai,"Activa" , "3678367287"));
 	}
 
 	@Test
@@ -650,7 +650,7 @@ public class TuringFintech {
 	public void testObtenerCuentasHolanda(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
-			gestionCuentas.getCuentasHolanda(ibai, "Baja", "ES2057883234722030876293");
+			System.out.println(gestionCuentas.getCuentasHolanda(ibai, "Baja", null));
 		} catch (NingunaCuentaCoincideConLosParametrosDeBusqueda e) {
 			fail("Los parametros de busqueda no han obtenido ningun resultado");
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -682,6 +682,7 @@ public class TuringFintech {
 			fail("Ningun cliente fue encontrado con estos parametros de busqueda");
 		}
 	}
+
 
 	@Test
 	@Requisitos("RF13")

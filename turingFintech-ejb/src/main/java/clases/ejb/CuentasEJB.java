@@ -168,10 +168,20 @@ public class CuentasEJB implements GestionCuentas {
     @Override
     public List<Segregada> getCuentasHolanda(Usuario u, String estado, String IBAN) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunaCuentaCoincideConLosParametrosDeBusqueda{
         gestionUsuarios.usuarioAdministrativo(u);
-        Query query = em.createQuery("SELECT s FROM Segregada s where s.estado = :estado AND s.IBAN = :IBAN");
+        Query query = em.createQuery("SELECT s FROM Segregada s where s.estado like :estado" +
+                " and s.IBAN like :IBAN " );
 
-        query.setParameter("estado" , estado);
-        query.setParameter("IBAN" , IBAN);
+        if (!(estado == null)){
+            query.setParameter("estado" , estado);
+        }else{
+            query.setParameter("estado", "%");
+        }
+        if (!(IBAN == null)){
+            query.setParameter("IBAN" , IBAN);
+        }else{
+            query.setParameter("IBAN", "%");
+        }
+
         List<Segregada> listaResultado = query.getResultList();
         if(listaResultado.isEmpty()){
             throw new NingunaCuentaCoincideConLosParametrosDeBusqueda();
