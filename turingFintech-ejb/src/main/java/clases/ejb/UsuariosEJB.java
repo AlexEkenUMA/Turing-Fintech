@@ -18,7 +18,7 @@ public class UsuariosEJB implements GestionUsuarios {
     private EntityManager em;
 
     @Override
-    public boolean usuarioCorrecto (Usuario u) throws AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada, UsuarioNoEncontrado, EmpresaNoTieneAcceso {
+    public boolean usuarioCorrecto (Usuario u) throws AutorizadoBloqueado, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada, UsuarioNoEncontrado, EmpresaNoTieneAcceso {
         boolean ok = false;
         Query query = em.createQuery("select usuario from Usuario usuario where usuario.nombre_usuario = :nombre " +
                 "and usuario.contraseña = :password");
@@ -29,18 +29,68 @@ public class UsuariosEJB implements GestionUsuarios {
         if (usuarios.isEmpty()){
             throw new UsuarioNoEncontrado();
         }else{
-            //si el usuario no tiene ningun cliente asociado, suponemos que podrá entrar a la aplicacion
-            //si el usuario no pertenece a ningun autorizado, suponemos que podrá entrar a la aplicacion
-            if(usuarios.get(0).getCliente() == null && usuarios.get(0).getAutorizado() == null){
-                ok = true;
+            //el usuario que nos llega puede ser o cliente o autorizado, o las dos cosas
+            //1. Caso solo cliente
+            if(usuarios.get(0).getCliente() != null && usuarios.get(0).getAutorizado() == null){
+                //si es una persona fisica, comprobamos si está bloqueado. En ese caso, no podra acceder a la aplicación
+                if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Fisica")){
+                    if(usuarios.get(0).getCliente().getEstado().equals("Bloqueado")){
+                        ok = false;
+                        throw new PersonaFisicaBloqueada();
+                    }
+                    else{
+                        ok = false;
+                    }
+                }
+                //Empresas no tienen acceso a la aplicacion
+                if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Juridico")){
+                    throw new EmpresaNoTieneAcceso();
+                }
             }
+            //2. Caso solo Autorizado
+            else if(usuarios.get(0).getCliente() == null && usuarios.get(0).getAutorizado() != null){
+                //autorizados bloqueados no tienen acceso a la aplicacion
+                if(usuarios.get(0).getAutorizado().getEstado().equals("Bloqueado")){
+                    ok = false;
+                    throw new AutorizadoBloqueado();
+                }
+                else{
+                    ok = true;
+                }
+            }
+            //3. Las dos cosas
             else{
-                //si es un autorizado, comprobamos el n de cuentas a la que tiene acceso. Si solo tiene acceso a operar
-                //con una cuenta y esta bloqueado, le denegamos el acceso a la aplicacion
-                if(usuarios.get(0).getAutorizado() != null){
-                    Autorizado au = usuarios.get(0).getAutorizado();
+                boolean accesoCorrectoCliente = false;
+                if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Fisica")){
+                    if(usuarios.get(0).getCliente().getEstado().equals("Bloqueado")){
+                        accesoCorrectoCliente = false;
+                    }
+                    else{
+                        accesoCorrectoCliente = true;
+                    }
+                }
+                //Empresas no tienen acceso a la aplicacion
+                if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Juridico")){
+                    accesoCorrectoCliente = false;
+                }
+                boolean accesoCorrectoAutorizado = false;
+                if(usuarios.get(0).getAutorizado().getEstado().equals("Bloqueado")){
+                    accesoCorrectoAutorizado = false;
+                }
+                else{
+                    accesoCorrectoAutorizado = true;
+                }
+                //tanto el cliente como el autorizado asociado al usuario que intenta loguearse estan bloqueados
+                if(!accesoCorrectoCliente && !accesoCorrectoAutorizado){
+                    ok = false;
+                }
+                //el autorizado asociado al cliente est5
+                if(accesoCorrectoCliente && !accesoCorrectoAutorizado){
+                    ok = true;
+                }
+                if(!accesoCorrectoCliente && accesoCorrectoAutorizado){
+                    List<PersonaJuridica> listapj = usuarios.get(0).getAutorizado().getEmpresas();
                     boolean solotieneaccesoacuentasdeclientebloqueado = true;
-                    List<PersonaJuridica> listapj = au.getEmpresas();
                     for(PersonaJuridica pj : listapj){
                         if(!pj.getEstado().equals("Bloqueado") && !pj.getCuentasFintech().isEmpty()){
                             solotieneaccesoacuentasdeclientebloqueado = false;
@@ -53,18 +103,20 @@ public class UsuariosEJB implements GestionUsuarios {
                         throw new AutorizadoSoloTieneAccesoACuentasClienteBloqueado();
                     }
                 }
-                //si es una persona fisica, comprobamos si está bloqueado. En ese caso, no podra acceder a la aplicación
-                if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Fisica")){
-                    if(!usuarios.get(0).getCliente().getEstado().equals("Bloqueado")){
+                if(accesoCorrectoCliente && accesoCorrectoAutorizado){
+                    List<PersonaJuridica> listapj = usuarios.get(0).getAutorizado().getEmpresas();
+                    boolean solotieneaccesoacuentasdeclientebloqueado = true;
+                    for(PersonaJuridica pj : listapj){
+                        if(!pj.getEstado().equals("Bloqueado") && !pj.getCuentasFintech().isEmpty()){
+                            solotieneaccesoacuentasdeclientebloqueado = false;
+                        }
+                    }
+                    if(!solotieneaccesoacuentasdeclientebloqueado || !usuarios.get(0).getCliente().getCuentasFintech().isEmpty()){
                         ok = true;
                     }
                     else{
-                        throw new PersonaFisicaBloqueada();
+                        throw new AutorizadoSoloTieneAccesoACuentasClienteBloqueado();
                     }
-                }
-                //Empresas no tienen acceso a la aplicacion
-                if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Juridico")){
-                    throw new EmpresaNoTieneAcceso();
                 }
             }
         }

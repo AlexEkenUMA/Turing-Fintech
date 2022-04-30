@@ -189,9 +189,22 @@ public class BaseDatos {
 		em.persist(destino);
 
 
+		//RF 10 Y RF 16
 
+		Usuario messi = new Usuario("Lionel Andrés Messi", "messirve", true);
+		PersonaFisica personaFisica8 = new PersonaFisica(null, "458948503U", "Fisica", "Activo", date, null, "su casa",
+				"olimpo", 2967, "argentina loko", "Messi", "messi lolololo", date);
+		messi.setCliente(personaFisica8);
+		personaFisica8.setUsuario(messi);
+		em.persist(personaFisica8);
+		em.persist(messi);
 
-
+		Usuario esoler = new Usuario("eSoler", "bbdd", true);
+		Autorizado autorizado9 = new Autorizado(null, "esoler", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
+		esoler.setAutorizado(autorizado9);
+		autorizado9.setUsuario(esoler);
+		em.persist(autorizado9);
+		em.persist(esoler);
 
 
 

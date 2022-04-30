@@ -55,9 +55,9 @@ public class TuringFintech {
 	@Test
 	@Requisitos("RF1")
 	public void testUsuarioCorrecto(){
-		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
+		Usuario messi = new Usuario("Lionel Andrés Messi", "messirve", true);
 		try{
-			gestionUsuarios.usuarioCorrecto(usuario2);
+			gestionUsuarios.usuarioCorrecto(messi);
 
 		}catch (UsuarioNoEncontrado e){
 			fail("No deberia lanzar la excepcion");
@@ -68,6 +68,8 @@ public class TuringFintech {
 			fail("Autorizado que solo tiene acceso a las cuentas de clientes que estan bloqueados");
 		} catch (PersonaFisicaBloqueada e) {
 			fail("Persona fisica bloqueada esta intentando acceder a la aplicacion");
+		} catch (AutorizadoBloqueado autorizadoBloqueado) {
+			fail("Persona autorizada bloqueada esta intentando acceder a la aplicacion");
 		}
 	}
 
@@ -622,9 +624,9 @@ public class TuringFintech {
 	@Requisitos("RF10")
 	public void testAccesoPersonaAutorizada(){
 		//este usuario tiene asociado un autorizado en la BBDD
-		Usuario usuario3= new Usuario("Cristiano", "Ronaldo", false);
+		Usuario esoler = new Usuario("eSoler", "bbdd", true);
 		try{
-			assertEquals(true, gestionUsuarios.usuarioCorrecto(usuario3));
+			assertEquals(true, gestionUsuarios.usuarioCorrecto(esoler));
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
 			fail("Usuario no encontrado");
 		} catch (EmpresaNoTieneAcceso empresaNoTieneAcceso) {
@@ -633,6 +635,8 @@ public class TuringFintech {
 			fail("Autorizado que solo tiene acceso a las cuentas de clientes que estan bloqueados");
 		} catch (PersonaFisicaBloqueada e) {
 			fail("Persona fisica bloqueada esta intentando acceder a la aplicacion");
+		} catch (AutorizadoBloqueado autorizadoBloqueado) {
+			fail("Persona autorizada bloqueada esta intentando acceder a la aplicacion");
 		}
 
 

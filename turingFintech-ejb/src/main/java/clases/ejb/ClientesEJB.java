@@ -180,12 +180,6 @@ public class ClientesEJB implements GestionClientes {
                 pj.setEstado("Bloqueado");
                 em.merge(pj);
             }
-            List<CuentaFintech> cuentaspj = pj.getCuentasFintech();
-            List<Autorizado> listaAutorizados = pj.getAutorizados();
-            //no sabemos si hace falta bloquear a los autorizados asociados a la empresa
-            //for(Autorizado au : listaAutorizados){
-            //    au.setEstado("Bloqueado");
-            //}
         }
         else if(c.getTipo_Cliente().equals("Fisica")){
             PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
@@ -219,12 +213,6 @@ public class ClientesEJB implements GestionClientes {
                 pj.setEstado("Activo");
                 em.merge(pj);
             }
-            List<CuentaFintech> cuentaspj = pj.getCuentasFintech();
-            List<Autorizado> listaAutorizados = pj.getAutorizados();
-            //no sabemos si es necesario
-            //for(Autorizado au : listaAutorizados){
-            //    au.setEstado("Activo");
-            //}
         }
         else if (c.getTipo_Cliente().equals("Fisica")){
             PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
