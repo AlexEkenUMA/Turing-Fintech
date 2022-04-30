@@ -43,7 +43,7 @@ public class Transaccion implements Serializable {
         this.cantidad = cantidad;
         this.concepto = concepto;
         this.nombre_Emisor = nombre_Emisor;
-        this.comision = 0.01;
+        this.comision = 0.01 * cantidad;
         this.tipo_Transaccion = tipo_Transaccion;
     }
 

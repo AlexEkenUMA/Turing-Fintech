@@ -148,12 +148,23 @@ public class BaseDatos {
 		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), "Baja", "Segregada", 0.1);
 		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), "Baja", "Segregada", 0.1);
 
+		Segregada saldoCero = new Segregada("ES0", "", new Date(), "Activa", "Segregada", 0.1);
+		CuentaReferencia crCero = new CuentaReferencia("Cr0", "", "Santander", "Sucursal", "España",
+				0.0, new Date(), true );
+		Divisa euros = new Divisa("EUR", "Euros", '€', 1);
+		em.persist(euros);
+		crCero.setSegregada(saldoCero);
+		crCero.setDivisa(euros);
+		saldoCero.setCr(crCero);
+		em.persist(crCero);
+		em.persist(saldoCero);
 
 		em.persist(ibai);
 		em.persist(cuentaSegregada1);
 		em.persist(cuentaSegregada2);
 		em.persist(cuentaDeBaja);
 		em.persist(cuentaDeBaja2);
+
 
 		em.getTransaction().commit();
 		

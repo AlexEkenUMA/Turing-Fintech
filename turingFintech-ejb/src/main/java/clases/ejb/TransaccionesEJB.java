@@ -75,27 +75,6 @@ public class TransaccionesEJB implements GestionTransacciones {
                     em.merge(segregadaOrigen.getCr());
                 }
             }
-
-
-            /**
-            for(DepositadaEn dp : segregadaOrigen.getCr().getListaDepositos()){
-                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
-                    okOrigen = true;
-                    double nuevoSaldo = dp.getSaldo()-transaccion.getCantidad()-transaccion.getComision();
-                    double nuevoSaldoCr = dp.getCuentaReferencia().getSaldo()- transaccion.getCantidad()- transaccion.getComision();
-                    if(nuevoSaldo < 0 || nuevoSaldoCr < 0){
-                        throw new SaldoInsuficiente();
-                    }
-                    else{
-                        dp.setSaldo(nuevoSaldo);
-                        //no se si es necesario
-                        dp.getCuentaReferencia().setSaldo(nuevoSaldoCr);
-                        em.merge(dp);
-                        em.merge(dp.getCuentaReferencia());
-                    }
-                }
-            }
-             */
             if(!okOrigen){
                 throw new DivisaNoCoincide();
             }
@@ -132,18 +111,6 @@ public class TransaccionesEJB implements GestionTransacciones {
                 segregadaDestino.getCr().setSaldo(segregadaDestino.getCr().getSaldo()+transaccion.getCantidad());
                 em.merge(segregadaDestino.getCr());
             }
-            /*
-            for(DepositadaEn dp : segregadaDestino.getCr().getListaDepositos()){
-                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
-                    okDestino = true;
-                    dp.setSaldo(dp.getSaldo()+transaccion.getCantidad());
-                    //no se si es necesario
-                    dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()+transaccion.getCantidad());
-                    em.merge(dp);
-                    em.merge(dp.getCuentaReferencia());
-                }
-            }
-             */
             if(!okDestino){
                 throw new DivisaNoCoincide();
             }
