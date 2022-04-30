@@ -42,7 +42,6 @@ public class TransaccionesEJB implements GestionTransacciones {
             for(DepositadaEn dp : pooledOrigen.getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
                     okOrigen = true;
-                    //el saldo de la cuentareferencia y depositadaen que esten relacionados deberia ser el mismo?
                     double nuevoSaldo = dp.getSaldo()-transaccion.getCantidad()-transaccion.getComision();
                     double nuevoSaldoCr = dp.getCuentaReferencia().getSaldo()- transaccion.getCantidad()- transaccion.getComision();
                     if(nuevoSaldo < 0 || nuevoSaldoCr < 0){
@@ -55,8 +54,6 @@ public class TransaccionesEJB implements GestionTransacciones {
                         em.merge(dp);
                         em.merge(dp.getCuentaReferencia());
                     }
-
-
                 }
             }
             if(!okOrigen){
@@ -66,6 +63,7 @@ public class TransaccionesEJB implements GestionTransacciones {
         if(origenEntity instanceof Segregada){
             Segregada segregadaOrigen = (Segregada) origenEntity;
             transaccion.setOrigen(segregadaOrigen);
+            //Buscar solo la cuenta de referencia (no las depositadas) ******
             for(DepositadaEn dp : segregadaOrigen.getCr().getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
                     okOrigen = true;
@@ -75,9 +73,9 @@ public class TransaccionesEJB implements GestionTransacciones {
                         throw new SaldoInsuficiente();
                     }
                     else{
-                        dp.setSaldo(dp.getSaldo()-transaccion.getCantidad()-transaccion.getComision());
+                        dp.setSaldo(nuevoSaldo);
                         //no se si es necesario
-                        dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()- transaccion.getCantidad()- transaccion.getComision());
+                        dp.getCuentaReferencia().setSaldo(nuevoSaldoCr);
                         em.merge(dp);
                         em.merge(dp.getCuentaReferencia());
                     }
@@ -113,6 +111,7 @@ public class TransaccionesEJB implements GestionTransacciones {
                 throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
             }
             transaccion.setDestino(segregadaDestino);
+            // No hace falta miras en las depositadas ****
             for(DepositadaEn dp : segregadaDestino.getCr().getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
                     okDestino = true;

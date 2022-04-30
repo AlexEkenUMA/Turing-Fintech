@@ -37,13 +37,13 @@ public class Transaccion implements Serializable {
     //Constructores
 
 
-    public Transaccion(Long iD_Unico, Date fecha_Instruccion, Double cantidad, String concepto, String nombre_Emisor, Double comision, String tipo_Transaccion) {
+    public Transaccion(Long iD_Unico, Date fecha_Instruccion, Double cantidad, String concepto, String nombre_Emisor, String tipo_Transaccion) {
         this.iD_Unico = iD_Unico;
         this.fecha_Instruccion = fecha_Instruccion;
         this.cantidad = cantidad;
         this.concepto = concepto;
         this.nombre_Emisor = nombre_Emisor;
-        this.comision = comision;
+        this.comision = 0.01;
         this.tipo_Transaccion = tipo_Transaccion;
     }
 

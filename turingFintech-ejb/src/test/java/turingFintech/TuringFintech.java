@@ -687,7 +687,7 @@ public class TuringFintech {
 	@Requisitos("RF13")
 	public void testRegistrarTransaccionConCantidadErronea(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		Transaccion tx1 = new Transaccion(1L, new Date(), 0.0, "Quiero hackear el sistema", "Ismael", 0.0, "Transferencia regular");
+		Transaccion tx1 = new Transaccion(1L, new Date(), 0.0, "Quiero hackear el sistema", "Ismael", "Transferencia regular");
 		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
 		Segregada cuentaSegregada2 = new Segregada("ES394583094851", "", new Date(), "Activa", "Segregada", 0.1);
 
@@ -698,7 +698,7 @@ public class TuringFintech {
 	@Requisitos("RF13")
 	public void testCuentaNoExistenteRealizaTransaccion(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael",  "Transferencia regular");
 		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
 		Segregada cuentaSegregada2 = new Segregada("990", "", new Date(), "Activa", "Segregada", 0.1);
 
@@ -709,7 +709,7 @@ public class TuringFintech {
 	@Requisitos("RF13")
 	public void testCuentaDeBajaRealizaTransaccion(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", "Transferencia regular");
 		Segregada cuentaDeBaja = new Segregada("ES394583094857", "", new Date(), "Baja", "Segregada", 0.1);
 		Segregada cuentaDeBaja2 = new Segregada("ES394583094858", "", new Date(), "Baja", "Segregada", 0.1);
 		assertThrows(CuentaDeBajaNoPuedeRegistrarTransaccion.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaDeBaja, cuentaDeBaja2, tx1));
@@ -719,7 +719,7 @@ public class TuringFintech {
 	@Requisitos("RF13")
 	public void testCuentaRealizaTransaccionASiMisma(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", 0.01, "Transferencia regular");
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael",  "Transferencia regular");
 		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
 		assertThrows(MismaCuentaOrigenYDestino.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada1, tx1));
 	}
