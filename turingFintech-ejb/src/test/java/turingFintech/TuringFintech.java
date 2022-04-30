@@ -955,4 +955,84 @@ public class TuringFintech {
 		assertThrows(PersonaFisicaBloqueada.class, () -> gestionUsuarios.usuarioCorrecto(turing));
 	}
 
+	@Test
+	@Requisitos("RF16")
+	public void testBloquearAutorizadoNoExistente(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		Autorizado autorizadonoexistente = new Autorizado(55L, "noexisto", "noexisto", "4", "Cielo", new Date(), "Activo", new Date(), null);
+
+		assertThrows(AutorizadoNoEncontradoException.class, () -> gestionAutorizados.bloquearAutorizado(karim, autorizadonoexistente));
+	}
+
+	@Test
+	@Requisitos("RF16")
+	public void testBloquearAutorizado(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		Autorizado autorizado9 = new Autorizado(12L, "esoler", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
+
+		try{
+			gestionAutorizados.bloquearAutorizado(karim, autorizado9);
+
+		} catch (AutorizadoNoEncontradoException e) {
+			fail("El autorizado no fue encontrado en la bbdd");
+		} catch (BloquearAutorizadoYaBloqueado bloquearAutorizadoYaBloqueado) {
+			fail("El administrativo ha intentado bloquear a un autorizado que ya esta bloqueado");
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("El usuario no fue encontrado en la bbdd");
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario que intenta bloquear al autorizado no es administrativo");
+		}
+		for(Autorizado au: gestionAutorizados.getAutorizados()){
+			if(au.getIdentificacion().equals("esoler")){
+				assertEquals("Bloqueado", au.getEstado());
+			}
+		}
+	}
+
+	@Test
+	@Requisitos("RF16")
+	public void testDesbloquearAutorizado(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		Autorizado autorizado9 = new Autorizado(12L, "esoler", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
+
+		try{
+			//bloqueamos
+			gestionAutorizados.bloquearAutorizado(karim, autorizado9);
+			//desbloqueamos
+			gestionAutorizados.desbloquearAutorizado(karim, autorizado9);
+		} catch (AutorizadoNoEncontradoException e) {
+			fail("El autorizado no fue encontrado en la bbdd");
+		} catch (BloquearAutorizadoYaBloqueado bloquearAutorizadoYaBloqueado) {
+			fail("El administrativo ha intentado bloquear a un autorizado que ya esta bloqueado");
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("El usuario no fue encontrado en la bbdd");
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario que intenta bloquear al autorizado no es administrativo");
+		} catch (DesbloquearAutorizadoQueNoEstaBloqueado desbloquearAutorizadoQueNoEstaBloqueado) {
+			fail("El usuario ha intentado desbloquear a un autorizado que estaba activo");
+		}
+
+		for(Autorizado au: gestionAutorizados.getAutorizados()){
+			if(au.getIdentificacion().equals("esoler")){
+				assertEquals("Activo", au.getEstado());
+			}
+		}
+	}
+
+	@Test
+	@Requisitos("RF16")
+	public void testBloquearAutorizadoYaBloqueado(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		Autorizado autorizado10 = new Autorizado(13L, "moises", "autorizado", "4", "Cielo", new Date(), "Bloqueado", new Date(), null);
+
+		assertThrows(BloquearAutorizadoYaBloqueado.class, () -> gestionAutorizados.bloquearAutorizado(karim, autorizado10));
+	}
+	@Test
+	@Requisitos("RF16")
+	public void testDesbloquearAutorizadoNoBloqueado(){
+		Usuario karim = new Usuario("Karim", "Benzedios", true);
+		Autorizado autorizado9 = new Autorizado(12L, "esoler", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
+
+		assertThrows(DesbloquearAutorizadoQueNoEstaBloqueado.class, () -> gestionAutorizados.desbloquearAutorizado(karim, autorizado9));
+	}
 }

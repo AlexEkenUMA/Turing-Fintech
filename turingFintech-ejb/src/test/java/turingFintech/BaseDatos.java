@@ -206,8 +206,11 @@ public class BaseDatos {
 		em.persist(autorizado9);
 		em.persist(esoler);
 
+		Autorizado autorizado10 = new Autorizado(null, "moises", "autorizado", "4", "Cielo", new Date(), "Bloqueado", new Date(), null);
 
-
+		em.persist(autorizado10);
+		//System.out.println(autorizado10.getId());
+		//System.out.println(autorizado9.getId());
 		em.getTransaction().commit();
 		
 		em.close();

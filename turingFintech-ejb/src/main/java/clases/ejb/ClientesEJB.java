@@ -303,7 +303,6 @@ public class ClientesEJB implements GestionClientes {
                     personaJuridicas.get(0).getAutorizados().size();
                 }
 
-
             }
         }
 
