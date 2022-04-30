@@ -734,8 +734,23 @@ public class TuringFintech {
 		Segregada saldoCero = new Segregada("ES0", "", new Date(), "Activa", "Segregada", 0.1);
 		Segregada destino = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
 		tx1.setEmisor(euros);
-		tx1.setReceptor(euros);
 		assertThrows(SaldoInsuficiente.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, saldoCero, destino, tx1));
+
+	}
+
+	@Test
+	@Requisitos("RF13")
+	public void testDivisaNoCoincide (){
+
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael",
+				"Transferencia regular");
+		Divisa euros = new Divisa("EUR", "Euros", '€', 1);
+		Divisa dolares = new Divisa("USD", "Dolar", '$', 0.95);
+		Segregada saldoCero = new Segregada("ES0", "", new Date(), "Activa", "Segregada", 0.1);
+		Segregada destino = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
+		tx1.setEmisor(dolares);
+		assertThrows(DivisaNoCoincide.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, saldoCero, destino, tx1));
 
 	}
 

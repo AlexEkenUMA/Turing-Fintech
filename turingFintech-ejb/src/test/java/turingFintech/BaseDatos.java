@@ -151,7 +151,10 @@ public class BaseDatos {
 		Segregada saldoCero = new Segregada("ES0", "", new Date(), "Activa", "Segregada", 0.1);
 		CuentaReferencia crCero = new CuentaReferencia("Cr0", "", "Santander", "Sucursal", "España",
 				0.0, new Date(), true );
-		Divisa euros = new Divisa("EUR", "Euros", '€', 1);
+		Divisa euros   = new Divisa("EUR", "Euros", '€', 1);
+		Divisa dolares = new Divisa("USD", "Dolar", '$', 0.95);
+
+		em.persist(dolares);
 		em.persist(euros);
 		crCero.setSegregada(saldoCero);
 		crCero.setDivisa(euros);
