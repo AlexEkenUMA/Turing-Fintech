@@ -168,6 +168,32 @@ public class BaseDatos {
 		em.persist(cuentaDeBaja);
 		em.persist(cuentaDeBaja2);
 
+		//RF13 testTOCHO TEST DE JHONNY TEST
+
+		Segregada origen  			= new Segregada("ES1", "", new Date(), "Activa", "Segregada", 0.1);
+		CuentaReferencia crOrigen 	= new CuentaReferencia("ESCrOrigen", "", "Ebury", "Uma",
+				"España", 500.00, new Date(), true);
+		origen.setCr(crOrigen);
+		crOrigen.setSegregada(origen);
+		crOrigen.setDivisa(euros);
+		em.persist(crOrigen);
+		em.persist(origen);
+
+		Segregada destino  			= new Segregada("ES2", "", new Date(), "Activa", "Segregada", 0.1);
+		CuentaReferencia crDestino 	= new CuentaReferencia("ESCrDestino", "", "Ebury", "Uma",
+				"España", 500.00, new Date(), true);
+		destino.setCr(crDestino);
+		crDestino.setSegregada(destino);
+		crDestino.setDivisa(euros);
+		em.persist(crDestino);
+		em.persist(destino);
+
+
+
+
+
+
+
 
 		em.getTransaction().commit();
 		

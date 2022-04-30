@@ -755,6 +755,62 @@ public class TuringFintech {
 	}
 
 
+	@Test
+	@Requisitos("RF13")
+	public void testRealizarTransaccion(){
+
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael",
+				"Transferencia regular");
+		Divisa euros = new Divisa("EUR", "Euros", '€', 1);
+		Segregada origen  			= new Segregada("ES1", "", new Date(), "Activa", "Segregada", 0.1);
+		Segregada destino  			= new Segregada("ES2", "", new Date(), "Activa", "Segregada", 0.1);
+		tx1.setReceptor(euros);
+		tx1.setEmisor(euros);
+		tx1.setCantidad(100.0);
+
+		try{
+			gestionTransacciones.registrarTransaccionFintech(ibai, origen, destino, tx1);
+			List<Segregada> segregadaList = gestionCuentas.obtenerCuentasSegregada();
+			Segregada o = null;
+			Segregada d = null;
+			for (Segregada s: segregadaList){
+
+				if (s.getIBAN().equals(origen.getIBAN())){
+					o = s;
+				}
+				if (s.getIBAN().equals(destino.getIBAN())){
+					d = s;
+				}
+			}
+			Double saldoDestino = 600.0;
+			assertEquals(saldoDestino, d.getCr().getSaldo());
+			Double saldoOrigen  = 399.0;
+			assertEquals(saldoOrigen, o.getCr().getSaldo());
+			assertEquals(o, tx1.getOrigen());
+			assertEquals(d, tx1.getDestino());
+
+
+		}catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			usuarioNoEncontrado.printStackTrace();
+		} catch (MismaCuentaOrigenYDestino mismaCuentaOrigenYDestino) {
+			mismaCuentaOrigenYDestino.printStackTrace();
+		} catch (SaldoInsuficiente saldoInsuficiente) {
+			saldoInsuficiente.printStackTrace();
+		} catch (CuentaNoEncontradaException e) {
+			e.printStackTrace();
+		} catch (TransaccionConCantidadIncorrecta transaccionConCantidadIncorrecta) {
+			transaccionConCantidadIncorrecta.printStackTrace();
+		} catch (DivisaNoCoincide divisaNoCoincide) {
+			divisaNoCoincide.printStackTrace();
+		} catch (CuentaDeBajaNoPuedeRegistrarTransaccion cuentaDeBajaNoPuedeRegistrarTransaccion) {
+			cuentaDeBajaNoPuedeRegistrarTransaccion.printStackTrace();
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			noEsAdministrativo.printStackTrace();
+		}
+
+
+	}
 
 
 

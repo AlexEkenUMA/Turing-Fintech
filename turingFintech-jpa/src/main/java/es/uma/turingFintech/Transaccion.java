@@ -76,6 +76,7 @@ public class Transaccion implements Serializable {
 
     public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
+        this.comision = 0.01*cantidad;
     }
 
     public String getConcepto() {
