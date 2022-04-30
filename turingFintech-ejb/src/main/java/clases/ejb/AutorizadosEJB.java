@@ -1,10 +1,7 @@
 package clases.ejb;
 
 import clases.ejb.exceptions.*;
-import es.uma.turingFintech.Autorizado;
-import es.uma.turingFintech.CuentaFintech;
-import es.uma.turingFintech.PersonaJuridica;
-import es.uma.turingFintech.Usuario;
+import es.uma.turingFintech.*;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -84,6 +81,39 @@ public class AutorizadosEJB implements GestionAutorizados{
             List<PersonaJuridica> vacia = new ArrayList<>();
             autorizadoExiste.setEmpresas(vacia);
             em.merge(autorizadoExiste);
+    }
+
+    public void bloquearAutorizado (Usuario u, Autorizado au) throws BloquearAutorizadoYaBloqueado, AutorizadoNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
+        gestionUsuarios.usuarioAdministrativo(u);
+        Autorizado autorizado = em.find(Autorizado.class, au.getId());
+        if(autorizado == null){
+            throw new AutorizadoNoEncontradoException();
+        }
+        if(autorizado.getEstado().equals("Bloqueado")){
+            throw new BloquearAutorizadoYaBloqueado();
+        }
+        else{
+            autorizado.setEstado("Bloqueado");
+            em.merge(autorizado);
+        }
+
+    }
+
+
+
+    public void desbloquearAutorizado (Usuario u, Autorizado au) throws DesbloquearAutorizadoQueNoEstaBloqueado, AutorizadoNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
+        gestionUsuarios.usuarioAdministrativo(u);
+        Autorizado autorizado = em.find(Autorizado.class, au.getId());
+        if(autorizado == null){
+            throw new AutorizadoNoEncontradoException();
+        }
+        if(!autorizado.getEstado().equals("Bloqueado")){
+            throw new DesbloquearAutorizadoQueNoEstaBloqueado();
+        }
+        else{
+            autorizado.setEstado("Activo");
+            em.merge(autorizado);
+        }
     }
 
     @Override

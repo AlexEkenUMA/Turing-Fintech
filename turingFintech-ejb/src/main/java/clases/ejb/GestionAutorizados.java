@@ -19,6 +19,10 @@ public interface    GestionAutorizados {
 
     public void eliminarAutorizados(Usuario u, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException;
 
+    public void bloquearAutorizado (Usuario u, Autorizado au) throws BloquearAutorizadoYaBloqueado, AutorizadoNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
+
+    public void desbloquearAutorizado (Usuario u, Autorizado au) throws DesbloquearAutorizadoQueNoEstaBloqueado, AutorizadoNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
+
 
     public List<Autorizado> getAutorizados();
 
