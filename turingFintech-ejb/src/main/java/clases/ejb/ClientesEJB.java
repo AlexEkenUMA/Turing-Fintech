@@ -257,22 +257,87 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public List<Cliente> getClientesHolanda(Usuario u, String dni, Date fechaAlta, Date fechaBaja, String direccion, Integer codigoPostal, String pais) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda{
+    public List<Cliente> getClientesHolanda(Usuario u, String dni, String nombre, String apellidos, String direccion)
+            throws NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda{
         gestionUsuarios.usuarioAdministrativo(u);
-        Query query = em.createQuery("SELECT c FROM Cliente c where c.identificacion = :dni and " +
-                "c.fecha_Alta = :fechaAlta and c.fecha_Baja = :fechaBaja " +
-                "and c.direccion = :direccion and c.codigo_Postal = :codigoPostal and c.pais = :pais");
+        List<Cliente> resultados = new ArrayList<>();
+
+        if (dni != null){
+
+            List<PersonaFisica> personaFisicaList       = this.getPersonasFisicas();
+            List<PersonaJuridica> personaJuridicaList   = this.getPersonasJuridicas();
+
+            boolean fisica   = false;
+            boolean juridica = false;
+
+            for (PersonaFisica pf : personaFisicaList){
+                if (dni.equals(pf.getIdentificacion())){
+                    fisica = true;
+                }
+            }
+            for (PersonaJuridica pj : personaJuridicaList){
+                if (dni.equals(pj.getIdentificacion())){
+                    juridica = true;
+                }
+            }
+            if (fisica){
+                Query query = em.createQuery("Select f from PersonaFisica f where f.identificacion like :dni " +
+                        "and f.Nombre like :nombre  and f.Apellidos like :apellidos and f.direccion like :direccion");
+                query.setParameter("dni", dni);
+                if (nombre != null){
+                    query.setParameter("nombre", nombre);
+                }else{
+                    query.setParameter("nombre", "%");
+                }
+                if (apellidos != null){
+                    query.setParameter("apellidos", apellidos);
+                }else{
+                    query.setParameter("apellidos", "%");
+                }
+                if (direccion != null){
+                    query.setParameter("direccion", direccion);
+                }else{
+                    query.setParameter("direccion", "%");
+                }
+                 resultados = query.getResultList();
+            }else{  //Es una personaJuridica
+
+                Query query = em.createQuery("Select j from PersonaJuridica  j where j.identificacion like :dni"
+                + " and j.direccion like :direccion");
+                if (direccion != null){
+                    query.setParameter("direccion", direccion);
+                }else{
+                    query.setParameter("direccion", "%");
+                }
+                resultados = query.getResultList();
+                List<PersonaJuridica> personaJuridicas = (List<PersonaJuridica>) query.getResultList();
+                if (!personaJuridicas.isEmpty()){
+                    personaJuridicas.get(0).getAutorizados().size();
+                }
+
+
+            }
+        }
+
+        /*
+
+        Query query = em.createQuery("SELECT c FROM Cliente c where c.identificacion like :dni and " +
+                "c.nombre like :nombre and c.apellidos like :apellido and c.direccion like :direccion");
 
         query.setParameter("dni" , dni);
-        query.setParameter("fechaAlta" , fechaAlta);
-        query.setParameter("fechaBaja" , fechaBaja);
+        query.setParameter("nombre", nombre);
+        query.setParameter("apellido", apellidos);
         query.setParameter("direccion" , direccion);
-        query.setParameter("codigoPostal" , codigoPostal);
-        query.setParameter("pais" , pais);
+
+
         List<Cliente> listaResultado = query.getResultList();
-        if(listaResultado.isEmpty()){
+         */
+
+        if(resultados.isEmpty()){
             throw new NingunClienteCoincideConLosParametrosDeBusqueda();
         }
-        return listaResultado;
+
+
+        return resultados;
     }
 }
