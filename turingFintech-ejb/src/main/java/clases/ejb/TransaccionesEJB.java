@@ -64,6 +64,20 @@ public class TransaccionesEJB implements GestionTransacciones {
             Segregada segregadaOrigen = (Segregada) origenEntity;
             transaccion.setOrigen(segregadaOrigen);
             //Buscar solo la cuenta de referencia (no las depositadas) ******
+            if (segregadaOrigen.getCr().getDivisa().equals(transaccion.getEmisor())){
+                okOrigen = true;
+                double nuevoSaldoCr = segregadaOrigen.getCr().getSaldo() -transaccion.getCantidad()- transaccion.getComision();
+                if(nuevoSaldoCr < 0){
+                    throw new SaldoInsuficiente();
+                }else{
+
+                    segregadaOrigen.getCr().setSaldo(nuevoSaldoCr);
+                    em.merge(segregadaOrigen.getCr());
+                }
+            }
+
+
+            /**
             for(DepositadaEn dp : segregadaOrigen.getCr().getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
                     okOrigen = true;
@@ -81,6 +95,7 @@ public class TransaccionesEJB implements GestionTransacciones {
                     }
                 }
             }
+             */
             if(!okOrigen){
                 throw new DivisaNoCoincide();
             }
@@ -111,7 +126,13 @@ public class TransaccionesEJB implements GestionTransacciones {
                 throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
             }
             transaccion.setDestino(segregadaDestino);
-            // No hace falta miras en las depositadas ****
+            // No hace falta mirar en las depositadas ****
+            if (segregadaDestino.getCr().getDivisa().equals(transaccion.getEmisor())){
+                okDestino = true;
+                segregadaDestino.getCr().setSaldo(segregadaDestino.getCr().getSaldo()+transaccion.getCantidad());
+                em.merge(segregadaDestino.getCr());
+            }
+            /*
             for(DepositadaEn dp : segregadaDestino.getCr().getListaDepositos()){
                 if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
                     okDestino = true;
@@ -122,6 +143,7 @@ public class TransaccionesEJB implements GestionTransacciones {
                     em.merge(dp.getCuentaReferencia());
                 }
             }
+             */
             if(!okDestino){
                 throw new DivisaNoCoincide();
             }

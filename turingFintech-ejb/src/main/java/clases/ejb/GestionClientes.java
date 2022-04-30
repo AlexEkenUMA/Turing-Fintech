@@ -10,14 +10,10 @@ import java.util.List;
 @Local
 public interface GestionClientes {
 
-    /**
 
-     Este método es para insertar un cliente en la base de datos
-     Se le permite a un administrativo
-     RF2
-    */
-    public void darAltaCliente (Cliente c,String tipoCliente, String razonSocial, String nombre, String apellidos, Date fecha_nacimiento) throws ClienteNoValidoException;
-
+    public void darDeAltaCliente (Usuario u, String id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
+                                  Date fechaNac, String direccion, int codigoPostal,
+                                  String pais, List<Autorizado> au, String ciudad) throws ClienteNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
     /**
 
@@ -34,10 +30,6 @@ public interface GestionClientes {
      */
     public void eliminarCliente (Usuario u, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
-
-    public void darAlta2 (Usuario u, String id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
-                          Date fechaNac, String direccion, int codigoPostal,
-                          String pais, List<Autorizado> au, String ciudad) throws ClienteNoValidoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
     public void bloquearCliente (Usuario u, Cliente c) throws BloquearClienteYaBloqueado, TipoNoValidoException, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 

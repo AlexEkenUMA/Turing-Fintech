@@ -110,7 +110,7 @@ public class TuringFintech {
 		Date date = new Date();
 		List<Autorizado> au = new ArrayList<>();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
-		assertThrows(ClienteNoValidoException.class, () -> gestionClientes.darAlta2(usuario1,"32L", tipo, "Razon", "Nombre", "Apellidos", date,
+		assertThrows(ClienteNoValidoException.class, () -> gestionClientes.darDeAltaCliente(usuario1,"32L", tipo, "Razon", "Nombre", "Apellidos", date,
 				"Direccion", 2967, "Pais",au, "Ciudad" ));
 
 	}
@@ -125,7 +125,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try{
-			gestionClientes.darAlta2(usuario1,"30L", tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darDeAltaCliente(usuario1,"30L", tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
@@ -160,7 +160,7 @@ public class TuringFintech {
 		List<Autorizado> au = new ArrayList<>();
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
-			gestionClientes.darAlta2(usuario1,"31L", tipo, "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darDeAltaCliente(usuario1,"31L", tipo, "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("ClienteNoValido (NO DEBERIA");
@@ -280,7 +280,7 @@ public class TuringFintech {
 
 
 		try{
-			gestionClientes.darAlta2(usuario1,"33L", "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darDeAltaCliente(usuario1,"33L", "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("Cliente no valido (NO DEBERIA)");
@@ -323,7 +323,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try{
-			gestionClientes.darAlta2(usuario1,"34L", "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darDeAltaCliente(usuario1,"34L", "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",au, "Ciudad" );
 		}catch (ClienteNoValidoException e){
 			fail("Cliente no valido (NO DEBERIA)");
@@ -376,7 +376,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
 			List<Autorizado> autor = new ArrayList<>();
-			gestionClientes.darAlta2(usuario1,"50L", "Juridico", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darDeAltaCliente(usuario1,"50L", "Juridico", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais",autor, "Ciudad" );
 
 			List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
@@ -505,7 +505,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try {
 			List<Autorizado> autor = new ArrayList<>();
-			gestionClientes.darAlta2(usuario1, "50L", "Juridico", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darDeAltaCliente(usuario1, "50L", "Juridico", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais", autor, "Ciudad");
 			List<PersonaJuridica> personaJuridicas = gestionClientes.getPersonasJuridicas();
 			Long id = null;
@@ -578,7 +578,7 @@ public class TuringFintech {
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
 		try {
-			gestionClientes.darAlta2(usuario1, "39L", "Fisica", "Razon", "Nombre", "Apellidos", date,
+			gestionClientes.darDeAltaCliente(usuario1, "39L", "Fisica", "Razon", "Nombre", "Apellidos", date,
 					"Direccion", 2967, "Pais", au, "Ciudad");
 		} catch (ClienteNoValidoException e) {
 			fail("Cliente no valido (NO DEBERIA)");
@@ -723,6 +723,21 @@ public class TuringFintech {
 		Segregada cuentaSegregada1 = new Segregada("ES394583094850", "", new Date(), "Activa", "Segregada", 0.1);
 		assertThrows(MismaCuentaOrigenYDestino.class, () -> gestionTransacciones.registrarTransaccionFintech(ibai, cuentaSegregada1, cuentaSegregada1, tx1));
 	}
+
+	@Test
+	@Requisitos("RF13")
+	public void testSaldoInsuficiente(){
+
+
+
+
+
+
+	}
+
+
+
+
 
 	@Test
 	@Requisitos("RF16")
