@@ -54,7 +54,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF1")
+	@Requisitos({"RF1"})
 	public void testUsuarioCorrecto(){
 		Usuario messi = new Usuario("Lionel Andrés Messi", "messirve", true);
 		try{
@@ -75,7 +75,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF1")
+	@Requisitos({"RF1"})
 	public void testUsuarioNoEncontrado(){
 		Usuario usuario1 = new Usuario("JoseP", "1234", false);
 
@@ -83,7 +83,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF1")
+	@Requisitos({"RF1"})
 	public void testUsuarioAdministrativo(){
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		try{
@@ -96,7 +96,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF1")
+	@Requisitos({"RF1"})
 	public void testUsuarioNoAdministrativo(){
 
 		Usuario usuario2 = new Usuario("Chikano", "Mascarilla", false);
@@ -104,7 +104,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF2")
+	@Requisitos({"RF2"})
 	public void darDeAltaClienteNoValido(){
 
 		// (Long id, String tipoCliente, String RazonSocial, String nombre, String apellidos,
@@ -119,7 +119,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF2")
+	@Requisitos({"RF2"})
 	public void darDeAltaClienteFisico(){
 
 		final String tipo = "Fisica";
@@ -155,7 +155,7 @@ public class TuringFintech {
 
 
 	@Test
-	@Requisitos("RF2")
+	@Requisitos({"RF2"})
 	public void darDeAltaClienteJuridico(){
 
 		final String tipo = "Juridico";
@@ -183,7 +183,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF3")
+	@Requisitos({"RF3"})
 	public void modificarClienteNoEncontrado(){
 		Date date1 = new Date();
 		Date date2 = new Date();
@@ -194,7 +194,7 @@ public class TuringFintech {
 
 
 	@Test
-	@Requisitos("RF3")
+	@Requisitos({"RF3"})
 	public void modificarCliente(){
 		String identificacion = "21L";
 		PersonaJuridica pj2 = null;
@@ -231,7 +231,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF4")
+	@Requisitos({"RF4"})
 	public void testEliminarClienteNoExistente(){
 		Date date1 = new Date();
 		Date date2 = new Date();
@@ -240,7 +240,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF4")
+	@Requisitos({"RF4"})
 	public void testEliminarCliente(){
 		final String identificacion = "300L";
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
@@ -263,7 +263,7 @@ public class TuringFintech {
 		}
 	}
 	@Test
-	@Requisitos("RF4")
+	@Requisitos({"RF4"})
 	public void testEliminarClienteConCuentaActiva(){
 		final String identificacion = "108L";
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
@@ -271,7 +271,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF5")
+	@Requisitos({"RF5"})
 	public void testDarDeAltaCuentaPooled(){
 
 		final String tipo = "Pooled";
@@ -315,7 +315,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF5")
+	@Requisitos({"RF5"})
 	public void testDarDeAltaCuentaSegregada(){
 
 		final String tipo = "Segregada";
@@ -354,7 +354,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF6")
+	@Requisitos({"RF6"})
 	public void testAnadirAutorizadoPersonaJuridicaNoEncontrada(){
 		Date date = new Date();
 		Autorizado autorizado = new Autorizado(null, "10L", "Nombre", "Apellidos",
@@ -367,7 +367,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF6")
+	@Requisitos({"RF6"})
 	public void testAnadirAutorizado(){
 		Date date = new Date();
 		Autorizado autorizado = new Autorizado(150L, "100L", "Nombre", "Apellidos",
@@ -435,7 +435,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF7")
+	@Requisitos({"RF7"})
 	public void testModificarAutorizadoNoEncontradoAutorizado(){
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Date date1 = new Date();
@@ -447,7 +447,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF7")
+	@Requisitos({"RF7"})
 	public void testModificarAutorizadosConDistintaID(){
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Date date1 = new Date();
@@ -459,7 +459,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF7")
+	@Requisitos({"RF7"})
 	public void testmodificarAutorizados(){
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		Date date1 = new Date();
@@ -487,7 +487,7 @@ public class TuringFintech {
 
 
 	@Test
-	@Requisitos("RF8")
+	@Requisitos({"RF8"})
 	public void testAutorizadoNoEncontrado(){
 
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
@@ -496,7 +496,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF8")
+	@Requisitos({"RF8"})
 	public void testEliminarAutorizado(){
 		Date date = new Date();
 		Autorizado autorizado = new Autorizado(150L, "100L", "Nombre", "Apellidos",
@@ -557,7 +557,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF9")
+	@Requisitos({"RF9"})
 	public void testCierreCuentaNoEncontrada(){
 		final String IBAN = "1234";
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
@@ -568,7 +568,7 @@ public class TuringFintech {
 
 
 	@Test
-	@Requisitos("RF9")
+	@Requisitos({"RF9"})
 	public void testCierreCuenta() {
 
 		final String tipo = "Pooled";
@@ -612,7 +612,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF10")
+	@Requisitos({"RF10"})
 	public void testAccesoPersonaJuridica(){
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 
@@ -620,7 +620,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF10")
+	@Requisitos({"RF10"})
 	public void testAccesoPersonaAutorizada(){
 		//este usuario tiene asociado un autorizado en la BBDD
 		Usuario esoler = new Usuario("eSoler", "bbdd", true);
@@ -642,14 +642,14 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF11")
+	@Requisitos({"RF11"})
 	public void testObtenerCuentasHolandaNingunaCoincide(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		assertThrows(NingunaCuentaCoincideConLosParametrosDeBusqueda.class, () -> gestionCuentas.getCuentasHolanda(ibai,"Activa" , "3678367287"));
 	}
 
 	@Test
-	@Requisitos("RF11")
+	@Requisitos({"RF11"})
 	public void testObtenerCuentasHolanda(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
@@ -664,7 +664,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF11")
+	@Requisitos({"RF11"})
 	public void testObtenerClientesHolandaNingunaCoincide(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try {
@@ -680,7 +680,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF11")
+	@Requisitos({"RF11"})
 	public void testObtenerClientesHolanda(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
@@ -695,7 +695,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF12")
+	@Requisitos({"RF12"})
 	public void testObtenerInformeInicialAlemania(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
@@ -710,7 +710,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF12")
+	@Requisitos({"RF12"})
 	public void testObtenerInformeSemanalAlemania(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
@@ -726,7 +726,7 @@ public class TuringFintech {
 
 
 	@Test
-	@Requisitos("RF13")
+	@Requisitos({"RF13"})
 	public void testRegistrarTransaccionConCantidadErronea(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 0.0, "Quiero hackear el sistema", "Ismael", "Transferencia regular");
@@ -737,7 +737,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF13")
+	@Requisitos({"RF13"})
 	public void testCuentaNoExistenteRealizaTransaccion(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael",  "Transferencia regular");
@@ -748,7 +748,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF13")
+	@Requisitos({"RF13"})
 	public void testCuentaDeBajaRealizaTransaccion(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael", "Transferencia regular");
@@ -758,7 +758,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF13")
+	@Requisitos({"RF13"})
 	public void testCuentaRealizaTransaccionASiMisma(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael",  "Transferencia regular");
@@ -767,7 +767,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF13")
+	@Requisitos({"RF13"})
 	public void testSaldoInsuficiente(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		Transaccion tx1 = new Transaccion(1L, new Date(), 1.0, "Transaccion correcta", "Ismael",
@@ -781,7 +781,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF13")
+	@Requisitos({"RF13"})
 	public void testDivisaNoCoincide (){
 
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
@@ -798,7 +798,7 @@ public class TuringFintech {
 
 
 	@Test
-	@Requisitos("RF13")
+	@Requisitos({"RF13"})
 	public void testRealizarTransaccion(){
 
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
@@ -857,7 +857,7 @@ public class TuringFintech {
 
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testBloquearClienteNoExistente(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		PersonaFisica personaFisica4 = new PersonaFisica(69L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
@@ -866,7 +866,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testBloquearPersonaFisicaYJuridica(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
@@ -900,7 +900,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testDesbloquearPersonaFisicaYJuridica(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
@@ -940,7 +940,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testBloquearClienteYaBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
@@ -966,7 +966,7 @@ public class TuringFintech {
 		assertThrows(BloquearClienteYaBloqueado.class, () -> gestionClientes.bloquearCliente(karim, personaJuridica4));
 	}
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testDesbloquearClienteNoBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		PersonaFisica personaFisica4 = new PersonaFisica(8L, "800L", "Fisica", "Activo", new Date(), null, "Direccion",
@@ -979,21 +979,21 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testAccesoAutorizadoQueSoloTieneAccesoACuentasDeClientesBloqueados(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		assertThrows(AutorizadoSoloTieneAccesoACuentasClienteBloqueado.class, () -> gestionUsuarios.usuarioCorrecto(karim));
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testAccesoPersonaFisicaBloqueada(){
 		Usuario turing = new Usuario("alan", "turing", false);
 		assertThrows(PersonaFisicaBloqueada.class, () -> gestionUsuarios.usuarioCorrecto(turing));
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testBloquearAutorizadoNoExistente(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		Autorizado autorizadonoexistente = new Autorizado(55L, "noexisto", "noexisto", "4", "Cielo", new Date(), "Activo", new Date(), null);
@@ -1002,7 +1002,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testBloquearAutorizado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		Autorizado autorizado9 = new Autorizado(12L, "esoler", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
@@ -1027,7 +1027,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testDesbloquearAutorizado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		Autorizado autorizado9 = new Autorizado(12L, "esoler", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
@@ -1057,7 +1057,7 @@ public class TuringFintech {
 	}
 
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testBloquearAutorizadoYaBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		Autorizado autorizado10 = new Autorizado(13L, "moises", "autorizado", "4", "Cielo", new Date(), "Bloqueado", new Date(), null);
@@ -1065,7 +1065,7 @@ public class TuringFintech {
 		assertThrows(BloquearAutorizadoYaBloqueado.class, () -> gestionAutorizados.bloquearAutorizado(karim, autorizado10));
 	}
 	@Test
-	@Requisitos("RF16")
+	@Requisitos({"RF16"})
 	public void testDesbloquearAutorizadoNoBloqueado(){
 		Usuario karim = new Usuario("Karim", "Benzedios", true);
 		Autorizado autorizado9 = new Autorizado(12L, "esoler", "autorizado", "4", "Cielo", new Date(), "Activo", new Date(), null);
