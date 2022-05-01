@@ -2,6 +2,7 @@ package turingFintech;
 
 import clases.ejb.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -199,11 +200,9 @@ public class TuringFintech {
 		PersonaJuridica pj2 = null;
 		Usuario usuario1 = new Usuario("AlexEkken", "1234", true);
 		List<PersonaJuridica> clientes = gestionClientes.getPersonasJuridicas();
-		System.out.println(clientes);
 		for(PersonaJuridica pj: clientes){
 			if(identificacion.equals(pj.getIdentificacion())){
 				pj2 = pj;
-				System.out.println("encontrado identificacion");
 			}
 		}
 		PersonaJuridica copiapj2 = pj2;
@@ -654,7 +653,7 @@ public class TuringFintech {
 	public void testObtenerCuentasHolanda(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
-			System.out.println(gestionCuentas.getCuentasHolanda(ibai, "Baja", null));
+			gestionCuentas.getCuentasHolanda(ibai, "Baja", null);
 		} catch (NingunaCuentaCoincideConLosParametrosDeBusqueda e) {
 			fail("Los parametros de busqueda no han obtenido ningun resultado");
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -669,7 +668,7 @@ public class TuringFintech {
 	public void testObtenerClientesHolandaNingunaCoincide(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try {
-			System.out.print(gestionClientes.getClientesHolanda(ibai, "39827489823759F",  "su ca0sa", "29834", "Mozambique"));
+			gestionClientes.getClientesHolanda(ibai, "39827489823759F",  "su ca0sa", "29834", "Mozambique");
 		} catch (NoEsAdministrativo noEsAdministrativo) {
 			noEsAdministrativo.printStackTrace();
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -692,6 +691,36 @@ public class TuringFintech {
 			fail("Usuario no es administrativo");
 		} catch (NingunClienteCoincideConLosParametrosDeBusqueda ningunClienteCoincideConLosParametrosDeBusqueda) {
 			fail("Ningun cliente fue encontrado con estos parametros de busqueda");
+		}
+	}
+
+	@Test
+	@Requisitos("RF12")
+	public void testObtenerInformeInicialAlemania(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		try{
+			gestionCuentas.getInformeInicialAlemania(ibai, "C:");
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("El usuario no fue encontrado en la bbdd");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario no es administrativo");
+		}
+	}
+
+	@Test
+	@Requisitos("RF12")
+	public void testObtenerInformeSemanalAlemania(){
+		Usuario ibai = new Usuario("Ibai", "Llanos", true);
+		try{
+			gestionCuentas.getInformeSemanalAlemania(ibai, "C:");
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			fail("El usuario no fue encontrado en la bbdd");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			fail("El usuario no es administrativo");
 		}
 	}
 

@@ -2,6 +2,8 @@ package clases.ejb;
 
 import clases.ejb.exceptions.*;
 import es.uma.turingFintech.*;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -9,6 +11,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.ws.rs.client.Client;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -191,16 +198,89 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
-    public List<Segregada> getCuentasAlemania(){
+    public void getInformeInicialAlemania(Usuario u, String rutaCSV) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException {
+        gestionUsuarios.usuarioAdministrativo(u);
         Query query = em.createQuery("SELECT s FROM Segregada s");
         List<Segregada> lista = query.getResultList();
-        for(Segregada s : lista){
-            if(s.getCliente() == null){
-                lista.remove(s);
+        SimpleDateFormat sdf=new SimpleDateFormat("ddMMYYYYhhmmss");
+        String dateString=sdf.format(new Date());
+        String nombreArchivo = "/Turing_IBAN_" + dateString + ".csv";
+        try(
+                BufferedWriter stringWriter = Files.newBufferedWriter(Paths.get(nombreArchivo));
+                CSVPrinter csvPrinter = new CSVPrinter(stringWriter, CSVFormat.DEFAULT.withHeader("IBAN", "Last_Name", "First_Name",
+                        "Street", "City", "Post_Code", "Country", "identification_Number", "Date_Of_Birth"));
+
+        ){
+
+            csvPrinter.print("Ebury_IBAN_" + dateString + "\n");
+            for(Segregada s : lista){
+                if(s.getCliente() instanceof PersonaJuridica){
+                    PersonaJuridica pj = (PersonaJuridica) s.getCliente();
+                    for(Autorizado au : pj.getAutorizados()){
+                        if(au.getUsuario().getCliente() instanceof PersonaFisica){
+                            PersonaFisica pf = (PersonaFisica) au.getUsuario().getCliente();
+                            csvPrinter.printRecord(s.getIBAN(), pf.getApellidos(), pf.getNombre(), pf.getDireccion(),
+                                    pf.getCodigo_Postal(), pf.getPais(), pf.getId(), pf.getFecha_Nacimiento().toString());
+                        }
+                    }
+                }
+                if(s.getCliente() instanceof PersonaFisica){
+                    PersonaFisica pf = (PersonaFisica) s.getCliente();
+                    csvPrinter.printRecord(s.getIBAN(), pf.getApellidos(), pf.getNombre(), pf.getDireccion(),
+                    pf.getCodigo_Postal(), pf.getPais(), pf.getId(), pf.getFecha_Nacimiento().toString());
+                }
+
             }
+            csvPrinter.flush();
         }
 
-        return lista;
+
+
+
+    }
+
+    @Override
+    public void getInformeSemanalAlemania(Usuario u, String rutaCSV) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException {
+        gestionUsuarios.usuarioAdministrativo(u);
+        Query query = em.createQuery("SELECT s FROM Segregada s where s.estado='Activa'");
+        List<Segregada> lista = query.getResultList();
+        SimpleDateFormat sdf=new SimpleDateFormat("ddMMYYYYhhmmss");
+        String dateString=sdf.format(new Date());
+        String nombreArchivo = rutaCSV+"/Turing_IBAN_" + dateString + ".csv";
+        try(
+                BufferedWriter stringWriter = Files.newBufferedWriter(Paths.get(nombreArchivo));
+                CSVPrinter csvPrinter = new CSVPrinter(stringWriter, CSVFormat.DEFAULT.withHeader("IBAN", "Last_Name", "First_Name",
+                        "Street", "City", "Post_Code", "Country", "identification_Number", "Date_Of_Birth"));
+
+        ){
+            csvPrinter.print("Ebury_IBAN_" + dateString + "\n");
+            for(Segregada s : lista){
+                if(s.getCliente() instanceof PersonaJuridica){
+                    PersonaJuridica pj = (PersonaJuridica) s.getCliente();
+                    for(Autorizado au : pj.getAutorizados()){
+                        if(au.getEstado().equals("Activo")){
+                            if(au.getUsuario().getCliente() instanceof PersonaFisica){
+                                PersonaFisica pf = (PersonaFisica) au.getUsuario().getCliente();
+                                if(pf.getEstado().equals("Activo")){
+                                    csvPrinter.printRecord(s.getIBAN(), pf.getApellidos(), pf.getNombre(), pf.getDireccion(),
+                                            pf.getCodigo_Postal(), pf.getPais(), pf.getId(), pf.getFecha_Nacimiento().toString());
+                                }
+                            }
+                        }
+                    }
+                }
+                if(s.getCliente() instanceof PersonaFisica){
+                    PersonaFisica pf = (PersonaFisica) s.getCliente();
+                    if(pf.getEstado().equals("Activo")){
+                        csvPrinter.printRecord(s.getIBAN(), pf.getApellidos(), pf.getNombre(), pf.getDireccion(),
+                                pf.getCodigo_Postal(), pf.getPais(), pf.getId(), pf.getFecha_Nacimiento().toString());
+                    }
+
+                }
+
+            }
+            csvPrinter.flush();
+        }
     }
 }
 
