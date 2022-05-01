@@ -42,6 +42,7 @@ public class AutorizadosEJB implements GestionAutorizados{
         em.merge(pj);
     }
 
+    @Override
     public void modificarAutorizados(Usuario u, Autorizado au, Long ID) throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException, ModificarAutorizadosDistintaID {
 
         gestionUsuarios.usuarioAdministrativo(u);
@@ -58,7 +59,7 @@ public class AutorizadosEJB implements GestionAutorizados{
         }
     }
 
-
+    @Override
     public void eliminarAutorizados(Usuario u, Long ID)
             throws UsuarioNoEncontrado, NoEsAdministrativo, AutorizadoNoEncontradoException{
 
@@ -83,6 +84,7 @@ public class AutorizadosEJB implements GestionAutorizados{
             em.merge(autorizadoExiste);
     }
 
+    @Override
     public void bloquearAutorizado (Usuario u, Autorizado au) throws BloquearAutorizadoYaBloqueado, AutorizadoNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         Autorizado autorizado = em.find(Autorizado.class, au.getId());
@@ -99,8 +101,7 @@ public class AutorizadosEJB implements GestionAutorizados{
 
     }
 
-
-
+    @Override
     public void desbloquearAutorizado (Usuario u, Autorizado au) throws DesbloquearAutorizadoQueNoEstaBloqueado, AutorizadoNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         Autorizado autorizado = em.find(Autorizado.class, au.getId());

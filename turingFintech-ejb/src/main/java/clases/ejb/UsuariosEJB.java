@@ -60,6 +60,7 @@ public class UsuariosEJB implements GestionUsuarios {
             }
             //3. Las dos cosas
             else{
+                //comprobamos su acceso a la aplicacion como cliente
                 boolean accesoCorrectoCliente = false;
                 if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Fisica")){
                     if(usuarios.get(0).getCliente().getEstado().equals("Bloqueado")){
@@ -73,6 +74,7 @@ public class UsuariosEJB implements GestionUsuarios {
                 if(usuarios.get(0).getCliente().getTipo_Cliente().equals("Juridico")){
                     accesoCorrectoCliente = false;
                 }
+                //comprobamos su acceso a la aplicacion como autorizado
                 boolean accesoCorrectoAutorizado = false;
                 if(usuarios.get(0).getAutorizado().getEstado().equals("Bloqueado")){
                     accesoCorrectoAutorizado = false;
@@ -84,10 +86,11 @@ public class UsuariosEJB implements GestionUsuarios {
                 if(!accesoCorrectoCliente && !accesoCorrectoAutorizado){
                     ok = false;
                 }
-                //el autorizado asociado al cliente est5
+                //el autorizado asociado al usuario esta bloqueado, solo puede entrar como cliente
                 if(accesoCorrectoCliente && !accesoCorrectoAutorizado){
                     ok = true;
                 }
+                //el cliente asociado esta bloqueado, solo puede entrar como autorizado
                 if(!accesoCorrectoCliente && accesoCorrectoAutorizado){
                     List<PersonaJuridica> listapj = usuarios.get(0).getAutorizado().getEmpresas();
                     boolean solotieneaccesoacuentasdeclientebloqueado = true;
@@ -100,6 +103,7 @@ public class UsuariosEJB implements GestionUsuarios {
                         ok = true;
                     }
                     else{
+                        ok = false;
                         throw new AutorizadoSoloTieneAccesoACuentasClienteBloqueado();
                     }
                 }

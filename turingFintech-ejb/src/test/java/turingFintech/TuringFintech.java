@@ -668,7 +668,16 @@ public class TuringFintech {
 	@Requisitos("RF11")
 	public void testObtenerClientesHolandaNingunaCoincide(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		assertThrows(NingunClienteCoincideConLosParametrosDeBusqueda.class, () -> gestionClientes.getClientesHolanda(ibai, "3982749823759F",  "su casa", "29834", "Mozambique"));
+		try {
+			System.out.print(gestionClientes.getClientesHolanda(ibai, "39827489823759F",  "su ca0sa", "29834", "Mozambique"));
+		} catch (NoEsAdministrativo noEsAdministrativo) {
+			noEsAdministrativo.printStackTrace();
+		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+			usuarioNoEncontrado.printStackTrace();
+		} catch (NingunClienteCoincideConLosParametrosDeBusqueda ningunClienteCoincideConLosParametrosDeBusqueda) {
+			ningunClienteCoincideConLosParametrosDeBusqueda.printStackTrace();
+		}
+		assertThrows(NingunClienteCoincideConLosParametrosDeBusqueda.class, () -> gestionClientes.getClientesHolanda(ibai, "39827489823759F",  "su ca0sa", "29834", "Mozambique"));
 	}
 
 	@Test
@@ -676,8 +685,7 @@ public class TuringFintech {
 	public void testObtenerClientesHolanda(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
-			gestionClientes.getClientesHolanda(ibai, "666L", "Alejandro", "Requena", "Direccion");
-			System.out.println(gestionClientes.getClientesHolanda(ibai, "666L", "Alejandro", "Requena", "Direccion"));
+			gestionClientes.getClientesHolanda(ibai, null, "Alejandro", "Requena", null);
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
 			fail("Usuario no encontrado en la BBDD");
 		} catch (NoEsAdministrativo noEsAdministrativo) {

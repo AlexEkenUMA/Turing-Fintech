@@ -166,6 +166,7 @@ public class ClientesEJB implements GestionClientes {
         }
     }
 
+    @Override
     public void bloquearCliente (Usuario u, Cliente c) throws BloquearClienteYaBloqueado, TipoNoValidoException, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         if(c.getTipo_Cliente().equals("Juridico")){
@@ -199,6 +200,7 @@ public class ClientesEJB implements GestionClientes {
         }
     }
 
+    @Override
     public void desbloquearCliente (Usuario u, Cliente c) throws DesbloquearClienteQueNoEstaBloqueado, TipoNoValidoException, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         if(c.getTipo_Cliente().equals("Juridico")){
@@ -248,82 +250,70 @@ public class ClientesEJB implements GestionClientes {
     public List<Cliente> getClientesHolanda(Usuario u, String dni, String nombre, String apellidos, String direccion)
             throws NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda{
         gestionUsuarios.usuarioAdministrativo(u);
-        List<Cliente> resultados = new ArrayList<>();
+        List<Cliente> resultados;
 
-        if (dni != null){
-
-            List<PersonaFisica> personaFisicaList       = this.getPersonasFisicas();
-            List<PersonaJuridica> personaJuridicaList   = this.getPersonasJuridicas();
-
-            boolean fisica   = false;
-            boolean juridica = false;
-
-            for (PersonaFisica pf : personaFisicaList){
-                if (dni.equals(pf.getIdentificacion())){
-                    fisica = true;
-                }
-            }
-            for (PersonaJuridica pj : personaJuridicaList){
-                if (dni.equals(pj.getIdentificacion())){
-                    juridica = true;
-                }
-            }
-            if (fisica){
-                Query query = em.createQuery("Select f from PersonaFisica f where f.identificacion like :dni " +
-                        "and f.Nombre like :nombre  and f.Apellidos like :apellidos and f.direccion like :direccion");
+        if(nombre != null || apellidos != null){
+            System.out.println("HOLAA");
+            //se esta buscando persona fisica
+            Query query = em.createQuery("Select pf from PersonaFisica pf " +
+                    "where pf.identificacion like :dni " +
+                    "and pf.Nombre = :nombre and pf.Apellidos = :apellidos " +
+                    "and pf.direccion like :direccion ");
+            if (dni != null){
                 query.setParameter("dni", dni);
-                if (nombre != null){
-                    query.setParameter("nombre", nombre);
-                }else{
-                    query.setParameter("nombre", "%");
-                }
-                if (apellidos != null){
-                    query.setParameter("apellidos", apellidos);
-                }else{
-                    query.setParameter("apellidos", "%");
-                }
-                if (direccion != null){
-                    query.setParameter("direccion", direccion);
-                }else{
-                    query.setParameter("direccion", "%");
-                }
-                 resultados = query.getResultList();
-            }else{  //Es una personaJuridica
-
-                Query query = em.createQuery("Select j from PersonaJuridica  j where j.identificacion like :dni"
-                + " and j.direccion like :direccion");
-                if (direccion != null){
-                    query.setParameter("direccion", direccion);
-                }else{
-                    query.setParameter("direccion", "%");
-                }
-                resultados = query.getResultList();
-                List<PersonaJuridica> personaJuridicas = (List<PersonaJuridica>) query.getResultList();
-                if (!personaJuridicas.isEmpty()){
-                    personaJuridicas.get(0).getAutorizados().size();
-                }
-
+            }else{
+                query.setParameter("dni", "%");
             }
+            if (nombre != null){
+                System.out.println(nombre);
+                query.setParameter("nombre", nombre);
+            }else{
+                query.setParameter("nombre", "%");
+            }
+            if (apellidos != null){
+                query.setParameter("apellidos", apellidos);
+            }else{
+                query.setParameter("apellidos", "%");
+            }
+            if (direccion != null){
+                query.setParameter("direccion", direccion);
+            }else{
+                query.setParameter("direccion", "%");
+            }
+            resultados = query.getResultList();
         }
-
-        /*
-
-        Query query = em.createQuery("SELECT c FROM Cliente c where c.identificacion like :dni and " +
-                "c.nombre like :nombre and c.apellidos like :apellido and c.direccion like :direccion");
-
-        query.setParameter("dni" , dni);
-        query.setParameter("nombre", nombre);
-        query.setParameter("apellido", apellidos);
-        query.setParameter("direccion" , direccion);
-
-
-        List<Cliente> listaResultado = query.getResultList();
-         */
-
+        else{
+            //se esta buscando persona juridica o fisica
+            Query query = em.createQuery("Select c from Cliente c " +
+                    "where c.identificacion like :dni " +
+                    "and c.direccion like :direccion ");
+            if (dni != null){
+                query.setParameter("dni", dni);
+            }else{
+                query.setParameter("dni", "%");
+            }
+            if (direccion != null){
+                query.setParameter("direccion", direccion);
+            }else{
+                query.setParameter("direccion", "%");
+            }
+            resultados = query.getResultList();
+        }
         if(resultados.isEmpty()){
             throw new NingunClienteCoincideConLosParametrosDeBusqueda();
         }
-
+        else{
+            for(Cliente c : resultados){
+                if(c instanceof PersonaJuridica){
+                    PersonaJuridica pj = (PersonaJuridica) c;
+                    for(Autorizado au : pj.getAutorizados()){
+                        if(au.getUsuario().getCliente() != null){
+                            resultados.add(au.getUsuario().getCliente());
+                        }
+                    }
+                }
+            }
+        }
 
         return resultados;
     }

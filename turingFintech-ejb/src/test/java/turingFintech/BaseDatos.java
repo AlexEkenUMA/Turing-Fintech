@@ -212,7 +212,8 @@ public class BaseDatos {
 		//System.out.println(autorizado10.getId());
 		//System.out.println(autorizado9.getId());
 		em.getTransaction().commit();
-		
+
+
 		em.close();
 		emf.close();
 	}

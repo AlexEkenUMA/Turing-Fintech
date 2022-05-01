@@ -59,6 +59,7 @@ public class CuentasEJB implements GestionCuentas {
         }
     }
 
+    @Override
     public void aperturaCuentaPooled(Usuario u,Cliente cliente,String IBAN,String SWIFT, List<DepositadaEn> dpList) throws UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
 
@@ -85,7 +86,7 @@ public class CuentasEJB implements GestionCuentas {
     }
 
 
-
+    @Override
     public void aperturaCuentaSegregada(Usuario u,Cliente cliente,String IBAN,String SWIFT, CuentaReferencia cr) throws UsuarioNoEncontrado, NoEsAdministrativo{
         gestionUsuarios.usuarioAdministrativo(u);
         //hay que preguntar la comision por defecto de una cuenta segregada
