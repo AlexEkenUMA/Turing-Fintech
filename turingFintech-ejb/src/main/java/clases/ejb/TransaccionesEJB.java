@@ -121,15 +121,10 @@ public class TransaccionesEJB implements GestionTransacciones {
                 throw new CuentaDeBajaNoPuedeRegistrarTransaccion();
             }
             transaccion.setDestino(crDestino);
-            for(DepositadaEn dp : crDestino.getListaDepositos()){
-                if(dp.getCuentaReferencia().getDivisa().equals(transaccion.getEmisor())){
+            if(crDestino.getDivisa().equals(transaccion.getEmisor())){
                     okDestino = true;
-                    dp.setSaldo(dp.getSaldo()+transaccion.getCantidad());
-                    //no se si es necesario
-                    dp.getCuentaReferencia().setSaldo(dp.getCuentaReferencia().getSaldo()+transaccion.getCantidad());
-                    em.merge(dp);
-                    em.merge(dp.getCuentaReferencia());
-                }
+                    crDestino.setSaldo(crDestino.getSaldo()+transaccion.getCantidad());
+                    em.merge(crDestino);
             }
             if(!okDestino){
                 throw new DivisaNoCoincide();
@@ -137,5 +132,5 @@ public class TransaccionesEJB implements GestionTransacciones {
         }
         em.persist(transaccion);
     }
-
 }
+
