@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="turingFintech-jpa" />
+        <module name="turingFintech-war" />
+        <module name="turingFintech-ear" />
         <module name="turingFintech-ejb" />
+        <module name="turingFintech-jpa" />
+        <module name="turingFintech-tests" />
       </profile>
     </annotationProcessing>
   </component>

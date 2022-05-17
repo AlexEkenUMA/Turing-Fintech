@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="javaeeApplication" name="javaEEApplication2">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="application.xml" url="file://$MODULE_DIR$/turingFintech-ear/target/application.xml" />
+        </descriptors>
+      </configuration>
+    </facet>
+    <facet type="javaeeApplication" name="javaEEApplication">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="application.xml" url="file://$MODULE_DIR$/turingFintech-ear/target/turingFintech-ear-1.0.0-SNAPSHOT/META-INF/application.xml" />
+        </descriptors>
+      </configuration>
+    </facet>
+  </component>
+</module>

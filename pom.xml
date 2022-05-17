@@ -43,6 +43,8 @@
       
     <module>turingFintech-jpa</module>
     <module>turingFintech-ejb</module>
-      
+    <module>turingFintech-war</module>
+    <module>turingFintech-ear</module>
+    <module>turingFintech-tests</module>
   </modules>
 </project>
