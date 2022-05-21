@@ -13,5 +13,9 @@ public interface GestionUsuarios {
 
     public boolean usuarioAdministrativo (Usuario u) throws UsuarioNoEncontrado, NoEsAdministrativo;
 
+    public Usuario refrescarUsuario(Usuario u) throws AutorizadoBloqueado, UsuarioNoEncontrado, EmpresaNoTieneAcceso, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada;
+
+
+    public Usuario refrescarUsuarioAdmin(Usuario u) throws AutorizadoBloqueado, UsuarioNoEncontrado, EmpresaNoTieneAcceso, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada, NoEsAdministrativo;
 
 }

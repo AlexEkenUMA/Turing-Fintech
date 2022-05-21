@@ -146,4 +146,24 @@ public class UsuariosEJB implements GestionUsuarios {
     }
 
 
+
+
+    @Override
+    public Usuario refrescarUsuario(Usuario u) throws AutorizadoBloqueado, UsuarioNoEncontrado, EmpresaNoTieneAcceso, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada {
+        usuarioCorrecto(u);
+        Usuario user = em.find(Usuario.class, u.getNombre_usuario());
+        em.refresh(user);
+        return user;
+
+    }
+
+    @Override
+    public Usuario refrescarUsuarioAdmin(Usuario u) throws AutorizadoBloqueado, UsuarioNoEncontrado, EmpresaNoTieneAcceso, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada, NoEsAdministrativo {
+        usuarioAdministrativo(u);
+        Usuario user = em.find(Usuario.class, u.getNombre_usuario());
+        em.refresh(user);
+        return user;
+
+    }
+
 }
