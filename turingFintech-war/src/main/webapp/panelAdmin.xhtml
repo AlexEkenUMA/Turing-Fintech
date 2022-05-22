@@ -10,33 +10,18 @@
 
     <h1> PANEL ADMINISTRATIVO</h1>
 
-    <h:form id="login">
+    <h:form id="PanelAdministrativo">
 
         <c:choose>
             <c:when test="#{!empty infoSesion.usuario}">
                 <p>Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
                 <p>Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
+                <div>
+                    <p>Para dar alta a un cliente <h:link outcome="darAltaCliente.xhtml">página de acceso</h:link></p>
+                </div>
             </c:when>
 
-            <c:otherwise>
-                <h:panelGrid columns="3">
-                    <h:outputText value="Nombre de usuario:"/>
-                    <h:inputText id="user" required="true" value="#{Acceso.usuario.nombre_usuario}"/>
-                    <h:message id="userMessage" for="user"/>
 
-                    <h:outputText value="Contraseña:"/>
-                    <h:inputSecret id="pass" required="true" value="#{Acceso.usuario.contraseña}"/>
-                    <h:message id="passwordMessage" for="pass"/>
-
-                    <h:commandButton id="botonLogin" value="Entrar" action="#{Acceso.entrar()}"/>
-
-                </h:panelGrid>
-
-                <div>
-                    <p>Si usted es administrativo debe acceder desde <h:link outcome="admin.xhtml">página de acceso</h:link></p>
-                </div>
-
-            </c:otherwise>
         </c:choose>
 
 
