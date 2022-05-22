@@ -8,7 +8,7 @@
 </h:head>
 <h:body>
 
-    <h1>DAR ALTA A UN CLIENTE</h1>
+    <h1>DAR ALTA A UN CLIENTE FISICO</h1>
 
     <h:form id="darAltaClienteFisica">
         <h:panelGrid columns="3">
@@ -21,14 +21,11 @@
             <h:outputText value="DNI:"/>
             <h:inputText id="DNI" value="#{darAltaClienteFisica.personaFisica.identificacion}" required="true" />
             <h:message for="DNI"/>
-
-
-           <!-- <h:outputText value="Fecha de nacimiento"/>
-            <h:inputText id="fechaNac" value="#{darAltaClienteFisica.personaFisica.fecha_Nacimiento}"/>
+            <!--
+            <h:outputText value="Fecha de nacimiento"/>
+            <h:inputText id="fechaNac" t value="#{darAltaClienteFisica.personaFisica.fecha_Nacimiento}"/>
             <h:message for="fechaNac"/>
             -->
-
-
             <h:outputText value="Direccion"/>
             <h:inputText id="direccion" value="#{darAltaClienteFisica.personaFisica.direccion}" required="true"/>
             <h:message for="direccion"/>

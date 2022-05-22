@@ -17,7 +17,10 @@
                 <p>Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
                 <p>Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
                 <div>
-                    <p>Para dar alta a un cliente <h:link outcome="darAltaCliente.xhtml">página de acceso</h:link></p>
+                    <p>Para dar alta a un cliente fisico <h:link outcome="darAltaCliente.xhtml">página de acceso</h:link></p>
+                </div>
+                <div>
+                    <p>Para dar alta a un cliente juridico <h:link outcome="darAltaClienteJuridico.xhtml">página de acceso</h:link></p>
                 </div>
             </c:when>
 

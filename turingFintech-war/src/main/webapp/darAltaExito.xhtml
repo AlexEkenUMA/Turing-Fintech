@@ -25,6 +25,13 @@
                 <p><h:link outcome="panelAdmin.xhtml">Ir al panel de administrador</h:link></p>
             </div>
         </c:when>
+        <c:when test="#{darAltaJuridico.darAltaOk}">
+            <div>
+                <p>El registro se ha realizado con éxito. Hemos enviado un mensaje de validación a su correo
+                    electrónico. Compruébelo y pulse el enlace para validar la cuenta de usuario.</p>
+                <p><h:link outcome="panelAdmin.xhtml">Ir al panel de administrador</h:link></p>
+            </div>
+        </c:when>
         <c:otherwise>
             No tiene autorización para acceder a esta página.
         </c:otherwise>
