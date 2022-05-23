@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" 
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <persistence-unit name="turingFintech-ejb" transaction-type="JTA">
+    <jta-data-source>java:jboss/datasources/sii</jta-data-source>
+    <class>es.uma.turingFintech.Autorizado</class>
+    <class>es.uma.turingFintech.Cliente</class>
+    <class>es.uma.turingFintech.Cuenta</class>
+    <class>es.uma.turingFintech.CuentaFintech</class>
+    <class>es.uma.turingFintech.CuentaReferencia</class>
+    <class>es.uma.turingFintech.Divisa</class>
+    <class>es.uma.turingFintech.PersonaFisica</class>
+    <class>es.uma.turingFintech.PersonaJuridica</class>
+    <class>es.uma.turingFintech.PooledAccount</class>
+    <class>es.uma.turingFintech.Segregada</class>
+    <class>es.uma.turingFintech.Transaccion</class>
+    <class>es.uma.turingFintech.Usuario</class>
+    <class>es.uma.turingFintech.DepositadaEn</class>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <properties>
+    	<property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

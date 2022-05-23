@@ -1,0 +1,157 @@
+{
+  "id": "08178992-917a-42c9-a059-190ca50b72ee",
+  "version": "2.0",
+  "name": "turingFintech",
+  "url": "http://localhost:8080/turingFintech-war",
+  "tests": [{
+    "id": "c2b1ae27-029f-4553-aa6a-df2c0054929b",
+    "name": "inicio",
+    "commands": [{
+      "id": "9c50f171-833d-4944-950c-e10e16425294",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/turingFintech-war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7cbac8fd-4062-400a-8923-ba5ee61ceeff",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x900",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "72772bc5-7998-411b-b071-c01be4b47893",
+      "comment": "",
+      "command": "click",
+      "target": "id=saludo",
+      "targets": [
+        ["id=saludo", "id"],
+        ["css=#saludo", "css:finder"],
+        ["xpath=//span[@id='saludo']", "xpath:attributes"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "46826fae-140d-42a4-a03b-6433c5bd3f44",
+      "comment": "",
+      "command": "click",
+      "target": "id=saludo",
+      "targets": [
+        ["id=saludo", "id"],
+        ["css=#saludo", "css:finder"],
+        ["xpath=//span[@id='saludo']", "xpath:attributes"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8be067f4-29a7-4e9f-a714-7eb68b9e5b38",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "id=saludo",
+      "targets": [
+        ["id=saludo", "id"],
+        ["css=#saludo", "css:finder"],
+        ["xpath=//span[@id='saludo']", "xpath:attributes"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c76fe13e-b070-4cac-956f-ab7723c451ab",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"],
+        ["xpath=//html[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0f4c5a16-dddb-4464-b85e-d4e36f1389d9",
+      "comment": "",
+      "command": "click",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "006dd400-edb0-402a-bb40-783693046343",
+      "comment": "",
+      "command": "click",
+      "target": "id=saludo",
+      "targets": [
+        ["id=saludo", "id"],
+        ["css=#saludo", "css:finder"],
+        ["xpath=//span[@id='saludo']", "xpath:attributes"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7a4753e0-9fcb-4e11-96d7-9eb5d5178577",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"],
+        ["xpath=//html[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d7a216f2-717c-4987-a598-7ceabdc6edbc",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"],
+        ["xpath=//html[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "479214bc-c16c-40c7-80cd-12f710ad878a",
+      "comment": "",
+      "command": "click",
+      "target": "id=saludo",
+      "targets": [
+        ["id=saludo", "id"],
+        ["css=#saludo", "css:finder"],
+        ["xpath=//span[@id='saludo']", "xpath:attributes"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "187def7c-70ee-4109-aa96-63dcd1ed7ce6",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=saludo",
+      "targets": [
+        ["id=saludo", "id"],
+        ["css=#saludo", "css:finder"],
+        ["xpath=//span[@id='saludo']", "xpath:attributes"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Hola mundo')]", "xpath:innerText"]
+      ],
+      "value": "Hola mundo"
+    }]
+  }],
+  "suites": [{
+    "id": "081fbcb3-4d25-4c7d-8014-dca3b4f6330d",
+    "name": "turingFintechIT",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c2b1ae27-029f-4553-aa6a-df2c0054929b"]
+  }],
+  "urls": ["http://localhost:8080/turingFintech-war"],
+  "plugins": []
+}
