@@ -36,6 +36,7 @@ public class ClientesEJB implements GestionClientes {
         gestionUsuarios.usuarioAdministrativo(u);
 
 
+
         if (!tipoCliente.equals("Juridico") && !tipoCliente.equals("Fisica")){
             throw new ClienteNoValidoException();
         }
@@ -61,7 +62,9 @@ public class ClientesEJB implements GestionClientes {
     @Override
     public void modificarCliente(Usuario u, Cliente c, String ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
 
-        gestionUsuarios.usuarioAdministrativo(u);
+
+        //gestionUsuarios.usuarioAdministrativo(u);
+
         if(c.getTipo_Cliente().equals("Juridico")){
             PersonaJuridica personaJuridicaExiste = null;
             List<PersonaJuridica> empresas = getPersonasJuridicas();
@@ -73,7 +76,7 @@ public class ClientesEJB implements GestionClientes {
             if(personaJuridicaExiste == null){
                 throw new ClienteNoEncontradoException();
             }
-            if(c.getId() == personaJuridicaExiste.getId() && c.getIdentificacion() == personaJuridicaExiste.getIdentificacion()){
+            if(c.getId().equals(personaJuridicaExiste.getId()) && c.getIdentificacion().equals(personaJuridicaExiste.getIdentificacion())){
                 em.merge(c);
             }else{
                 throw new ModificarClienteDistintaID();
@@ -235,6 +238,13 @@ public class ClientesEJB implements GestionClientes {
             throw new TipoNoValidoException();
         }
     }
+
+    public List<Cliente> getClientes(){
+        Query query = em.createQuery("select cliente from Cliente cliente");
+        List<Cliente> clientes = (List<Cliente>) query.getResultList();
+        return clientes;
+    }
+
 
     public List<PersonaFisica> getPersonasFisicas (){
         Query query = em.createQuery("select cliente from PersonaFisica cliente");

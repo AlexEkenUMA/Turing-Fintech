@@ -35,6 +35,8 @@ public interface GestionClientes {
 
     public void desbloquearCliente (Usuario u, Cliente c) throws DesbloquearClienteQueNoEstaBloqueado, TipoNoValidoException, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
+    public List<Cliente> getClientes();
+
     public List<PersonaFisica> getPersonasFisicas ();
 
     public List<PersonaJuridica> getPersonasJuridicas();

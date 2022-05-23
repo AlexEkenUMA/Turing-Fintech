@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Lista de clientes</title>
+</h:head>
+<h:body>
+    <c:choose>
+        <c:when test="#{empty infoSesion.usuario}">
+            <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
+        </c:when>
+        <c:otherwise>
+            <h:form id="modificarCliente">
+                <h:dataTable value="#{infoSesion.clientes}" var="c">
+                    <h:column>
+                        <f:facet id="cabeceraNombre" name="header">ID</f:facet>
+                        <h:outputText id="ide" value="#{c.id}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet id="cabeceraNombre" name="header">DNI</f:facet>
+                        <h:outputText id="textoDNI" value="#{c.identificacion}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet id="cabeceraTipo" name="header">Tipo cliente</f:facet>
+                        <h:outputText id="textoTipo" value="#{c.tipo_Cliente}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet id="cabeceraFecha" name="header">Fecha alta</f:facet>
+                        <h:outputText id="textoFecha" value="#{c.fecha_Alta}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet id="cabeceraEstado" name="header">Estado</f:facet>
+                        <h:outputText id="estado" value="#{c.estado}"/>
+                    </h:column>
+
+                    <h:column>
+                        <h:commandButton id="botonModificar" value="Modificar" action="#{modificarCliente.modificar(c)}"/>
+                    </h:column>
+                   <!--
+                    <h:column>
+                        <h:commandButton id="botonEliminar" value="Eliminar" action="#{contactos.eliminar(c)}"/>
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton id="botonInsertar" value="Insertar" action="#{contactos.insertarContacto()}"/>
+                <h:commandButton id="botonRefrescar" value="Refrescar" action="#{contactos.refrescar}"/>
+
+                -->
+                </h:dataTable>
+                <div>
+                    <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>
+                </div>
+            </h:form>
+        </c:otherwise>
+    </c:choose>
+
+</h:body>
+</html>
+

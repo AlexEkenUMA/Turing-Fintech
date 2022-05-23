@@ -1,8 +1,10 @@
 package es.uma.turingFintech.backing;
 
 
+import clases.ejb.GestionClientes;
 import clases.ejb.GestionUsuarios;
 import clases.ejb.exceptions.*;
+import es.uma.turingFintech.Cliente;
 import es.uma.turingFintech.Usuario;
 
 import javax.enterprise.context.SessionScoped;
@@ -19,6 +21,10 @@ public class InfoSesion implements Serializable {
 
     @Inject
     private GestionUsuarios gestionUsuarios;
+
+    @Inject
+    private GestionClientes gestionClientes;
+
     private Usuario usuario;
     
     /**
@@ -33,6 +39,10 @@ public class InfoSesion implements Serializable {
 
     public synchronized Usuario getUsuario() {
         return usuario;
+    }
+
+    public List<Cliente> getClientes (){
+        return gestionClientes.getClientes();
     }
 
     public synchronized String invalidarSesion()
