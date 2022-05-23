@@ -93,7 +93,7 @@ public class ClientesEJB implements GestionClientes {
             if(personaFisicaExiste == null){
                 throw new ClienteNoEncontradoException();
             }
-            if(c.getId() == personaFisicaExiste.getId() && c.getIdentificacion() == personaFisicaExiste.getIdentificacion()){
+            if(c.getId().equals(personaFisicaExiste.getId()) && c.getIdentificacion().equals(personaFisicaExiste.getIdentificacion())){
                 em.merge(c);
             }else{
                 throw new ModificarClienteDistintaID();

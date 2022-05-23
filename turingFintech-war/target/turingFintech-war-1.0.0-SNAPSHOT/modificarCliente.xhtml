@@ -41,18 +41,18 @@
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="botonModificar" value="Modificar" action="#{modificarCliente.modificar(c)}"/>
+                        <h:commandButton id="botonModificar" value="Modificar" action="#{modificarCliente.modificar(c, infoSesion.usuario)}"/>
                     </h:column>
-                   <!--
+
                     <h:column>
-                        <h:commandButton id="botonEliminar" value="Eliminar" action="#{contactos.eliminar(c)}"/>
+                        <h:commandButton id="botonEliminar" value="Dar de baja" action="#{modificarCliente.darBaja(c.identificacion, infoSesion.usuario)}"/>
                     </h:column>
                 </h:dataTable>
+                <!--
                 <h:commandButton id="botonInsertar" value="Insertar" action="#{contactos.insertarContacto()}"/>
                 <h:commandButton id="botonRefrescar" value="Refrescar" action="#{contactos.refrescar}"/>
 
                 -->
-                </h:dataTable>
                 <div>
                     <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>
                 </div>

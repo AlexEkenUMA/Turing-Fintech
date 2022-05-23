@@ -2,6 +2,7 @@ package es.uma.turingFintech;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class Cliente implements Serializable {
 
     //relación uno a muchos cliente-cuenta
     @OneToMany(mappedBy = "cliente")
-    private List<CuentaFintech> cuentasFintech;
+    private List<CuentaFintech> cuentasFintech = new ArrayList<>();
 
     //Relacion 1:1 usuario
     @OneToOne(mappedBy = "cliente")

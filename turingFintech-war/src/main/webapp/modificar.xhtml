@@ -35,10 +35,15 @@
                     <h:commandButton value="Modificar" action="#{modificarCliente.ejecutarAccion()}"/>
                     <h:commandButton value="Cancelar" action="modificarCliente.xhtml"/>
 
+
                     <h:inputHidden value="#{modificarCliente.cliente.id}"/>
                     <h:inputHidden value="#{modificarCliente.cliente.identificacion}"/>
                     <h:inputHidden value="#{modificarCliente.cliente.tipo_Cliente}"/>
                     <h:inputHidden value="#{modificarCliente.cliente.estado}"/>
+                    <h:inputHidden value="#{modificarCliente.modo}"/>
+                    <!--
+                    <h:inputHidden value="#{modificarCliente.usuario}"/>
+                    -->
 
 
 

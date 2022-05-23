@@ -14,11 +14,20 @@ import javax.inject.Named;
 @RequestScoped
 public class modificarCliente {
 
+    public static enum Modo {
+        MODIFICAR,
+        INSERTAR,
+        NOACCION
+    };
+
+
     @Inject
     private GestionClientes gestionClientes;
 
     @Inject
     private InfoSesion sesion;
+
+    private Modo modo;
 
     private Cliente cliente;
 
@@ -35,6 +44,18 @@ public class modificarCliente {
 
     public Cliente getCliente() {return cliente;}
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Modo getModo() {return modo;}
+
+    public void setModo(Modo modo) {this.modo = modo;}
+
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
 
     public boolean isModificarOk() {return modificarOk;}
@@ -43,18 +64,58 @@ public class modificarCliente {
 
     public void setId(String id) {this.id = id;}
 
-    public String modificar(Cliente c){
+    public String getAccion() {
+        switch (modo) {
+            case MODIFICAR:
+                return "Modificar";
+            case INSERTAR:
+                return "Insertar";
+
+        }
+        return null;
+    }
+
+    public String modificar(Cliente c, Usuario u){
         this.cliente = c;
-        System.out.println(c.toString());
+        this.usuario = u;
+        setModo(Modo.MODIFICAR);
         return "modificar.xhtml";
     }
 
-    public String ejecutarAccion (){
-
+    public String darBaja(String dni, Usuario u){
         try{
-            gestionClientes.modificarCliente(usuario,cliente, cliente.getIdentificacion());
-            sesion.refrescarUsuarioAdmin();
+            gestionClientes.eliminarCliente(u,dni);
             return "modificarCliente.xhtml";
+
+        } catch (CuentaActiva cuentaActiva) {
+            cuentaActiva.printStackTrace();
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (ClienteNoEncontradoException e) {
+            e.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public String ejecutarAccion () {
+
+
+        try {
+            switch (modo) {
+                case MODIFICAR:
+                    gestionClientes.modificarCliente(usuario, cliente, cliente.getIdentificacion());
+                    break;
+                case INSERTAR:
+
+                    //gestionClientes.insertar(contacto);
+                    break;
+            }
+           // sesion.refrescarUsuarioAdmin();
+            return "modificarCliente.xhtml";
+
         } catch (ModificarClienteDistintaID modificarClienteDistintaID) {
             modificarClienteDistintaID.printStackTrace();
         } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -67,8 +128,5 @@ public class modificarCliente {
             noEsAdministrativo.printStackTrace();
         }
         return null;
-
     }
-
-
 }
