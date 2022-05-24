@@ -25,6 +25,8 @@ public class Cuentas {
         NOACCION
     };
 
+    String pooled = "Pooled";
+
     String dni = "";
 
     String ibanCr = "";
@@ -53,6 +55,14 @@ public class Cuentas {
         segregada = new Segregada();
         pooledAccount = new PooledAccount();
         modo = Modo.NOACCION;
+    }
+
+    public String getPooled() {
+        return pooled;
+    }
+
+    public void setPooled(String pooled) {
+        this.pooled = pooled;
     }
 
     public Segregada getSegregada() {return segregada;}

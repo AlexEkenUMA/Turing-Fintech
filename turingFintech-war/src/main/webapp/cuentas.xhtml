@@ -40,11 +40,14 @@
                         <h:outputText id="estado" value="#{c.estado}"/>
                     </h:column>
 
-                <!--
-               <h:column>
-                   <h:commandButton id="botonEliminar" value="Dar de baja" action="#{modificarCliente.darBaja(c.identificacion, infoSesion.usuario)}"/>
-               </h:column>
-                -->
+                <c:when test="#{c.tipo.equals(cuentas.pooled)}">
+                    <h:column>
+                   <h:commandButton id="anadirDe" value="AñadirDeposito" action="#{cuentas.aperturaPooled()}"/>
+                    </h:column>
+                </c:when>
+
+
+
            </h:dataTable>
 
            <h:commandButton id="botonInsertarSegregada" value="Apertura Cuenta Segregada" action="#{cuentas.aperturaSegregada()}"/>
