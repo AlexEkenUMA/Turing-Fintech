@@ -79,13 +79,7 @@ public class CuentasEJB implements GestionCuentas {
 
         for (DepositadaEn dp : dpList){
             if (dp != null) {
-                dp.setPooledAccount(pooledAccount);
                 em.persist(dp);
-                //em.persist(dp.getCuentaReferencia());
-                CuentaReferencia cuentaReferencia =   em.find(CuentaReferencia.class, dp.getCuentaReferencia().getIBAN());
-                if (cuentaReferencia == null){
-                    em.persist(dp.getCuentaReferencia());
-                }
             }
         }
         pooledAccount.setListaDepositos(dpList);
@@ -155,6 +149,45 @@ public class CuentasEJB implements GestionCuentas {
             em.merge(segregadaEntity);
         }
     }
+
+    @Override
+    public void setDepositos(String pooledAccount, String ibanCr, String abreviaturaDiv) throws CuentaNoEncontradaException, DivisaNoCoincide {
+
+        CuentaReferencia cuentaReferencia = em.find(CuentaReferencia.class, ibanCr);
+        if (cuentaReferencia == null){
+            throw new CuentaNoEncontradaException();
+        }
+        PooledAccount pooledAccount1 = em.find(PooledAccount.class,pooledAccount);
+        if (pooledAccount1 == null ){
+            throw new CuentaNoEncontradaException();
+        }
+        if (!cuentaReferencia.getDivisa().getAbreviatura().equals(abreviaturaDiv)){
+            throw new DivisaNoCoincide();
+        }
+        DepositadaEn depositadaEn = new DepositadaEn(cuentaReferencia.getSaldo());
+
+        depositadaEn.setPooledAccount(pooledAccount1);
+        depositadaEn.setCuentaReferencia(cuentaReferencia);
+
+        em.persist(depositadaEn);
+
+        List<DepositadaEn> depositadaEns = pooledAccount1.getListaDepositos();
+        depositadaEns.add(depositadaEn);
+
+
+    }
+
+
+
+
+    @Override
+    public List<Divisa> getDivisas(){
+        List<Divisa> divisas;
+        Query query = em.createQuery("select divisa from Divisa divisa");
+        divisas = (List<Divisa>) query.getResultList();
+        return divisas;
+    }
+
 
     @Override
     public List<CuentaReferencia> obtenerReferencias (){

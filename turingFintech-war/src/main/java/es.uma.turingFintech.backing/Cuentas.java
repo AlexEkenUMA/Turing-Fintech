@@ -2,6 +2,8 @@ package es.uma.turingFintech.backing;
 
 import clases.ejb.GestionClientes;
 import clases.ejb.GestionCuentas;
+import clases.ejb.exceptions.CuentaNoEncontradaException;
+import clases.ejb.exceptions.DivisaNoCoincide;
 import clases.ejb.exceptions.NoEsAdministrativo;
 import clases.ejb.exceptions.UsuarioNoEncontrado;
 import es.uma.turingFintech.*;
@@ -10,6 +12,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named(value = "cuentas")
@@ -25,6 +28,8 @@ public class Cuentas {
     String dni = "";
 
     String ibanCr = "";
+
+    String divisa = "";
 
     private Segregada segregada;
 
@@ -70,6 +75,10 @@ public class Cuentas {
 
     public void setModo(Modo modo) {this.modo = modo;}
 
+    public String getDivisa() {return divisa;}
+
+    public void setDivisa(String divisa) {this.divisa = divisa;}
+
     public String aperturaSegregada(){
         modo = Modo.SEGREGADA;
         return "aperturaSegregada"; //Añadir panel segregada
@@ -77,7 +86,7 @@ public class Cuentas {
 
     public String aperturaPooled(){
         modo = Modo.POOLED;
-        return null; //Añadir panel pooled
+        return "aperturaPooled"; //Añadir panel pooled
     }
 
     public void asociarCliente (String iden){
@@ -104,6 +113,7 @@ public class Cuentas {
     }
 
 
+
     public String accion(){
 
         //public void aperturaCuentaSegregada(Usuario u,Cliente cliente,String IBAN,String SWIFT, CuentaReferencia cr)
@@ -116,16 +126,26 @@ public class Cuentas {
             }
 
             if (modo.equals((Modo.POOLED))){
-                //public void aperturaCuentaPooled(Usuario u,Cliente cliente,String IBAN,String SWIFT, List<DepositadaEn> dpList)
+
                 asociarCliente(dni);
+               List<DepositadaEn> depositadaEns = new ArrayList<>();
                 gestionCuentas.aperturaCuentaPooled(sesion.getUsuario(), pooledAccount.getCliente(), pooledAccount.getIBAN(), pooledAccount.getSWIFT()
-                , pooledAccount.getListaDepositos());
+                , depositadaEns);
+
+                gestionCuentas.setDepositos(pooledAccount.getIBAN(), ibanCr, divisa);
             }
+
             return "panelAdmin.xhtml";
+
+
         } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
             usuarioNoEncontrado.printStackTrace();
         } catch (NoEsAdministrativo noEsAdministrativo) {
             noEsAdministrativo.printStackTrace();
+        } catch (CuentaNoEncontradaException e) {
+            e.printStackTrace();
+        } catch (DivisaNoCoincide divisaNoCoincide) {
+            divisaNoCoincide.printStackTrace();
         }
         return null;
     }

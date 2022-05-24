@@ -3,6 +3,7 @@ package es.uma.turingFintech;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class PooledAccount extends CuentaFintech implements Serializable {
     //relacion uno-muchos pooledaccount-depositadaen
     @OneToMany (mappedBy = "pooledAccount")
-    private List<DepositadaEn> listaDepositos;
+    private List<DepositadaEn> listaDepositos = new ArrayList<>();
 
     public PooledAccount(String IBAN, String SWIFT, Date fecha_Apertura, String estado, String tipo) {
         super(IBAN, SWIFT, fecha_Apertura, estado, tipo);
