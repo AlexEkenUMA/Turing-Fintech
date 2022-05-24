@@ -157,7 +157,14 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
+    public List<CuentaReferencia> obtenerReferencias (){
+        List<CuentaReferencia> cuentaReferenciaList;
+        Query query = em.createQuery("select cuenta from CuentaReferencia cuenta");
+        cuentaReferenciaList = (List<CuentaReferencia>) query.getResultList();
+        return cuentaReferenciaList;
+    }
 
+    @Override
     public List<CuentaFintech> obtenerCuentasFintech (){
         List<CuentaFintech> fintechList;
         Query query = em.createQuery("select cuenta from CuentaFintech cuenta");
