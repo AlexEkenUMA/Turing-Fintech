@@ -33,6 +33,8 @@ public interface GestionCuentas {
     public void cierreCuenta (Usuario u,String IBAN)
             throws CuentaNoEncontradaException, SaldoIncorrectoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
+    public List<CuentaFintech> obtenerCuentasFintech ();
+
     public List<PooledAccount> obtenerCuentasPooled ();
 
     public List<Segregada> obtenerCuentasSegregada();

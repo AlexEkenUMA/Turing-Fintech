@@ -157,6 +157,15 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
+
+    public List<CuentaFintech> obtenerCuentasFintech (){
+        List<CuentaFintech> fintechList;
+        Query query = em.createQuery("select cuenta from CuentaFintech cuenta");
+        fintechList = (List<CuentaFintech>) query.getResultList();
+        return fintechList;
+    }
+
+    @Override
     public List<PooledAccount> obtenerCuentasPooled (){
 
         List<PooledAccount> pooled;
@@ -282,6 +291,10 @@ public class CuentasEJB implements GestionCuentas {
             csvPrinter.flush();
         }
     }
+
+
+
+
 }
 
 
