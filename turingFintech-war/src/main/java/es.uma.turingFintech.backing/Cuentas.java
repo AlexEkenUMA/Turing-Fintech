@@ -19,7 +19,8 @@ public class Cuentas {
     public static enum Modo {
         SEGREGADA,
         POOLED,
-        NOACCION
+        NOACCION,
+        DEPOSITO
     };
 
     String pooled = "Pooled";
@@ -27,6 +28,8 @@ public class Cuentas {
     String dni = "";
 
     String ibanCr = "";
+
+    String ibanPooled = "";
 
     String divisa = "";
 
@@ -59,6 +62,10 @@ public class Cuentas {
     public Double getSaldo() {return saldo;}
 
     public void setSaldo(Double saldo) {this.saldo = saldo;}
+
+    public String getIbanPooled() {return ibanPooled;}
+
+    public void setIbanPooled(String ibanPooled) {this.ibanPooled = ibanPooled;}
 
     public String getPooled() {
         return pooled;
@@ -130,6 +137,14 @@ public class Cuentas {
     }
 
 
+    public String aniadirDeposito(String pooledAccount){
+        ibanPooled = pooledAccount;
+        modo = Modo.DEPOSITO;
+        return "aniadirDeposito.xhtml";
+    }
+
+
+
 
     public String accion(){
 
@@ -154,6 +169,11 @@ public class Cuentas {
                 gestionCuentas.aperturaCuentaPooled(sesion.getUsuario(), pooledAccount.getCliente(), pooledAccount.getIBAN(), pooledAccount.getSWIFT()
                 , depositadaEns);
 
+                gestionCuentas.setDepositos(pooledAccount.getIBAN(), ibanCr, divisa, saldo);
+            }
+
+            if (modo.equals(Modo.DEPOSITO)){
+                pooledAccount = gestionCuentas.getCuentaPooled(ibanPooled);
                 gestionCuentas.setDepositos(pooledAccount.getIBAN(), ibanCr, divisa, saldo);
             }
 

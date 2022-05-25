@@ -35,6 +35,8 @@ public interface GestionCuentas {
 
     public void setDepositos(String pooledAccount, String ibanCr, String abreviaturaDiv, Double saldo) throws CuentaNoEncontradaException, DivisaNoCoincide;
 
+    public PooledAccount getCuentaPooled (String iban) throws CuentaNoEncontradaException;
+
     public Cuenta getCuenta (String iban) throws CuentaNoEncontradaException;
 
     public List<CuentaFintech> getCuentasCliente (Long id);

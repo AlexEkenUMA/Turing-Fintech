@@ -45,7 +45,7 @@
                     </h:column>
 
                     <h:column>
-                    <h:commandButton id="anadirDe" value="AñadirDeposito"  action="#{cuentas.aperturaPooled()}" rendered="#{c.tipo == 'Pooled'}"/>
+                    <h:commandButton id="anadirDe" value="AñadirDeposito"  action="#{cuentas.aniadirDeposito(c.IBAN)}" rendered="#{c.tipo == 'Pooled'}"/>
                     </h:column>
 
             </h:dataTable>

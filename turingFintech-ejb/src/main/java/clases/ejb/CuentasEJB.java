@@ -182,6 +182,18 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
+    public PooledAccount getCuentaPooled (String iban) throws CuentaNoEncontradaException {
+        List<PooledAccount> cuentas;
+        Query query = em.createQuery("select cuenta from PooledAccount cuenta where cuenta.IBAN = :iban");
+        query.setParameter("iban", iban);
+        cuentas = (List<PooledAccount>) query.getResultList();
+        if (cuentas.size() == 0){
+            throw new CuentaNoEncontradaException();
+        }
+        return cuentas.get(0);
+    }
+
+    @Override
     public Cuenta getCuenta (String iban) throws CuentaNoEncontradaException {
         List<Cuenta> cuentas;
         Query query = em.createQuery("select cuenta from Cuenta cuenta where cuenta.IBAN = :iban");
