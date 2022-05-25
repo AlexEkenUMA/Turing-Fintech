@@ -38,7 +38,7 @@ public class Acceso {
         try {
             gestionUsuarios.usuarioCorrecto(this.usuario);
             sesion.setUsuario(gestionUsuarios.refrescarUsuario(usuario));
-            return "index.html";
+            return "interfazCliente.xhtml";
 
         } catch (AutorizadoBloqueado autorizadoBloqueado) {
             autorizadoBloqueado.printStackTrace();

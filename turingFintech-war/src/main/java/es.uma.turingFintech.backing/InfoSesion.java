@@ -1,10 +1,7 @@
 package es.uma.turingFintech.backing;
 
 
-import clases.ejb.GestionAutorizados;
-import clases.ejb.GestionClientes;
-import clases.ejb.GestionCuentas;
-import clases.ejb.GestionUsuarios;
+import clases.ejb.*;
 import clases.ejb.exceptions.*;
 import es.uma.turingFintech.*;
 
@@ -32,6 +29,9 @@ public class InfoSesion implements Serializable {
     @Inject
     private GestionAutorizados gestionAutorizados;
 
+    @Inject
+    GestionTransacciones gestionTransacciones;
+
     private Usuario usuario;
     
     /**
@@ -57,6 +57,12 @@ public class InfoSesion implements Serializable {
     public List<Autorizado> getAutorizado (){return gestionAutorizados.getAutorizados();}
 
     public List<CuentaFintech> getCuentasFintech(){return gestionCuentas.obtenerCuentasFintech();}
+
+    public List<CuentaFintech> getCuentasCliente() {return gestionCuentas.getCuentasCliente(this.usuario.getCliente().getId());}
+
+    public List<Transaccion> getTransaccionesEmitidad(String iban){return gestionTransacciones.getTransaccionesEmitidad(iban);}
+
+
 
     public synchronized String invalidarSesion()
     {

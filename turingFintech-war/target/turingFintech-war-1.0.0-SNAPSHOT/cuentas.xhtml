@@ -40,11 +40,9 @@
                         <h:outputText id="estado" value="#{c.estado}"/>
                     </h:column>
 
-                <c:when test="#{c.tipo.equals(cuentas.pooled)}">
                     <h:column>
-                   <h:commandButton id="anadirDe" value="AñadirDeposito" action="#{cuentas.aperturaPooled()}"/>
+                        <h:commandButton id="darBaja" value="Cerrar cuenta" action="#{cuentas.darBajar(c.IBAN)}"/>
                     </h:column>
-                </c:when>
 
 
 

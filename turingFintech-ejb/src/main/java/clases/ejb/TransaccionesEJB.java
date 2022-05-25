@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -132,5 +133,25 @@ public class TransaccionesEJB implements GestionTransacciones {
         }
         em.persist(transaccion);
     }
+
+    @Override
+    public List<Transaccion> getTransaccionesEmitidad(String iban){
+        List<Transaccion> transaccionList;
+        Query query = em.createQuery("select t from Transaccion t where t.origen.IBAN = :origen");
+        query.setParameter("origen", iban);
+        transaccionList = (List<Transaccion>) query.getResultList();;
+        return transaccionList;
+    }
+
+    @Override
+    public List<Transaccion> getTransaccionesRecibidad(String iban){
+        List<Transaccion> transaccionList;
+        Query query = em.createQuery("select t from Transaccion t where t.destino.IBAN = :destino");
+        query.setParameter("destino", iban);
+        transaccionList = (List<Transaccion>) query.getResultList();;
+        return transaccionList;
+    }
+
+
 }
 

@@ -177,6 +177,14 @@ public class CuentasEJB implements GestionCuentas {
 
     }
 
+    @Override
+    public List<CuentaFintech> getCuentasCliente (Long id){
+        List<CuentaFintech> cuentaFintechList;
+        Query query = em.createQuery("select cuenta from CuentaFintech cuenta where cuenta.cliente.id = :cliente");
+        query.setParameter("cliente", id);
+        cuentaFintechList = (List<CuentaFintech>) query.getResultList();
+        return cuentaFintechList;
+    }
 
 
 
