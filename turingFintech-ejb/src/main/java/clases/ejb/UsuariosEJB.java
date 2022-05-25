@@ -14,7 +14,7 @@ import java.util.List;
 @Stateless
 public class UsuariosEJB implements GestionUsuarios {
 
-    @PersistenceContext(name = "turingFintech-ejb")
+    @PersistenceContext(unitName = "turingFintech-ejb")
     private EntityManager em;
 
     @Override

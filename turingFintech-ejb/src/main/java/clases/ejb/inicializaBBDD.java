@@ -13,7 +13,7 @@ import java.util.*;
 @Startup
 public class inicializaBBDD {
 
-    @PersistenceContext(name = "turingFintechTest")
+    @PersistenceContext(unitName = "turingFintech-ejb")
     private EntityManager em;
 
     @PostConstruct

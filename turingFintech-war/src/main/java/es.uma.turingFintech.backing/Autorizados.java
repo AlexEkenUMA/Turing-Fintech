@@ -72,8 +72,7 @@ public class Autorizados {
 
     public String seleccion (Autorizado au, String dni, Usuario u){
         try{
-            sesion.setUsuario(u);
-            sesion.refrescarUsuarioAdmin();
+
             List<PersonaJuridica> personaJuridicaList = gestionClientes.getPersonasJuridicas();
             for (PersonaJuridica pj : personaJuridicaList){
                 if (pj.getIdentificacion().equals(dni)){

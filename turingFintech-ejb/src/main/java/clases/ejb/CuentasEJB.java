@@ -23,7 +23,7 @@ import java.util.List;
 @Stateless
 public class CuentasEJB implements GestionCuentas {
 
-    @PersistenceContext(name = "turingFintech-ejb")
+    @PersistenceContext(unitName = "turingFintech-ejb")
     private EntityManager em;
 
     @EJB GestionUsuarios gestionUsuarios;

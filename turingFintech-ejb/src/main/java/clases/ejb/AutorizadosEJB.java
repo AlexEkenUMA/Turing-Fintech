@@ -31,15 +31,17 @@ public class AutorizadosEJB implements GestionAutorizados{
         Autorizado autporizadoEntity = em.find(Autorizado.class, autorizado.getId());
         if (autporizadoEntity == null){
             em.persist(autorizado);
+            autporizadoEntity = autorizado;
         }
+
         List<Autorizado> autorizadoList = pj.getAutorizados();
         autorizadoList.add(autorizado);
-        pj.setAutorizados(autorizadoList);
-        List<PersonaJuridica> personaJuridicas = autorizado.getEmpresas();
+       // pj.setAutorizados(autorizadoList);
+        List<PersonaJuridica> personaJuridicas = autporizadoEntity.getEmpresas();
         personaJuridicas.add(pj);
-        autorizado.setEmpresas(personaJuridicas);
-        em.merge(autorizado);
-        em.merge(pj);
+       // autorizado.setEmpresas(personaJuridicas);
+        //em.merge(autorizado);
+        //em.merge(pj);
     }
 
     @Override

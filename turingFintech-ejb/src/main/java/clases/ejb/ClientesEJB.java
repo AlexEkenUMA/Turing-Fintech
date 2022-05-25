@@ -21,7 +21,7 @@ public class ClientesEJB implements GestionClientes {
 
     private static final Logger LOG = Logger.getLogger(ClientesEJB.class.getCanonicalName());
 
-    @PersistenceContext(name = "turingFintech-ejb")
+    @PersistenceContext(unitName = "turingFintech-ejb")
     private EntityManager em;
 
     @EJB
