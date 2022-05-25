@@ -37,12 +37,10 @@
 
 
                     <h:column>
-                        <h:commandButton id="seleccion" value="Seleccionar Autorizado" action="#{Autorizados.seleccion(c, Autorizados.dni, infoSesion.usuario)}"/>
+                        <h:commandButton id="darBaja" value="Dar Baja" action="#{Autorizados.darBajar(c.id)}"/>
                     </h:column>
 
                 </h:dataTable>
-
-                <h:inputHidden value="#{Autorizados.dni}"/>
 
 
                 <div>

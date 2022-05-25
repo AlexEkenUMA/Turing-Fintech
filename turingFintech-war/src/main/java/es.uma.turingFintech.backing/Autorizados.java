@@ -2,6 +2,7 @@ package es.uma.turingFintech.backing;
 
 import clases.ejb.GestionAutorizados;
 import clases.ejb.GestionClientes;
+import clases.ejb.exceptions.AutorizadoNoEncontradoException;
 import clases.ejb.exceptions.NoEsAdministrativo;
 import clases.ejb.exceptions.PersonaJuridicaNoEncontrada;
 import clases.ejb.exceptions.UsuarioNoEncontrado;
@@ -89,6 +90,23 @@ public class Autorizados {
         } catch (PersonaJuridicaNoEncontrada personaJuridicaNoEncontrada) {
             personaJuridicaNoEncontrada.printStackTrace();
         }
+        return null;
+    }
+
+    public String darBajar(Long id){
+
+        try{
+            gestionAutorizados.eliminarAutorizados(sesion.getUsuario(), id);
+            return "panelAdmin.xhtml";
+        } catch (AutorizadoNoEncontradoException e) {
+            e.printStackTrace();
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        }
+
+
         return null;
     }
 

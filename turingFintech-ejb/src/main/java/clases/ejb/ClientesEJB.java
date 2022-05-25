@@ -105,6 +105,7 @@ public class ClientesEJB implements GestionClientes {
     }
 
 
+
     @Override
     public void eliminarCliente (Usuario u, String ID) throws CuentaActiva, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo {
         gestionUsuarios.usuarioAdministrativo(u);
