@@ -2,10 +2,7 @@ package es.uma.turingFintech.backing;
 
 import clases.ejb.GestionClientes;
 import clases.ejb.GestionCuentas;
-import clases.ejb.exceptions.CuentaNoEncontradaException;
-import clases.ejb.exceptions.DivisaNoCoincide;
-import clases.ejb.exceptions.NoEsAdministrativo;
-import clases.ejb.exceptions.UsuarioNoEncontrado;
+import clases.ejb.exceptions.*;
 import es.uma.turingFintech.*;
 
 import javax.enterprise.context.RequestScoped;
@@ -157,6 +154,23 @@ public class Cuentas {
         } catch (DivisaNoCoincide divisaNoCoincide) {
             divisaNoCoincide.printStackTrace();
         }
+        return null;
+    }
+
+    public String darBajar (String iban){
+        try{
+            gestionCuentas.cierreCuenta(sesion.getUsuario(), iban);
+            return "panelAdmin.xhtml";
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (CuentaNoEncontradaException e) {
+            e.printStackTrace();
+        } catch (SaldoIncorrectoException e) {
+            e.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        }
+
         return null;
     }
 

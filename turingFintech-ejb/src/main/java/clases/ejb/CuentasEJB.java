@@ -132,7 +132,7 @@ public class CuentasEJB implements GestionCuentas {
         if (!ok){
             throw new SaldoIncorrectoException();
         }
-        pooledEntity.setEstado("Baja");
+        pooledEntity.setEstado("Cerrada");
         pooledEntity.setFecha_cierre(fecha);
         em.merge(pooledEntity);
         }
@@ -145,7 +145,7 @@ public class CuentasEJB implements GestionCuentas {
                 throw new SaldoIncorrectoException();
             }
             segregadaEntity.setFecha_cierre(fecha);
-            segregadaEntity.setEstado("Baja");
+            segregadaEntity.setEstado("Cerrada");
             em.merge(segregadaEntity);
         }
     }
