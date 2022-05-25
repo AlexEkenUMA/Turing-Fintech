@@ -16,15 +16,9 @@
             <c:when test="#{!empty infoSesion.usuario}">
                 <p>Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
                 <p>Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
-                <div>
-                    <p>Para dar alta a un cliente fisico <h:link outcome="darAltaClienteIndividual.xhtml">página de acceso</h:link></p>
-                </div>
-                <div>
-                    <p>Para dar alta a un cliente juridico <h:link outcome="darAltaClienteJuridico.xhtml">página de acceso</h:link></p>
-                </div>
 
                 <div>
-                    <p>Para ver la lista de clientes <h:link outcome="modificarCliente.xhtml">página de acceso</h:link></p>
+                    <p>Para ver la lista de clientes <h:link outcome="clientes.xhtml">página de acceso</h:link></p>
                 </div>
 
                 <div>

@@ -10,28 +10,30 @@
 
     <h1>DAR ALTA A UN CLIENTE JURIDICO</h1>
 
-    <h:form id="darAltaJuridico">
+    <h:form id="clientes">
         <h:panelGrid columns="3">
             <h:outputText value="DNI:"/>
-            <h:inputText id="DNI" value="#{darAltaJuridico.personaJuridica.identificacion}" required="true" />
+            <h:inputText id="DNI" value="#{clientes.personaJuridica.identificacion}" required="true" />
             <h:message for="DNI"/>
             <h:outputText value="Direccion"/>
-            <h:inputText id="direccion" value="#{darAltaJuridico.personaJuridica.direccion}" required="true"/>
+            <h:inputText id="direccion" value="#{clientes.personaJuridica.direccion}" required="true"/>
             <h:message for="direccion"/>
             <h:outputText value="Codigo Postal"/>
-            <h:inputText id="codPost" value="#{darAltaJuridico.personaJuridica.codigo_Postal}" required="true"/>
+            <h:inputText id="codPost" value="#{clientes.personaJuridica.codigo_Postal}" required="true"/>
             <h:message for="codPost"/>
             <h:outputText value="Pais"/>
-            <h:inputText id="pais" value="#{darAltaJuridico.personaJuridica.pais}" required="true"/>
+            <h:inputText id="pais" value="#{clientes.personaJuridica.pais}" required="true"/>
             <h:message for="pais"/>
             <h:outputText value="Ciudad"/>
-            <h:inputText id="ciudad" value="#{darAltaJuridico.personaJuridica.ciudad}" required="true"/>
+            <h:inputText id="ciudad" value="#{clientes.personaJuridica.ciudad}" required="true"/>
             <h:message for="ciudad"/>
             <h:outputText value="Razon Social"/>
-            <h:inputText id="Razon" value="#{darAltaJuridico.personaJuridica.razon_Social}" required="true"/>
+            <h:inputText id="Razon" value="#{clientes.personaJuridica.razon_Social}" required="true"/>
             <h:message for="Razon"/>
-            <h:commandButton value="Crear usuario" action="#{darAltaJuridico.darAlta()}"/>
+            <h:commandButton value="Crear usuario" action="#{clientes.ejecutarAccion()}"/>
             <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
+
+            <h:inputHidden value="#{clientes.modo}"/>
         </h:panelGrid>
         <h:messages/>
 

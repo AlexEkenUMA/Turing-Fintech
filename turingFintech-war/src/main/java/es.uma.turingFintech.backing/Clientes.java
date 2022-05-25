@@ -2,22 +2,24 @@ package es.uma.turingFintech.backing;
 
 import clases.ejb.GestionClientes;
 import clases.ejb.exceptions.*;
-import es.uma.turingFintech.Cliente;
-import es.uma.turingFintech.PersonaFisica;
-import es.uma.turingFintech.Usuario;
+import es.uma.turingFintech.*;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
 
-@Named(value = "modificarCliente")
+@Named(value = "clientes")
 @RequestScoped
-public class modificarCliente {
+public class Clientes {
 
     public static enum Modo {
         MODIFICAR,
         INSERTAR,
-        NOACCION
+        NOACCION,
+        FISICA,
+        JURIDICA
     };
 
 
@@ -31,26 +33,35 @@ public class modificarCliente {
 
     private Cliente cliente;
 
+    private PersonaFisica personaFisica;
+    private PersonaJuridica personaJuridica;
+
     private Usuario usuario;
 
     private String id;
 
     private boolean modificarOk;
 
-    public modificarCliente(){
-        cliente     = new Cliente();
+    public Clientes(){
+        cliente         = new Cliente();
+        personaFisica   = new PersonaFisica();
+        personaJuridica = new PersonaJuridica();
         modificarOk = false;
     }
 
+    public PersonaFisica getPersonaFisica() {return personaFisica;}
+
+    public void setPersonaFisica(PersonaFisica personaFisica) {this.personaFisica = personaFisica;}
+
+    public PersonaJuridica getPersonaJuridica() {return personaJuridica;}
+
+    public void setPersonaJuridica(PersonaJuridica personaJuridica) {this.personaJuridica = personaJuridica;}
+
     public Cliente getCliente() {return cliente;}
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+    public Usuario getUsuario() {return usuario;}
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    public void setUsuario(Usuario usuario) {this.usuario = usuario;}
 
     public Modo getModo() {return modo;}
 
@@ -85,7 +96,7 @@ public class modificarCliente {
     public String darBaja(String dni, Usuario u){
         try{
             gestionClientes.eliminarCliente(u,dni);
-            return "modificarCliente.xhtml";
+            return "clientes.xhtml";
 
         } catch (CuentaActiva cuentaActiva) {
             cuentaActiva.printStackTrace();
@@ -100,6 +111,20 @@ public class modificarCliente {
 
     }
 
+    public String darAltaJuridica (){
+        modo = Modo.JURIDICA;
+
+        return "darAltaClienteJuridico.xhtml";
+    }
+
+
+    public String darAltaFisica (){
+        modo = Modo.FISICA;
+
+        return "darAltaClienteIndividual.xhtml";
+    }
+
+
     public String ejecutarAccion () {
 
 
@@ -108,13 +133,21 @@ public class modificarCliente {
                 case MODIFICAR:
                     gestionClientes.modificarCliente(usuario, cliente, cliente.getIdentificacion());
                     break;
-                case INSERTAR:
-
-                    //gestionClientes.insertar(contacto);
+                case JURIDICA:
+                    List<Autorizado> au = new ArrayList<>();
+                    gestionClientes.darDeAltaCliente(sesion.getUsuario(), personaJuridica.getIdentificacion(),"Juridico", personaJuridica.getRazon_Social(),
+                            null,null,null,personaJuridica.getDireccion(), personaJuridica.getCodigo_Postal(), personaJuridica.getPais(), au,
+                            personaJuridica.getCiudad());
                     break;
+
+                case FISICA:
+                    gestionClientes.darDeAltaCliente(sesion.getUsuario(), personaFisica.getIdentificacion(),"Fisica", null,
+                            personaFisica.getNombre(), personaFisica.getApellidos(), personaFisica.getFecha_Nacimiento(),
+                            personaFisica.getDireccion(), personaFisica.getCodigo_Postal(), personaFisica.getPais(), null,
+                            personaFisica.getCiudad());
             }
-           // sesion.refrescarUsuarioAdmin();
-            return "modificarCliente.xhtml";
+
+            return "clientes.xhtml";
 
         } catch (ModificarClienteDistintaID modificarClienteDistintaID) {
             modificarClienteDistintaID.printStackTrace();
@@ -126,6 +159,8 @@ public class modificarCliente {
             e.printStackTrace();
         } catch (NoEsAdministrativo noEsAdministrativo) {
             noEsAdministrativo.printStackTrace();
+        } catch (ClienteNoValidoException e) {
+            e.printStackTrace();
         }
         return null;
     }

@@ -13,7 +13,7 @@
             <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
         </c:when>
         <c:otherwise>
-            <h:form id="modificarCliente">
+            <h:form id="clientes">
                 <h:dataTable value="#{infoSesion.clientes}" var="c">
                     <h:column>
                         <f:facet id="cabeceraNombre" name="header">ID</f:facet>
@@ -41,18 +41,18 @@
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="botonModificar" value="Modificar" action="#{modificarCliente.modificar(c, infoSesion.usuario)}"/>
+                        <h:commandButton id="botonModificar" value="Modificar" action="#{clientes.modificar(c, infoSesion.usuario)}"/>
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="botonEliminar" value="Dar de baja" action="#{modificarCliente.darBaja(c.identificacion, infoSesion.usuario)}"/>
+                        <h:commandButton id="botonEliminar" value="Dar de baja" action="#{clientes.darBaja(c.identificacion, infoSesion.usuario)}"/>
                     </h:column>
                 </h:dataTable>
-                <!--
-                <h:commandButton id="botonInsertar" value="Insertar" action="#{contactos.insertarContacto()}"/>
-                <h:commandButton id="botonRefrescar" value="Refrescar" action="#{contactos.refrescar}"/>
 
-                -->
+                <h:commandButton id="botonJuridico" value="Añadir P. Juridica" action="#{clientes.darAltaJuridica()}"/>
+                <h:commandButton id="botonFisico" value="Añadir P.Fisica" action="#{clientes.darAltaFisica()}"/>
+
+
                 <div>
                     <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>
                 </div>

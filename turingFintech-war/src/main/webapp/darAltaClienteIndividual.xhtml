@@ -10,36 +10,38 @@
 
     <h1>DAR ALTA A UN CLIENTE FISICO</h1>
 
-    <h:form id="darAltaClienteFisica">
+    <h:form id="clientes">
         <h:panelGrid columns="3">
             <h:outputText value="Nombre:"/>
-            <h:inputText id="nombre" value="#{darAltaClienteFisica.personaFisica.nombre}"/>
+            <h:inputText id="nombre" value="#{clientes.personaFisica.nombre}"/>
             <h:message for="nombre"/>
             <h:outputText value="Apellidos:"/>
-            <h:inputText id="apellidos" value="#{darAltaClienteFisica.personaFisica.apellidos}"/>
+            <h:inputText id="apellidos" value="#{clientes.personaFisica.apellidos}"/>
             <h:message for="apellidos"/>
             <h:outputText value="DNI:"/>
-            <h:inputText id="DNI" value="#{darAltaClienteFisica.personaFisica.identificacion}" required="true" />
+            <h:inputText id="DNI" value="#{clientes.personaFisica.identificacion}" required="true" />
             <h:message for="DNI"/>
             <!--
             <h:outputText value="Fecha de nacimiento"/>
-            <h:inputText id="fechaNac" t value="#{darAltaClienteFisica.personaFisica.fecha_Nacimiento}"/>
+            <h:inputText id="fechaNac" t value="#{clientes.personaFisica.fecha_Nacimiento}"/>
             <h:message for="fechaNac"/>
             -->
             <h:outputText value="Direccion"/>
-            <h:inputText id="direccion" value="#{darAltaClienteFisica.personaFisica.direccion}" required="true"/>
+            <h:inputText id="direccion" value="#{clientes.personaFisica.direccion}" required="true"/>
             <h:message for="direccion"/>
             <h:outputText value="Codigo Postal"/>
-            <h:inputText id="codPost" value="#{darAltaClienteFisica.personaFisica.codigo_Postal}" required="true"/>
+            <h:inputText id="codPost" value="#{clientes.personaFisica.codigo_Postal}" required="true"/>
             <h:message for="codPost"/>
             <h:outputText value="Pais"/>
-            <h:inputText id="pais" value="#{darAltaClienteFisica.personaFisica.pais}" required="true"/>
+            <h:inputText id="pais" value="#{clientes.personaFisica.pais}" required="true"/>
             <h:message for="pais"/>
             <h:outputText value="Ciudad"/>
-            <h:inputText id="ciudad" value="#{darAltaClienteFisica.personaFisica.ciudad}" required="true"/>
+            <h:inputText id="ciudad" value="#{clientes.personaFisica.ciudad}" required="true"/>
             <h:message for="ciudad"/>
-            <h:commandButton value="Crear usuario" action="#{darAltaClienteFisica.darAlta()}"/>
+            <h:commandButton value="Crear usuario" action="#{clientes.ejecutarAccion()}"/>
             <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
+
+            <h:inputHidden value="#{clientes.modo}"/>
         </h:panelGrid>
         <h:messages/>
 
