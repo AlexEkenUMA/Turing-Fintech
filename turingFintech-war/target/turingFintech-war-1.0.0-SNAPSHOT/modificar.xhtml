@@ -20,27 +20,28 @@
     <c:choose>
         <c:when test="#{infoSesion.usuario.administrativo}">
             <h1>Cliente</h1>
-            <h:form id="modificarCliente">
+            <h:form id="clientes">
                 <h:panelGrid columns="3">
                     <h:outputText value="Ciudad"/>
-                    <h:inputText id ="ciudad" value="#{modificarCliente.cliente.ciudad}"/>
+                    <h:inputText id ="ciudad" value="#{clientes.cliente.ciudad}"/>
                     <h:message for="ciudad"/>
                     <h:outputText value="Pais"/>
-                    <h:inputText id ="pais" value="#{modificarCliente.cliente.pais}"/>
+                    <h:inputText id ="pais" value="#{clientes.cliente.pais}"/>
                     <h:message for="pais"/>
                     <h:outputText value="Codigo Postal"/>
-                    <h:inputText id ="codPost" value="#{modificarCliente.cliente.codigo_Postal}"/>
+                    <h:inputText id ="codPost" value="#{clientes.cliente.codigo_Postal}"/>
                     <h:message for="codPost"/>
 
-                    <h:commandButton value="Modificar" action="#{modificarCliente.ejecutarAccion()}"/>
+                    <h:commandButton value="Modificar" action="#{clientes.ejecutarAccion()}"/>
                     <h:commandButton value="Cancelar" action="modificarCliente.xhtml"/>
 
 
-                    <h:inputHidden value="#{modificarCliente.cliente.id}"/>
-                    <h:inputHidden value="#{modificarCliente.cliente.identificacion}"/>
-                    <h:inputHidden value="#{modificarCliente.cliente.tipo_Cliente}"/>
-                    <h:inputHidden value="#{modificarCliente.cliente.estado}"/>
-                    <h:inputHidden value="#{modificarCliente.modo}"/>
+                    <h:inputHidden value="#{clientes.cliente.id}"/>
+                    <h:inputHidden value="#{clientes.cliente.identificacion}"/>
+                    <h:inputHidden value="#{clientes.cliente.tipo_Cliente}"/>
+                    <h:inputHidden value="#{clientes.cliente.estado}"/>
+                    <h:inputHidden value="#{clientes.cliente.direccion}"/>
+                    <h:inputHidden value="#{clientes.modo}"/>
                     <!--
                     <h:inputHidden value="#{modificarCliente.usuario}"/>
                     -->
