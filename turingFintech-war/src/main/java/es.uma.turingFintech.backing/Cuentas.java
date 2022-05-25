@@ -30,6 +30,8 @@ public class Cuentas {
 
     String divisa = "";
 
+    Double saldo =0.0;
+
     private Segregada segregada;
 
     private PooledAccount pooledAccount;
@@ -53,6 +55,10 @@ public class Cuentas {
         pooledAccount = new PooledAccount();
         modo = Modo.NOACCION;
     }
+
+    public Double getSaldo() {return saldo;}
+
+    public void setSaldo(Double saldo) {this.saldo = saldo;}
 
     public String getPooled() {
         return pooled;
@@ -136,10 +142,15 @@ public class Cuentas {
 
                 asociarCliente(dni);
                List<DepositadaEn> depositadaEns = new ArrayList<>();
+                Cuenta prueba = gestionCuentas.getCuenta(ibanCr);
+                if (prueba == null){
+                    throw new CuentaNoEncontradaException();
+                }
+
                 gestionCuentas.aperturaCuentaPooled(sesion.getUsuario(), pooledAccount.getCliente(), pooledAccount.getIBAN(), pooledAccount.getSWIFT()
                 , depositadaEns);
 
-                gestionCuentas.setDepositos(pooledAccount.getIBAN(), ibanCr, divisa);
+                gestionCuentas.setDepositos(pooledAccount.getIBAN(), ibanCr, divisa, saldo);
             }
 
             return "panelAdmin.xhtml";

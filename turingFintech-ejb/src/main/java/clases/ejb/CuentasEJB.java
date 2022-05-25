@@ -151,7 +151,7 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
-    public void setDepositos(String pooledAccount, String ibanCr, String abreviaturaDiv) throws CuentaNoEncontradaException, DivisaNoCoincide {
+    public void setDepositos(String pooledAccount, String ibanCr, String abreviaturaDiv, Double saldo) throws CuentaNoEncontradaException, DivisaNoCoincide {
 
         CuentaReferencia cuentaReferencia = em.find(CuentaReferencia.class, ibanCr);
         if (cuentaReferencia == null){
@@ -164,7 +164,11 @@ public class CuentasEJB implements GestionCuentas {
         if (!cuentaReferencia.getDivisa().getAbreviatura().equals(abreviaturaDiv)){
             throw new DivisaNoCoincide();
         }
-        DepositadaEn depositadaEn = new DepositadaEn(cuentaReferencia.getSaldo());
+        if (cuentaReferencia.getSaldo() < saldo){
+           // throw new SaldoInsuficiente();
+        }
+
+        DepositadaEn depositadaEn = new DepositadaEn(saldo);
 
         depositadaEn.setPooledAccount(pooledAccount1);
         depositadaEn.setCuentaReferencia(cuentaReferencia);
@@ -176,6 +180,19 @@ public class CuentasEJB implements GestionCuentas {
 
 
     }
+
+    @Override
+    public Cuenta getCuenta (String iban) throws CuentaNoEncontradaException {
+        List<Cuenta> cuentas;
+        Query query = em.createQuery("select cuenta from Cuenta cuenta where cuenta.IBAN = :iban");
+        query.setParameter("iban", iban);
+        cuentas = (List<Cuenta>) query.getResultList();
+        if (cuentas.size() == 0){
+            throw new CuentaNoEncontradaException();
+        }
+        return cuentas.get(0);
+    }
+
 
     @Override
     public List<CuentaFintech> getCuentasCliente (Long id){

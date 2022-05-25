@@ -33,7 +33,9 @@ public interface GestionCuentas {
     public void cierreCuenta (Usuario u,String IBAN)
             throws CuentaNoEncontradaException, SaldoIncorrectoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
-    public void setDepositos(String pooledAccount, String ibanCr, String abreviaturaDiv) throws CuentaNoEncontradaException, DivisaNoCoincide;
+    public void setDepositos(String pooledAccount, String ibanCr, String abreviaturaDiv, Double saldo) throws CuentaNoEncontradaException, DivisaNoCoincide;
+
+    public Cuenta getCuenta (String iban) throws CuentaNoEncontradaException;
 
     public List<CuentaFintech> getCuentasCliente (Long id);
 
