@@ -14,7 +14,7 @@
         </c:when>
         <c:otherwise>
             <h:form id="cuentas">
-                <h:dataTable value="#{infoSesion.cuentasFintech}" var="c">
+                <h:dataTable value="#{infoSesion.cuentasFintech}" var="c" border="1">
                     <h:column>
                         <f:facet id="cabeceraIban" name="header">IBAN</f:facet>
                         <h:outputText id="ide" value="#{c.IBAN}"/>
@@ -44,10 +44,11 @@
                         <h:commandButton id="darBaja" value="Cerrar cuenta" action="#{cuentas.darBajar(c.IBAN)}"/>
                     </h:column>
 
+                    <h:column>
                     <h:commandButton id="anadirDe" value="AñadirDeposito"  action="#{cuentas.aperturaPooled()}" rendered="#{c.tipo == 'Pooled'}"/>
+                    </h:column>
 
-
-           </h:dataTable>
+            </h:dataTable>
 
            <h:commandButton id="botonInsertarSegregada" value="Apertura Cuenta Segregada" action="#{cuentas.aperturaSegregada()}"/>
            <h:commandButton id="botonInsertarPooled" value="Apertura Cuenta Pooled" action="#{cuentas.aperturaPooled()}"/>

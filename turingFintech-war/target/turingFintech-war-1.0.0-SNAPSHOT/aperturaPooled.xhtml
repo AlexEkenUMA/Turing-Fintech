@@ -24,6 +24,9 @@
             <h:outputText value="Cuenta de referencia"/>
             <h:inputText id="Cr" value="#{cuentas.ibanCr}" required="true"/>
             <h:message for="Cr"/>
+            <h:outputText value="Saldo"/>
+            <h:inputText id="saldo" value="#{cuentas.saldo}" required="true"/>
+            <h:message for="saldo"/>
             <h:outputText value="Divisa"/>
             <h:inputText id="divisa" value="#{cuentas.divisa}" required="true"/>
             <h:message for="divisa"/>
@@ -31,9 +34,13 @@
             <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
 
             <h:inputHidden value="#{cuentas.modo}"/>
-
         </h:panelGrid>
         <h:messages/>
+
+        <hr> </hr>
+
+                <h3>Si desea abrir una cuenta de referencia nueva </h3>
+
 
     </h:form>
 

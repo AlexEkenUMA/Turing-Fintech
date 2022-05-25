@@ -125,6 +125,10 @@ public class Cuentas {
         segregada.setCr(objetivo);
     }
 
+    public String aperturaReferencia(){
+        return null;
+    }
+
 
 
     public String accion(){
