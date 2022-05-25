@@ -14,7 +14,7 @@
         </c:when>
         <c:otherwise>
             <h:form id="Autorizados">
-                <h:dataTable value="#{infoSesion.juridica}" var="c">
+                <h:dataTable value="#{infoSesion.juridica}" var="c" border="1">
                     <h:column>
                         <f:facet id="cabeceraIden" name="header">Identificacion</f:facet>
                         <h:outputText id="ide" value="#{c.identificacion}"/>
