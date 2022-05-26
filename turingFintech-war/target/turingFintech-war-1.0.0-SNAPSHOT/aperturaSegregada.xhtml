@@ -21,10 +21,8 @@
             <h:outputText value="SWIFT"/>
             <h:inputText id="SWIFT" value="#{cuentas.segregada.SWIFT}" required="true"/>
             <h:message for="SWIFT"/>
-            <br> </br>
-
-            <h:outputText value="Cuenta de referencia"/>
-            <h:inputText id="Cr" value="#{cuentas.ibanCr}" required="true"/>
+            <h:outputText value="Iban de la Cuenta de ref"/>
+            <h:inputText id="Cr" value="#{cuentas.cuentaReferencia.IBAN}" required="true"/>
             <h:message for="Cr"/>
             <h:outputText value="SWIFT"/>
             <h:inputText id="Crswif" value="#{cuentas.cuentaReferencia.SWIFT}" required="true"/>
