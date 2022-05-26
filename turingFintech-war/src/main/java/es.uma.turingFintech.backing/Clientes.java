@@ -15,7 +15,8 @@ import java.util.List;
 public class Clientes {
 
     public static enum Modo {
-        MODIFICAR,
+        MODIFICARFISICO,
+        MODIFICARJURIDICO,
         INSERTAR,
         NOACCION,
         FISICA,
@@ -75,22 +76,21 @@ public class Clientes {
 
     public void setId(String id) {this.id = id;}
 
-    public String getAccion() {
-        switch (modo) {
-            case MODIFICAR:
-                return "Modificar";
-            case INSERTAR:
-                return "Insertar";
 
-        }
-        return null;
-    }
-
-    public String modificar(Cliente c, Usuario u){
+    public String modificarJuridico(Cliente c, Usuario u) throws PersonaJuridicaNoEncontrada {
         this.cliente = c;
         this.usuario = u;
-        setModo(Modo.MODIFICAR);
-        return "modificar.xhtml";
+        personaJuridica = gestionClientes.getPersonasJuridicaID(c.getId());
+        setModo(Modo.MODIFICARJURIDICO);
+        return "modificarJuridico.xhtml";
+    }
+
+    public String modificarFisico(Cliente c, Usuario u) throws ClienteNoEncontradoException {
+        this.cliente = c;
+        this.usuario = u;
+        personaFisica = gestionClientes.getPersonasFisicaID(c.getId());
+        setModo(Modo.MODIFICARFISICO);
+        return "modificarPersonaIndividual.xhtml";
     }
 
     public String darBaja(String dni, Usuario u){
@@ -130,8 +130,11 @@ public class Clientes {
 
         try {
             switch (modo) {
-                case MODIFICAR:
-                    gestionClientes.modificarCliente(usuario, cliente, cliente.getIdentificacion());
+                case MODIFICARJURIDICO:
+                    gestionClientes.modificarJuridico(sesion.getUsuario(), personaJuridica);
+                    break;
+                case MODIFICARFISICO:
+                    gestionClientes.modificarFisico(sesion.getUsuario(), personaFisica);
                     break;
                 case JURIDICA:
                     List<Autorizado> au = new ArrayList<>();
@@ -149,12 +152,8 @@ public class Clientes {
 
             return "clientes.xhtml";
 
-        } catch (ModificarClienteDistintaID modificarClienteDistintaID) {
-            modificarClienteDistintaID.printStackTrace();
         } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
             usuarioNoEncontrado.printStackTrace();
-        } catch (TipoNoValidoException e) {
-            e.printStackTrace();
         } catch (ClienteNoEncontradoException e) {
             e.printStackTrace();
         } catch (NoEsAdministrativo noEsAdministrativo) {

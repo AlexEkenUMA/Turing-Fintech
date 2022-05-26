@@ -240,6 +240,28 @@ public class ClientesEJB implements GestionClientes {
         }
     }
 
+    @Override
+    public void modificarJuridico (Usuario u, PersonaJuridica pj) throws UsuarioNoEncontrado, NoEsAdministrativo, ClienteNoEncontradoException {
+        gestionUsuarios.usuarioAdministrativo(u);
+        PersonaJuridica personaJuridica = em.find(PersonaJuridica.class, pj.getId());
+        if(personaJuridica == null){
+            throw new ClienteNoEncontradoException();
+        }
+        em.merge(pj);
+    }
+
+    @Override
+    public void modificarFisico (Usuario u, PersonaFisica pf) throws UsuarioNoEncontrado, NoEsAdministrativo, ClienteNoEncontradoException {
+        gestionUsuarios.usuarioAdministrativo(u);
+        PersonaFisica personaFisica = em.find(PersonaFisica.class, pf.getId());
+        if(personaFisica == null){
+            throw new ClienteNoEncontradoException();
+        }
+        em.merge(pf);
+    }
+
+
+
     public List<Cliente> getClientes(){
         Query query = em.createQuery("select cliente from Cliente cliente");
         List<Cliente> clientes = (List<Cliente>) query.getResultList();
@@ -251,6 +273,26 @@ public class ClientesEJB implements GestionClientes {
         Query query = em.createQuery("select cliente from PersonaFisica cliente");
         List<PersonaFisica> personaFisicas = (List<PersonaFisica>) query.getResultList();
         return personaFisicas;
+    }
+
+    public PersonaJuridica getPersonasJuridicaID(Long id) throws PersonaJuridicaNoEncontrada {
+        Query query = em.createQuery("select cliente from PersonaJuridica cliente where cliente.id = :id");
+        query.setParameter("id",id);
+        List<PersonaJuridica> personaJuridicas = (List<PersonaJuridica>) query.getResultList();
+        if (personaJuridicas.isEmpty()){
+            throw new PersonaJuridicaNoEncontrada();
+        }
+        return personaJuridicas.get(0);
+    }
+
+    public PersonaFisica getPersonasFisicaID(Long id) throws ClienteNoEncontradoException {
+        Query query = em.createQuery("select cliente from PersonaFisica cliente where cliente.id = :id");
+        query.setParameter("id",id);
+        List<PersonaFisica> personaFisicas = (List<PersonaFisica>) query.getResultList();
+        if (personaFisicas.isEmpty()){
+            throw new ClienteNoEncontradoException();
+        }
+        return personaFisicas.get(0);
     }
 
     public List<PersonaJuridica> getPersonasJuridicas(){

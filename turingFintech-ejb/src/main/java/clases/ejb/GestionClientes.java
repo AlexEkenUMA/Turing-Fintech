@@ -22,6 +22,7 @@ public interface GestionClientes {
      */
     public void modificarCliente(Usuario u, Cliente c, String ID) throws TipoNoValidoException, ModificarClienteDistintaID, ClienteNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
+    public void modificarJuridico (Usuario u, PersonaJuridica pj) throws UsuarioNoEncontrado, NoEsAdministrativo, ClienteNoEncontradoException;
 
     /**
 
@@ -44,4 +45,11 @@ public interface GestionClientes {
     public List<Cliente> getClientesHolanda(Usuario u, String dni, String nombre, String apellido, String direccion)
             throws  NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda;
 
+    public PersonaJuridica getPersonasJuridicaID(Long id) throws PersonaJuridicaNoEncontrada;
+
+    public PersonaFisica getPersonasFisicaID(Long id) throws ClienteNoEncontradoException;
+
+    public void modificarFisico (Usuario u, PersonaFisica pf) throws UsuarioNoEncontrado, NoEsAdministrativo, ClienteNoEncontradoException;
     }
+
+

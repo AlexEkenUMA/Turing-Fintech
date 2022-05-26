@@ -41,12 +41,16 @@
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="botonModificar" value="Modificar" action="#{clientes.modificar(c, infoSesion.usuario)}"/>
+                        <h:commandButton id="modJu" value="Modificar"  action="#{clientes.modificarJuridico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Juridico'}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton id="modFi" value="Modificar"  action="#{clientes.modificarFisico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Fisico'}"/>
                     </h:column>
 
                     <h:column>
                         <h:commandButton id="botonEliminar" value="Dar de baja" action="#{clientes.darBaja(c.identificacion, infoSesion.usuario)}"/>
                     </h:column>
+
                 </h:dataTable>
 
                 <h:commandButton id="botonJuridico" value="Añadir P. Juridica" action="#{clientes.darAltaJuridica()}"/>
