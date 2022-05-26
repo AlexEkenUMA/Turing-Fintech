@@ -21,9 +21,27 @@
             <h:outputText value="SWIFT"/>
             <h:inputText id="SWIFT" value="#{cuentas.segregada.SWIFT}" required="true"/>
             <h:message for="SWIFT"/>
+            <br> </br>
+
             <h:outputText value="Cuenta de referencia"/>
             <h:inputText id="Cr" value="#{cuentas.ibanCr}" required="true"/>
             <h:message for="Cr"/>
+            <h:outputText value="SWIFT"/>
+            <h:inputText id="Crswif" value="#{cuentas.cuentaReferencia.SWIFT}" required="true"/>
+            <h:message for="Crswif"/>
+            <h:outputText value="Nombre banco"/>
+            <h:inputText id="CrNombre" value="#{cuentas.cuentaReferencia.nombre_Banco}" required="true"/>
+            <h:message for="CrNombre"/>
+            <h:outputText value="Sucursal"/>
+            <h:inputText id="CrSurcursal" value="#{cuentas.cuentaReferencia.sucursal}" required="true"/>
+            <h:message for="CrSurcursal"/>
+            <h:outputText value="Pais"/>
+            <h:inputText id="CrPais" value="#{cuentas.cuentaReferencia.pais}" required="true"/>
+            <h:message for="CrPais"/>
+            <h:outputText value="Saldo"/>
+            <h:inputText id="CrSaldo" value="#{cuentas.cuentaReferencia.saldo}" required="true"/>
+            <h:message for="CrSaldo"/>
+
             <h:commandButton value="Apertura cuenta" action="#{cuentas.accion()}"/>
             <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
 

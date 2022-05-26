@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Named(value = "cuentas")
@@ -35,6 +36,8 @@ public class Cuentas {
 
     Double saldo =0.0;
 
+    private CuentaReferencia cuentaReferencia;
+
     private Segregada segregada;
 
     private PooledAccount pooledAccount;
@@ -56,8 +59,13 @@ public class Cuentas {
     public Cuentas(){
         segregada = new Segregada();
         pooledAccount = new PooledAccount();
+        cuentaReferencia = new CuentaReferencia();
         modo = Modo.NOACCION;
     }
+
+    public CuentaReferencia getCuentaReferencia() {return cuentaReferencia;}
+
+    public void setCuentaReferencia(CuentaReferencia cuentaReferencia) {this.cuentaReferencia = cuentaReferencia;}
 
     public Double getSaldo() {return saldo;}
 
@@ -152,9 +160,11 @@ public class Cuentas {
         try{
             if (modo.equals(Modo.SEGREGADA)){
                 asociarCliente(dni);
-                asociarReferencia(ibanCr);
+                //asociarReferencia(ibanCr);
+                cuentaReferencia.setEstado(true);
+                cuentaReferencia.setFecha_Apertura(new Date());
                 gestionCuentas.aperturaCuentaSegregada(sesion.getUsuario(), segregada.getCliente(), segregada.getIBAN(),
-                        segregada.getSWIFT(), segregada.getCr());
+                        segregada.getSWIFT(), cuentaReferencia);
             }
 
             if (modo.equals((Modo.POOLED))){
