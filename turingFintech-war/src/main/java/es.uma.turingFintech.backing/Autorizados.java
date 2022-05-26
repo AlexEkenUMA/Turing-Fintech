@@ -2,10 +2,7 @@ package es.uma.turingFintech.backing;
 
 import clases.ejb.GestionAutorizados;
 import clases.ejb.GestionClientes;
-import clases.ejb.exceptions.AutorizadoNoEncontradoException;
-import clases.ejb.exceptions.NoEsAdministrativo;
-import clases.ejb.exceptions.PersonaJuridicaNoEncontrada;
-import clases.ejb.exceptions.UsuarioNoEncontrado;
+import clases.ejb.exceptions.*;
 import es.uma.turingFintech.Autorizado;
 import es.uma.turingFintech.PersonaJuridica;
 import es.uma.turingFintech.Usuario;
@@ -32,14 +29,25 @@ public class Autorizados {
 
     private PersonaJuridica personaJuridica;
 
+    Autorizado autorizado;
+
     private Usuario usuario;
 
     public Autorizados(){
         personaJuridica = new PersonaJuridica();
+        autorizado = new Autorizado();
     }
 
     public PersonaJuridica getPersonaJuridica() {
         return personaJuridica;
+    }
+
+    public Autorizado getAutorizado() {
+        return autorizado;
+    }
+
+    public void setAutorizado(Autorizado autorizado) {
+        this.autorizado = autorizado;
     }
 
     public String getDni() {
@@ -106,6 +114,27 @@ public class Autorizados {
         }
 
 
+        return null;
+    }
+
+    public String modifcicar(Autorizado autorizado1){
+        this.autorizado = autorizado1;
+        return "modficarAutorizado.xhtml";
+    }
+
+    public String accion(){
+        try{
+            gestionAutorizados.modificarAutorizados(sesion.getUsuario(), autorizado, autorizado.getId());
+            return "autorizados.xhtml";
+        } catch (AutorizadoNoEncontradoException e) {
+            e.printStackTrace();
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        } catch (ModificarAutorizadosDistintaID modificarAutorizadosDistintaID) {
+            modificarAutorizadosDistintaID.printStackTrace();
+        }
         return null;
     }
 

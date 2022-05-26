@@ -35,10 +35,15 @@
                         <h:outputText id="textoEstado" value="#{c.estado}"/>
                     </h:column>
 
+                    <h:column>
+                        <h:commandButton id="Modificar" value="Modificar" action="#{Autorizados.modifcicar(c)}"/>
+                    </h:column>
 
                     <h:column>
                         <h:commandButton id="darBaja" value="Dar Baja" action="#{Autorizados.darBajar(c.id)}"/>
                     </h:column>
+
+
 
                 </h:dataTable>
 

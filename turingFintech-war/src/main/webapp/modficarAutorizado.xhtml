@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
+    <title>
+        <c:choose>
+            <c:when test="#{infoSesion.usuario.administrativo}">
+                <h:outputText value="cliente"/>
+            </c:when>
+            <c:otherwise>
+                Acceso irregular
+            </c:otherwise>
+        </c:choose>
+    </title>
+</h:head>
+<h:body>
+
+    <c:choose>
+        <c:when test="#{infoSesion.usuario.administrativo}">
+            <h1>Cliente</h1>
+            <h:form id="Autorizados">
+                <h:panelGrid columns="3">
+                    <h:outputText value="Nombre"/>
+                    <h:inputText id ="nombre" value="#{Autorizados.autorizado.nombre}"/>
+                    <h:message for="nombre"/>
+                    <h:outputText value="Apellidos"/>
+                    <h:inputText id ="ape" value="#{Autorizados.autorizado.apellidos}"/>
+                    <h:message for="ape"/>
+                    <h:outputText value="Dirección"/>
+                    <h:inputText id ="direc" value="#{Autorizados.autorizado.direccion}"/>
+                    <h:message for="direc"/>
+
+
+                    <h:commandButton value="Modificar" action="#{Autorizados.accion()}"/>
+                    <h:commandButton value="Cancelar" action="autorizados.xhtml"/>
+
+
+                    <h:inputHidden value="#{Autorizados.autorizado.id}"/>
+                    <h:inputHidden value="#{Autorizados.autorizado.identificacion}"/>
+                    <h:inputHidden value="#{Autorizados.autorizado.estado}"/>
+
+                    <h:inputHidden value="#{Autorizados.autorizado.fecha_Nacimiento}">
+                        <f:convertDateTime pattern = "dd-mm-yyyy" />
+                    </h:inputHidden>
+                    <h:inputHidden value="#{Autorizados.autorizado.fecha_Inicio}">
+                        <f:convertDateTime pattern = "dd-mm-yyyy" />
+                    </h:inputHidden>
+
+                    <h:inputHidden value="#{Autorizados.autorizado.fecha_Fin}">
+                        <f:convertDateTime pattern = "dd-mm-yyyy" />
+                    </h:inputHidden>
+
+
+
+                </h:panelGrid>
+            </h:form>
+        </c:when>
+        <c:otherwise>
+            <p>No está autorizado para ver esta página.</p>
+        </c:otherwise>
+    </c:choose>
+
+</h:body>
+</html>
+
