@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp/aperturaPooled.xhtml" value="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp/darAltaClienteIndividual.xhtml" value="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp/datapicker.xhtml" value="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp/interfazCliente.xhtml" value="file://$PROJECT_DIR$/turingFintech-war/src/main/webapp" />

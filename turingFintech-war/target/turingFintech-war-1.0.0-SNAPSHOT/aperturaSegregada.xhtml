@@ -39,6 +39,9 @@
             <h:outputText value="Saldo"/>
             <h:inputText id="CrSaldo" value="#{cuentas.cuentaReferencia.saldo}" required="true"/>
             <h:message for="CrSaldo"/>
+            <h:outputText value="Divisa"/>
+            <h:inputText id="CrDiv" value="#{cuentas.divisa}" required="true"/>
+            <h:message for="CrDiv"/>
 
             <h:commandButton value="Apertura cuenta" action="#{cuentas.accion()}"/>
             <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Lista de cuentas</title>
 </h:head>
@@ -51,7 +52,17 @@
             </h:dataTable>
 
            <h:commandButton id="botonInsertarSegregada" value="Apertura Cuenta Segregada" action="#{cuentas.aperturaSegregada()}"/>
+
+                <p:outputLabel for="@next" value="Apertura Pooled"/>
+                <p:selectOneMenu id="option" value="#{cuentas.opcion}" >
+                    <f:selectItem itemLabel="Elige una" itemValue=""/>
+                    <f:selectItem itemLabel="Referencia existe" itemValue="existe"/>
+                    <f:selectItem itemLabel="Referencia no existe" itemValue="no"/>
+                </p:selectOneMenu>
+
            <h:commandButton id="botonInsertarPooled" value="Apertura Cuenta Pooled" action="#{cuentas.aperturaPooled()}"/>
+
+
 
 
                 <div>

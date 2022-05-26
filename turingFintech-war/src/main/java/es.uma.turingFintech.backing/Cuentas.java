@@ -21,8 +21,11 @@ public class Cuentas {
         SEGREGADA,
         POOLED,
         NOACCION,
-        DEPOSITO
+        DEPOSITO,
+        POOLEDREF
     };
+
+    String opcion = "";
 
     String pooled = "Pooled";
 
@@ -62,6 +65,10 @@ public class Cuentas {
         cuentaReferencia = new CuentaReferencia();
         modo = Modo.NOACCION;
     }
+
+    public String getOpcion() {return opcion;}
+
+    public void setOpcion(String opcion) {this.opcion = opcion;}
 
     public CuentaReferencia getCuentaReferencia() {return cuentaReferencia;}
 
@@ -114,8 +121,13 @@ public class Cuentas {
 
     public String aperturaPooled(){
         modo = Modo.POOLED;
+        if (opcion.equals("no")){
+            modo = Modo.POOLEDREF;
+            return "pooledRef.xhtml";
+        }
         return "aperturaPooled"; //Añadir panel pooled
     }
+
 
     public void asociarCliente (String iden){
         List<Cliente> clienteList = gestionClientes.getClientes();
@@ -140,9 +152,10 @@ public class Cuentas {
         segregada.setCr(objetivo);
     }
 
-    public String aperturaReferencia(){
-        return null;
-    }
+   public void asociarDivisa () throws DivisaNoCoincide {
+        Divisa divisa = gestionCuentas.obetenerDivisa(this.divisa);
+        cuentaReferencia.setDivisa(divisa);
+   }
 
 
     public String aniadirDeposito(String pooledAccount){
@@ -163,6 +176,7 @@ public class Cuentas {
                 //asociarReferencia(ibanCr);
                 cuentaReferencia.setEstado(true);
                 cuentaReferencia.setFecha_Apertura(new Date());
+                asociarDivisa();
                 gestionCuentas.aperturaCuentaSegregada(sesion.getUsuario(), segregada.getCliente(), segregada.getIBAN(),
                         segregada.getSWIFT(), cuentaReferencia);
             }
@@ -185,6 +199,18 @@ public class Cuentas {
             if (modo.equals(Modo.DEPOSITO)){
                 pooledAccount = gestionCuentas.getCuentaPooled(ibanPooled);
                 gestionCuentas.setDepositos(pooledAccount.getIBAN(), ibanCr, divisa, saldo);
+            }
+
+            if (modo.equals(Modo.POOLEDREF)){
+                asociarCliente(dni);
+                List<DepositadaEn> depositadaEns = new ArrayList<>();
+                gestionCuentas.aperturaCuentaPooled(sesion.getUsuario(), pooledAccount.getCliente(), pooledAccount.getIBAN(), pooledAccount.getSWIFT()
+                ,depositadaEns);
+                cuentaReferencia.setEstado(true);
+                cuentaReferencia.setFecha_Apertura(new Date());
+                asociarDivisa();
+                gestionCuentas.darAltaRef(sesion.getUsuario(), cuentaReferencia);
+                gestionCuentas.setDepositos(pooledAccount.getIBAN(), cuentaReferencia.getIBAN(),divisa,  saldo);
             }
 
             return "panelAdmin.xhtml";

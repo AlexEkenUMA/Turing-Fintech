@@ -151,6 +151,12 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
+    public void darAltaRef(Usuario u, CuentaReferencia r) throws UsuarioNoEncontrado, NoEsAdministrativo {
+        gestionUsuarios.usuarioAdministrativo(u);
+        em.persist(r);
+    }
+
+    @Override
     public void setDepositos(String pooledAccount, String ibanCr, String abreviaturaDiv, Double saldo) throws CuentaNoEncontradaException, DivisaNoCoincide {
 
         CuentaReferencia cuentaReferencia = em.find(CuentaReferencia.class, ibanCr);
@@ -257,6 +263,17 @@ public class CuentasEJB implements GestionCuentas {
         Query query = em.createQuery("select cuenta from Segregada cuenta");
         segregadas = (List<Segregada>) query.getResultList();
         return segregadas;
+    }
+
+    public Divisa obetenerDivisa(String abre) throws DivisaNoCoincide {
+        List<Divisa> divisas;
+        Query query = em.createQuery("select divisa from Divisa divisa where divisa.abreviatura = :abre");
+        query.setParameter("abre", abre);
+        divisas = (List<Divisa>) query.getResultList();
+        if (divisas.isEmpty()){
+            throw  new DivisaNoCoincide();
+        }
+        return divisas.get(0);
     }
 
     @Override
