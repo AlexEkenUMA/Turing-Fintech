@@ -2,7 +2,89 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<script type="text/javascript">
+    PrimeFaces.locales['es'] = {
+        closeText: 'Cerrar',
+        prevText: 'Anterior',
+        nextText: 'Siguiente',
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+        weekHeader: 'Semana',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
+        timeOnlyTitle: 'Sólo hora',
+        timeText: 'Tiempo',
+        hourText: 'Hora',
+        minuteText: 'Minuto',
+        secondText: 'Segundo',
+        millisecondText: 'Milisegundo',
+        currentText: 'Fecha actual',
+        ampm: false,
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Día',
+        allDayText: 'Todo el día',
+        today: 'Hoy',
+        clear: 'Claro'
+    };
+    PrimeFaces.locales ['de'] = {
+        closeText: 'Schließen',
+        prevText: 'Zurück',
+        nextText: 'Weiter',
+        monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+        dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+        dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+        dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+        weekHeader: 'Woche',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
+        timeOnlyTitle: 'Nur Zeit',
+        timeText: 'Zeit',
+        hourText: 'Stunde',
+        minuteText: 'Minute',
+        secondText: 'Sekunde',
+        millisecondText: 'Millisekunde',
+        currentText: 'Aktuelles Datum',
+        ampm: false,
+        month: 'Monat',
+        week: 'Woche',
+        day: 'Tag',
+        allDayText: 'Ganzer Tag',
+        today: 'Heute',
+        clear: 'Löschen'
+    };
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function dateTemplateFunc(date) {
+        return '<span style="background-color:' + ((date.day < 21 && date.day > 10) ? '#81C784' : 'inherit') + ';border-radius:50%;width: 2.5rem;height: 2.5rem;line-height: 2.5rem;display: flex;align-items: center;justify-content: center;">' + date.day + '</span>';
+    }
+
+    //]]>
+</script>
+
+<style type="text/css">
+    .value {
+        font-weight: bold;
+    }
+</style>
+
+
+
+
+
 <h:head>
     <title>dar alta cliente fisico</title>
 </h:head>
@@ -21,11 +103,6 @@
             <h:outputText value="DNI:"/>
             <h:inputText id="DNI" value="#{clientes.personaFisica.identificacion}" required="true" />
             <h:message for="DNI"/>
-            <!--
-            <h:outputText value="Fecha de nacimiento"/>
-            <h:inputText id="fechaNac" t value="#{clientes.personaFisica.fecha_Nacimiento}"/>
-            <h:message for="fechaNac"/>
-            -->
             <h:outputText value="Direccion"/>
             <h:inputText id="direccion" value="#{clientes.personaFisica.direccion}" required="true"/>
             <h:message for="direccion"/>
@@ -38,17 +115,18 @@
             <h:outputText value="Ciudad"/>
             <h:inputText id="ciudad" value="#{clientes.personaFisica.ciudad}" required="true"/>
             <h:message for="ciudad"/>
+            <p:outputLabel for="basic" value="Fecha de nacimiento"/>
+            <p:datePicker id="basic" value="#{clientes.personaFisica.fecha_Nacimiento}" size="8"/>
+            <h:outputText id="Fec_Sel" value="#{clientes.personaFisica.fecha_Nacimiento}"/>
+            <h:message for="Fec_Sel"/>
             <h:commandButton value="Crear usuario" action="#{clientes.ejecutarAccion()}"/>
             <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
-
             <h:inputHidden value="#{clientes.modo}"/>
         </h:panelGrid>
         <h:messages/>
 
+
+
     </h:form>
-
-
-
 </h:body>
 </html>
-
