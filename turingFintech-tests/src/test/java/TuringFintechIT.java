@@ -61,6 +61,7 @@ public class TuringFintechIT {
   public void tearDown() {
     driver.quit();
   }
+
   @Test
   public void inicio() {
     driver.get(baseURL);
@@ -80,4 +81,5 @@ public class TuringFintechIT {
     driver.findElement(By.id("saludo")).click();
     assertThat(driver.findElement(By.id("saludo")).getText(), is("Hola mundo"));
   }
+
 }
