@@ -33,6 +33,7 @@ public class Autorizados {
 
     private Usuario usuario;
 
+
     public Autorizados(){
         personaJuridica = new PersonaJuridica();
         autorizado = new Autorizado();
@@ -117,9 +118,9 @@ public class Autorizados {
         return null;
     }
 
-    public String modifcicar(Autorizado autorizado1){
+    public String modifcicar(Autorizado autorizado1) throws UsuarioNoEncontrado {
         this.autorizado = autorizado1;
-        return "modficarAutorizado.xhtml";
+       return "modficarAutorizado.xhtml";
     }
 
     public String accion(){

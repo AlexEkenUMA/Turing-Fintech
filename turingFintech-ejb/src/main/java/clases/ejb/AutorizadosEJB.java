@@ -57,6 +57,9 @@ public class AutorizadosEJB implements GestionAutorizados{
         if(ID != au.getId()){
             throw new ModificarAutorizadosDistintaID();
         }else{
+            au.setUsuario(autorizadoExiste.getUsuario());
+            au.setEmpresas(autorizadoExiste.getEmpresas());
+
             em.merge(au);
         }
     }
