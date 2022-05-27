@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -127,6 +128,32 @@ public class AutorizadosEJB implements GestionAutorizados{
         Query query = em.createQuery("select autorizado from Autorizado autorizado");
         List<Autorizado> autorizadoList = (List<Autorizado>) query.getResultList();
         return autorizadoList;
+    }
+
+    @Override
+    public void nuevoAutorizado (Usuario u, Autorizado autorizado, Long id, Usuario usuario) throws UsuarioNoEncontrado, NoEsAdministrativo, PersonaJuridicaNoEncontrada, UsuarioNombreRepetido {
+        gestionUsuarios.usuarioAdministrativo(u);
+        PersonaJuridica personaJuridica = em.find(PersonaJuridica.class, id);
+        if (personaJuridica == null){
+            throw new PersonaJuridicaNoEncontrada();
+        }
+        Usuario usuario1 = em.find(Usuario.class, usuario.getNombre_usuario());
+        if (usuario1 != null){
+            throw new UsuarioNombreRepetido();
+        }
+        List<PersonaJuridica> personaJuridicas = new ArrayList<>();
+        personaJuridicas.add(personaJuridica);
+        autorizado.setEmpresas(personaJuridicas);
+        autorizado.setEstado("Activo");
+        autorizado.setFecha_Inicio(new Date());
+        autorizado.setUsuario(usuario);
+        em.persist(autorizado);
+        Autorizado au = em.find(Autorizado.class, autorizado.getId());
+        Cliente cliente = em.find(Cliente.class, id);
+        usuario.setAutorizado(autorizado);
+        usuario.setCliente(cliente);
+        em.persist(usuario);
+
     }
 
 }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Lista de Personas Autorizadas</title>
 </h:head>
@@ -13,6 +14,8 @@
             <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
         </c:when>
         <c:otherwise>
+            <h2>Ahora seleccione el autorizado</h2>
+            <hr> </hr>
             <h:form id="Autorizados">
                 <h:dataTable value="#{infoSesion.autorizado}" var="c" border="1">
                     <h:column>
@@ -43,7 +46,13 @@
                 </h:dataTable>
 
                 <h:inputHidden value="#{Autorizados.dni}"/>
+                <h:inputHidden value="#{Autorizados.id}"/>
+                <hr> </hr>
+                <h2>Si desea añadir un autorizado nuevo pulse</h2>
 
+                <h:column>
+                    <h:commandButton id="nuevo" value="Nuevo autorizado" action="#{Autorizados.accionNuevoAu()}"/>
+                </h:column>
 
                 <div>
                     <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>

@@ -166,4 +166,18 @@ public class UsuariosEJB implements GestionUsuarios {
 
     }
 
+    @Override
+    public void nuevoUsuario(Usuario u,String nombre, String contrasena, Boolean admin, Autorizado au) throws UsuarioNombreRepetido, UsuarioNoEncontrado, NoEsAdministrativo {
+        usuarioAdministrativo(u);
+        Usuario prueba = em.find(Usuario.class, nombre);
+        if (prueba != null){
+            throw new UsuarioNombreRepetido();
+        }
+        Usuario usuario = new Usuario(nombre, contrasena, admin);
+        if (au != null){
+            usuario.setAutorizado(au);
+        }
+       em.persist(usuario);
+    }
+
 }

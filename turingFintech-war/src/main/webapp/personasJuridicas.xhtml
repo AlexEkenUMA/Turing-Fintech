@@ -13,6 +13,8 @@
             <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
         </c:when>
         <c:otherwise>
+            <h2>Seleccione la empresa a la que se quiere autorizar</h2>
+            <hr> </hr>
             <h:form id="Autorizados">
                 <h:dataTable value="#{infoSesion.juridica}" var="c" border="1">
                     <h:column>

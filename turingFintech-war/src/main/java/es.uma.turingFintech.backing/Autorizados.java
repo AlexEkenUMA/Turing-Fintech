@@ -2,12 +2,15 @@ package es.uma.turingFintech.backing;
 
 import clases.ejb.GestionAutorizados;
 import clases.ejb.GestionClientes;
+import clases.ejb.GestionUsuarios;
 import clases.ejb.exceptions.*;
 import es.uma.turingFintech.Autorizado;
 import es.uma.turingFintech.PersonaJuridica;
 import es.uma.turingFintech.Usuario;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
@@ -25,7 +28,11 @@ public class Autorizados {
     @Inject
     private GestionAutorizados gestionAutorizados;
 
+    @Inject
+    private GestionUsuarios gestionUsuarios;
     String dni= "";
+
+    Long id;
 
     private PersonaJuridica personaJuridica;
 
@@ -33,11 +40,20 @@ public class Autorizados {
 
     private Usuario usuario;
 
+    private Usuario nuevo;
+
+    String repass = "";
+
 
     public Autorizados(){
         personaJuridica = new PersonaJuridica();
         autorizado = new Autorizado();
+        nuevo = new Usuario();
     }
+
+    public Usuario getNuevo() {return nuevo;}
+
+    public void setNuevo(Usuario nuevo) {this.nuevo = nuevo;}
 
     public PersonaJuridica getPersonaJuridica() {
         return personaJuridica;
@@ -71,10 +87,19 @@ public class Autorizados {
         this.usuario = usuario;
     }
 
+    public Long getId() {return id;}
+
+    public void setId(Long id) {this.id = id;}
+
+    public String getRepass() {return repass;}
+
+    public void setRepass(String repass) {this.repass = repass;}
+
     public String anadirAuto(PersonaJuridica pj, Usuario u){
         personaJuridica = pj;
         usuario = u;
         dni = pj.getIdentificacion();
+        id = pj.getId();
         sesion.refrescarUsuarioAdmin();
         return "listaAutorizados.xhtml";
     }
@@ -136,6 +161,34 @@ public class Autorizados {
         } catch (ModificarAutorizadosDistintaID modificarAutorizadosDistintaID) {
             modificarAutorizadosDistintaID.printStackTrace();
         }
+        return null;
+    }
+
+    public String accionNuevoAu(){
+        return "nuevoAutorizado.xhtml";
+    }
+
+    public String nuevoAutorizado (){
+        try{
+            if (!nuevo.getContraseña().equals(repass)) {
+                FacesMessage fm = new FacesMessage("Las contraseñas deben coincidir");
+                FacesContext.getCurrentInstance().addMessage("registro:repass", fm);
+                return null;
+            }
+            nuevo.setAutorizado(autorizado);
+            nuevo.setAdministrativo(false);
+            gestionAutorizados.nuevoAutorizado(sesion.getUsuario(), autorizado, id, nuevo);
+            return "panelAdmin.xhtml";
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        } catch (PersonaJuridicaNoEncontrada personaJuridicaNoEncontrada) {
+            personaJuridicaNoEncontrada.printStackTrace();
+        } catch (UsuarioNombreRepetido usuarioNombreRepetido) {
+            usuarioNombreRepetido.printStackTrace();
+        }
+
         return null;
     }
 

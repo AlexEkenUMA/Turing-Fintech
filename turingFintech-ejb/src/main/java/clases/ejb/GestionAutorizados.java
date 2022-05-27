@@ -23,6 +23,7 @@ public interface    GestionAutorizados {
 
     public void desbloquearAutorizado (Usuario u, Autorizado au) throws DesbloquearAutorizadoQueNoEstaBloqueado, AutorizadoNoEncontradoException, UsuarioNoEncontrado, NoEsAdministrativo;
 
+    public void nuevoAutorizado (Usuario u, Autorizado autorizado, Long id, Usuario usario) throws UsuarioNoEncontrado, NoEsAdministrativo, PersonaJuridicaNoEncontrada, UsuarioNombreRepetido;
 
     public List<Autorizado> getAutorizados();
 
