@@ -18,13 +18,16 @@ public class UsuariosEJB implements GestionUsuarios {
     private EntityManager em;
 
     @Override
-    public boolean usuarioCorrecto (Usuario u) throws AutorizadoBloqueado, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada, UsuarioNoEncontrado, EmpresaNoTieneAcceso {
+    public boolean usuarioCorrecto (Usuario u) throws AutorizadoBloqueado, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada, UsuarioNoEncontrado, EmpresaNoTieneAcceso, AccesoIncorrecto {
         boolean ok = false;
         Query query = em.createQuery("select usuario from Usuario usuario where usuario.nombre_usuario = :nombre " +
                 "and usuario.contraseña = :password");
         query.setParameter("nombre", u.getNombre_usuario());
         query.setParameter("password", u.getContraseña());
         List<Usuario> usuarios = query.getResultList();
+        if (usuarios.get(0).isAdministrativo()){
+            throw new AccesoIncorrecto();
+        }
 
         if (usuarios.isEmpty()){
             throw new UsuarioNoEncontrado();
@@ -149,7 +152,7 @@ public class UsuariosEJB implements GestionUsuarios {
 
 
     @Override
-    public Usuario refrescarUsuario(Usuario u) throws AutorizadoBloqueado, UsuarioNoEncontrado, EmpresaNoTieneAcceso, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada {
+    public Usuario refrescarUsuario(Usuario u) throws AutorizadoBloqueado, UsuarioNoEncontrado, EmpresaNoTieneAcceso, AutorizadoSoloTieneAccesoACuentasClienteBloqueado, PersonaFisicaBloqueada, AccesoIncorrecto {
         usuarioCorrecto(u);
         Usuario user = em.find(Usuario.class, u.getNombre_usuario());
         em.refresh(user);

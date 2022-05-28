@@ -1,3 +1,4 @@
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/AccesoIncorrecto.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/NingunaCuentaCoincideConLosParametrosDeBusqueda.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/MismaCuentaOrigenYDestino.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/GestionCuentas.java

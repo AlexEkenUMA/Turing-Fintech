@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Lista de Personas Autorizadas</title>
 </h:head>
@@ -38,10 +39,17 @@
                     <h:column>
                         <h:commandButton id="Modificar" value="Modificar" action="#{Autorizados.modifcicar(c)}"/>
                     </h:column>
-
+                    <h:column>
+                        <h:commandButton id="Bloquear" value="Bloquear" action="#{Autorizados.bloquear(c)}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton id="Desbloq" value="Desbloquear" action="#{Autorizados.desbloquear(c)}"/>
+                    </h:column>
                     <h:column>
                         <h:commandButton id="darBaja" value="Dar Baja" action="#{Autorizados.darBajar(c.id)}"/>
                     </h:column>
+
+
 
 
 

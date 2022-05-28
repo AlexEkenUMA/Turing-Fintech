@@ -50,6 +50,8 @@ public class Acceso {
             autorizadoSoloTieneAccesoACuentasClienteBloqueado.printStackTrace();
         } catch (PersonaFisicaBloqueada personaFisicaBloqueada) {
             personaFisicaBloqueada.printStackTrace();
+        } catch (AccesoIncorrecto accesoIncorrecto) {
+            accesoIncorrecto.printStackTrace();
         }
         return null;
 

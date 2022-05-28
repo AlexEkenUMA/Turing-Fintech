@@ -116,7 +116,7 @@
             <h:inputText id="ciudad" value="#{clientes.personaFisica.ciudad}" required="true"/>
             <h:message for="ciudad"/>
             <p:outputLabel for="basic" value="Fecha de nacimiento"/>
-            <p:datePicker id="basic" value="#{clientes.personaFisica.fecha_Nacimiento}" size="8"/>
+            <p:datePicker id="basic" value="#{clientes.personaFisica.fecha_Nacimiento}" size="8" pattern="dd/MM/yyyy"/>
             <h:outputText id="Fec_Sel" value="#{clientes.personaFisica.fecha_Nacimiento}"/>
             <h:message for="Fec_Sel"/>
             <h:commandButton value="Crear usuario" action="#{clientes.ejecutarAccion()}"/>

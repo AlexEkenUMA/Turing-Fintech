@@ -37,7 +37,7 @@ public class ClientesEJB implements GestionClientes {
 
 
 
-        if (!tipoCliente.equals("Juridico") && !tipoCliente.equals("Fisica")){
+        if (!tipoCliente.equals("Juridico") && !tipoCliente.equals("Fisico")){
             throw new ClienteNoValidoException();
         }
         Date date = new Date();
@@ -49,7 +49,7 @@ public class ClientesEJB implements GestionClientes {
 
             em.persist(personaJuridica);
         }
-        if (tipoCliente.equals("Fisica")){
+        if (tipoCliente.equals("Fisico")){
             PersonaFisica personaFisica = new PersonaFisica(null, id, tipoCliente, "Activo", date, null, direccion,ciudad,
                     codigoPostal, pais, nombre, apellidos, fechaNac);
 
@@ -188,7 +188,7 @@ public class ClientesEJB implements GestionClientes {
                 em.merge(pj);
             }
         }
-        else if(c.getTipo_Cliente().equals("Fisica")){
+        else if(c.getTipo_Cliente().equals("Fisico")){
             PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
             if(pf == null){
                 throw new ClienteNoEncontradoException();
@@ -222,7 +222,7 @@ public class ClientesEJB implements GestionClientes {
                 em.merge(pj);
             }
         }
-        else if (c.getTipo_Cliente().equals("Fisica")){
+        else if (c.getTipo_Cliente().equals("Fisico")){
             PersonaFisica pf = em.find(PersonaFisica.class, c.getId());
             if(pf == null){
                 throw new ClienteNoEncontradoException();

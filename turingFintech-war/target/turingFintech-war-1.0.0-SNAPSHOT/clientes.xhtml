@@ -48,6 +48,14 @@
                     </h:column>
 
                     <h:column>
+                        <h:commandButton id="Bloquear" value="Bloquear" action="#{clientes.bloquear(c)}"/>
+                    </h:column>
+
+                    <h:column>
+                        <h:commandButton id="Desbloq" value="Desbloquear" action="#{clientes.desbloquear(c)}"/>
+                    </h:column>
+
+                    <h:column>
                         <h:commandButton id="botonEliminar" value="Dar de baja" action="#{clientes.darBaja(c.identificacion, infoSesion.usuario)}"/>
                     </h:column>
 

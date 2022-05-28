@@ -38,3 +38,4 @@ clases/ejb/exceptions/NoEsAdministrativo.class
 clases/ejb/exceptions/UsuarioNombreRepetido.class
 clases/ejb/exceptions/ClienteNoValidoException.class
 clases/ejb/exceptions/DivisaNoCoincide.class
+clases/ejb/exceptions/AccesoIncorrecto.class

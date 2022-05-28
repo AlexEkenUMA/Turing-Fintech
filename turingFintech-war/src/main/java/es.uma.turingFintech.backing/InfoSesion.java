@@ -92,6 +92,8 @@ public class InfoSesion implements Serializable {
             autorizadoSoloTieneAccesoACuentasClienteBloqueado.printStackTrace();
         } catch (PersonaFisicaBloqueada personaFisicaBloqueada) {
             personaFisicaBloqueada.printStackTrace();
+        } catch (AccesoIncorrecto accesoIncorrecto) {
+            accesoIncorrecto.printStackTrace();
         }
     }
 

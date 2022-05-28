@@ -71,6 +71,8 @@ public class TuringFintech {
 			fail("Persona fisica bloqueada esta intentando acceder a la aplicacion");
 		} catch (AutorizadoBloqueado autorizadoBloqueado) {
 			fail("Persona autorizada bloqueada esta intentando acceder a la aplicacion");
+		} catch (AccesoIncorrecto accesoIncorrecto) {
+			accesoIncorrecto.printStackTrace();
 		}
 	}
 
@@ -636,6 +638,8 @@ public class TuringFintech {
 			fail("Persona fisica bloqueada esta intentando acceder a la aplicacion");
 		} catch (AutorizadoBloqueado autorizadoBloqueado) {
 			fail("Persona autorizada bloqueada esta intentando acceder a la aplicacion");
+		} catch (AccesoIncorrecto accesoIncorrecto) {
+			accesoIncorrecto.printStackTrace();
 		}
 
 

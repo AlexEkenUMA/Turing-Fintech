@@ -270,7 +270,7 @@ public class Cuentas {
 
             }
 
-            return "panelAdmin.xhtml";
+            return "cuentas.xhtml";
 
 
         } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -296,7 +296,7 @@ public class Cuentas {
     public String darBajar (String iban){
         try{
             gestionCuentas.cierreCuenta(sesion.getUsuario(), iban);
-            return "panelAdmin.xhtml";
+            return "cuentas.xhtml";
         } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
             usuarioNoEncontrado.printStackTrace();
         } catch (CuentaNoEncontradaException e) {

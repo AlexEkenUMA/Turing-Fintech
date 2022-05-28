@@ -125,6 +125,43 @@ public class Clientes {
     }
 
 
+    public String bloquear (Cliente c){
+        try{
+            gestionClientes.bloquearCliente(sesion.getUsuario(), c);
+            return "clientes.xhtml";
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (TipoNoValidoException e) {
+            e.printStackTrace();
+        } catch (BloquearClienteYaBloqueado bloquearClienteYaBloqueado) {
+            bloquearClienteYaBloqueado.printStackTrace();
+        } catch (ClienteNoEncontradoException e) {
+            e.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        }
+      return null;
+    }
+
+    public String desbloquear(Cliente c){
+        try{
+            gestionClientes.desbloquearCliente(sesion.getUsuario(), c);
+            return "clientes.xhtml";
+        } catch (DesbloquearClienteQueNoEstaBloqueado desbloquearClienteQueNoEstaBloqueado) {
+            desbloquearClienteQueNoEstaBloqueado.printStackTrace();
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (TipoNoValidoException e) {
+            e.printStackTrace();
+        } catch (ClienteNoEncontradoException e) {
+            e.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     public String ejecutarAccion () {
 
@@ -145,7 +182,7 @@ public class Clientes {
                     break;
 
                 case FISICA:
-                    gestionClientes.darDeAltaCliente(sesion.getUsuario(), personaFisica.getIdentificacion(),"Fisica", null,
+                    gestionClientes.darDeAltaCliente(sesion.getUsuario(), personaFisica.getIdentificacion(),"Fisico", null,
                             personaFisica.getNombre(), personaFisica.getApellidos(), personaFisica.getFecha_Nacimiento(),
                             personaFisica.getDireccion(), personaFisica.getCodigo_Postal(), personaFisica.getPais(), null,
                             personaFisica.getCiudad());
