@@ -3,49 +3,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-<h:head>
-    <title>Login de usuario</title>
-</h:head>
-<h:body>
-
-    <h1> ACCESO AUTORIZADOS Y CLIENTES</h1>
-
-    <h:form id="Acceso">
-
-        <c:choose>
-            <c:when test="#{!empty infoSesion.usuario}">
-                <p>Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
-                <p>Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
-            </c:when>
-
-            <c:otherwise>
-                <h:panelGrid columns="3">
-                    <h:outputText value="Nombre de usuario:"/>
-                    <h:inputText id="user" required="true" value="#{Acceso.usuario.nombre_usuario}"/>
-                    <h:message id="userMessage" for="user"/>
-
-                    <h:outputText value="Contraseña:"/>
-                    <h:inputSecret id="pass" required="true" value="#{Acceso.usuario.contraseña}"/>
-                    <h:message id="passwordMessage" for="pass"/>
-
-                    <h:commandButton id="botonLogin" value="Entrar" action="#{Acceso.entrar()}"/>
-
-                </h:panelGrid>
-
-                <div>
-                    <p>Si usted es administrativo debe acceder desde <h:link outcome="admin.xhtml">página de acceso</h:link></p>
-                </div>
-
-            </c:otherwise>
-        </c:choose>
 
 
+<head>
 
 
-    </h:form>
+    <!-- Link hacia el archivo de estilos css -->
+    <link rel="stylesheet" href="ccss/login.css"> </link>
 
+    <style type="text/css">
 
+    </style>
 
-</h:body>
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+
+<body>
+
+<div id="contenedor">
+    <div id="central">
+        <div id="login">
+            <div class="titulo">
+                Acceso Usuario
+            </div>
+            <h:form id="Acceso">
+                <h:inputText id="user" placeholder="Usuario" required="true" value="#{Acceso.usuario.nombre_usuario}"/>
+
+                <h:inputSecret id="pass" placeholder="Contraseña" required="true" value="#{Acceso.usuario.contraseña}"/>
+
+                <h:commandButton id="botonLogin" value="Entrar" action="#{Acceso.entrar()}"/>
+
+            </h:form>
+        </div>
+        <div>
+            <p>Si usted es administrativo debe acceder desde <h:link outcome="admin2.xhtml">página de acceso</h:link></p>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>
-
