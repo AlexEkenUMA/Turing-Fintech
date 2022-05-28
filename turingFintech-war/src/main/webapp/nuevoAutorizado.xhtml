@@ -105,7 +105,7 @@
             <h:inputText id="Dir" value="#{Autorizados.autorizado.direccion}" required="true"/>
             <h:message for="Dir"/>
             <p:outputLabel for="basic" value="Fecha de nacimiento"/>
-            <p:datePicker id="basic" value="#{Autorizados.autorizado.fecha_Nacimiento}" size="8"/>
+            <p:datePicker id="basic" value="#{Autorizados.autorizado.fecha_Nacimiento}" size="8" pattern="dd/MM/yyyy"/>
             <h:outputText id="Fec_Sel" value="#{Autorizados.autorizado.fecha_Nacimiento}"/>
             <h:message for="Fec_Sel"/>
             <h:outputText value="Nombre de usuario"/>
