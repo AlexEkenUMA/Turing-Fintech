@@ -34,11 +34,11 @@ import java.net.URL;
 public class TuringFintechIT {
   public static final String NOMBRE_UNIDAD_PERSISTENCIA = "turingFintechIT";
 
-  private static final String PRODUCTO = "api/holanda/producto";
+  private static final String PRODUCTS = "api/products";
 
-  private static final String CLIENTES = "api/holanda/clientes";
+  private static final String CLIENTS = "api/clients";
 
-  private static final String HEALTHCHECK = "api/holanda/healthcheck";
+  private static final String HEALTHCHECK = "api/healthcheck";
 
   private static final String CONTEXT_ROOT = "turingFintech-war";
 
