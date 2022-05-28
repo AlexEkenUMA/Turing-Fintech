@@ -49,6 +49,12 @@ public interface GestionCuentas {
 
     public List<CuentaFintech> obtenerCuentasFintech ();
 
+    public List<Cuenta> getCuentas();
+
+    public CuentaFintech obtenerCuentasFintechIban (String iban) throws CuentaNoEncontradaException;
+
+    public Cuenta obtenerCuentaIban (String iban) throws CuentaNoEncontradaException;
+
     public Divisa obetenerDivisa(String abre) throws DivisaNoCoincide;
 
     public List<PooledAccount> obtenerCuentasPooled ();

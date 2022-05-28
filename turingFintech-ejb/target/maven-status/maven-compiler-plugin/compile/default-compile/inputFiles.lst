@@ -1,40 +1,39 @@
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\CuentasEJB.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\PersonaJuridicaNoEncontrada.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\CuentaActiva.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\GestionAutorizados.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\CuentaDeBajaNoPuedeRegistrarTransaccion.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\SaldoInsuficiente.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\EmpresaNoTieneAcceso.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\ClienteNoEncontradoException.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\UsuarioNombreRepetido.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\DesbloquearClienteQueNoEstaBloqueado.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\AutorizadoBloqueado.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\TipoNoValidoException.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\GestionClientes.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\DesbloquearAutorizadoQueNoEstaBloqueado.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\UsuarioNoEncontrado.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\MismaCuentaOrigenYDestino.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\AutorizadosEJB.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\BloquearAutorizadoYaBloqueado.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\NingunaCuentaCoincideConLosParametrosDeBusqueda.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\AutorizadoNoEncontradoException.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\UsuariosEJB.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\BloquearClienteYaBloqueado.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\GestionUsuarios.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\ClienteNoValidoException.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\PersonaFisicaBloqueada.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\DivisaNoCoincide.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\NingunClienteCoincideConLosParametrosDeBusqueda.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\NoEsAdministrativo.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\ClientesEJB.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\GestionCuentas.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\inicializaBBDD.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\SaldoIncorrectoException.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\ModificarClienteDistintaID.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\TransaccionesEJB.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\TransaccionConCantidadIncorrecta.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\TuringTestException.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\ModificarAutorizadosDistintaID.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\AutorizadoSoloTieneAccesoACuentasClienteBloqueado.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\exceptions\CuentaNoEncontradaException.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-ejb\src\main\java\clases\ejb\GestionTransacciones.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/NingunaCuentaCoincideConLosParametrosDeBusqueda.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/MismaCuentaOrigenYDestino.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/GestionCuentas.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/TipoNoValidoException.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/UsuarioNoEncontrado.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/TuringTestException.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/CuentasEJB.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/BloquearClienteYaBloqueado.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/DesbloquearClienteQueNoEstaBloqueado.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/TransaccionesEJB.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/AutorizadosEJB.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/NingunClienteCoincideConLosParametrosDeBusqueda.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/ModificarClienteDistintaID.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/ClienteNoValidoException.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/TransaccionConCantidadIncorrecta.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/ClienteNoEncontradoException.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/EmpresaNoTieneAcceso.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/AutorizadoSoloTieneAccesoACuentasClienteBloqueado.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/CuentaNoEncontradaException.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/AutorizadoBloqueado.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/DivisaNoCoincide.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/DesbloquearAutorizadoQueNoEstaBloqueado.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/SaldoInsuficiente.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/CuentaActiva.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/NoEsAdministrativo.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/GestionTransacciones.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/CuentaDeBajaNoPuedeRegistrarTransaccion.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/ClientesEJB.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/PersonaJuridicaNoEncontrada.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/inicializaBBDD.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/PersonaFisicaBloqueada.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/GestionUsuarios.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/SaldoIncorrectoException.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/BloquearAutorizadoYaBloqueado.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/GestionAutorizados.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/GestionClientes.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/UsuariosEJB.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/ModificarAutorizadosDistintaID.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/AutorizadoNoEncontradoException.java

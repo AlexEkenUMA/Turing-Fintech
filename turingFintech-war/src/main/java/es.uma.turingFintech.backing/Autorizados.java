@@ -100,7 +100,6 @@ public class Autorizados {
         usuario = u;
         dni = pj.getIdentificacion();
         id = pj.getId();
-        sesion.refrescarUsuarioAdmin();
         return "listaAutorizados.xhtml";
     }
 

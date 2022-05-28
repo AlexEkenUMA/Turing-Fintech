@@ -62,6 +62,7 @@ public class InfoSesion implements Serializable {
 
     public List<Transaccion> getTransaccionesEmitidad(String iban){return gestionTransacciones.getTransaccionesEmitidad(iban);}
 
+    public List<Cuenta> getCuentas(){return gestionCuentas.getCuentas();}
 
 
     public synchronized String invalidarSesion()

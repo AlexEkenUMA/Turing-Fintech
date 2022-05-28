@@ -2,6 +2,7 @@ package es.uma.turingFintech.backing;
 
 import clases.ejb.GestionClientes;
 import clases.ejb.GestionCuentas;
+import clases.ejb.GestionTransacciones;
 import clases.ejb.exceptions.*;
 import es.uma.turingFintech.*;
 
@@ -22,7 +23,8 @@ public class Cuentas {
         POOLED,
         NOACCION,
         DEPOSITO,
-        POOLEDREF
+        POOLEDREF,
+        TRANSACCION
     };
 
     String opcion = "";
@@ -45,6 +47,14 @@ public class Cuentas {
 
     private PooledAccount pooledAccount;
 
+    private Transaccion transaccion;
+
+    private String origen = "";
+    private String destino = "";
+
+    private String divisaOrigen = "";
+    private String divisaDestino = "";
+
     Usuario usuario;
 
     @Inject
@@ -56,6 +66,9 @@ public class Cuentas {
     @Inject
     GestionClientes gestionClientes;
 
+    @Inject
+    GestionTransacciones gestionTransacciones;
+
     private Modo modo;
 
 
@@ -63,8 +76,21 @@ public class Cuentas {
         segregada = new Segregada();
         pooledAccount = new PooledAccount();
         cuentaReferencia = new CuentaReferencia();
+        transaccion = new Transaccion();
         modo = Modo.NOACCION;
     }
+
+    public String getDivisaOrigen() {return divisaOrigen;}
+
+    public void setDivisaOrigen(String divisaOrigen) {this.divisaOrigen = divisaOrigen;}
+
+    public String getDivisaDestino() {return divisaDestino;}
+
+    public void setDivisaDestino(String divisaDestino) {this.divisaDestino = divisaDestino;}
+
+    public Transaccion getTransaccion() {return transaccion;}
+
+    public void setTransaccion(Transaccion transaccion) {this.transaccion = transaccion;}
 
     public String getOpcion() {return opcion;}
 
@@ -85,6 +111,14 @@ public class Cuentas {
     public String getPooled() {
         return pooled;
     }
+
+    public String getOrigen() {return origen;}
+
+    public void setOrigen(String origen) {this.origen = origen;}
+
+    public String getDestino() {return destino;}
+
+    public void setDestino(String destino) {this.destino = destino;}
 
     public void setPooled(String pooled) {
         this.pooled = pooled;
@@ -165,6 +199,17 @@ public class Cuentas {
     }
 
 
+    public String registroOrigen(String o){
+        origen = o;
+        return "transaccion.xhtml";
+    }
+
+    public String regsitroDestino(String d){
+        modo = Modo.TRANSACCION;
+        destino = d;
+        return "registroTransaccion.xhtml";
+    }
+
 
 
     public String accion(){
@@ -213,6 +258,18 @@ public class Cuentas {
                 gestionCuentas.setDepositos(pooledAccount.getIBAN(), cuentaReferencia.getIBAN(),divisa,  saldo);
             }
 
+            if (modo.equals(Modo.TRANSACCION)){
+                CuentaFintech cuentaOrigen = gestionCuentas.obtenerCuentasFintechIban(origen);
+                Cuenta cuentaDestino = gestionCuentas.getCuenta(destino);
+                Divisa divO = gestionCuentas.obetenerDivisa(divisaOrigen);
+                Divisa divD = gestionCuentas.obetenerDivisa(divisaDestino);
+                transaccion.setEmisor(divO);
+                transaccion.setReceptor(divD);
+                transaccion.setFecha_Instruccion(new Date());
+                gestionTransacciones.registrarTransaccionFintech(sesion.getUsuario(), cuentaOrigen, cuentaDestino, transaccion);
+
+            }
+
             return "panelAdmin.xhtml";
 
 
@@ -224,6 +281,14 @@ public class Cuentas {
             e.printStackTrace();
         } catch (DivisaNoCoincide divisaNoCoincide) {
             divisaNoCoincide.printStackTrace();
+        } catch (MismaCuentaOrigenYDestino mismaCuentaOrigenYDestino) {
+            mismaCuentaOrigenYDestino.printStackTrace();
+        } catch (SaldoInsuficiente saldoInsuficiente) {
+            saldoInsuficiente.printStackTrace();
+        } catch (TransaccionConCantidadIncorrecta transaccionConCantidadIncorrecta) {
+            transaccionConCantidadIncorrecta.printStackTrace();
+        } catch (CuentaDeBajaNoPuedeRegistrarTransaccion cuentaDeBajaNoPuedeRegistrarTransaccion) {
+            cuentaDeBajaNoPuedeRegistrarTransaccion.printStackTrace();
         }
         return null;
     }

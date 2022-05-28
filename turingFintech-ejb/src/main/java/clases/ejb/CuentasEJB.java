@@ -94,13 +94,14 @@ public class CuentasEJB implements GestionCuentas {
         Segregada segregada = new Segregada(IBAN, SWIFT, new Date(), "Activa", "Segregada",0.00);
         CuentaReferencia crExiste = em.find(CuentaReferencia.class, cr.getIBAN());
         if(crExiste == null){
+            cr.setSegregada(segregada);
             em.persist(cr);
             segregada.setCr(cr);
         }
         else{
+            crExiste.setSegregada(segregada);
             segregada.setCr(crExiste);
         }
-        //habria que comprobar si el cliente existe o no ???
         segregada.setCliente(cliente);
         em.persist(segregada);
     }
@@ -230,6 +231,13 @@ public class CuentasEJB implements GestionCuentas {
         divisas = (List<Divisa>) query.getResultList();
         return divisas;
     }
+    @Override
+    public List<Cuenta> getCuentas(){
+        List<Cuenta> cuentas;
+        Query query = em.createQuery("select cuenta from Cuenta cuenta");
+        cuentas = (List<Cuenta>) query.getResultList();
+        return cuentas;
+    }
 
 
     @Override
@@ -238,6 +246,30 @@ public class CuentasEJB implements GestionCuentas {
         Query query = em.createQuery("select cuenta from CuentaReferencia cuenta");
         cuentaReferenciaList = (List<CuentaReferencia>) query.getResultList();
         return cuentaReferenciaList;
+    }
+
+    @Override
+    public CuentaFintech obtenerCuentasFintechIban (String iban) throws CuentaNoEncontradaException {
+        List<CuentaFintech> fintechList;
+        Query query = em.createQuery("select cuenta from CuentaFintech cuenta where cuenta.IBAN = :iban");
+        query.setParameter("iban", iban);
+        fintechList = (List<CuentaFintech>) query.getResultList();
+        if (fintechList.isEmpty()){
+            throw new CuentaNoEncontradaException();
+        }
+        return fintechList.get(0);
+    }
+
+    @Override
+    public Cuenta obtenerCuentaIban (String iban) throws CuentaNoEncontradaException {
+        List<Cuenta> cuentaList;
+        Query query = em.createQuery("select cuenta from Cuenta cuenta where cuenta.IBAN = :iban");
+        query.setParameter("iban", iban);
+        cuentaList = (List<Cuenta>) query.getResultList();
+        if (cuentaList.isEmpty()){
+            throw new CuentaNoEncontradaException();
+        }
+        return cuentaList.get(0);
     }
 
     @Override

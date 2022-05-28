@@ -20,7 +20,7 @@ public class Clientes {
         INSERTAR,
         NOACCION,
         FISICA,
-        JURIDICA
+        JURIDICA,
     };
 
 
@@ -123,6 +123,7 @@ public class Clientes {
 
         return "darAltaClienteIndividual.xhtml";
     }
+
 
 
     public String ejecutarAccion () {
