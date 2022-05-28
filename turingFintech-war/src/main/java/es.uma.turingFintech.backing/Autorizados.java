@@ -129,7 +129,7 @@ public class Autorizados {
 
         try{
             gestionAutorizados.eliminarAutorizados(sesion.getUsuario(), id);
-            return "panelAdmin.xhtml";
+            return "autorizados.xhtml";
         } catch (AutorizadoNoEncontradoException e) {
             e.printStackTrace();
         } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -188,6 +188,41 @@ public class Autorizados {
             usuarioNombreRepetido.printStackTrace();
         }
 
+        return null;
+    }
+
+    public String bloquear (Autorizado autorizado){
+
+        try{
+            gestionAutorizados.bloquearAutorizado(sesion.getUsuario(), autorizado);
+            return "autorizados.xhtml";
+        } catch (AutorizadoNoEncontradoException e) {
+            e.printStackTrace();
+        } catch (BloquearAutorizadoYaBloqueado bloquearAutorizadoYaBloqueado) {
+            bloquearAutorizadoYaBloqueado.printStackTrace();
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public String desbloquear (Autorizado autorizado){
+
+        try{
+            gestionAutorizados.desbloquearAutorizado(sesion.getUsuario(), autorizado);
+            return "autorizados.xhtml";
+        } catch (AutorizadoNoEncontradoException e) {
+            e.printStackTrace();
+        } catch (UsuarioNoEncontrado usuarioNoEncontrado) {
+            usuarioNoEncontrado.printStackTrace();
+        } catch (DesbloquearAutorizadoQueNoEstaBloqueado desbloquearAutorizadoQueNoEstaBloqueado) {
+            desbloquearAutorizadoQueNoEstaBloqueado.printStackTrace();
+        } catch (NoEsAdministrativo noEsAdministrativo) {
+            noEsAdministrativo.printStackTrace();
+        }
         return null;
     }
 

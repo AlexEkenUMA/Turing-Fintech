@@ -4,6 +4,7 @@
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/TipoNoValidoException.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/UsuarioNoEncontrado.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/TuringTestException.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/UsuarioNombreRepetido.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/CuentasEJB.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/BloquearClienteYaBloqueado.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-ejb/src/main/java/clases/ejb/exceptions/DesbloquearClienteQueNoEstaBloqueado.java
