@@ -699,7 +699,7 @@ public class TuringFintech {
 	public void testObtenerInformeInicialAlemania(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
-			gestionCuentas.getInformeInicialAlemania(ibai, "C:");
+			gestionCuentas.getInformeInicialAlemania(ibai);
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
 			fail("El usuario no fue encontrado en la bbdd");
 		} catch (IOException e) {
@@ -714,7 +714,7 @@ public class TuringFintech {
 	public void testObtenerInformeSemanalAlemania(){
 		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
-			gestionCuentas.getInformeSemanalAlemania(ibai, "C:");
+			gestionCuentas.getInformeSemanalAlemania(ibai);
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
 			fail("El usuario no fue encontrado en la bbdd");
 		} catch (IOException e) {

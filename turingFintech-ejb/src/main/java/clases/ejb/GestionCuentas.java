@@ -63,7 +63,7 @@ public interface GestionCuentas {
 
     public List<Segregada> getCuentasHolanda(String estado, String IBAN) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunaCuentaCoincideConLosParametrosDeBusqueda;
 
-    public void getInformeInicialAlemania(Usuario u, String rutaCSV) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException;
-    public void getInformeSemanalAlemania(Usuario u, String rutaCSV) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException;
+    public String getInformeInicialAlemania(Usuario u) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException;
+    public String getInformeSemanalAlemania(Usuario u) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException;
 
 }

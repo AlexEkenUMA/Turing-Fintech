@@ -10,13 +10,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.ws.rs.client.Client;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -332,13 +330,13 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
-    public void getInformeInicialAlemania(Usuario u, String rutaCSV) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException {
+    public String getInformeInicialAlemania(Usuario u) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException {
         gestionUsuarios.usuarioAdministrativo(u);
         Query query = em.createQuery("SELECT s FROM Segregada s");
         List<Segregada> lista = query.getResultList();
         SimpleDateFormat sdf=new SimpleDateFormat("ddMMYYYYhhmmss");
         String dateString=sdf.format(new Date());
-        String nombreArchivo = "/Turing_IBAN_" + dateString + ".csv";
+        String nombreArchivo = "C:/Turing_IBAN_" + dateString + ".csv";
         try(
                 BufferedWriter stringWriter = Files.newBufferedWriter(Paths.get(nombreArchivo));
                 CSVPrinter csvPrinter = new CSVPrinter(stringWriter, CSVFormat.DEFAULT.withHeader("IBAN", "Last_Name", "First_Name",
@@ -367,20 +365,17 @@ public class CuentasEJB implements GestionCuentas {
             }
             csvPrinter.flush();
         }
-
-
-
-
+        return nombreArchivo;
     }
 
     @Override
-    public void getInformeSemanalAlemania(Usuario u, String rutaCSV) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException {
+    public String getInformeSemanalAlemania(Usuario u) throws UsuarioNoEncontrado, NoEsAdministrativo, IOException {
         gestionUsuarios.usuarioAdministrativo(u);
         Query query = em.createQuery("SELECT s FROM Segregada s where s.estado='Activa'");
         List<Segregada> lista = query.getResultList();
         SimpleDateFormat sdf=new SimpleDateFormat("ddMMYYYYhhmmss");
         String dateString=sdf.format(new Date());
-        String nombreArchivo = rutaCSV+"/Turing_IBAN_" + dateString + ".csv";
+        String nombreArchivo = "C:/Turing_IBAN_" + dateString + ".csv";
         try(
                 BufferedWriter stringWriter = Files.newBufferedWriter(Paths.get(nombreArchivo));
                 CSVPrinter csvPrinter = new CSVPrinter(stringWriter, CSVFormat.DEFAULT.withHeader("IBAN", "Last_Name", "First_Name",
@@ -414,7 +409,9 @@ public class CuentasEJB implements GestionCuentas {
 
             }
             csvPrinter.flush();
+
         }
+        return nombreArchivo;
     }
 
 

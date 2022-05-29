@@ -105,11 +105,11 @@ public class ServicioREST {
             }
             return Response.ok(respuestaAPI).build();
         } catch (NoEsAdministrativo e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         } catch (UsuarioNoEncontrado e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         } catch (NingunClienteCoincideConLosParametrosDeBusqueda e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
@@ -175,13 +175,11 @@ public class ServicioREST {
             return Response.ok(respuestaAPI).build();
 
         } catch (NoEsAdministrativo e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         } catch (UsuarioNoEncontrado e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         } catch (NingunaCuentaCoincideConLosParametrosDeBusqueda e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
-
     }
-
 }
