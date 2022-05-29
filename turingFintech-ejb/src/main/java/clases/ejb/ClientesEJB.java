@@ -302,25 +302,15 @@ public class ClientesEJB implements GestionClientes {
     }
 
     @Override
-    public List<Cliente> getClientesHolanda(Usuario u, String dni, String nombre, String apellidos, String direccion)
+    public List<Cliente> getClientesHolanda(String nombre, String apellidos, String startPeriod, String endPeriod)
             throws NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda{
-        gestionUsuarios.usuarioAdministrativo(u);
         List<Cliente> resultados;
 
         if(nombre != null || apellidos != null){
-            System.out.println("HOLAA");
             //se esta buscando persona fisica
             Query query = em.createQuery("Select pf from PersonaFisica pf " +
-                    "where pf.identificacion like :dni " +
-                    "and pf.Nombre = :nombre and pf.Apellidos = :apellidos " +
-                    "and pf.direccion like :direccion ");
-            if (dni != null){
-                query.setParameter("dni", dni);
-            }else{
-                query.setParameter("dni", "%");
-            }
+                    "where pf.Nombre = :nombre and pf.Apellidos = :apellidos ");
             if (nombre != null){
-                System.out.println(nombre);
                 query.setParameter("nombre", nombre);
             }else{
                 query.setParameter("nombre", "%");
@@ -330,45 +320,32 @@ public class ClientesEJB implements GestionClientes {
             }else{
                 query.setParameter("apellidos", "%");
             }
-            if (direccion != null){
-                query.setParameter("direccion", direccion);
-            }else{
-                query.setParameter("direccion", "%");
-            }
             resultados = query.getResultList();
         }
         else{
             //se esta buscando persona juridica o fisica
-            Query query = em.createQuery("Select c from Cliente c " +
-                    "where c.identificacion like :dni " +
-                    "and c.direccion like :direccion ");
-            if (dni != null){
-                query.setParameter("dni", dni);
-            }else{
-                query.setParameter("dni", "%");
-            }
-            if (direccion != null){
-                query.setParameter("direccion", direccion);
-            }else{
-                query.setParameter("direccion", "%");
-            }
+            Query query = em.createQuery("Select c from Cliente c ");
             resultados = query.getResultList();
         }
+
         if(resultados.isEmpty()){
             throw new NingunClienteCoincideConLosParametrosDeBusqueda();
         }
         else{
+            List<Cliente> autorizadosClientes = new ArrayList<>();
             for(Cliente c : resultados){
                 if(c instanceof PersonaJuridica){
                     PersonaJuridica pj = (PersonaJuridica) c;
                     for(Autorizado au : pj.getAutorizados()){
                         if(au.getUsuario().getCliente() != null){
-                            resultados.add(au.getUsuario().getCliente());
+                            autorizadosClientes.add(au.getUsuario().getCliente());
                         }
                     }
                 }
             }
+            resultados.addAll(autorizadosClientes);
         }
+        //AQUI HABRIA QUE MIRAR SI ESTA DENTRO DEL RANGO DE FECHAS
 
         return resultados;
     }

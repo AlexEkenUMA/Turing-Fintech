@@ -309,8 +309,7 @@ public class CuentasEJB implements GestionCuentas {
     }
 
     @Override
-    public List<Segregada> getCuentasHolanda(Usuario u, String estado, String IBAN) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunaCuentaCoincideConLosParametrosDeBusqueda{
-        gestionUsuarios.usuarioAdministrativo(u);
+    public List<Segregada> getCuentasHolanda(String estado, String IBAN) throws NoEsAdministrativo, UsuarioNoEncontrado, NingunaCuentaCoincideConLosParametrosDeBusqueda{
         Query query = em.createQuery("SELECT s FROM Segregada s where s.estado like :estado" +
                 " and s.IBAN like :IBAN " );
 

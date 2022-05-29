@@ -5,6 +5,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" href="ccss/tablas.css"> </link>
 <h:head>
     <title>Lista de cuentas</title>
 </h:head>
@@ -15,7 +17,8 @@
         </c:when>
         <c:otherwise>
             <h:form id="cuentas">
-                <h:dataTable value="#{infoSesion.cuentasFintech}" var="c" border="1">
+                <h1 class="titulo">Cuentas</h1>
+                <h:dataTable styleClass="dataTable" value="#{infoSesion.cuentasFintech}" var="c" border="1">
                     <h:column>
                         <f:facet id="cabeceraIban" name="header">IBAN</f:facet>
                         <h:outputText id="ide" value="#{c.IBAN}"/>
@@ -69,9 +72,8 @@
 
 
 
-                <div>
-                    <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>
-                </div>
+                <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver</h:link>
+
             </h:form>
         </c:otherwise>
     </c:choose>

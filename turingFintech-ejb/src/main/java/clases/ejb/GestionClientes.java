@@ -42,7 +42,7 @@ public interface GestionClientes {
 
     public List<PersonaJuridica> getPersonasJuridicas();
 
-    public List<Cliente> getClientesHolanda(Usuario u, String dni, String nombre, String apellido, String direccion)
+    public List<Cliente> getClientesHolanda(String nombre, String apellido, String startPeriod, String endPeriod)
             throws  NoEsAdministrativo, UsuarioNoEncontrado, NingunClienteCoincideConLosParametrosDeBusqueda;
 
     public PersonaJuridica getPersonasJuridicaID(Long id) throws PersonaJuridicaNoEncontrada;

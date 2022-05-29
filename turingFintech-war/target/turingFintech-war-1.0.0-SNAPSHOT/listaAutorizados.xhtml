@@ -5,6 +5,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+<link rel="stylesheet" href="ccss/tablas.css"> </link>
 <h:head>
     <title>Lista de Personas Autorizadas</title>
 </h:head>
@@ -14,10 +15,10 @@
             <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
         </c:when>
         <c:otherwise>
-            <h2>Ahora seleccione el autorizado</h2>
+            <h2 class="titulo">Ahora seleccione el autorizado</h2>
             <hr> </hr>
             <h:form id="Autorizados">
-                <h:dataTable value="#{infoSesion.autorizado}" var="c" border="1">
+                <h:dataTable styleClass="dataTable" value="#{infoSesion.autorizado}" var="c" border="1">
                     <h:column>
                         <f:facet id="cabeceraIden" name="header">Identificacion</f:facet>
                         <h:outputText id="ide" value="#{c.identificacion}"/>
@@ -55,9 +56,8 @@
                     <h:commandButton id="nuevo" value="Nuevo autorizado" action="#{Autorizados.accionNuevoAu()}"/>
                 </h:column>
 
-                <div>
-                    <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>
-                </div>
+                <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver</h:link>
+
             </h:form>
         </c:otherwise>
     </c:choose>
