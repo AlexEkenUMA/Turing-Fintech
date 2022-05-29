@@ -1,18 +1,20 @@
 package es.uma.turingFintech.restClasses;
 
+import java.util.List;
+
 public class Individual {
-    private ProductsClients productsClients;
+    private List<ProductsClients> productsClients;
     private String activeCustomer;
     private String identificationNumber;
     private String dateOfBirth;
     private ClientName name;
     private Adress adress;
 
-    public ProductsClients getProductsClients() {
+    public List<ProductsClients> getProductsClients() {
         return productsClients;
     }
 
-    public void setProductsClients(ProductsClients productsClients) {
+    public void setProductsClients(List<ProductsClients> productsClients) {
         this.productsClients = productsClients;
     }
 

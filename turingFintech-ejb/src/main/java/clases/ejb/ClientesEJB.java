@@ -309,13 +309,13 @@ public class ClientesEJB implements GestionClientes {
         if(nombre != null || apellidos != null){
             //se esta buscando persona fisica
             Query query = em.createQuery("Select pf from PersonaFisica pf " +
-                    "where pf.Nombre = :nombre and pf.Apellidos = :apellidos ");
-            if (nombre != null){
+                    "where pf.Nombre like :nombre and pf.Apellidos like :apellidos ");
+            if (nombre != null && !nombre.isEmpty()){
                 query.setParameter("nombre", nombre);
             }else{
                 query.setParameter("nombre", "%");
             }
-            if (apellidos != null){
+            if (apellidos != null && !apellidos.isEmpty()){
                 query.setParameter("apellidos", apellidos);
             }else{
                 query.setParameter("apellidos", "%");
