@@ -4,7 +4,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
 <link rel="stylesheet" href="ccss/tablas.css"> </link>
 <h:head>
     <title>Lista de Personas Juridicas</title>
@@ -34,10 +33,10 @@
                         <h:commandButton id="anadirAutor" value="Añadir Autorizado" action="#{Autorizados.anadirAuto(c, infoSesion.usuario)}"/>
                     </h:column>
 
+
                 </h:dataTable>
-                <div>
-                    <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver</h:link>
-                </div>
+                <h:link outcome="panelAdmin.xhtml" styleClass="link1">Volver</h:link>
+
 
             </h:form>
         </c:otherwise>
@@ -45,4 +44,5 @@
 
 </h:body>
 </html>
+
 

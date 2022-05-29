@@ -45,12 +45,7 @@ div {
 }
 
 .link1{
-    text-align: center;
+    margin-top: 100px;
     color: azure;
-}
-
-
-.pooled{
-   color: azure;
-
+    text-align: center;
 }

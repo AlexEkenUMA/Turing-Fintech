@@ -15,7 +15,7 @@
             <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
         </c:when>
         <c:otherwise>
-            <h1 class="titulo">Seleccione la cuenta para la transacción</h1>
+            <h1>Seleccione la cuenta para la transacción</h1>
             <h:form id="cuentas">
                 <h:dataTable styleClass="dataTable" value="#{infoSesion.cuentas}" var="c" border="1">
                     <h:column>
@@ -27,15 +27,14 @@
                         <h:commandButton id="seleccionar" value="Seleccionar" action="#{cuentas.regsitroDestino(c.IBAN)}"/>
                     </h:column>
 
-                    <h:link outcome="cuentas.xhtml" styleClass="link">Volver</h:link>
+
                 </h:dataTable>
 
                 <h:inputHidden value="#{cuentas.origen}"/>
 
-
+                    <h:link outcome="panelAdmin.xhtml" styleClass="link">página de acceso</h:link>
 
             </h:form>
-            <hr> </hr>
         </c:otherwise>
     </c:choose>
 
