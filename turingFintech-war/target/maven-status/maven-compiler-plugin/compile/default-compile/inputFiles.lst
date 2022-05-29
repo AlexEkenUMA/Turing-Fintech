@@ -1,21 +1,21 @@
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\Saludo.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\Acceso.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\ProductsClients.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\Autorizados.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\FieldsetView.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\SearchParametersProducts.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\SearchParametersClients.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\CalendarView.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\rest\ApplicationConfig.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\ClientName.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\Individual.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\InterfazCliente.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\AccesoAdministrativo.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\rest\ServicioREST.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\InfoSesion.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\PanelAdministrativo.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\Products.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\Adress.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\Cuentas.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es\uma\turingFintech\restClasses\AccountHolder.java
-C:\Users\aleja\OneDrive\Escritorio\Sistemas de Información para Internet\Turing-Fintech\turingFintech-war\src\main\java\es.uma.turingFintech.backing\Clientes.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/CalendarView.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/AccesoAdministrativo.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/AccountHolder.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/rest/ServicioREST.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/ClientName.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Cuentas.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/FieldsetView.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Autorizados.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/ProductsClients.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/InterfazCliente.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/Products.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Acceso.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/SearchParametersClients.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/Adress.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/Individual.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Clientes.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/PanelAdministrativo.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/InfoSesion.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/restClasses/SearchParametersProducts.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Saludo.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/rest/ApplicationConfig.java

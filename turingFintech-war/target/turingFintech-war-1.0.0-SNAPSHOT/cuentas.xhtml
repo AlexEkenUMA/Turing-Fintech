@@ -58,18 +58,23 @@
 
             </h:dataTable>
 
-           <h:commandButton id="botonInsertarSegregada" value="Apertura Cuenta Segregada" action="#{cuentas.aperturaSegregada()}"/>
+                <hr> </hr>
 
-                <p:outputLabel for="@next" value="Apertura Pooled"/>
+            <p style="color: azure">Para abrir una cuenta Segregada:
+                <h:commandButton id="botonInsertarSegregada" value="Apertura Cuenta Segregada" action="#{cuentas.aperturaSegregada()}"/>
+            </p>
+
+            <br> </br>
+                <p:outputLabel style="color: azure" for="@next" value="Para abrir una pooled"/>
                 <p:selectOneMenu id="option" value="#{cuentas.opcion}" >
                     <f:selectItem itemLabel="Elige una" itemValue=""/>
                     <f:selectItem itemLabel="Referencia existe" itemValue="existe"/>
                     <f:selectItem itemLabel="Referencia no existe" itemValue="no"/>
                 </p:selectOneMenu>
 
-           <h:commandButton id="botonInsertarPooled" value="Apertura Cuenta Pooled" action="#{cuentas.aperturaPooled()}"/>
+           <h:commandButton id="botonInsertarPooled" value="Continuar" action="#{cuentas.aperturaPooled()}"/>
 
-
+            <br> </br>
 
 
                 <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver</h:link>

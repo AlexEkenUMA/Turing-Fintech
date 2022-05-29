@@ -43,3 +43,9 @@ div {
 .link{
     color: azure;
 }
+
+.link1{
+    margin-top: 100px;
+    color: azure;
+    text-align: center;
+}

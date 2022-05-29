@@ -15,8 +15,7 @@
             <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
         </c:when>
         <c:otherwise>
-            <h2 class="titulo">Ahora seleccione el autorizado</h2>
-            <hr> </hr>
+            <h1 class="titulo">Ahora seleccione el autorizado</h1>
             <h:form id="Autorizados">
                 <h:dataTable styleClass="dataTable" value="#{infoSesion.autorizado}" var="c" border="1">
                     <h:column>
@@ -50,12 +49,11 @@
                 <h:inputHidden value="#{Autorizados.id}"/>
 
                 <hr> </hr>
-                <h2>Si desea añadir un autorizado nuevo pulse</h2>
-
-                <h:column>
+                <h2 style="color: azure">Si desea añadir un autorizado nuevo pulse
                     <h:commandButton id="nuevo" value="Nuevo autorizado" action="#{Autorizados.accionNuevoAu()}"/>
-                </h:column>
+                </h2>
 
+                <br> </br>
                 <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver</h:link>
 
             </h:form>
