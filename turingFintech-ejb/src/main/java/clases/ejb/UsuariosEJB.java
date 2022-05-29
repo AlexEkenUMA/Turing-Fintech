@@ -25,13 +25,15 @@ public class UsuariosEJB implements GestionUsuarios {
         query.setParameter("nombre", u.getNombre_usuario());
         query.setParameter("password", u.getContraseña());
         List<Usuario> usuarios = query.getResultList();
-        if (usuarios.get(0).isAdministrativo()){
-            throw new AccesoIncorrecto();
-        }
+
 
         if (usuarios.isEmpty()){
             throw new UsuarioNoEncontrado();
-        }else{
+        }
+        else if (usuarios.get(0).isAdministrativo()){
+            throw new AccesoIncorrecto();
+        }
+        else{
             //el usuario que nos llega puede ser o cliente o autorizado, o las dos cosas
             //1. Caso solo cliente
             if(usuarios.get(0).getCliente() != null && usuarios.get(0).getAutorizado() == null){

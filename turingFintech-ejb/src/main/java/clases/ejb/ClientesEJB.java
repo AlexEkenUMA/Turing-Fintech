@@ -307,12 +307,10 @@ public class ClientesEJB implements GestionClientes {
         List<Cliente> resultados;
 
         if(nombre != null || apellidos != null){
-            System.out.println("HOLAA");
             //se esta buscando persona fisica
             Query query = em.createQuery("Select pf from PersonaFisica pf " +
-                    "and pf.Nombre = :nombre and pf.Apellidos = :apellidos ");
+                    "where pf.Nombre = :nombre and pf.Apellidos = :apellidos ");
             if (nombre != null){
-                System.out.println(nombre);
                 query.setParameter("nombre", nombre);
             }else{
                 query.setParameter("nombre", "%");
@@ -334,16 +332,18 @@ public class ClientesEJB implements GestionClientes {
             throw new NingunClienteCoincideConLosParametrosDeBusqueda();
         }
         else{
+            List<Cliente> autorizadosClientes = new ArrayList<>();
             for(Cliente c : resultados){
                 if(c instanceof PersonaJuridica){
                     PersonaJuridica pj = (PersonaJuridica) c;
                     for(Autorizado au : pj.getAutorizados()){
                         if(au.getUsuario().getCliente() != null){
-                            resultados.add(au.getUsuario().getCliente());
+                            autorizadosClientes.add(au.getUsuario().getCliente());
                         }
                     }
                 }
             }
+            resultados.addAll(autorizadosClientes);
         }
         //AQUI HABRIA QUE MIRAR SI ESTA DENTRO DEL RANGO DE FECHAS
 

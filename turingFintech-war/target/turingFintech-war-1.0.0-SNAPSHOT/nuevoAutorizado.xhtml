@@ -5,6 +5,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 
+<link rel="stylesheet" href="ccss/formularios.css"> </link>
+
 <script type="text/javascript">
     PrimeFaces.locales['es'] = {
         closeText: 'Cerrar',
@@ -88,10 +90,10 @@
 </h:head>
 <h:body>
 
-    <h1>NUEVO AUTORIZADO</h1>
+    <h1 class="titulo">NUEVO AUTORIZADO</h1>
 
     <h:form id="Autorizados">
-        <h:panelGrid columns="3">
+        <h:panelGrid columns="3" styleClass="formulario">
             <h:outputText value="Identificación:"/>
             <h:inputText id="Iden" value="#{Autorizados.autorizado.identificacion}" required="true" />
             <h:message for="Iden"/>
@@ -119,12 +121,13 @@
             <h:message for="repass"/>
 
             <h:commandButton value="Siguiente" action="#{Autorizados.nuevoAutorizado()}"/>
-            <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
+            <h:link outcome="personasJuridicas.xhtml" styleClass="link">Volver</h:link>
 
             <h:inputHidden value="#{Autorizados.dni}"/>
             <h:inputHidden value="#{Autorizados.id}"/>
         </h:panelGrid>
         <h:messages/>
+        <hr> </hr>
 
     </h:form>
 

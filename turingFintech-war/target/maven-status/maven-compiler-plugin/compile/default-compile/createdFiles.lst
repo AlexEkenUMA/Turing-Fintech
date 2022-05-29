@@ -1,4 +1,3 @@
-es/uma/turingFintech/backing/FieldsetView.class
 es\uma\turingFintech\restClasses\Adress.class
 es\uma\turingFintech\backing\Cuentas.class
 es\uma\turingFintech\backing\Clientes$Modo.class
@@ -14,6 +13,7 @@ es\uma\turingFintech\backing\Clientes.class
 es\uma\turingFintech\backing\Saludo.class
 es\uma\turingFintech\rest\ServicioREST.class
 es\uma\turingFintech\backing\Autorizados.class
+es\uma\turingFintech\backing\FieldsetView.class
 es\uma\turingFintech\backing\Clientes$1.class
 es\uma\turingFintech\rest\ApplicationConfig.class
 es\uma\turingFintech\restClasses\SearchParametersProducts.class
