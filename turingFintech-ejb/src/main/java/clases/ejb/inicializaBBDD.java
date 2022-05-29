@@ -199,6 +199,7 @@ public class inicializaBBDD {
 
         pf1.setUsuario(juan);
         au1.setUsuario(ana);
+        ana.setCliente(au1.getEmpresas().get(0));
 
         em.merge(pf1);
         em.merge(au1);
