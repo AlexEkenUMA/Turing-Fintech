@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<link rel="stylesheet" href="ccss/formularios.css"> </link>
+<h:head>
+    <title>Registro de transacción</title>
+</h:head>
+<h:body>
+
+    <h1 class="titulo">Transacción</h1>
+
+    <h:form id="cuentas">
+        <h:panelGrid columns="3" styleClass="formulario">
+            <h:outputText value="Cantidad:"/>
+            <h:inputText id="cant" value="#{cuentas.transaccion.cantidad}" required="true" />
+            <h:message for="cant"/>
+            <h:outputText value="Concepto"/>
+            <h:inputText id="conce" value="#{cuentas.transaccion.concepto}" required="true"/>
+            <h:message for="conce"/>
+            <h:outputText value="Nombre emisor"/>
+            <h:inputText id="nom" value="#{cuentas.transaccion.nombre_Emisor}" required="true"/>
+            <h:message for="nom"/>
+            <h:outputText value="Comision"/>
+            <h:inputText id="Comi" value="#{cuentas.transaccion.comision}" required="true"/>
+            <h:message for="Comi"/>
+            <h:outputText value="Tipo"/>
+            <h:inputText id="tipo" value="#{cuentas.transaccion.tipo_Transaccion}" required="true"/>
+            <h:message for="tipo"/>
+            <h:outputText value="Divisa origen"/>
+            <h:inputText id="divisao" value="#{cuentas.divisaOrigen}" required="true"/>
+            <h:message for="divisao"/>
+            <h:outputText value="Divisa destino"/>
+            <h:inputText id="divisad" value="#{cuentas.divisaDestino}" required="true"/>
+            <h:message for="divisad"/>
+
+            <h:commandButton value="Continuar" action="#{cuentas.accion()}"/>
+            <h:link outcome="cuentas.xhtml" styleClass="link">Volver</h:link>
+
+            <h:inputHidden value="#{cuentas.modo}"/>
+            <h:inputHidden value="#{cuentas.origen}"/>
+            <h:inputHidden value="#{cuentas.destino}"/>
+        </h:panelGrid>
+        <h:messages/>
+        <hr> </hr>
+    </h:form>
+
+
+
+</h:body>
+</html>
+

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<link rel="stylesheet" href="ccss/tablas.css"> </link>
+<h:head>
+    <title>Lista de cuentas</title>
+</h:head>
+<h:body>
+    <c:choose>
+        <c:when test="#{empty infoSesion.usuario}">
+            <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
+        </c:when>
+        <c:otherwise>
+            <h1 class="titulo">Seleccione la cuenta para la transacción</h1>
+            <h:form id="cuentas">
+                <h:dataTable styleClass="dataTable" value="#{infoSesion.cuentas}" var="c" border="1">
+                    <h:column>
+                        <f:facet id="cabeceraIban" name="header">IBAN</f:facet>
+                        <h:outputText id="ide" value="#{c.IBAN}"/>
+                    </h:column>
+
+                    <h:column>
+                        <h:commandButton id="seleccionar" value="Seleccionar" action="#{cuentas.regsitroDestino(c.IBAN)}"/>
+                    </h:column>
+
+                    <h:link outcome="cuentas.xhtml" styleClass="link">Volver</h:link>
+                </h:dataTable>
+
+                <h:inputHidden value="#{cuentas.origen}"/>
+
+
+
+            </h:form>
+            <hr> </hr>
+        </c:otherwise>
+    </c:choose>
+
+</h:body>
+</html>
+
