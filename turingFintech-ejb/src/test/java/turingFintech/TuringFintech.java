@@ -648,16 +648,14 @@ public class TuringFintech {
 	@Test
 	@Requisitos({"RF11"})
 	public void testObtenerCuentasHolandaNingunaCoincide(){
-		Usuario ibai = new Usuario("Ibai", "Llanos", true);
-		assertThrows(NingunaCuentaCoincideConLosParametrosDeBusqueda.class, () -> gestionCuentas.getCuentasHolanda(ibai,"Activa" , "3678367287"));
+		assertThrows(NingunaCuentaCoincideConLosParametrosDeBusqueda.class, () -> gestionCuentas.getCuentasHolanda("Activa" , "3678367287"));
 	}
 
 	@Test
 	@Requisitos({"RF11"})
 	public void testObtenerCuentasHolanda(){
-		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
-			gestionCuentas.getCuentasHolanda(ibai, "Baja", null);
+			gestionCuentas.getCuentasHolanda("Baja", null);
 		} catch (NingunaCuentaCoincideConLosParametrosDeBusqueda e) {
 			fail("Los parametros de busqueda no han obtenido ningun resultado");
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -670,9 +668,8 @@ public class TuringFintech {
 	@Test
 	@Requisitos({"RF11"})
 	public void testObtenerClientesHolandaNingunaCoincide(){
-		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try {
-			gestionClientes.getClientesHolanda(ibai, "39827489823759F",  "su ca0sa", "29834", "Mozambique");
+			gestionClientes.getClientesHolanda("39827489823759F",  "su ca0sa", null, null);
 		} catch (NoEsAdministrativo noEsAdministrativo) {
 			noEsAdministrativo.printStackTrace();
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
@@ -680,15 +677,14 @@ public class TuringFintech {
 		} catch (NingunClienteCoincideConLosParametrosDeBusqueda ningunClienteCoincideConLosParametrosDeBusqueda) {
 			ningunClienteCoincideConLosParametrosDeBusqueda.printStackTrace();
 		}
-		assertThrows(NingunClienteCoincideConLosParametrosDeBusqueda.class, () -> gestionClientes.getClientesHolanda(ibai, "39827489823759F",  "su ca0sa", "29834", "Mozambique"));
+		assertThrows(NingunClienteCoincideConLosParametrosDeBusqueda.class, () -> gestionClientes.getClientesHolanda("39827489823759F",  "su ca0sa", null, null));
 	}
 
 	@Test
 	@Requisitos({"RF11"})
 	public void testObtenerClientesHolanda(){
-		Usuario ibai = new Usuario("Ibai", "Llanos", true);
 		try{
-			gestionClientes.getClientesHolanda(ibai, null, "Alejandro", "Requena", null);
+			gestionClientes.getClientesHolanda("Alejandro","Requena" , null, null);
 		} catch (UsuarioNoEncontrado usuarioNoEncontrado) {
 			fail("Usuario no encontrado en la BBDD");
 		} catch (NoEsAdministrativo noEsAdministrativo) {

@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
+    <title>
+        <c:choose>
+            <c:when test="#{infoSesion.usuario.administrativo}">
+                <h:outputText value="cliente"/>
+            </c:when>
+            <c:otherwise>
+                Acceso irregular
+            </c:otherwise>
+        </c:choose>
+    </title>
+</h:head>
+<h:body>
+
+    <c:choose>
+        <c:when test="#{infoSesion.usuario.administrativo}">
+            <h1>Modificar Persona Juridica</h1>
+            <h:form id="clientes">
+                <h:panelGrid columns="3">
+                    <h:outputText value="Ciudad"/>
+                    <h:inputText id ="ciudad" value="#{clientes.personaJuridica.ciudad}"/>
+                    <h:message for="ciudad"/>
+                    <h:outputText value="Pais"/>
+                    <h:inputText id ="pais" value="#{clientes.personaJuridica.pais}"/>
+                    <h:message for="pais"/>
+                    <h:outputText value="Codigo Postal"/>
+                    <h:inputText id ="codPost" value="#{clientes.personaJuridica.codigo_Postal}"/>
+                    <h:message for="codPost"/>
+                    <h:outputText value="Direccion"/>
+                    <h:inputText id ="dic" value="#{clientes.personaJuridica.direccion}"/>
+                    <h:message for="dic"/>
+                    <h:outputText value="Razon Social"/>
+                    <h:inputText id ="Raz" value="#{clientes.personaJuridica.razon_Social}"/>
+                    <h:message for="Raz"/>
+
+                    <h:commandButton value="Modificar" action="#{clientes.ejecutarAccion()}"/>
+                    <h:commandButton value="Cancelar" action="clientes.xhtml"/>
+
+
+                    <h:inputHidden value="#{clientes.personaJuridica.id}"/>
+                    <h:inputHidden value="#{clientes.personaJuridica.identificacion}"/>
+                    <h:inputHidden value="#{clientes.personaJuridica.tipo_Cliente}"/>
+                    <h:inputHidden value="#{clientes.personaJuridica.estado}"/>
+                    <h:inputHidden value="#{clientes.modo}"/>
+                    <h:inputHidden value="#{clientes.personaJuridica.fecha_Alta}">
+                        <f:convertDateTime pattern = "dd-mm-yyyy" />
+                    </h:inputHidden>
+
+
+                </h:panelGrid>
+            </h:form>
+        </c:when>
+        <c:otherwise>
+            <p>No está autorizado para ver esta página.</p>
+        </c:otherwise>
+    </c:choose>
+
+</h:body>
+</html>
+

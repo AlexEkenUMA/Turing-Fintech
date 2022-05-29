@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+<head>
+
+
+    <!-- Link hacia el archivo de estilos css -->
+    <link rel="stylesheet" href="ccss/login.css"> </link>
+
+    <style type="text/css">
+
+    </style>
+
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+
+<body>
+
+<div id="contenedor">
+    <div id="central">
+        <div id="login">
+            <div class="titulo">
+                Acceso Administrativo
+            </div>
+            <h:form id="AccesoAdministrativos">
+                <h:inputText id="user" required="true" value="#{AccesoAdministrativos.usuario.nombre_usuario}"/>
+
+                <h:inputSecret id="pass" placeholder="Contraseña" required="true" value="#{AccesoAdministrativos.usuario.contraseña}"/>
+                <h:commandButton id="botonLogin" value="Entrar" action="#{AccesoAdministrativos.entrar()}"/>
+            </h:form>
+        </div>
+        <div>
+            <p><h:link outcome="index.xhtml"> Volver </h:link></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

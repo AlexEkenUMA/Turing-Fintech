@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+    <title>Apertura cuenta Pooled</title>
+</h:head>
+<h:body>
+
+    <h1>Apertura Pooled</h1>
+
+    <h:form id="cuentas">
+        <h:panelGrid columns="3">
+            <h:outputText value="DNI:"/>
+            <h:inputText id="DNI" value="#{cuentas.dni}" required="true" />
+            <h:message for="DNI"/>
+            <h:outputText value="IBAN"/>
+            <h:inputText id="IBAN" value="#{cuentas.pooledAccount.IBAN}" required="true"/>
+            <h:message for="IBAN"/>
+            <h:outputText value="SWIFT"/>
+            <h:inputText id="SWIFT" value="#{cuentas.pooledAccount.SWIFT}" required="true"/>
+            <h:message for="SWIFT"/>
+            <h:outputText value="Cuenta de referencia"/>
+            <h:inputText id="Cr" value="#{cuentas.cuentaReferencia.IBAN}" required="true"/>
+            <h:message for="Cr"/>
+            <h:outputText value="SWIFT"/>
+            <h:inputText id="Crswif" value="#{cuentas.cuentaReferencia.SWIFT}" required="true"/>
+            <h:message for="Crswif"/>
+            <h:outputText value="Nombre banco"/>
+            <h:inputText id="CrNombre" value="#{cuentas.cuentaReferencia.nombre_Banco}" required="true"/>
+            <h:message for="CrNombre"/>
+            <h:outputText value="Sucursal"/>
+            <h:inputText id="CrSurcursal" value="#{cuentas.cuentaReferencia.sucursal}" required="true"/>
+            <h:message for="CrSurcursal"/>
+            <h:outputText value="Pais"/>
+            <h:inputText id="CrPais" value="#{cuentas.cuentaReferencia.pais}" required="true"/>
+            <h:message for="CrPais"/>
+            <h:outputText value="Saldo Referencia"/>
+            <h:inputText id="CrSaldo" value="#{cuentas.cuentaReferencia.saldo}" required="true"/>
+            <h:message for="CrSaldo"/>
+            <h:outputText value="Saldo pooled"/>
+            <h:inputText id="saldo" value="#{cuentas.saldo}" required="true"/>
+            <h:message for="saldo"/>
+            <h:outputText value="Divisa"/>
+            <h:inputText id="divisa" value="#{cuentas.divisa}" required="true"/>
+            <h:message for="divisa"/>
+            <h:commandButton value="Apertura cuenta" action="#{cuentas.accion()}"/>
+            <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
+
+            <h:inputHidden value="#{cuentas.modo}"/>
+        </h:panelGrid>
+        <h:messages/>
+
+        <hr> </hr>
+
+        <h3>Si desea abrir una cuenta de referencia nueva </h3>
+
+
+    </h:form>
+
+
+
+</h:body>
+</html>
+
