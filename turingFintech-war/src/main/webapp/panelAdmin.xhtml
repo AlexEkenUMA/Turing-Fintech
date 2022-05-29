@@ -48,7 +48,8 @@
                 </p>
                 </p:fieldset>
                 </h:form>
-
+                <h:commandButton id="botoninformeinicial" value="Generar Informe Inicial para Alemania" action="#{informesAlemania.descargarInformeInicialAlemania()}"></h:commandButton>
+                <h:commandButton id="botoninformesemanal" value="Generar Informe Semanal para Alemania" action="#{informesAlemania.descargarInformeSemanalAlemania()}"></h:commandButton>
                 <p class="au">Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
                 <p class="au">Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
 
