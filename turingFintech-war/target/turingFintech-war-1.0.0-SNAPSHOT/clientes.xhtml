@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<link rel="stylesheet" href="ccss/tablas.css"> </link>
 <h:head>
     <title>Lista de clientes</title>
 </h:head>
@@ -14,7 +15,8 @@
         </c:when>
         <c:otherwise>
             <h:form id="clientes">
-                <h:dataTable value="#{infoSesion.clientes}" var="c" border="1">
+                <h1 class="clientes">Clientes</h1>
+                <h:dataTable styleClass="dataTable" value="#{infoSesion.clientes}" var="c" border="1">
                     <h:column>
                         <f:facet id="cabeceraNombre" name="header">ID</f:facet>
                         <h:outputText id="ide" value="#{c.id}"/>
@@ -41,28 +43,28 @@
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="modJu" value="Modificar"  action="#{clientes.modificarJuridico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Juridico'}"/>
+                        <h:commandButton  styleClass="boton" id="modJu" value="Modificar"  action="#{clientes.modificarJuridico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Juridico'}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton id="modFi" value="Modificar"  action="#{clientes.modificarFisico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Fisico'}"/>
-                    </h:column>
-
-                    <h:column>
-                        <h:commandButton id="Bloquear" value="Bloquear" action="#{clientes.bloquear(c)}"/>
+                        <h:commandButton id="modFi"  styleClass="boton" value="Modificar"  action="#{clientes.modificarFisico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Fisico'}"/>
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="Desbloq" value="Desbloquear" action="#{clientes.desbloquear(c)}"/>
+                        <h:commandButton id="Bloquear"  styleClass="boton" value="Bloquear" action="#{clientes.bloquear(c)}"/>
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="botonEliminar" value="Dar de baja" action="#{clientes.darBaja(c.identificacion, infoSesion.usuario)}"/>
+                        <h:commandButton id="Desbloq" styleClass="boton" value="Desbloquear" action="#{clientes.desbloquear(c)}"/>
+                    </h:column>
+
+                    <h:column>
+                        <h:commandButton id="botonEliminar" styleClass="boton" value="Dar de baja" action="#{clientes.darBaja(c.identificacion, infoSesion.usuario)}"/>
                     </h:column>
 
                 </h:dataTable>
 
-                <h:commandButton id="botonJuridico" value="Añadir P. Juridica" action="#{clientes.darAltaJuridica()}"/>
-                <h:commandButton id="botonFisico" value="Añadir P.Fisica" action="#{clientes.darAltaFisica()}"/>
+                <h:commandButton id="botonJuridico" styleClass="botonA" value="Añadir P. Juridica" action="#{clientes.darAltaJuridica()}"/>
+                <h:commandButton id="botonFisico" styleClass="botonA" value="Añadir P.Fisica" action="#{clientes.darAltaFisica()}"/>
 
 
                 <div>
