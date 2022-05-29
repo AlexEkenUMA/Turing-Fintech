@@ -5,6 +5,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 
+<link rel="stylesheet" href="ccss/formularios.css"> </link>
+
 <script type="text/javascript">
     PrimeFaces.locales['es'] = {
         closeText: 'Cerrar',
@@ -90,10 +92,10 @@
 </h:head>
 <h:body>
 
-    <h1>DAR ALTA A UN CLIENTE FISICO</h1>
+    <h1 class="titulo">DAR ALTA A UN CLIENTE FISICO</h1>
 
     <h:form id="clientes">
-        <h:panelGrid columns="3">
+        <h:panelGrid styleClass="formulario" columns="3">
             <h:outputText value="Nombre:"/>
             <h:inputText id="nombre" value="#{clientes.personaFisica.nombre}"/>
             <h:message for="nombre"/>
@@ -119,8 +121,8 @@
             <p:datePicker id="basic" value="#{clientes.personaFisica.fecha_Nacimiento}" size="8" pattern="dd/MM/yyyy"/>
             <h:outputText id="Fec_Sel" value="#{clientes.personaFisica.fecha_Nacimiento}"/>
             <h:message for="Fec_Sel"/>
-            <h:commandButton value="Crear usuario" action="#{clientes.ejecutarAccion()}"/>
-            <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
+            <h:commandButton value="Dar alta" action="#{clientes.ejecutarAccion()}"/>
+            <h:link styleClass="link" outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
             <h:inputHidden value="#{clientes.modo}"/>
         </h:panelGrid>
         <h:messages/>

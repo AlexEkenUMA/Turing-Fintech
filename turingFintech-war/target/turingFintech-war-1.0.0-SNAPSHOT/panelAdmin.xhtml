@@ -2,41 +2,57 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" href="ccss/panelAdmin.css"> </link>
+
 <h:head>
     <title>PANEL ADMINISTRATIVO</title>
 </h:head>
 <h:body>
 
-    <h1> PANEL ADMINISTRATIVO</h1>
+    <h1 class="titulo"> PANEL ADMINISTRATIVO</h1>
 
     <h:form id="PanelAdministrativo">
 
         <c:choose>
             <c:when test="#{!empty infoSesion.usuario}">
-                <p>Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
-                <p>Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
 
-                <div>
-                    <p>Para ver la lista de clientes <h:link outcome="clientes.xhtml">página de acceso</h:link></p>
-                </div>
+                <h:form>
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                    <p:fieldset legend="Información">
+                        <p class="p-m-0">
+                            Desde este panel podrás gestionar todo lo relacionado con las cuentas, clientes, autorizado y el registro de transacciones.
+                            Si despliega el menú de abajo podrá seleccionar entre cuatro opciones:
+                            <br> </br>
+                            Clientes, desde donde podrá dar de alta a un cliente (de cualquiera de los tipos), modificarlo, darle de baja y bloquearlo. <br> </br>
+                            Cuentas, desde donde podrá ver las cuentas registradas, abrir una cuenta (de cualquiera de los tipos), tambien darla de baja y registrar transacciones. <br> </br>
+                            Empresas, desde donde porá asignar un nuevo autorizado a cada empresa. <br> </br>
+                            Autorizados, desde donde podrá ver y modificar la lista de autorizados del sistema. <br> </br>
+                        </p>
+                    </p:fieldset>
 
-                <div>
-                    <p>Para ver la lista de cuentas <h:link outcome="cuentas.xhtml">página de acceso</h:link></p>
-                </div>
 
-                <div>
-                    <p>Para añadir un autorizado a una empresa <h:link outcome="personasJuridicas.xhtml">página de acceso</h:link></p>
-                </div>
+                <p:fieldset legend="Acción" toggleable="true" toggleSpeed="500">
+                <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" update="msgs"/>
+                <p class="p-m-0">
+                        <h:link styleClass="link" outcome="clientes.xhtml">Clientes</h:link>
+                        <br> </br>
+                        <h:link styleClass="link" outcome="cuentas.xhtml">Cuentas</h:link>
+                         <br> </br>
+                        <h:link styleClass="link" outcome="personasJuridicas.xhtml">Empresas</h:link>
+                         <br> </br>
+                        <h:link styleClass="link" outcome="autorizados.xhtml">Autorizados</h:link>
+                        <br> </br>
+                </p>
+                </p:fieldset>
+                </h:form>
 
-                <div>
-                    <p>Para ver la lista de Autorizados <h:link outcome="autorizados.xhtml">página de acceso</h:link></p>
-                </div>
-
+                <p class="au">Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
+                <p class="au">Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
 
             </c:when>
-
-
         </c:choose>
 
 

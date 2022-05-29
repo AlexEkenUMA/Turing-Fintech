@@ -1,12 +1,13 @@
-/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/InterfazCliente.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/CalendarView.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/AccesoAdministrativo.java
-/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Acceso.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/rest/ServicioREST.java
-/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Clientes.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Cuentas.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/FieldsetView.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Autorizados.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/InterfazCliente.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Acceso.java
+/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Clientes.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/PanelAdministrativo.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/InfoSesion.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Saludo.java
-/Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es.uma.turingFintech.backing/Autorizados.java
 /Users/jose/Documents/Proyecto22/Turing-Fintech/turingFintech-war/src/main/java/es/uma/turingFintech/rest/ApplicationConfig.java
