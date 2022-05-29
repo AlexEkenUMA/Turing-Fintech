@@ -79,17 +79,29 @@ public class inicializaBBDD {
         CuentaReferencia cr5 = new CuentaReferencia("GB79BARC20040134265953", null, "Ebury", "Malaga",
                 "España", 134.0, date, true);
         cr5.setDivisa(libras);
+        CuentaReferencia cr6 = new CuentaReferencia("SALDO0", null, "Ebury", "Malaga",
+                "España", 0.0, date, true);
+        cr5.setDivisa(libras);
 
         em.persist(cr1);
         em.persist(cr2);
         em.persist(cr3);
         em.persist(cr4);
         em.persist(cr5);
+        em.persist(cr6);
 
         Segregada segregada1 = new Segregada("NL63ABNA6548268733", null, date, "Activa", "Segregada",0.0);
         segregada1.setCr(cr1);
         segregada1.setCliente(pj1);
         em.persist(segregada1);
+
+        Segregada segregada10 = new Segregada("SEGREGADA0", null, date, "Activa", "Segregada",0.0);
+        segregada10.setCr(cr6);
+        segregada10.setCliente(pj1);
+        cr6.setSegregada(segregada10);
+        em.persist(segregada10);
+
+
         List<CuentaFintech> cuentaFinteches = new ArrayList<>();
         cuentaFinteches.add(segregada1);
         pj1.setCuentasFintech(cuentaFinteches);
