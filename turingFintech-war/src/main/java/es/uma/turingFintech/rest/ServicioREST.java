@@ -4,10 +4,7 @@ import clases.ejb.GestionClientes;
 import clases.ejb.GestionCuentas;
 import clases.ejb.GestionUsuarios;
 import clases.ejb.exceptions.*;
-import es.uma.turingFintech.Cliente;
-import es.uma.turingFintech.CuentaFintech;
-import es.uma.turingFintech.PersonaFisica;
-import es.uma.turingFintech.PersonaJuridica;
+import es.uma.turingFintech.*;
 import es.uma.turingFintech.restClasses.*;
 
 import javax.ejb.EJB;
@@ -40,8 +37,8 @@ public class ServicioREST {
 
     @Path("/clients")
     @POST
-    @Consumes ({MediaType.APPLICATION_JSON})
-    @Produces ({MediaType.APPLICATION_JSON})
+    @Consumes ({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces ({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response getClientes(SearchParametersClients clientsRequest) {
         try {
             List<Cliente> clientes = gestionClientes.getClientesHolanda(clientsRequest.getName().getFirstName(), clientsRequest.getName().getLastName(),
@@ -122,7 +119,61 @@ public class ServicioREST {
     @Produces ({MediaType.APPLICATION_JSON})
     public Response getProducto(SearchParametersProducts productsRequest) {
         try {
-            gestionCuentas.getCuentasHolanda(productsRequest.getStatus(), productsRequest.getProductNumber());
+            List<Segregada> cuentas = gestionCuentas.getCuentasHolanda(productsRequest.getStatus(), productsRequest.getProductNumber());
+            //TODO: Modelar formato de respuesta JSON
+            List<Products> respuestaAPI = new ArrayList<>();
+            for(Segregada s : cuentas){
+                Products producto = new Products();
+                AccountHolder accountHolder = new AccountHolder();
+                if(s.getCliente().getEstado().equals("Activa")){
+                    accountHolder.setActiveCustomer("true");
+                }
+                else{
+                    accountHolder.setActiveCustomer("false");
+                }
+                if(s.getCliente().getTipo_Cliente().equals("Fisico")){
+                    accountHolder.setAccounttype("Fisica");
+                }
+                if(s.getCliente().getTipo_Cliente().equals("Juridico")){
+                    accountHolder.setAccounttype("Empresa");
+                }
+                if(s.getCliente() instanceof PersonaFisica){
+                    PersonaFisica pf = (PersonaFisica) s.getCliente();
+                    //NOMBRE
+                    ClientName clientName = new ClientName();
+                    clientName.setFirstName(pf.getNombre());
+                    clientName.setLastName(pf.getApellidos());
+                    accountHolder.setName(clientName);
+                }
+                //DIRECCION
+                Adress adress = new Adress();
+                adress.setCity(s.getCliente().getCiudad());
+                adress.setCountry(s.getCliente().getPais());
+                adress.setPostalCode(s.getCliente().getCodigo_Postal().toString());
+                adress.setStreetNumber(s.getCliente().getDireccion());
+                accountHolder.setAdress(adress);
+
+                producto.setAccountHolder(accountHolder);
+
+                producto.setProductNumber(s.getIBAN());
+                producto.setStatus(s.getEstado());
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                Date startDate = s.getFecha_Apertura();
+
+                producto.setStartDate(dateFormat.format(startDate));
+                Date endDate = s.getFecha_cierre();
+                if(endDate == null){
+                    producto.setStartDate("non-existent");
+                }
+                else{
+                    producto.setStartDate(dateFormat.format(endDate));
+                }
+
+
+                respuestaAPI.add(producto);
+            }
+            return Response.ok(respuestaAPI).build();
+
         } catch (NoEsAdministrativo e) {
             throw new RuntimeException(e);
         } catch (UsuarioNoEncontrado e) {
@@ -130,12 +181,7 @@ public class ServicioREST {
         } catch (NingunaCuentaCoincideConLosParametrosDeBusqueda e) {
             throw new RuntimeException(e);
         }
-        //TODO: Modelar formato de respuesta JSON
-        return Response.ok().build();
+
     }
-
-
-
-
 
 }

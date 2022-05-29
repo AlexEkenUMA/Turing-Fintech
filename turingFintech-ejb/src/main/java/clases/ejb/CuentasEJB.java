@@ -313,12 +313,12 @@ public class CuentasEJB implements GestionCuentas {
         Query query = em.createQuery("SELECT s FROM Segregada s where s.estado like :estado" +
                 " and s.IBAN like :IBAN " );
 
-        if (estado != null){
+        if (estado != null && !estado.isEmpty()){
             query.setParameter("estado" , estado);
         }else{
             query.setParameter("estado", "%");
         }
-        if (IBAN != null){
+        if (IBAN != null && !IBAN.isEmpty()){
             query.setParameter("IBAN" , IBAN);
         }else{
             query.setParameter("IBAN", "%");
