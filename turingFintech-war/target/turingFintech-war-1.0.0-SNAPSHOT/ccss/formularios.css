@@ -1,0 +1,29 @@
+body{
+    font-family: 'Overpass', sans-serif;
+    font-weight: normal;
+    font-size: 100%;
+    color: #1b262c;
+
+    margin: 0;
+    background-color: #0f4c75;
+}
+
+
+.titulo{
+    margin-top: 100px;
+    color: azure;
+    text-align: center;
+}
+
+.formulario{
+
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    align-content: center;
+    color: azure;
+}
+
+.link{
+    color: azure;
+}
