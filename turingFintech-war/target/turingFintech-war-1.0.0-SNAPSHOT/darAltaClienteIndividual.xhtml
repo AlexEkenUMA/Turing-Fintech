@@ -122,12 +122,12 @@
             <h:outputText id="Fec_Sel" value="#{clientes.personaFisica.fecha_Nacimiento}"/>
             <h:message for="Fec_Sel"/>
             <h:commandButton value="Dar alta" action="#{clientes.ejecutarAccion()}"/>
-            <h:link styleClass="link" outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
+            <h:link styleClass="link" outcome="clientes.xhtml">Volver</h:link>
             <h:inputHidden value="#{clientes.modo}"/>
         </h:panelGrid>
         <h:messages/>
 
-
+        <hr> </hr>
 
     </h:form>
 </h:body>

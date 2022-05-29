@@ -4,6 +4,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f = "http://java.sun.com/jsf/core">
+
+<link rel="stylesheet" href="ccss/formularios.css"> </link>
+
 <h:head>
     <title>
         <c:choose>
@@ -20,9 +23,9 @@
 
     <c:choose>
         <c:when test="#{infoSesion.usuario.administrativo}">
-            <h1>Modificar Autorizados</h1>
+            <h1 class="titulo">Modificar Autorizados</h1>
             <h:form id="Autorizados">
-                <h:panelGrid columns="3">
+                <h:panelGrid columns="3" styleClass="formulario">
                     <h:outputText value="Nombre"/>
                     <h:inputText id ="nombre" value="#{Autorizados.autorizado.nombre}"/>
                     <h:message for="nombre"/>
@@ -52,9 +55,8 @@
                         <f:convertDateTime pattern = "dd-mm-yyyy" />
                     </h:inputHidden>
 
-
-
                 </h:panelGrid>
+                <hr> </hr>
             </h:form>
         </c:when>
         <c:otherwise>

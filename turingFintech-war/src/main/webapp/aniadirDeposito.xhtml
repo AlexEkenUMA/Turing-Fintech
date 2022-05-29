@@ -3,15 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<link rel="stylesheet" href="ccss/formularios.css"> </link>
+
 <h:head>
     <title>Apertura cuenta Pooled</title>
 </h:head>
 <h:body>
 
-    <h1>Nuevo Depósito</h1>
+    <h1 class="titulo">Nuevo Depósito</h1>
 
     <h:form id="cuentas">
-        <h:panelGrid columns="3">
+        <h:panelGrid columns="3" styleClass="formulario">
             <h:outputText value="IBAN C. Ref"/>
             <h:inputText id="ref" value="#{cuentas.ibanCr}" required="true" />
             <h:message for="ref"/>
@@ -23,13 +26,14 @@
             <h:message for="divisa"/>
 
             <h:commandButton value="Añadir depósito" action="#{cuentas.accion()}"/>
-            <h:link outcome="panelAdmin.xhtml">Volver al panel de control</h:link>
+            <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver al panel de control</h:link>
 
             <h:inputHidden value="#{cuentas.modo}"/>
             <h:inputHidden value="#{cuentas.ibanPooled}"/>
         </h:panelGrid>
         <h:messages/>
 
+        <hr> </hr>
 
     </h:form>
 
