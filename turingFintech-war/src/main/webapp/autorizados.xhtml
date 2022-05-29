@@ -5,6 +5,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" href="ccss/tablas.css"> </link>
 <h:head>
     <title>Lista de Personas Autorizadas</title>
 </h:head>
@@ -15,7 +17,8 @@
         </c:when>
         <c:otherwise>
             <h:form id="Autorizados">
-                <h:dataTable value="#{infoSesion.autorizado}" var="c" border="1">
+                <h1 class="titulo">Autorizados</h1>
+                <h:dataTable styleClass="dataTable" value="#{infoSesion.autorizado}" var="c" border="1">
                     <h:column>
                         <f:facet id="cabeceraIden" name="header">Identificacion</f:facet>
                         <h:outputText id="ide" value="#{c.identificacion}"/>
@@ -50,14 +53,11 @@
                     </h:column>
 
 
-
-
-
                 </h:dataTable>
 
 
                 <div>
-                    <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>
+                    <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver</h:link>
                 </div>
             </h:form>
         </c:otherwise>

@@ -19,7 +19,7 @@ body{
 
 }
 
-.clientes{
+.titulo{
 
     margin-top: 100px;
     color: azure;
@@ -41,5 +41,5 @@ div {
 
 
 .link{
-    color: inherit;
+    color: azure;
 }

@@ -15,7 +15,7 @@
         </c:when>
         <c:otherwise>
             <h:form id="clientes">
-                <h1 class="clientes">Clientes</h1>
+                <h1 class="titulo">Clientes</h1>
                 <h:dataTable styleClass="dataTable" value="#{infoSesion.clientes}" var="c" border="1">
                     <h:column>
                         <f:facet id="cabeceraNombre" name="header">ID</f:facet>
@@ -68,7 +68,7 @@
 
 
                 <div class="link">
-                    <p>Para volver al panel de control <h:link outcome="panelAdmin.xhtml">página de acceso</h:link></p>
+                    <h:link outcome="panelAdmin.xhtml" styleClass="link">Volver</h:link>
                 </div>
             </h:form>
         </c:otherwise>
