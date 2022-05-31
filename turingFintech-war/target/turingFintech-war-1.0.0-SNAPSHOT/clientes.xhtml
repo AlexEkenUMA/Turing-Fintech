@@ -4,11 +4,19 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <link rel="stylesheet" href="ccss/tablas.css"> </link>
 <h:head>
     <title>Lista de clientes</title>
 </h:head>
 <h:body>
+    <h:form>
+        <div class="parent">
+            <h1 class="parent"> <img src="img/Ebury2.png" width="350" alt="Logo"/>  </h1>
+            <h:commandButton styleClass="boton" width="50" action="#{infoSesion.invalidarSesion()}" image="img/right-from-bracket-solid.svg"/>
+        </div>
+        <hr class="demonio"> </hr>
+    </h:form>
     <c:choose>
         <c:when test="#{empty infoSesion.usuario}">
             <p>No tiene autorización para ver esta página, debe autenticarse antes.</p>
@@ -43,22 +51,22 @@
                     </h:column>
 
                     <h:column>
-                        <h:commandButton  styleClass="boton" id="modJu" value="Modificar"  action="#{clientes.modificarJuridico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Juridico'}"/>
+                        <h:commandButton  id="modJu" value="Modificar"  action="#{clientes.modificarJuridico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Juridico'}"/>
                     </h:column>
                     <h:column>
-                        <h:commandButton id="modFi"  styleClass="boton" value="Modificar"  action="#{clientes.modificarFisico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Fisico'}"/>
-                    </h:column>
-
-                    <h:column>
-                        <h:commandButton id="Bloquear"  styleClass="boton" value="Bloquear" action="#{clientes.bloquear(c)}"/>
+                        <h:commandButton id="modFi" value="Modificar"  action="#{clientes.modificarFisico(c, infoSesion.usuario)}" rendered="#{c.tipo_Cliente == 'Fisico'}"/>
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="Desbloq" styleClass="boton" value="Desbloquear" action="#{clientes.desbloquear(c)}"/>
+                        <h:commandButton id="Bloquear"  value="Bloquear" action="#{clientes.bloquear(c)}"/>
                     </h:column>
 
                     <h:column>
-                        <h:commandButton id="botonEliminar" styleClass="boton" value="Dar de baja" action="#{clientes.darBaja(c.identificacion, infoSesion.usuario)}"/>
+                        <h:commandButton id="Desbloq"  value="Desbloquear" action="#{clientes.desbloquear(c)}"/>
+                    </h:column>
+
+                    <h:column>
+                        <h:commandButton id="botonEliminar"  value="Dar de baja" action="#{clientes.darBaja(c.identificacion, infoSesion.usuario)}"/>
                     </h:column>
 
                 </h:dataTable>
