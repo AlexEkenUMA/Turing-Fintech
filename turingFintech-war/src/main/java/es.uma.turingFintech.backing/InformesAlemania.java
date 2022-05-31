@@ -5,6 +5,7 @@ import clases.ejb.exceptions.NoEsAdministrativo;
 import clases.ejb.exceptions.UsuarioNoEncontrado;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Named(value = "informesAlemania")
+@RequestScoped
 public class InformesAlemania {
     @Inject
     GestionCuentas gestionCuentas;

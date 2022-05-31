@@ -23,13 +23,14 @@
                     <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
                     <p:fieldset legend="Información">
                         <p class="p-m-0">
-                            Desde este panel podrás gestionar todo lo relacionado con las cuentas, clientes, autorizado y el registro de transacciones.
-                            Si despliega el menú de abajo podrá seleccionar entre cuatro opciones:
+                            Desde este panel podrás gestionar todo lo relacionado con las cuentas, clientes, autorizados, el registro de transacciones y los informes.
+                            Si despliega el menú de abajo podrá seleccionar entre cinco opciones:
                             <br> </br>
                             Clientes, desde donde podrá dar de alta a un cliente (de cualquiera de los tipos), modificarlo, darle de baja y bloquearlo. <br> </br>
                             Cuentas, desde donde podrá ver las cuentas registradas, abrir una cuenta (de cualquiera de los tipos), tambien darla de baja y registrar transacciones. <br> </br>
                             Empresas, desde donde podrá asignar un nuevo autorizado a cada empresa. <br> </br>
                             Autorizados, desde donde podrá ver y modificar la lista de autorizados del sistema. <br> </br>
+                            Informes, desde donde podrá generar los informes de Alemania.<br> </br>
                         </p>
                     </p:fieldset>
 
@@ -45,8 +46,11 @@
                          <br> </br>
                         <h:link styleClass="link" outcome="autorizados.xhtml">Autorizados</h:link>
                         <br> </br>
+                    <h:link styleClass="link" outcome="informes.xhtml">Informes</h:link>
+                    <br> </br>
                 </p>
                 </p:fieldset>
+
                 </h:form>
 
                 <p class="au">Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>

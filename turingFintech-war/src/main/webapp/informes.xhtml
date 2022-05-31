@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<link rel="stylesheet" href="ccss/panelAdmin.css"> </link>
+
+<h:head>
+    <title>INFORMES</title>
+</h:head>
+<h:body>
+
+<h1 class="titulo"> INFORMES DE ALEMANIA</h1>
+
+    <h:form id="Informes">
+    <c:choose>
+    <c:when test="#{!empty infoSesion.usuario}">
+
+    <h:form>
+        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+        <p:fieldset legend="Informes">
+            <p class="p-m-0">
+                Desde aquí podrás, pulsando en los botones siguientes, generar los informes tanto incial como semanal de Alemania
+                <br> </br>
+                <h:commandButton id="botoninformeinicial" value="Generar Informe Inicial para Alemania" action="#{informesAlemania.descargarInformeInicialAlemania()}"/>
+                <h:commandButton id="botoninformesemanal" style="margin-left: 10px" value="Generar Informe Semanal para Alemania" action="#{informesAlemania.descargarInformeSemanalAlemania()}"/>
+            </p>
+        </p:fieldset>
+    </h:form>
+
+
+        <p class="au">Está autenticado como <h:outputText value="#{infoSesion.usuario.nombre_usuario}"/>.</p>
+        <p class="au">Para iniciar sesión con otra cuenta debe <h:commandLink action="#{infoSesion.invalidarSesion()}">salir</h:commandLink> primero de la aplicación</p>
+
+    </c:when>
+    </c:choose>
+    </h:form>
+
+</h:body>
+
+
+</html>
