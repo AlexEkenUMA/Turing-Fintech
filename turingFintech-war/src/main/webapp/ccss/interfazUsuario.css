@@ -33,10 +33,14 @@ body{
     margin-top: 15px;
 
 }
-
 .demonio{
     border: 10px solid azure;
     border-radius: 5px;
+}
 
+.boton{
 
+    width: 40px;
+    position: relative;
+    left: 200px;
 }

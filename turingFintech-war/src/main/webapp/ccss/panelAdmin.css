@@ -37,3 +37,10 @@ body{
 
 
 }
+
+.boton{
+
+    width: 40px;
+    position: relative;
+    left: 200px;
+}
