@@ -129,3 +129,20 @@ body {
 .inferior a:hover {
     color: #3282b8;
 }
+
+
+
+.parent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+
+}
+
+.demonio{
+    border: 10px solid azure;
+    border-radius: 5px;
+
+
+}

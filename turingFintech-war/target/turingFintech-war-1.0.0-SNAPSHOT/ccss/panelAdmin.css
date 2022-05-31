@@ -22,3 +22,18 @@ body{
     color: azure;
     font-size: xx-small;
 }
+
+.parent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+
+}
+
+.demonio{
+    border: 10px solid azure;
+    border-radius: 5px;
+
+
+}
