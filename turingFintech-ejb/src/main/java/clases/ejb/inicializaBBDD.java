@@ -30,7 +30,7 @@ public class inicializaBBDD {
         PersonaJuridica pj1 = new PersonaJuridica(null, "P3310693A", "Juridico", "Activo", date, null, "ETSI",
                 "MALAGA", 29640, "ESPAÑA", "GANAR_DINEROS");
 
-        PersonaFisica pf1 = new PersonaFisica( null, "63937528N", "Fisico", "Activo", date, null,
+        PersonaFisica pf1 = new PersonaFisica( null, "63937528N", "Fisica", "Activo", date, null,
                 "Avnd Ing", "Mijas", 29649, "España", "Jose", "Pan", date);
 
         Autorizado au1 = new Autorizado(null, "Y4001267V", "Alejandro", "Requena",
